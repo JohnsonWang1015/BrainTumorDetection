@@ -1,0 +1,31 @@
+services:
+  trainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: idh-glioma:gpu
+    working_dir: /workspace
+    command: ["bash", "scripts/run_baseline_pipeline.sh"]
+    volumes:
+      - ./datasets:/workspace/datasets
+      - ./artifacts:/workspace/artifacts
+      - ./checkpoints:/workspace/checkpoints
+      - ./outputs:/workspace/outputs
+    environment:
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
+      PYTHONUNBUFFERED: "1"
+    ipc: host
+    shm_size: "8gb"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD-SHELL", "nvidia-smi >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

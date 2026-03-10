@@ -1,0 +1,15 @@
+{
+  "include": ["src"],
+  "typeCheckingMode": "off",
+  "reportMissingImports": "none",
+  "reportMissingModuleSource": "none",
+  "reportAttributeAccessIssue": "none",
+  "reportMissingTypeArgument": "none",
+  "reportUnknownVariableType": "none",
+  "reportUnknownMemberType": "none",
+  "reportUnknownArgumentType": "none",
+  "reportUnknownParameterType": "none",
+  "reportAny": "none",
+  "venvPath": ".",
+  "venv": ".venv"
+}

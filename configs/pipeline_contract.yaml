@@ -1,0 +1,45 @@
+project: idh-glioma
+version: 0.1.0
+
+model_roles:
+  segmentation_baseline: unet2d
+  classification_baseline: mobilenetv3
+  segmentation_alt_prompt: sam3
+  detection_or_segmentation_alt: yolov11
+
+input_contract:
+  formats:
+    - nifti_nii_gz
+  required_modalities:
+    - flair
+    - t1
+    - t1Gd
+    - t2
+  segmentation_target:
+    priority:
+      - GlistrBoost_ManuallyCorrected
+      - GlistrBoost
+  idh_labels:
+    csv_columns:
+      - case_id
+      - idh_label
+    label_semantics:
+      0: IDH_wildtype
+      1: IDH_mutant
+
+preprocessing_contract:
+  orientation: keep_source_orientation
+  spacing: keep_source_spacing
+  intensity_norm: per_volume_zscore
+  segmentation_binarization: mask_gt_0
+  split_policy:
+    level: patient_case
+    stratify_by: idh_label_if_available
+
+output_contract:
+  segmentation_mask: nifti_nii_gz
+  classification:
+    probability: float_0_1
+    class:
+      0: IDH_wildtype
+      1: IDH_mutant
