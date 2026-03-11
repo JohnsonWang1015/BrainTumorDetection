@@ -144,6 +144,14 @@ uv run python -m idh_glioma.data.prepare_dataset \
 
 若你暫時沒有 `idh_labels.csv`，也可先不帶 `--idh-labels`，先跑 segmentation。
 
+也可讓程式自動從 `datasets/` 掃描 BraTS 根目錄：
+
+```bash
+uv run python -m idh_glioma.data.prepare_dataset \
+  --dataset-root datasets \
+  --output artifacts/manifest.json
+```
+
 ---
 
 ## 6. 訓練流程
@@ -297,6 +305,30 @@ uv run python -m idh_glioma.integrations.yolov11_runner \
 
 ```bash
 ./scripts/run_baseline_pipeline.sh
+```
+
+如果你在 `datasets/` 新增了資料，建議改用自動偵測啟動腳本：
+
+```bash
+# BraTS / Ultralytics 自動判斷
+./scripts/start_training.sh --dataset-path datasets --mode auto
+
+# 明確指定 BraTS 路徑（可加 IDH 標籤）
+./scripts/start_training.sh \
+  --mode brats \
+  --dataset-path datasets/BraTS-TCGA-LGG \
+  --idh-labels artifacts/idh_labels.csv
+
+# 明確指定 Ultralytics 資料集（需有 brain-tumor.yaml 或 dataset.yaml）
+./scripts/start_training.sh \
+  --mode ultralytics \
+  --dataset-path datasets/Ultralytics \
+  --yolo-task detect
+
+# Kaggle / Kaggle_multimodal 類別資料夾格式（YOLO classify）
+./scripts/start_training.sh \
+  --mode kaggle \
+  --dataset-path datasets/Kaggle
 ```
 
 `--profile a6000` 會在 GPU 可用時自動套用較高吞吐參數（batch size / workers / prefetch / AMP / TF32）。

@@ -60,7 +60,7 @@ def parse_case_folder(case_dir: Path) -> CaseRecord | None:
 
 
 def build_manifest(brats_root: Path, idh_labels_csv: Path | None) -> list[CaseRecord]:
-    case_dirs = [p for p in brats_root.glob("TCGA-*") if p.is_dir()]
+    case_dirs = [p for p in brats_root.iterdir() if p.is_dir()]
     records: list[CaseRecord] = []
     label_map: dict[str, int] = {}
 
@@ -70,8 +70,13 @@ def build_manifest(brats_root: Path, idh_labels_csv: Path | None) -> list[CaseRe
         if not required.issubset(set(labels_df.columns)):
             raise ValueError("IDH label CSV must have columns: case_id, idh_label")
         for _, row in labels_df.iterrows():
-            case_id = str(row["case_id"])
-            idh_label = int(str(row["idh_label"]))
+            case_id = str(row["case_id"]).strip()
+            raw_label = row["idh_label"]
+            if pd.isna(raw_label):
+                continue
+            idh_label = int(str(raw_label).strip())
+            if idh_label not in (0, 1):
+                raise ValueError("IDH labels must be binary values: 0 or 1")
             label_map[case_id] = idh_label
 
     for case_dir in sorted(case_dirs):
@@ -85,38 +90,95 @@ def build_manifest(brats_root: Path, idh_labels_csv: Path | None) -> list[CaseRe
     return records
 
 
+def infer_brats_root(dataset_root: Path) -> Path:
+    default = (
+        dataset_root
+        / "BraTS-TCGA-LGG"
+        / "Pre-operative_TCGA_LGG_NIfTI_and_Segmentations"
+    )
+    if default.exists():
+        return default
+
+    nested_candidates = sorted(
+        p
+        for p in dataset_root.glob("**/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations")
+        if p.is_dir()
+    )
+    if nested_candidates:
+        if len(nested_candidates) > 1:
+            matches = "\n".join(str(p) for p in nested_candidates)
+            raise ValueError(
+                "Multiple BraTS roots found. Please pass --brats-root explicitly.\n"
+                f"Candidates:\n{matches}"
+            )
+        return nested_candidates[0]
+
+    direct_candidates = sorted(p for p in dataset_root.iterdir() if p.is_dir())
+    for candidate in direct_candidates:
+        if any(candidate.glob("TCGA-*/*.nii.gz")):
+            return candidate
+
+    raise FileNotFoundError(
+        "Unable to locate BraTS root automatically. Please pass --brats-root explicitly."
+    )
+
+
 def stratified_split(
     records: list[CaseRecord], val_ratio: float, test_ratio: float
 ) -> dict[str, list[CaseRecord]]:
     if not records:
         raise ValueError("No valid cases found for split.")
+    if test_ratio <= 0 or test_ratio >= 1:
+        raise ValueError("test_ratio must be in range (0, 1)")
+    if val_ratio <= 0 or val_ratio >= 1:
+        raise ValueError("val_ratio must be in range (0, 1)")
+    if val_ratio + test_ratio >= 1:
+        raise ValueError("val_ratio + test_ratio must be < 1")
 
     idh_available = [r for r in records if r.idh_label is not None]
     idh_missing = [r for r in records if r.idh_label is None]
 
-    if idh_available and len({r.idh_label for r in idh_available}) > 1:
-        y = [r.idh_label for r in idh_available]
+    if not idh_available:
+        train_val, test = train_test_split(
+            records, test_size=test_ratio, random_state=42
+        )
+        val_relative = val_ratio / (1.0 - test_ratio)
+        train, val = train_test_split(
+            train_val, test_size=val_relative, random_state=42
+        )
+        return {"train": train, "val": val, "test": test}
+
+    use_stratify = len({r.idh_label for r in idh_available}) > 1
+    y = [r.idh_label for r in idh_available] if use_stratify else None
+    try:
         train_val, test = train_test_split(
             idh_available,
             test_size=test_ratio,
             random_state=42,
             stratify=y,
         )
-        y_train_val = [r.idh_label for r in train_val]
-        val_relative = val_ratio / (1.0 - test_ratio)
+    except ValueError:
+        train_val, test = train_test_split(
+            idh_available,
+            test_size=test_ratio,
+            random_state=42,
+            stratify=None,
+        )
+    val_relative = val_ratio / (1.0 - test_ratio)
+    y_train_val = [r.idh_label for r in train_val] if use_stratify else None
+    try:
         train, val = train_test_split(
             train_val,
             test_size=val_relative,
             random_state=42,
             stratify=y_train_val,
         )
-    else:
-        train_val, test = train_test_split(
-            idh_available, test_size=test_ratio, random_state=42
-        )
-        val_relative = val_ratio / (1.0 - test_ratio)
+    except ValueError:
         train, val = train_test_split(
-            train_val, test_size=val_relative, random_state=42
+            train_val,
+            test_size=val_relative,
+            random_state=42,
+            stratify=None,
         )
 
     train.extend(idh_missing)
@@ -145,13 +207,8 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Prepare BraTS manifest for segmentation + IDH tasks"
     )
-    parser.add_argument(
-        "--brats-root",
-        type=Path,
-        default=Path(
-            "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations"
-        ),
-    )
+    parser.add_argument("--brats-root", type=Path, default=None)
+    parser.add_argument("--dataset-root", type=Path, default=Path("datasets"))
     parser.add_argument(
         "--idh-labels",
         type=Path,
@@ -166,10 +223,12 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    records = build_manifest(args.brats_root, args.idh_labels)
+    brats_root = args.brats_root or infer_brats_root(args.dataset_root)
+    records = build_manifest(brats_root, args.idh_labels)
     splits = stratified_split(records, args.val_ratio, args.test_ratio)
     write_manifest(splits, args.output)
     print(f"Saved manifest to {args.output}")
+    print(f"Using BraTS root: {brats_root}")
     print({k: len(v) for k, v in splits.items()})
 
 
