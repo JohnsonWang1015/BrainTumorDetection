@@ -1,13 +1,11 @@
 # Detect and Segment IDH Mutation Status in Brain Gliomas
 
-本專案提供一個可直接落地的端到端流程，整合：
+本專案提供一個可直接落地的 End-to-End 流程，整合：
 
 - 腦瘤分割（預設 U-Net 2D，並提供 SAM3 介接）
 - IDH mutation 狀態分類（MobileNetV3）
 - YOLOv11 資料匯出與訓練介接（detect/segment/classify 任務）
 - 針對你目前 `datasets/` 目錄下資料集的自動掃描與 manifest 建置
-
-> 你提到訓練會移到 RTX A6000 主機，本專案程式已設計成可在 CPU 開發、GPU 正式訓練。
 
 ---
 
@@ -41,7 +39,7 @@ brain-tumor-detection/
 
 ---
 
-## 2. 已對應你的資料集狀況
+## 2. 已對應目前資料集狀況
 
 ### 2.1 BraTS-TCGA-LGG
 
@@ -58,7 +56,7 @@ brain-tumor-detection/
 
 ### 2.2 MRIBrainTumor
 
-目前為多個 zip 分片（`2020 腦瘤分割挑戰賽-...zip`），可先在本地或 A6000 主機解壓後納入資料流程。
+目前為多個 zip 分片，可先在本地或 A6000 主機解壓後納入資料流程。
 
 ```bash
 ./scripts/unzip_mri_dataset.sh
@@ -289,7 +287,7 @@ uv run python -m idh_glioma.integrations.yolov11_runner \
 
 ---
 
-## 11. 你接下來可直接做的事
+## 11. 接下來可直接做的事
 
 1. 先在 A6000 主機安裝 CUDA 對應 PyTorch 與需求套件。
 2. 放入 `idh_labels.csv` 後執行 manifest + 分類訓練。
@@ -315,7 +313,7 @@ uv run python -m idh_glioma.integrations.yolov11_runner \
 
 ## 13. 版本與相容性建議
 
-此專案在你遷移到 A6000 主機後，請優先固定環境版本（Torch + CUDA + Ultralytics + SAM3），避免因套件升級造成行為漂移。
+此專案在遷移到 A6000 主機後，請優先固定環境版本（Torch + CUDA + Ultralytics + SAM3），避免因套件升級造成行為漂移。
 
 - 建議做法：每次實驗後更新 lock 檔（`uv lock`）並提交 `uv.lock`
 - 在 README 指令中，先跑 baseline（U-Net + MobileNetV3），再擴充到 SAM3 / YOLOv11
