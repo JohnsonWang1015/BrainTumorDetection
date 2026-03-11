@@ -135,6 +135,15 @@ TCGA-CS-4944,0
 
 ## 5. 建立 manifest 與資料切分
 
+如果要最短可直接使用流程，先跑一鍵腳本：
+
+```bash
+./scripts/prepare_idh_data.sh --dataset-path datasets/BraTS-TCGA-LGG
+```
+
+第一次執行會自動建立 `artifacts/idh_labels.csv`（從模板複製）。
+填完 `idh_label` 後，再執行一次同一指令，就會產生 `artifacts/manifest.json`。
+
 ```bash
 uv run python -m idh_glioma.data.prepare_dataset \
   --brats-root datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations \
@@ -142,7 +151,7 @@ uv run python -m idh_glioma.data.prepare_dataset \
   --output artifacts/manifest.json
 ```
 
-若你暫時沒有 `idh_labels.csv`，也可先不帶 `--idh-labels`，先跑 segmentation。
+若暫時沒有 `idh_labels.csv`，也可先不帶 `--idh-labels`，先跑 segmentation。
 
 也可讓程式自動從 `datasets/` 掃描 BraTS 根目錄：
 
