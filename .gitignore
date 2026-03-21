@@ -10,6 +10,7 @@ checkpoints/
 .ruff_cache/
 .sisyphus/
 .logs/
+mri_brats_compat_sample/
 *.egg-info
 *.pt
 *.pth

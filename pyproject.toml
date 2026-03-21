@@ -5,13 +5,14 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "idh-glioma"
 version = "0.1.0"
-description = "Detect and segment IDH mutation status in brain gliomas"
+description = "Detect and segment brain tumors from CT and MRI scans"
 requires-python = ">=3.10"
 readme = "README.md"
 dependencies = [
   "numpy>=1.26",
   "pandas>=2.2",
   "nibabel>=5.2",
+  "Pillow>=10.0",
   "scikit-image>=0.24",
   "scikit-learn>=1.5",
   "tqdm>=4.66",
@@ -23,9 +24,19 @@ dependencies = [
   "ultralytics>=8.3.0",
 ]
 
+[project.scripts]
+prepare-mri = "idh_glioma.data.prepare_dataset:main"
+prepare-ct  = "idh_glioma.data.prepare_ct_data:main"
+train-seg   = "idh_glioma.train.train_segmentation:main"
+train-idh   = "idh_glioma.train.train_idh_classifier:main"
+train-ct    = "idh_glioma.train.train_ct_classifier:main"
+infer       = "idh_glioma.infer.pipeline:main"
+
 [dependency-groups]
 dev = [
   "basedpyright>=1.31.0",
+  "pytest>=8.0",
+  "pytest-cov>=5.0",
 ]
 
 [tool.setuptools.packages.find]

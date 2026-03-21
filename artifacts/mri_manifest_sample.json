@@ -1,0 +1,248 @@
+{
+  "train": [
+    {
+      "case_id": "2HDZK6B6",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/2HDZK6B6/2HDZK6B6_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/2HDZK6B6/2HDZK6B6_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/2HDZK6B6/2HDZK6B6_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/2HDZK6B6/2HDZK6B6_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/2HDZK6B6/2HDZK6B6_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    },
+    {
+      "case_id": "2663BHJM",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/2663BHJM/2663BHJM_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/2663BHJM/2663BHJM_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/2663BHJM/2663BHJM_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/2663BHJM/2663BHJM_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/2663BHJM/2663BHJM_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    },
+    {
+      "case_id": "2DRQRHJK",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/2DRQRHJK/2DRQRHJK_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/2DRQRHJK/2DRQRHJK_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/2DRQRHJK/2DRQRHJK_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/2DRQRHJK/2DRQRHJK_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/2DRQRHJK/2DRQRHJK_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    },
+    {
+      "case_id": "24FQJ6VV",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/24FQJ6VV/24FQJ6VV_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/24FQJ6VV/24FQJ6VV_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/24FQJ6VV/24FQJ6VV_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/24FQJ6VV/24FQJ6VV_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/24FQJ6VV/24FQJ6VV_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    },
+    {
+      "case_id": "2BOW2HGS",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/2BOW2HGS/2BOW2HGS_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/2BOW2HGS/2BOW2HGS_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/2BOW2HGS/2BOW2HGS_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/2BOW2HGS/2BOW2HGS_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/2BOW2HGS/2BOW2HGS_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    },
+    {
+      "case_id": "26QPKJBJ",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/26QPKJBJ/26QPKJBJ_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/26QPKJBJ/26QPKJBJ_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/26QPKJBJ/26QPKJBJ_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/26QPKJBJ/26QPKJBJ_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/26QPKJBJ/26QPKJBJ_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    },
+    {
+      "case_id": "2CML4ING",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/2CML4ING/2CML4ING_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/2CML4ING/2CML4ING_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/2CML4ING/2CML4ING_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/2CML4ING/2CML4ING_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/2CML4ING/2CML4ING_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    },
+    {
+      "case_id": "2ABGOEM3",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/2ABGOEM3/2ABGOEM3_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/2ABGOEM3/2ABGOEM3_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/2ABGOEM3/2ABGOEM3_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/2ABGOEM3/2ABGOEM3_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/2ABGOEM3/2ABGOEM3_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    },
+    {
+      "case_id": "24ZGKQ3E",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/24ZGKQ3E/24ZGKQ3E_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/24ZGKQ3E/24ZGKQ3E_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/24ZGKQ3E/24ZGKQ3E_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/24ZGKQ3E/24ZGKQ3E_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/24ZGKQ3E/24ZGKQ3E_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    },
+    {
+      "case_id": "2GOOFGLI",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/2GOOFGLI/2GOOFGLI_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/2GOOFGLI/2GOOFGLI_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/2GOOFGLI/2GOOFGLI_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/2GOOFGLI/2GOOFGLI_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/2GOOFGLI/2GOOFGLI_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    },
+    {
+      "case_id": "2KF65E77",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/2KF65E77/2KF65E77_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/2KF65E77/2KF65E77_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/2KF65E77/2KF65E77_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/2KF65E77/2KF65E77_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/2KF65E77/2KF65E77_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    },
+    {
+      "case_id": "2FMHNBFN",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/2FMHNBFN/2FMHNBFN_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/2FMHNBFN/2FMHNBFN_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/2FMHNBFN/2FMHNBFN_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/2FMHNBFN/2FMHNBFN_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/2FMHNBFN/2FMHNBFN_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    },
+    {
+      "case_id": "2EOUWEGA",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/2EOUWEGA/2EOUWEGA_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/2EOUWEGA/2EOUWEGA_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/2EOUWEGA/2EOUWEGA_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/2EOUWEGA/2EOUWEGA_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/2EOUWEGA/2EOUWEGA_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    },
+    {
+      "case_id": "2JILYFHO",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/2JILYFHO/2JILYFHO_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/2JILYFHO/2JILYFHO_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/2JILYFHO/2JILYFHO_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/2JILYFHO/2JILYFHO_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/2JILYFHO/2JILYFHO_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    }
+  ],
+  "val": [
+    {
+      "case_id": "24E5HUMB",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/24E5HUMB/24E5HUMB_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/24E5HUMB/24E5HUMB_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/24E5HUMB/24E5HUMB_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/24E5HUMB/24E5HUMB_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/24E5HUMB/24E5HUMB_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    },
+    {
+      "case_id": "2CLKDOUC",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/2CLKDOUC/2CLKDOUC_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/2CLKDOUC/2CLKDOUC_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/2CLKDOUC/2CLKDOUC_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/2CLKDOUC/2CLKDOUC_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/2CLKDOUC/2CLKDOUC_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    },
+    {
+      "case_id": "2KACPF2M",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/2KACPF2M/2KACPF2M_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/2KACPF2M/2KACPF2M_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/2KACPF2M/2KACPF2M_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/2KACPF2M/2KACPF2M_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/2KACPF2M/2KACPF2M_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    }
+  ],
+  "test": [
+    {
+      "case_id": "23F4DGUR",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/23F4DGUR/23F4DGUR_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/23F4DGUR/23F4DGUR_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/23F4DGUR/23F4DGUR_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/23F4DGUR/23F4DGUR_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/23F4DGUR/23F4DGUR_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    },
+    {
+      "case_id": "2JK7OJNL",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/2JK7OJNL/2JK7OJNL_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/2JK7OJNL/2JK7OJNL_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/2JK7OJNL/2JK7OJNL_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/2JK7OJNL/2JK7OJNL_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/2JK7OJNL/2JK7OJNL_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    },
+    {
+      "case_id": "2HHFEFPB",
+      "date": "2020.01.01",
+      "modalities": {
+        "flair": "artifacts/mri_brats_compat_sample/2HHFEFPB/2HHFEFPB_2020.01.01_flair.nii.gz",
+        "t1": "artifacts/mri_brats_compat_sample/2HHFEFPB/2HHFEFPB_2020.01.01_t1.nii.gz",
+        "t1Gd": "artifacts/mri_brats_compat_sample/2HHFEFPB/2HHFEFPB_2020.01.01_t1Gd.nii.gz",
+        "t2": "artifacts/mri_brats_compat_sample/2HHFEFPB/2HHFEFPB_2020.01.01_t2.nii.gz"
+      },
+      "mask_path": "artifacts/mri_brats_compat_sample/2HHFEFPB/2HHFEFPB_2020.01.01_GlistrBoost.nii.gz",
+      "idh_label": null
+    }
+  ]
+}

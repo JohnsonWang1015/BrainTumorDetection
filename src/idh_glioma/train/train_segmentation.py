@@ -11,8 +11,13 @@ from torch.optim import AdamW
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-from idh_glioma.data.datasets import BraTSSliceSegmentationDataset
+from idh_glioma.data.datasets import BraTSSliceSegmentationDataset, CaseLevelSampler, load_nifti
 from idh_glioma.models.unet2d import UNet2D
+
+
+def _worker_init(worker_id: int) -> None:
+    """Clear the NIfTI LRU cache so each DataLoader worker builds its own."""
+    load_nifti.cache_clear()
 
 
 def dice_loss(logits: torch.Tensor, target: torch.Tensor) -> torch.Tensor:
@@ -141,32 +146,30 @@ def main() -> None:
     train_ds = BraTSSliceSegmentationDataset(args.manifest, split="train")
     val_ds = BraTSSliceSegmentationDataset(args.manifest, split="val")
     use_workers = args.num_workers > 0
-    train_loader_kwargs: dict[str, object] = {
+
+    train_sampler = CaseLevelSampler(
+        num_cases=len(train_ds.records),
+        num_slices_per_case=train_ds.num_slices_per_case,
+        shuffle=True,
+    )
+    val_sampler = CaseLevelSampler(
+        num_cases=len(val_ds.records),
+        num_slices_per_case=val_ds.num_slices_per_case,
+        shuffle=False,
+    )
+
+    common: dict[str, object] = {
         "batch_size": args.batch_size,
-        "shuffle": True,
-        "num_workers": args.num_workers,
-        "pin_memory": device.type == "cuda",
-    }
-    val_loader_kwargs: dict[str, object] = {
-        "batch_size": args.batch_size,
-        "shuffle": False,
         "num_workers": args.num_workers,
         "pin_memory": device.type == "cuda",
     }
     if use_workers:
-        train_loader_kwargs["persistent_workers"] = True
-        train_loader_kwargs["prefetch_factor"] = args.prefetch_factor
-        val_loader_kwargs["persistent_workers"] = True
-        val_loader_kwargs["prefetch_factor"] = args.prefetch_factor
+        common["persistent_workers"] = True
+        common["prefetch_factor"] = args.prefetch_factor
+        common["worker_init_fn"] = _worker_init
 
-    train_loader = DataLoader(
-        train_ds,
-        **train_loader_kwargs,
-    )
-    val_loader = DataLoader(
-        val_ds,
-        **val_loader_kwargs,
-    )
+    train_loader = DataLoader(train_ds, sampler=train_sampler, **common)
+    val_loader = DataLoader(val_ds, sampler=val_sampler, **common)
 
     model = UNet2D().to(device)
     if device.type == "cuda":
