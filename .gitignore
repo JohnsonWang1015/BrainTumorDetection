@@ -11,7 +11,6 @@ outputs/
 .logs/
 mri_brats_compat_sample/
 *.egg-info
-*.pt
 *.pth
 *.ckpt
 *.onnx
