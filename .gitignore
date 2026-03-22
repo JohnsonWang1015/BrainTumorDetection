@@ -6,7 +6,6 @@ __pycache__/
 venv/
 datasets
 outputs/
-checkpoints/
 .ruff_cache/
 .sisyphus/
 .logs/
