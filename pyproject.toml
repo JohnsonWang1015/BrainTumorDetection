@@ -30,6 +30,8 @@ prepare-ct  = "idh_glioma.data.prepare_ct_data:main"
 train-seg   = "idh_glioma.train.train_segmentation:main"
 train-idh   = "idh_glioma.train.train_idh_classifier:main"
 train-ct    = "idh_glioma.train.train_ct_classifier:main"
+eval-ct     = "idh_glioma.eval.eval_ct:main"
+eval-seg    = "idh_glioma.eval.eval_seg:main"
 infer       = "idh_glioma.infer.pipeline:main"
 
 [dependency-groups]
