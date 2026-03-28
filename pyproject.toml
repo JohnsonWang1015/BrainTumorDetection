@@ -33,6 +33,7 @@ train-ct    = "idh_glioma.train.train_ct_classifier:main"
 eval-ct     = "idh_glioma.eval.eval_ct:main"
 eval-seg    = "idh_glioma.eval.eval_seg:main"
 infer       = "idh_glioma.infer.pipeline:main"
+train-yolo  = "idh_glioma.train.train_yolo_detection:main"
 
 [dependency-groups]
 dev = [
