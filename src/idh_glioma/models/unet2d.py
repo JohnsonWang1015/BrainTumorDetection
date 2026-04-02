@@ -23,7 +23,11 @@ class ConvBlock(nn.Module):
 
 class UNet2D(nn.Module):
     def __init__(
-        self, in_channels: int = 4, out_channels: int = 1, base_channels: int = 32
+        self,
+        in_channels: int = 4,
+        out_channels: int = 1,
+        base_channels: int = 32,
+        dropout: float = 0.0,
     ) -> None:
         super().__init__()
         self.enc1 = ConvBlock(in_channels, base_channels)
@@ -45,6 +49,7 @@ class UNet2D(nn.Module):
         self.up1 = nn.ConvTranspose2d(base_channels * 2, base_channels, 2, stride=2)
         self.dec1 = ConvBlock(base_channels * 2, base_channels)
 
+        self.drop = nn.Dropout2d(dropout) if dropout > 0 else nn.Identity()
         self.out_conv = nn.Conv2d(base_channels, out_channels, 1)
 
     @staticmethod
@@ -93,4 +98,4 @@ class UNet2D(nn.Module):
         d1 = self.up1(d2)
         d1 = self._align_spatial(d1, e1)
         d1 = self.dec1(torch.cat([d1, e1], dim=1))
-        return self.out_conv(d1)
+        return self.out_conv(self.drop(d1))

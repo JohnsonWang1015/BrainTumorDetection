@@ -22,6 +22,7 @@ dependencies = [
   "torch>=2.4",
   "torchvision>=0.19",
   "ultralytics>=8.3.0",
+  "gradio>=5.0",
 ]
 
 [project.scripts]
@@ -34,6 +35,7 @@ eval-ct     = "idh_glioma.eval.eval_ct:main"
 eval-seg    = "idh_glioma.eval.eval_seg:main"
 infer       = "idh_glioma.infer.pipeline:main"
 train-yolo  = "idh_glioma.train.train_yolo_detection:main"
+tumor-app   = "idh_glioma.app:main"
 
 [dependency-groups]
 dev = [

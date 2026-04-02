@@ -4,6 +4,7 @@ import argparse
 import os
 from pathlib import Path
 
+import numpy as np
 import torch
 import torch.nn.functional as F
 from torch import nn
@@ -25,6 +26,19 @@ def dice_loss(logits: torch.Tensor, target: torch.Tensor) -> torch.Tensor:
     num = 2.0 * (probs * target).sum(dim=(1, 2, 3)) + 1e-6
     den = probs.sum(dim=(1, 2, 3)) + target.sum(dim=(1, 2, 3)) + 1e-6
     return 1.0 - (num / den).mean()
+
+
+def focal_loss(
+    logits: torch.Tensor,
+    target: torch.Tensor,
+    alpha: float = 0.25,
+    gamma: float = 2.0,
+) -> torch.Tensor:
+    """Focal loss for handling class imbalance (tumor pixels << background)."""
+    bce = F.binary_cross_entropy_with_logits(logits, target, reduction="none")
+    p_t = torch.sigmoid(logits) * target + (1 - torch.sigmoid(logits)) * (1 - target)
+    focal_weight = alpha * (1 - p_t) ** gamma
+    return (focal_weight * bce).mean()
 
 
 def train_epoch(
@@ -50,12 +64,11 @@ def train_epoch(
             enabled=amp_enabled,
         ):
             logits = model(images)
-            loss = F.binary_cross_entropy_with_logits(logits, masks) + dice_loss(
-                logits, masks
-            )
+            loss = focal_loss(logits, masks) + dice_loss(logits, masks)
 
         optimizer.zero_grad(set_to_none=True)
         scaler.scale(loss).backward()
+        nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
         scaler.step(optimizer)
         scaler.update()
         running += float(loss.item())
@@ -63,14 +76,17 @@ def train_epoch(
 
 
 @torch.no_grad()
-def eval_epoch(
+def validation_epoch(
     model: nn.Module,
     loader: DataLoader[tuple[torch.Tensor, torch.Tensor]],
     device: torch.device,
     amp_enabled: bool,
-) -> float:
-    model.eval()
-    running = 0.0
+) -> tuple[float, float]:
+    """Returns (loss, dice_score)."""
+    model.train(False)
+    running_loss = 0.0
+    running_dice = 0.0
+    n_batches = 0
     non_blocking = device.type == "cuda"
     for images, masks in tqdm(loader, desc="val", leave=False):
         images = images.to(device, non_blocking=non_blocking)
@@ -84,11 +100,18 @@ def eval_epoch(
             enabled=amp_enabled,
         ):
             logits = model(images)
-            loss = F.binary_cross_entropy_with_logits(logits, masks) + dice_loss(
-                logits, masks
-            )
-        running += float(loss.item())
-    return running / max(len(loader), 1)
+            loss = focal_loss(logits, masks) + dice_loss(logits, masks)
+
+        # Compute dice metric for monitoring
+        probs = torch.sigmoid(logits)
+        preds = (probs > 0.5).float()
+        intersection = (preds * masks).sum(dim=(1, 2, 3))
+        dice = (2.0 * intersection + 1e-6) / (preds.sum(dim=(1, 2, 3)) + masks.sum(dim=(1, 2, 3)) + 1e-6)
+        running_dice += dice.mean().item()
+        running_loss += loss.item()
+        n_batches += 1
+    n = max(n_batches, 1)
+    return running_loss / n, running_dice / n
 
 
 def parse_args() -> argparse.Namespace:
@@ -96,7 +119,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--manifest", type=Path, default=Path("artifacts/manifest.json")
     )
-    parser.add_argument("--epochs", type=int, default=20)
+    parser.add_argument("--epochs", type=int, default=100)
     parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--profile", choices=["default", "a6000"], default="default")
     parser.add_argument("--num-workers", type=int, default=min(8, os.cpu_count() or 1))
@@ -109,7 +132,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--compile", action=argparse.BooleanOptionalAction, default=False
     )
-    parser.add_argument("--lr", type=float, default=1e-4)
+    parser.add_argument("--lr", type=float, default=3e-4)
+    parser.add_argument("--weight-decay", type=float, default=1e-4)
+    parser.add_argument("--warmup-epochs", type=int, default=5)
+    parser.add_argument("--dropout", type=float, default=0.1)
     parser.add_argument(
         "--output", type=Path, default=Path("checkpoints/unet2d_best.pt")
     )
@@ -171,7 +197,7 @@ def main() -> None:
     train_loader = DataLoader(train_ds, sampler=train_sampler, **common)
     val_loader = DataLoader(val_ds, sampler=val_sampler, **common)
 
-    model = UNet2D().to(device)
+    model = UNet2D(dropout=args.dropout).to(device)
     if device.type == "cuda":
         model = model.to(memory_format=torch.channels_last)
     if args.compile:
@@ -180,10 +206,22 @@ def main() -> None:
         except Exception as exc:
             print(f"torch.compile disabled: {exc}")
 
-    optimizer = AdamW(model.parameters(), lr=args.lr)
+    optimizer = AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     scaler = torch.amp.GradScaler("cuda", enabled=use_amp)
 
-    best_val = float("inf")
+    # Cosine annealing with linear warmup
+    warmup_epochs = args.warmup_epochs
+    total_epochs = args.epochs
+
+    def lr_lambda(epoch: int) -> float:
+        if epoch < warmup_epochs:
+            return (epoch + 1) / warmup_epochs
+        progress = (epoch - warmup_epochs) / max(total_epochs - warmup_epochs, 1)
+        return 0.5 * (1.0 + np.cos(np.pi * progress))
+
+    scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda)
+
+    best_dice = 0.0
     args.output.parent.mkdir(parents=True, exist_ok=True)
 
     for epoch in range(args.epochs):
@@ -195,23 +233,33 @@ def main() -> None:
             amp_enabled=use_amp,
             scaler=scaler,
         )
-        val_loss = eval_epoch(
+        val_loss, val_dice = validation_epoch(
             model,
             val_loader,
             device,
             amp_enabled=use_amp,
         )
+        scheduler.step()
+        current_lr = optimizer.param_groups[0]["lr"]
         print(
-            f"[Epoch {epoch + 1:03d}] train_loss={train_loss:.4f} val_loss={val_loss:.4f}"
+            f"[Epoch {epoch + 1:03d}] train_loss={train_loss:.4f} "
+            f"val_loss={val_loss:.4f} val_dice={val_dice:.4f} lr={current_lr:.6f}"
         )
 
-        if val_loss < best_val:
-            best_val = val_loss
+        if val_dice > best_dice:
+            best_dice = val_dice
             torch.save(
-                {"model": model.state_dict(), "val_loss": val_loss, "epoch": epoch + 1},
+                {
+                    "model": model.state_dict(),
+                    "val_loss": val_loss,
+                    "val_dice": val_dice,
+                    "epoch": epoch + 1,
+                },
                 args.output,
             )
-            print(f"Saved best checkpoint: {args.output}")
+            print(f"Saved best checkpoint (dice={val_dice:.4f}): {args.output}")
+
+    print(f"\nTraining complete. Best val dice: {best_dice:.4f}")
 
 
 if __name__ == "__main__":
