@@ -12,7 +12,7 @@ Outputs
 Usage::
 
     uv run eval-seg
-    uv run eval-seg --manifest artifacts/mri_manifest.json --ckpt checkpoints/unet2d_best.pt
+    uv run eval-seg --manifest artifacts/manifest.json --ckpt checkpoints/unet2d_tcga_v1.pt
 """
 
 from __future__ import annotations
@@ -177,8 +177,13 @@ def evaluate(
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Evaluate UNet2D segmentation on BraTS test split")
-    p.add_argument("--manifest", type=Path, default=Path("artifacts/mri_manifest.json"))
-    p.add_argument("--ckpt", type=Path, default=Path("checkpoints/unet2d_best.pt"))
+    p.add_argument(
+        "--manifest",
+        type=Path,
+        default=Path("artifacts/manifest.json"),
+        help="Path to manifest. Must match the cohort the checkpoint was trained on.",
+    )
+    p.add_argument("--ckpt", type=Path, default=Path("checkpoints/unet2d_tcga_v1.pt"))
     p.add_argument("--batch-size", type=int, default=16)
     p.add_argument("--output-dir", type=Path, default=Path("outputs"))
     return p.parse_args()

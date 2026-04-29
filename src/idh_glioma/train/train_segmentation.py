@@ -117,7 +117,11 @@ def validation_epoch(
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Train U-Net for glioma segmentation")
     parser.add_argument(
-        "--manifest", type=Path, default=Path("artifacts/manifest.json")
+        "--manifest",
+        type=Path,
+        default=Path("artifacts/manifest.json"),
+        help="Path to manifest. Use the BraTS-TCGA-LGG cohort (true 4-modality). "
+        "Other manifests (e.g. single-modality datasets) will silently degrade Dice.",
     )
     parser.add_argument("--epochs", type=int, default=100)
     parser.add_argument("--batch-size", type=int, default=8)
