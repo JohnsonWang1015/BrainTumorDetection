@@ -54,13 +54,9 @@ brain-tumor-detection/
 
 `prepare_dataset.py` 會自動找出以上影像與 mask，建立 `artifacts/manifest.json`。
 
-### 2.2 MRIBrainTumor
+### 2.2 MRIBrainTumor（已停用）
 
-目前為多個 zip 分片，可先在本地或 A6000 主機解壓後納入資料流程。
-
-```bash
-./scripts/unzip_mri_dataset.sh
-```
+`datasets/MRIBrainTumor/` 的 9 個 zip 是 2020 腦瘤分割挑戰賽資料，**單模態**（每個 case 只有一個 NIfTI 影像 + 一個 mask），不適合 4-channel U-Net。早期 pipeline 用 4 個 symlink 假裝多模態導致模型 Dice 低落，現已從訓練流程移除。Segmentation 與 IDH 分類統一使用 TCGA-LGG（真 4 模態）。如需重新接上單模態資料流，需另外新增 1-channel 模型分支。
 
 ---
 
@@ -114,22 +110,38 @@ docker compose -f docker-compose.gpu.yml run --rm \
 
 ---
 
-## 4. 準備 IDH 標籤（重要）
+## 4. 準備 IDH 標籤
 
-你目前資料夾內可直接找到 segmentation 標註，但未發現可直接訓練分類用的 IDH 標籤表。
-
-請準備一個 CSV（例如 `artifacts/idh_labels.csv`）：
+`artifacts/idh_labels.csv` 已從 cBioPortal 公開臨床資料填好（study `lgggbm_tcga_pub` 的 `IDH_STATUS` attribute，64/65 cases 匹配）。格式：
 
 ```csv
 case_id,idh_label
 TCGA-CS-4942,1
-TCGA-CS-4944,0
+TCGA-CS-4944,1
 ```
 
 - `idh_label`: `0=IDH wildtype`, `1=IDH mutant`
-- `case_id` 必須對應病例資料夾名稱（例如 `TCGA-CS-4942`）
+- `case_id` 必須對應病例資料夾名稱
 
-可直接複製模板：`artifacts/idh_labels.template.csv`
+如要重新產生（例如新增 case 或更新標籤源），可用以下 Python 程式片段（需網路）：
+
+```python
+import json, csv, urllib.request
+url = ("https://www.cbioportal.org/api/studies/lgggbm_tcga_pub/clinical-data"
+       "?clinicalDataType=SAMPLE&attributeId=IDH_STATUS&pageSize=2000")
+data = json.loads(urllib.request.urlopen(url).read())
+patient_idh = {d['patientId']: d['value'] for d in data}
+with open('artifacts/idh_labels.csv') as f:
+    cases = [r['case_id'] for r in csv.DictReader(f)]
+mapping = {'Mutant': 1, 'WT': 0}
+with open('artifacts/idh_labels.csv', 'w', newline='') as f:
+    w = csv.writer(f); w.writerow(['case_id', 'idh_label'])
+    for cid in cases:
+        v = mapping.get(patient_idh.get(cid, ''), '')
+        w.writerow([cid, v])
+```
+
+模板仍保留於 `artifacts/idh_labels.template.csv`。
 
 ---
 
@@ -141,8 +153,7 @@ TCGA-CS-4944,0
 ./scripts/prepare_idh_data.sh --dataset-path datasets/BraTS-TCGA-LGG
 ```
 
-第一次執行會自動建立 `artifacts/idh_labels.csv`（從模板複製）。
-填完 `idh_label` 後，再執行一次同一指令，就會產生 `artifacts/manifest.json`。
+`artifacts/idh_labels.csv` 已預先填好（見 §4），執行該指令會直接 join 標籤並產出 `artifacts/manifest.json`。若 CSV 不存在，腳本會從 template 複製空白 CSV 並提示先填值。
 
 ```bash
 uv run python -m idh_glioma.data.prepare_dataset \
@@ -165,41 +176,39 @@ uv run python -m idh_glioma.data.prepare_dataset \
 
 ## 6. 訓練流程
 
-### 6.1 U-Net 分割訓練
+### 6.1 U-Net 分割訓練（TCGA-LGG, 4 模態）
+
+採用 Focal+Dice loss、cosine warmup、val Dice-based checkpoint。45 train cases 達到 test Dice ~0.76：
 
 ```bash
-uv run python -m idh_glioma.train.train_segmentation \
+uv run train-seg \
   --manifest artifacts/manifest.json \
   --profile a6000 \
-  --epochs 50 \
-  --batch-size 16 \
-  --num-workers 8 \
-  --prefetch-factor 2 \
-  --amp \
-  --cudnn-benchmark \
-  --tf32 \
-  --lr 1e-4 \
-  --output checkpoints/unet2d_best.pt
+  --epochs 100 \
+  --output checkpoints/unet2d_tcga_v1.pt
 ```
 
-### 6.2 MobileNetV3 IDH 分類訓練
+### 6.2 MobileNetV3 IDH 分類訓練（TCGA-LGG, 3 模態）
+
+採用 ImageNet pretrained backbone、`pos_weight = sqrt(neg/pos)` 處理 5:1 imbalance、cosine warmup（3 epochs）、val AUC-based checkpoint：
 
 ```bash
-uv run python -m idh_glioma.train.train_idh_classifier \
+uv run train-idh \
   --manifest artifacts/manifest.json \
   --profile a6000 \
-  --epochs 50 \
-  --batch-size 32 \
-  --num-workers 8 \
-  --prefetch-factor 2 \
-  --amp \
-  --cudnn-benchmark \
-  --tf32 \
-  --lr 3e-4 \
-  --output checkpoints/mobilenetv3_idh_best.pt
+  --epochs 25 \
+  --output checkpoints/mobilenetv3_idh_v3.pt
 ```
 
-若出現 `No IDH labels found`，代表你尚未提供 `idh_labels.csv` 或欄位不符。
+預期 best val AUC 0.7–0.75，test slice AUC 0.6–0.65。若出現 `No IDH labels found`，代表 `idh_labels.csv` 為空或欄位不符（見 §4）。
+
+### 6.3 評估
+
+```bash
+uv run eval-seg --ckpt checkpoints/unet2d_tcga_v1.pt    # Dice/IoU
+uv run eval-idh --ckpt checkpoints/mobilenetv3_idh_v3.pt  # AUC + per-class
+uv run eval-ct                                            # CT 分類器（預設 ckpt + manifest）
+```
 
 ---
 
@@ -307,7 +316,7 @@ uv run python -m idh_glioma.integrations.yolov11_runner \
 ## 11. 接下來可直接做的事
 
 1. 先在 A6000 主機安裝 CUDA 對應 PyTorch 與需求套件。
-2. 放入 `idh_labels.csv` 後執行 manifest + 分類訓練。
+2. 確認 `idh_labels.csv` 已填好（見 §4），執行 `./scripts/prepare_idh_data.sh` 產生 manifest 後即可訓練。
 3. 先跑 U-Net baseline，再切到 SAM3/YOLOv11 實驗分支比較指標。
 
 如果你想直接串起 baseline 流程：

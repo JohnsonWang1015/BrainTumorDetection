@@ -34,7 +34,8 @@ uv run train-seg      # Train U-Net 2D segmentation
 uv run train-idh      # Train MobileNetV3 IDH classifier
 uv run train-ct       # Train CT/MRI classifier
 uv run eval-seg       # Evaluate segmentation (Dice/IoU)
-uv run eval-ct        # Evaluate classification (AUC/F1)
+uv run eval-ct        # Evaluate CT/MRI classifier (AUC/F1)
+uv run eval-idh       # Evaluate IDH classifier (case + slice AUC)
 uv run infer          # End-to-end inference pipeline
 uv run train-yolo     # YOLOv11 detection training
 uv run tumor-app      # Launch Gradio web interface
@@ -88,9 +89,17 @@ src/idh_glioma/
 - **Gradient clipping**: `max_norm=1.0` prevents training instability, especially with mixed precision.
 - **Checkpoint selection**: Save by best validation Dice score (direct metric), not loss.
 
-### Classification Training
+### Classification Training (CT/MRI, `BrainImageDataset`)
 - **ImageNet normalization**: Applied to all CT/MRI images even though they are medical — pretrained features transfer well.
 - **Augmentation**: Random horizontal flip, rotation (15°), color jitter for training split only.
+
+### IDH Classification (`BraTSSliceClassificationDataset`)
+- **Inputs**: 3-channel slices (flair/t1Gd/t2) with per-volume z-score, NOT ImageNet normalization (intensity ranges differ).
+- **Augmentation**: `_augment_cls` mirrors the seg augment (flips + 90-deg rotations + intensity jitter); applied only when `split == "train"`.
+- **Pretrained backbone**: `build_mobilenetv3_binary(pretrained=True)` loads ImageNet weights and keeps the 3-channel stem unchanged. Fine-tuning from random init does not work with the small TCGA-LGG cohort (45 train cases).
+- **Class imbalance**: BCE-with-logits uses `pos_weight = sqrt(num_neg / num_pos)`. The literal ratio is too aggressive when imbalance is heavy and pushes the model to over-predict the minority class.
+- **Checkpointing**: Save by best validation **AUC**, not val_loss. With pos_weight set, val_loss is noisy and a poor signal of discrimination quality.
+- **LR / schedule**: Pretrained fine-tuning needs `lr=1e-4` with cosine warmup (3 epochs warmup, then cosine decay). `lr=3e-4` overshoots at epoch 1.
 
 ### Web Interface (app.py)
 - **Model singleton**: `_get_model()` loads once with global caching. Grad is globally disabled; GradCAM re-enables locally via `torch.enable_grad()`.
@@ -107,9 +116,12 @@ src/idh_glioma/
 
 ### Common Pitfalls
 - **JIT tracing breaks MobileNetV3**: Do not use `torch.jit.trace` — squeeze-excitation blocks have data-dependent control flow.
-- **Blackwell GPU (sm_120)**: PyTorch <=2.6 doesn't support it. App falls back to CPU automatically.
-- **Disk space**: Root partition `/` may be full. Use `TMPDIR=/mnt/8tb_hdd2/tmp` for pip installs.
-- **venv permissions**: The `.venv` symlinks to another user's Python. Use system Python with `PYTHONPATH=src` as fallback.
+- **Disk space**: Root partition `/` may be 99% full. Use `TMPDIR=/mnt/8tb_hdd2/johnson/tmp` for pip installs (the bare `/mnt/8tb_hdd2/tmp` is not writable).
+- **`.venv` rebuild**: If `.venv/bin/python3` becomes inaccessible (e.g. created by a different user, paths point to `/home/esl/...`), recover with `rm -rf .venv && uv sync --frozen`. Falling back to system Python won't work because torch is not installed there.
+- **Two GPUs on this host**: GPU 0 is RTX PRO 5000 Blackwell (ours), GPU 1 is RTX A6000 typically used by another user (`legal-rag-taide`). Default cuda:0 is correct; don't assume GPU 1 is free.
+- **`prepare_dataset.py` int parsing**: `pd.read_csv` infers numeric columns with NaN as float. Always cast labels via `int(float(str(x).strip()))` to handle pandas' float coercion.
+- **Manifest cohort mismatch**: `BraTSSliceClassificationDataset` filters out `idh_label is None`, so a mismatched/empty `idh_labels.csv` silently produces 0 training samples and a `RuntimeError`.
+- **`weights="DEFAULT"` vs custom stem**: When swapping the first conv of a pretrained backbone, you lose the pretrained stem weights. Only swap when `num_input_channels != 3`.
 
 ## Docker (GPU)
 
