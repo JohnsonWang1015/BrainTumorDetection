@@ -69,6 +69,22 @@ def _augment_seg(
     return image, mask
 
 
+def _augment_cls(image: np.ndarray) -> np.ndarray:
+    """Random spatial + intensity augmentations for classification (image only, C,H,W)."""
+    if random.random() > 0.5:
+        image = np.ascontiguousarray(image[:, :, ::-1])
+    if random.random() > 0.5:
+        image = np.ascontiguousarray(image[:, ::-1, :])
+    k = random.randint(0, 3)
+    if k > 0:
+        image = np.rot90(image, k, axes=(1, 2)).copy()
+    if random.random() > 0.5:
+        for c in range(image.shape[0]):
+            image[c] = image[c] * (1.0 + random.uniform(-0.1, 0.1))
+            image[c] = image[c] + random.uniform(-0.1, 0.1)
+    return image
+
+
 class BraTSSliceSegmentationDataset(Dataset[tuple[torch.Tensor, torch.Tensor]]):
     def __init__(
         self,
@@ -124,6 +140,7 @@ class BraTSSliceClassificationDataset(Dataset[tuple[torch.Tensor, torch.Tensor]]
         split: str = "train",
         num_slices_per_case: int = 12,
         img_size: int = 240,
+        augment: bool | None = None,
     ) -> None:
         super().__init__()
         manifest = load_json(manifest_path)
@@ -131,6 +148,7 @@ class BraTSSliceClassificationDataset(Dataset[tuple[torch.Tensor, torch.Tensor]]
         self.records = records
         self.num_slices_per_case = num_slices_per_case
         self.img_size = img_size
+        self.augment = augment if augment is not None else (split == "train")
 
     def __len__(self) -> int:
         return len(self.records) * self.num_slices_per_case
@@ -152,6 +170,8 @@ class BraTSSliceClassificationDataset(Dataset[tuple[torch.Tensor, torch.Tensor]]
         image = np.stack(
             [flair[:, :, z_idx], t1gd[:, :, z_idx], t2[:, :, z_idx]], axis=0
         )
+        if self.augment:
+            image = _augment_cls(image)
         label = np.array([record["idh_label"]], dtype=np.float32)
         image_t = _resize_slice(torch.from_numpy(image), self.img_size)
         return image_t, torch.from_numpy(label)

@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import argparse
+import math
 import os
 from pathlib import Path
 
+import numpy as np
 import torch
 import torch.nn.functional as F
+from sklearn.metrics import roc_auc_score
 from torch.optim import AdamW
 from torch.utils.data import DataLoader
 from tqdm import tqdm
@@ -21,11 +24,15 @@ def run_epoch(
     device: torch.device,
     amp_enabled: bool,
     scaler: torch.amp.GradScaler | None,
-) -> float:
+    pos_weight: torch.Tensor | None = None,
+) -> tuple[float, list[float], list[int]]:
+    """Returns (mean_loss, all_probs, all_labels)."""
     is_train = optimizer is not None
     model.train(is_train)
     running = 0.0
     non_blocking = device.type == "cuda"
+    all_probs: list[float] = []
+    all_labels: list[int] = []
 
     for images, labels in tqdm(
         loader, desc="train" if is_train else "val", leave=False
@@ -41,7 +48,9 @@ def run_epoch(
             enabled=amp_enabled,
         ):
             logits = model(images)
-            loss = F.binary_cross_entropy_with_logits(logits, labels)
+            loss = F.binary_cross_entropy_with_logits(
+                logits, labels, pos_weight=pos_weight
+            )
 
         if is_train:
             if scaler is None:
@@ -50,10 +59,14 @@ def run_epoch(
             scaler.scale(loss).backward()
             scaler.step(optimizer)
             scaler.update()
+        else:
+            probs = torch.sigmoid(logits.float()).detach().cpu().reshape(-1).tolist()
+            all_probs.extend(probs)
+            all_labels.extend(labels.detach().cpu().reshape(-1).int().tolist())
 
         running += float(loss.item())
 
-    return running / max(len(loader), 1)
+    return running / max(len(loader), 1), all_probs, all_labels
 
 
 def parse_args() -> argparse.Namespace:
@@ -76,7 +89,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--compile", action=argparse.BooleanOptionalAction, default=False
     )
-    parser.add_argument("--lr", type=float, default=3e-4)
+    parser.add_argument("--lr", type=float, default=1e-4)
+    parser.add_argument("--weight-decay", type=float, default=1e-4)
+    parser.add_argument("--warmup-epochs", type=int, default=3)
     parser.add_argument(
         "--output", type=Path, default=Path("checkpoints/mobilenetv3_idh_best.pt")
     )
@@ -117,6 +132,19 @@ def main() -> None:
             "No IDH labels found. Please provide --idh-labels CSV during dataset preparation."
         )
 
+    # pos_weight = sqrt(num_negative / num_positive) -- a softer rebalancing
+    # than the literal ratio, which over-pushes when imbalance is heavy.
+    train_labels = [int(r["idh_label"]) for r in train_ds.records]
+    n_pos = sum(train_labels)
+    n_neg = len(train_labels) - n_pos
+    raw_ratio = (n_neg / n_pos) if n_pos > 0 else 1.0
+    pos_weight_value = math.sqrt(raw_ratio)
+    pos_weight = torch.tensor([pos_weight_value], device=device)
+    print(
+        f"Train labels: WT={n_neg}, Mutant={n_pos}, "
+        f"pos_weight=sqrt({raw_ratio:.3f})={pos_weight_value:.4f}"
+    )
+
     use_workers = args.num_workers > 0
     train_loader_kwargs: dict[str, object] = {
         "batch_size": args.batch_size,
@@ -136,14 +164,8 @@ def main() -> None:
         val_loader_kwargs["persistent_workers"] = True
         val_loader_kwargs["prefetch_factor"] = args.prefetch_factor
 
-    train_loader = DataLoader(
-        train_ds,
-        **train_loader_kwargs,
-    )
-    val_loader = DataLoader(
-        val_ds,
-        **val_loader_kwargs,
-    )
+    train_loader = DataLoader(train_ds, **train_loader_kwargs)
+    val_loader = DataLoader(val_ds, **val_loader_kwargs)
 
     model = build_mobilenetv3_binary().to(device)
     if device.type == "cuda":
@@ -154,40 +176,69 @@ def main() -> None:
         except Exception as exc:
             print(f"torch.compile disabled: {exc}")
 
-    optimizer = AdamW(model.parameters(), lr=args.lr)
+    optimizer = AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     scaler = torch.amp.GradScaler("cuda", enabled=use_amp)
 
-    best_val = float("inf")
+    warmup_epochs = args.warmup_epochs
+    total_epochs = args.epochs
+
+    def lr_lambda(epoch: int) -> float:
+        if epoch < warmup_epochs:
+            return (epoch + 1) / warmup_epochs
+        progress = (epoch - warmup_epochs) / max(total_epochs - warmup_epochs, 1)
+        return 0.5 * (1.0 + np.cos(np.pi * progress))
+
+    scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda)
+
+    best_auc = -1.0
     args.output.parent.mkdir(parents=True, exist_ok=True)
 
     for epoch in range(args.epochs):
-        train_loss = run_epoch(
+        train_loss, _, _ = run_epoch(
             model,
             train_loader,
             optimizer,
             device,
             amp_enabled=use_amp,
             scaler=scaler,
+            pos_weight=pos_weight,
         )
-        val_loss = run_epoch(
+        val_loss, val_probs, val_labels = run_epoch(
             model,
             val_loader,
             None,
             device,
             amp_enabled=use_amp,
             scaler=None,
+            pos_weight=pos_weight,
         )
+        scheduler.step()
+        current_lr = optimizer.param_groups[0]["lr"]
+
+        if len(set(val_labels)) >= 2:
+            val_auc = float(roc_auc_score(val_labels, val_probs))
+        else:
+            val_auc = float("nan")
+
         print(
-            f"[Epoch {epoch + 1:03d}] train_loss={train_loss:.4f} val_loss={val_loss:.4f}"
+            f"[Epoch {epoch + 1:03d}] train_loss={train_loss:.4f} "
+            f"val_loss={val_loss:.4f} val_auc={val_auc:.4f} lr={current_lr:.6f}"
         )
 
-        if val_loss < best_val:
-            best_val = val_loss
+        if not math.isnan(val_auc) and val_auc > best_auc:
+            best_auc = val_auc
             torch.save(
-                {"model": model.state_dict(), "val_loss": val_loss, "epoch": epoch + 1},
+                {
+                    "model": model.state_dict(),
+                    "val_loss": val_loss,
+                    "val_auc": val_auc,
+                    "epoch": epoch + 1,
+                },
                 args.output,
             )
-            print(f"Saved best checkpoint: {args.output}")
+            print(f"Saved best checkpoint (auc={val_auc:.4f}): {args.output}")
+
+    print(f"\nTraining complete. Best val AUC: {best_auc:.4f}")
 
 
 if __name__ == "__main__":

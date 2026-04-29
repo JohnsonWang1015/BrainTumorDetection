@@ -74,7 +74,7 @@ def build_manifest(brats_root: Path, idh_labels_csv: Path | None) -> list[CaseRe
             raw_label = row["idh_label"]
             if pd.isna(raw_label):
                 continue
-            idh_label = int(str(raw_label).strip())
+            idh_label = int(float(str(raw_label).strip()))
             if idh_label not in (0, 1):
                 raise ValueError("IDH labels must be binary values: 0 or 1")
             label_map[case_id] = idh_label
