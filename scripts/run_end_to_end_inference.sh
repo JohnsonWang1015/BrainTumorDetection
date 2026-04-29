@@ -7,8 +7,8 @@ if [[ $# -lt 1 ]]; then
 fi
 
 CASE_DIR="$1"
-SEG_CKPT="${2:-checkpoints/unet2d_best.pt}"
-CLS_CKPT="${3:-checkpoints/mobilenetv3_idh_best.pt}"
+SEG_CKPT="${2:-checkpoints/unet2d_tcga_v1.pt}"
+CLS_CKPT="${3:-checkpoints/mobilenetv3_idh_v3.pt}"
 OUTPUT_MASK="${4:-outputs/pred_mask.nii.gz}"
 
 uv sync --frozen

@@ -208,8 +208,8 @@ uv run python -m idh_glioma.train.train_idh_classifier \
 ```bash
 uv run python -m idh_glioma.infer.pipeline \
   --case-dir datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-4942 \
-  --seg-ckpt checkpoints/unet2d_best.pt \
-  --cls-ckpt checkpoints/mobilenetv3_idh_best.pt \
+  --seg-ckpt checkpoints/unet2d_tcga_v1.pt \
+  --cls-ckpt checkpoints/mobilenetv3_idh_v3.pt \
   --profile a6000 \
   --batch-size 16 \
   --amp \

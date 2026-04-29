@@ -127,7 +127,7 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument("--case-glob", type=str, default="TCGA-*")
-    parser.add_argument("--ckpt", type=Path, default=Path("checkpoints/unet2d_mri.pt"))
+    parser.add_argument("--ckpt", type=Path, default=Path("checkpoints/unet2d_tcga_v1.pt"))
     parser.add_argument("--output-dir", type=Path, default=Path("outputs/batch_unet2d"))
     parser.add_argument("--batch-size", type=int, default=16)
     parser.add_argument("--alpha", type=float, default=0.45)

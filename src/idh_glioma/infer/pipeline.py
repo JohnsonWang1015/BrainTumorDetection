@@ -157,10 +157,10 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--case-dir", type=Path, required=True)
     parser.add_argument(
-        "--seg-ckpt", type=Path, default=Path("checkpoints/unet2d_best.pt")
+        "--seg-ckpt", type=Path, default=Path("checkpoints/unet2d_tcga_v1.pt")
     )
     parser.add_argument(
-        "--cls-ckpt", type=Path, default=Path("checkpoints/mobilenetv3_idh_best.pt")
+        "--cls-ckpt", type=Path, default=Path("checkpoints/mobilenetv3_idh_v3.pt")
     )
     parser.add_argument(
         "--output-mask", type=Path, default=Path("outputs/pred_mask.nii.gz")
