@@ -1,0 +1,88 @@
+{
+  "folds": [
+    {
+      "fold": 0,
+      "smoothed_auc": 1.0,
+      "val_auc": 1.0,
+      "epoch": 1,
+      "n_train": 51,
+      "n_val": 13,
+      "train_class_balance": [
+        9,
+        42
+      ],
+      "val_class_balance": [
+        2,
+        11
+      ]
+    },
+    {
+      "fold": 1,
+      "smoothed_auc": 0.8636363636363636,
+      "val_auc": 0.8181818181818181,
+      "epoch": 10,
+      "n_train": 51,
+      "n_val": 13,
+      "train_class_balance": [
+        9,
+        42
+      ],
+      "val_class_balance": [
+        2,
+        11
+      ]
+    },
+    {
+      "fold": 2,
+      "smoothed_auc": 0.8181818181818182,
+      "val_auc": 0.7272727272727273,
+      "epoch": 8,
+      "n_train": 51,
+      "n_val": 13,
+      "train_class_balance": [
+        9,
+        42
+      ],
+      "val_class_balance": [
+        2,
+        11
+      ]
+    },
+    {
+      "fold": 3,
+      "smoothed_auc": 0.9,
+      "val_auc": 0.9,
+      "epoch": 30,
+      "n_train": 51,
+      "n_val": 13,
+      "train_class_balance": [
+        8,
+        43
+      ],
+      "val_class_balance": [
+        3,
+        10
+      ]
+    },
+    {
+      "fold": 4,
+      "smoothed_auc": 1.0,
+      "val_auc": 1.0,
+      "epoch": 8,
+      "n_train": 52,
+      "n_val": 12,
+      "train_class_balance": [
+        9,
+        43
+      ],
+      "val_class_balance": [
+        2,
+        10
+      ]
+    }
+  ],
+  "smoothed_auc_mean": 0.9163636363636364,
+  "smoothed_auc_std": 0.07304476155127514,
+  "raw_auc_mean": 0.889090909090909,
+  "raw_auc_std": 0.10576756052544718
+}
