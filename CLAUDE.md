@@ -139,7 +139,9 @@ uv run tumor-app          # Launch Gradio UI at http://localhost:7860
 python -m idh_glioma.app  # Alternative launch
 ```
 
-Features: Upload CT/MRI images, real-time tumor detection (96.4% accuracy), GradCAM heatmap visualization, diagnostic report with inference latency. Supports 8 example images (CT/MRI tumor/healthy).
+Two tabs:
+1. **CT/MRI Tumor Detection** — single-image upload (PNG/JPG), MobileNetV3-Small binary classifier (96.4% acc / AUC 0.993) with GradCAM heatmap.
+2. **IDH Mutation Classification (TCGA-LGG)** — upload 4 BraTS-style NIfTI volumes (flair / t1 / t1Gd / t2), runs U-Net 2D segmentation → ROI crop → MobileNetV3-large IDH classifier. Uses the calibrated threshold (Youden's J, default 0.876) stored in the checkpoint metadata. Implementation in `app_idh.py`, wired in via tabs in `app.py`.
 
 ## Shell Scripts
 

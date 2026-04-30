@@ -27,6 +27,7 @@ from torchvision import transforms
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+from idh_glioma.app_idh import predict_idh
 from idh_glioma.models.mobilenetv3_classifier import build_mobilenetv3_binary
 
 # ── Constants ────────────────────────────────────────────────────────
@@ -282,80 +283,125 @@ def build_app():  # noqa: ANN201
             <div style="text-align: center; margin-bottom: 1.5em;">
                 <h1>Brain Tumor Detection System</h1>
                 <p style="color: #666;">
-                    CT / MRI Image Analysis<br>
-                    Model: MobileNetV3 | Accuracy: 96.4% | AUC: 0.993
+                    CT / MRI tumor detection &nbsp;+&nbsp; IDH mutation classification (TCGA-LGG)
                 </p>
             </div>
             """
         )
 
-        with gr.Row():
-            with gr.Column(scale=1):
-                input_image = gr.Image(
-                    label="Upload CT/MRI Image",
-                    type="numpy",
-                    height=350,
+        with gr.Tabs():
+            with gr.Tab("CT/MRI Tumor Detection"):
+                gr.Markdown(
+                    "Upload a single CT or MRI brain image (PNG/JPG). "
+                    "Returns tumor probability + GradCAM heatmap. "
+                    "Accuracy 96.4%, AUC 0.993 (Kaggle CT/MRI test split, 1,443 images)."
                 )
-                detect_btn = gr.Button(
-                    "Detect",
-                    variant="primary",
-                    size="lg",
+                with gr.Row():
+                    with gr.Column(scale=1):
+                        input_image = gr.Image(
+                            label="Upload CT/MRI Image",
+                            type="numpy",
+                            height=350,
+                        )
+                        detect_btn = gr.Button("Detect", variant="primary", size="lg")
+                        label_output = gr.Label(label="Classification", num_top_classes=2)
+
+                    with gr.Column(scale=2):
+                        result_image = gr.Image(
+                            label="GradCAM Visualization",
+                            type="numpy",
+                            height=350,
+                        )
+                        diagnosis_md = gr.Markdown(
+                            label="Report",
+                            value="Upload an image and click **Detect** to begin analysis.",
+                        )
+
+                detect_btn.click(
+                    fn=predict,
+                    inputs=[input_image],
+                    outputs=[label_output, result_image, diagnosis_md],
                 )
-                label_output = gr.Label(
-                    label="Classification",
-                    num_top_classes=2,
+                input_image.change(
+                    fn=predict,
+                    inputs=[input_image],
+                    outputs=[label_output, result_image, diagnosis_md],
                 )
 
-            with gr.Column(scale=2):
-                result_image = gr.Image(
-                    label="GradCAM Visualization",
-                    type="numpy",
-                    height=350,
+                if examples:
+                    gr.Examples(
+                        examples=[[e] for e in examples],
+                        inputs=[input_image],
+                        outputs=[label_output, result_image, diagnosis_md],
+                        fn=predict,
+                        cache_examples=False,
+                        label="Example Images (click to load)",
+                    )
+
+                with gr.Accordion("Model Info", open=False):
+                    gr.Markdown(
+                        """
+                        | Item | Details |
+                        |------|---------|
+                        | **Architecture** | MobileNetV3-Small (binary classification) |
+                        | **Training data** | 9,618 CT/MRI brain images |
+                        | **Test accuracy** | 96.4% (1,443 test images) |
+                        | **AUC-ROC** | 0.9928 |
+                        | **Input size** | 224 x 224 RGB |
+
+                        **GradCAM**: Red regions indicate the highest tumor correlation.
+                        """
+                    )
+
+            with gr.Tab("IDH Mutation Classification (TCGA-LGG)"):
+                gr.Markdown(
+                    "Upload all four BraTS-style NIfTI volumes (`.nii.gz`) for one case. "
+                    "The pipeline runs U-Net 2D segmentation, ROI-crops every tumor-bearing slice, "
+                    "and averages MobileNetV3-large slice probabilities for a case-level IDH call. "
+                    "Threshold (default 0.876) is the Youden's-J optimum on the val split."
                 )
-                diagnosis_md = gr.Markdown(
-                    label="Report",
-                    value="Upload an image and click **Detect** to begin analysis.",
+                with gr.Row():
+                    with gr.Column(scale=1):
+                        flair_in = gr.File(label="FLAIR (.nii.gz)", file_types=[".gz", ".nii"])
+                        t1_in = gr.File(label="T1 (.nii.gz)", file_types=[".gz", ".nii"])
+                        t1gd_in = gr.File(label="T1Gd (.nii.gz)", file_types=[".gz", ".nii"])
+                        t2_in = gr.File(label="T2 (.nii.gz)", file_types=[".gz", ".nii"])
+                        idh_btn = gr.Button("Run IDH analysis", variant="primary", size="lg")
+                        idh_label_out = gr.Label(
+                            label="IDH classification", num_top_classes=2
+                        )
+                    with gr.Column(scale=2):
+                        idh_image_out = gr.Image(
+                            label="Tumor segmentation overview",
+                            type="numpy",
+                            height=350,
+                        )
+                        idh_diag_md = gr.Markdown(
+                            label="Report",
+                            value="Upload all four modalities and click **Run IDH analysis**.",
+                        )
+
+                idh_btn.click(
+                    fn=predict_idh,
+                    inputs=[flair_in, t1_in, t1gd_in, t2_in],
+                    outputs=[idh_label_out, idh_image_out, idh_diag_md],
                 )
 
-        detect_btn.click(
-            fn=predict,
-            inputs=[input_image],
-            outputs=[label_output, result_image, diagnosis_md],
-        )
+                with gr.Accordion("Model Info", open=False):
+                    gr.Markdown(
+                        """
+                        | Item | Details |
+                        |------|---------|
+                        | **Pipeline** | U-Net 2D (segmentation) → ROI crop → MobileNetV3-large (classification) |
+                        | **Cohort** | TCGA-LGG (45 train / 10 val / 10 test cases) |
+                        | **Test case-level AUC** | 0.875 |
+                        | **Test slice-level AUC** | 0.453 (per-slice noisy by design; case vote wins) |
+                        | **Decision threshold** | 0.876 (Youden's J on val) |
+                        | **WT recall (calibrated)** | 50% (vs 0% at threshold 0.5) |
 
-        input_image.change(
-            fn=predict,
-            inputs=[input_image],
-            outputs=[label_output, result_image, diagnosis_md],
-        )
-
-        if examples:
-            gr.Examples(
-                examples=[[e] for e in examples],
-                inputs=[input_image],
-                outputs=[label_output, result_image, diagnosis_md],
-                fn=predict,
-                cache_examples=False,
-                label="Example Images (click to load)",
-            )
-
-        with gr.Accordion("Model Info", open=False):
-            gr.Markdown(
-                """
-                | Item | Details |
-                |------|---------|
-                | **Architecture** | MobileNetV3-Small (binary classification) |
-                | **Training data** | 9,618 CT/MRI brain images |
-                | **Test accuracy** | 96.4% (1,443 test images) |
-                | **AUC-ROC** | 0.9928 |
-                | **Precision** | 0.987 |
-                | **Recall** | 0.947 |
-                | **Input size** | 224 x 224 RGB |
-                | **Device** | GPU (CUDA) / CPU |
-
-                **GradCAM**: Highlights regions the model focuses on. Red areas indicate highest tumor correlation.
-                """
-            )
+                        Inputs must be 4-modality BraTS-style NIfTI from a single case. The four volumes must share the same shape.
+                        """
+                    )
 
     return app
 
