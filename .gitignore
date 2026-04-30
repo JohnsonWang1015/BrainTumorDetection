@@ -28,3 +28,6 @@ yolov8*.pt
 
 # Ultralytics training run outputs (default location varies by global config)
 runs/
+
+# 5-fold CV per-fold artifacts — large + reproducible from scripts/cv_idh.py
+artifacts/cv/cv_fold_*

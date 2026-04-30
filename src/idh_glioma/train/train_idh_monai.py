@@ -54,12 +54,17 @@ def _tumor_bbox_3d(mask, margin=4):
 
 
 class TumorVolume3DDataset(Dataset):
-    def __init__(self, records, project_root, target_size=(96, 96, 96), augment=False, margin=4):
+    def __init__(
+        self, records, project_root, target_size=(96, 96, 96), augment=False, margin=4,
+        jitter_expand_max=0, jitter_shift_max=0,
+    ):
         self.records = [r for r in records if r.get("idh_label") is not None]
         self.root = project_root
         self.target_size = target_size
         self.augment = augment
         self.margin = margin
+        self.jitter_expand_max = jitter_expand_max
+        self.jitter_shift_max = jitter_shift_max
 
     def __len__(self):
         return len(self.records)
@@ -83,6 +88,31 @@ class TumorVolume3DDataset(Dataset):
             z0 = (d - side) // 2
             bbox = (y0, y0 + side, x0, x0 + side, z0, z0 + side)
         y0, y1, x0, x1, z0, z1 = bbox
+
+        if self.augment and (self.jitter_expand_max > 0 or self.jitter_shift_max > 0):
+            # Simulate the looser/shifted bboxes that come from a noisy
+            # predicted mask at inference time. Independent per-side expansion
+            # plus a shared bbox shift.
+            h, w, d = flair.shape
+            ex = self.jitter_expand_max
+            if ex > 0:
+                y0 = max(y0 - np.random.randint(0, ex + 1), 0)
+                y1 = min(y1 + np.random.randint(0, ex + 1), h)
+                x0 = max(x0 - np.random.randint(0, ex + 1), 0)
+                x1 = min(x1 + np.random.randint(0, ex + 1), w)
+                z0 = max(z0 - np.random.randint(0, ex + 1), 0)
+                z1 = min(z1 + np.random.randint(0, ex + 1), d)
+            sh = self.jitter_shift_max
+            if sh > 0:
+                sy = np.random.randint(-sh, sh + 1)
+                sx = np.random.randint(-sh, sh + 1)
+                sz = np.random.randint(-sh, sh + 1)
+                y0 = max(y0 + sy, 0); y1 = min(y1 + sy, h)
+                x0 = max(x0 + sx, 0); x1 = min(x1 + sx, w)
+                z0 = max(z0 + sz, 0); z1 = min(z1 + sz, d)
+            # Guard against collapsed bbox after shift
+            if y1 <= y0 or x1 <= x0 or z1 <= z0:
+                y0, y1, x0, x1, z0, z1 = bbox
 
         flair = _zscore(flair[y0:y1, x0:x1, z0:z1])
         t1 = _zscore(t1[y0:y1, x0:x1, z0:z1])
@@ -126,6 +156,10 @@ def parse_args():
     p.add_argument("--num-workers", type=int, default=4)
     p.add_argument("--target-size", type=int, nargs=3, default=(96, 96, 96))
     p.add_argument("--margin", type=int, default=4)
+    p.add_argument("--jitter-expand-max", type=int, default=12,
+                   help="Max random per-side expansion of training bbox (simulates pred-mask looseness).")
+    p.add_argument("--jitter-shift-max", type=int, default=6,
+                   help="Max random shift of training bbox (simulates pred-mask offset).")
     p.add_argument("--smooth-window", type=int, default=3)
     p.add_argument("--output", type=Path, default=Path("checkpoints/densenet3d_idh.pt"))
     return p.parse_args()
@@ -179,7 +213,8 @@ def main():
     print(f"Train labels: WT={n_neg}, Mutant={n_pos}, pos_weight=sqrt({raw_ratio:.3f})={pos_weight_value:.4f}")
 
     train_ds = TumorVolume3DDataset(
-        train_records, project_root, target_size=tuple(args.target_size), augment=True, margin=args.margin
+        train_records, project_root, target_size=tuple(args.target_size), augment=True,
+        margin=args.margin, jitter_expand_max=args.jitter_expand_max, jitter_shift_max=args.jitter_shift_max,
     )
     val_ds = TumorVolume3DDataset(
         val_records, project_root, target_size=tuple(args.target_size), augment=False, margin=args.margin
@@ -249,6 +284,8 @@ def main():
                     "arch": "densenet121_3d",
                     "target_size": list(args.target_size),
                     "margin": args.margin,
+                    "jitter_expand_max": args.jitter_expand_max,
+                    "jitter_shift_max": args.jitter_shift_max,
                     "in_channels": 4,
                 },
                 args.output,
