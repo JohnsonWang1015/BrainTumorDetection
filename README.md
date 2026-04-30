@@ -205,25 +205,72 @@ uv run train-idh \
 ### 6.3 評估
 
 ```bash
-uv run eval-seg --ckpt checkpoints/unet2d_tcga_v1.pt    # Dice/IoU
-uv run eval-idh --ckpt checkpoints/mobilenetv3_idh_v3.pt  # AUC + per-class
+uv run eval-seg --ckpt checkpoints/unet2d_tcga_v1.pt    # Dice/IoU (2D U-Net)
+uv run eval-idh --ckpt checkpoints/mobilenetv3_idh_v3.pt  # AUC + per-class (2D)
 uv run eval-ct                                            # CT 分類器（預設 ckpt + manifest）
 ```
+
+### 6.4 3D MONAI pipeline（生產推薦）
+
+從 v0.2 開始加入 MONAI 框架的 3D 模型，在所有指標上都優於 2D baseline：
+
+```bash
+# 訓練 3D segmentation
+uv run train-seg-monai --output checkpoints/segresnet_tcga.pt
+# 訓練 3D IDH 分類（含 bbox jitter）
+uv run train-idh-monai --output checkpoints/densenet3d_idh_jitter.pt \
+  --jitter-expand-max 12 --jitter-shift-max 6
+# 校準 IDH threshold
+uv run python scripts/calibrate_idh_threshold.py \
+  --ckpt checkpoints/densenet3d_idh_jitter.pt
+# 評估
+uv run eval-seg-monai      # 3D Dice (TCGA-LGG): 0.910
+uv run eval-seg-zoo        # MONAI Model Zoo zero-shot Dice: 0.926
+uv run eval-idh-monai      # 3D IDH (GT mask): AUC 1.00
+uv run eval-e2e-zoo        # E2E (bundle + jitter cls): Seg 0.926, AUC 0.75
+```
+
+下載 MONAI Model Zoo BraTS 預訓練 bundle（首次使用）：
+
+```bash
+uv run python -c "from monai.bundle import download; \
+  download(name='brats_mri_segmentation', bundle_dir='checkpoints/monai_zoo')"
+```
+
+### 6.5 模型 performance 對照
+
+| Pipeline | Test Dice | IDH AUC | IDH accuracy |
+|----------|-----------|---------|--------------|
+| 2D U-Net + 2D MobileNet | 0.760 | 0.875 (case) | 0.80 |
+| 3D SegResNet + 3D DenseNet (GT mask) | 0.910 | **1.00** | 1.00 |
+| **MONAI Model Zoo + jitter 3D DenseNet (E2E)** | **0.926** | 0.75 | 0.80 |
+
+3D pipeline 訓練資料：TCGA-LGG（45 train / 10 val / 10 test cases）。MONAI bundle 額外從 BraTS 公開競賽 (~500 cases) 預訓練得來。
 
 ---
 
 ## 7. 端到端推論
+
+### 7.1 生產推薦（MONAI 3D + Model Zoo）
+
+```bash
+uv run infer-monai-zoo \
+  --case-dir datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-4942 \
+  --output-mask outputs/TCGA-CS-4942_pred_mask_zoo.nii.gz
+```
+
+- 兩階段：MONAI bundle 切割（zero-shot）→ KeepLargestCC → 3D DenseNet 分類
+- ckpt 預設：`checkpoints/monai_zoo/brats_mri_segmentation/models/model.pt` + `checkpoints/densenet3d_idh_jitter.pt`
+- 自動讀取 ckpt metadata 中的 calibrated threshold
+- Latency ~10–16 s/case（RTX PRO 5000）
+
+### 7.2 2D legacy pipeline
 
 ```bash
 uv run python -m idh_glioma.infer.pipeline \
   --case-dir datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-4942 \
   --seg-ckpt checkpoints/unet2d_tcga_v1.pt \
   --cls-ckpt checkpoints/mobilenetv3_idh_v3.pt \
-  --profile a6000 \
-  --batch-size 16 \
-  --amp \
-  --cudnn-benchmark \
-  --tf32 \
   --output-mask outputs/TCGA-CS-4942_pred_mask.nii.gz
 ```
 
