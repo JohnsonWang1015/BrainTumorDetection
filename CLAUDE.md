@@ -28,17 +28,46 @@ uv build
 ## CLI Entry Points (defined in pyproject.toml)
 
 ```bash
-uv run prepare-mri    # Scan BraTS dataset → manifest.json
-uv run prepare-ct     # Scan Kaggle CT/MRI → ct_manifest.json
-uv run train-seg      # Train U-Net 2D segmentation
-uv run train-idh      # Train MobileNetV3 IDH classifier
-uv run train-ct       # Train CT/MRI classifier
-uv run eval-seg       # Evaluate segmentation (Dice/IoU)
-uv run eval-ct        # Evaluate CT/MRI classifier (AUC/F1)
-uv run eval-idh       # Evaluate IDH classifier (case + slice AUC)
-uv run infer          # End-to-end inference pipeline
-uv run train-yolo     # YOLOv11 detection training
-uv run tumor-app      # Launch Gradio web interface
+# Data preparation
+uv run prepare-mri        # Scan BraTS dataset → manifest.json
+uv run prepare-ct         # Scan Kaggle CT/MRI → ct_manifest.json
+
+# 2D legacy training (TCGA-LGG)
+uv run train-seg          # U-Net 2D segmentation
+uv run train-idh          # MobileNetV3 IDH classifier
+uv run train-ct           # CT/MRI binary tumor classifier
+uv run train-yolo         # YOLOv8/v11 detection
+
+# 3D MONAI training (recommended for seg + IDH)
+uv run train-seg-monai    # SegResNet 3D
+uv run train-idh-monai    # DenseNet121 3D + bbox jitter
+
+# Evaluation
+uv run eval-seg           # 2D U-Net Dice/IoU
+uv run eval-ct            # CT classifier AUC/F1
+uv run eval-idh           # 2D IDH case + slice AUC
+uv run eval-seg-monai     # 3D SegResNet Dice
+uv run eval-seg-zoo       # MONAI Model Zoo bundle (zero-shot)
+uv run eval-idh-monai     # 3D IDH (GT-mask ROI)
+uv run eval-e2e-zoo       # Full pipeline: bundle seg + jitter cls
+
+# Inference
+uv run infer              # 2D end-to-end pipeline
+uv run infer-monai        # 3D end-to-end (custom SegResNet)
+uv run infer-monai-zoo    # 3D end-to-end (Model Zoo bundle, recommended)
+
+# Web UI
+uv run tumor-app          # Gradio (3 tabs: CT/MRI, IDH 2D, IDH 3D MONAI)
+```
+
+Helper scripts (not registered as CLI entries):
+
+```bash
+# Threshold calibration via Youden's J on val
+uv run python scripts/calibrate_idh_threshold.py --ckpt <ckpt>
+# 5-fold stratified CV
+uv run python scripts/cv_idh.py            # 2D
+uv run python scripts/cv_idh_monai.py      # 3D MONAI
 ```
 
 ## Architecture
