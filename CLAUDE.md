@@ -158,4 +158,4 @@ Two tabs:
 | CT/MRI Classification (MobileNetV3) | Accuracy / AUC | 96.4% / 0.993 |
 | MRI Segmentation (U-Net 2D, TCGA-LGG) | Dice | 0.7598 ± 0.090 (test, 10 cases); val best 0.8063 |
 | IDH Mutation Classifier (MobileNetV3-large, TCGA-LGG, ROI crop) | AUC | Case **0.875** / Slice 0.453 (single-split test, 10 cases / 709 slices); val best 0.8533 (smoothed 0.8299). 5-fold CV (`scripts/cv_idh.py`): smoothed val AUC **0.764 ± 0.076**, raw 0.747 ± 0.095 — single-split numbers are at the upper end of the fold distribution. Calibrated threshold 0.876 (Youden's J on val) lifts WT recall 0% → 50% on test. |
-| YOLOv8 Detection | mAP50 | 0.476 |
+| YOLO Detection (best of yolov8n / yolo11n / yolo11s) | mAP50 | 0.497 (yolo11s); mAP50-95 0.347 (yolov8n best for high-IoU). Dataset (893 train / 223 val) saturates at this ceiling — scaling backbone past yolo11s gives diminishing returns. Breaking 0.55 needs more data, not a bigger model. |
