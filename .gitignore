@@ -17,3 +17,14 @@ mri_brats_compat_sample/
 *.engine
 *.zip
 *.log
+
+# Local Claude Code session state (per-project plugin/data/memory dir)
+.claude/
+
+# Ultralytics auto-downloaded pretrained weights — re-fetched on demand
+yolo11*.pt
+yolov8*.pt
+!checkpoints/yolov8_brain_tumor_best.pt
+
+# Ultralytics training run outputs (default location varies by global config)
+runs/
