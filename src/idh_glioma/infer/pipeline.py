@@ -78,6 +78,7 @@ def predict(
     cls_use_roi = cls_state.get("use_roi", cls_use_roi)
     cls_roi_margin = cls_state.get("roi_margin", cls_roi_margin)
     cls_img_size = cls_state.get("img_size", cls_img_size)
+    cls_threshold = float(cls_state.get("threshold", 0.5))
 
     cls_model = build_mobilenetv3_binary(variant=cls_variant).to(device)
     cls_model.load_state_dict(cls_state["model"])
@@ -162,7 +163,7 @@ def predict(
         idh_prob = float(
             (1.0 / (1.0 + np.exp(-np.array(cls_logits)))).mean()
         )
-    idh_pred = int(idh_prob >= 0.5) if not np.isnan(idh_prob) else -1
+    idh_pred = int(idh_prob >= cls_threshold) if not np.isnan(idh_prob) else -1
 
     ref = cast(nib.Nifti1Image, nib.load(str(next(case_dir.glob("*_flair.nii.gz")))))
     output_mask.parent.mkdir(parents=True, exist_ok=True)
@@ -178,7 +179,10 @@ def predict(
         print("Predicted IDH mutation probability: n/a (no tumor predicted)")
     else:
         print(f"Predicted IDH mutation probability: {idh_prob:.4f}")
-    print(f"Predicted IDH class (0=WT,1=Mut,-1=undetermined): {idh_pred}")
+    print(
+        f"Predicted IDH class (0=WT,1=Mut,-1=undetermined): {idh_pred} "
+        f"(threshold={cls_threshold:.4f})"
+    )
 
 
 def parse_args() -> argparse.Namespace:

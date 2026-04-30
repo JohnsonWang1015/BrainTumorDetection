@@ -129,6 +129,13 @@ def score_test_split(
     use_roi = ckpt_use_roi
     roi_margin = ckpt_roi_margin
     img_size = ckpt_img_size
+    threshold = float(state.get("threshold", 0.5))
+    if threshold != 0.5:
+        print(
+            f"[eval-idh] Using calibrated threshold={threshold:.4f} "
+            f"(method={state.get('threshold_method', '?')}, "
+            f"split={state.get('threshold_split', '?')})"
+        )
 
     model = build_mobilenetv3_binary(variant=variant).to(device)
     model.load_state_dict(state["model"])
@@ -151,7 +158,7 @@ def score_test_split(
                 "case_id": record.get("case_id", ""),
                 "label": label,
                 "case_prob": case_prob,
-                "case_pred": int(case_prob >= 0.5),
+                "case_pred": int(case_prob >= threshold),
                 "n_slices": len(slice_probs),
             }
         )
@@ -160,11 +167,11 @@ def score_test_split(
 
     case_probs = np.array([r["case_prob"] for r in case_results])
     case_labels = np.array([r["label"] for r in case_results])
-    case_preds = (case_probs >= 0.5).astype(int)
+    case_preds = (case_probs >= threshold).astype(int)
 
     slice_probs_arr = np.array(slice_probs_all)
     slice_labels_arr = np.array(slice_labels_all)
-    slice_preds_arr = (slice_probs_arr >= 0.5).astype(int)
+    slice_preds_arr = (slice_probs_arr >= threshold).astype(int)
 
     print(f"\n{'=' * 60}")
     print(f"Checkpoint  : {ckpt}")
