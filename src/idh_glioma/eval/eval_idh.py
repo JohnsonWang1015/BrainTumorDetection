@@ -25,6 +25,7 @@ from pathlib import Path
 
 import numpy as np
 import torch
+import torch.nn.functional as F
 from sklearn.metrics import (
     ConfusionMatrixDisplay,
     RocCurveDisplay,
@@ -34,7 +35,7 @@ from sklearn.metrics import (
 )
 from tqdm import tqdm
 
-from idh_glioma.data.datasets import load_nifti, zscore
+from idh_glioma.data.datasets import _crop_roi, _tumor_bbox_2d, load_nifti, zscore
 from idh_glioma.models.mobilenetv3_classifier import build_mobilenetv3_binary
 from idh_glioma.utils import load_json
 
@@ -46,9 +47,6 @@ try:
 except ImportError:
     _HAS_MPL = False
 
-INFER_IMG_SIZE = 240
-
-
 @torch.inference_mode()
 def _predict_case(
     record: dict,
@@ -56,6 +54,9 @@ def _predict_case(
     device: torch.device,
     use_amp: bool,
     batch_size: int,
+    img_size: int,
+    use_roi: bool,
+    roi_margin: int,
 ) -> tuple[float, np.ndarray]:
     """Returns (case_prob, slice_probs) -- mean probability across tumor slices."""
     flair = zscore(load_nifti(record["modalities"]["flair"]))
@@ -70,14 +71,20 @@ def _predict_case(
     slice_probs: list[float] = []
     for start in range(0, len(tumor_z), batch_size):
         batch_z = tumor_z[start : start + batch_size]
-        slices = np.stack(
-            [
-                np.stack([flair[:, :, z], t1gd[:, :, z], t2[:, :, z]], axis=0)
-                for z in batch_z
-            ],
-            axis=0,
-        )  # (B, 3, H, W)
-        tensor = torch.from_numpy(slices).to(device, non_blocking=True)
+        cropped: list[torch.Tensor] = []
+        for z in batch_z:
+            stacked = np.stack(
+                [flair[:, :, z], t1gd[:, :, z], t2[:, :, z]], axis=0
+            )  # (3, H, W)
+            if use_roi:
+                bbox = _tumor_bbox_2d(mask[:, :, z], roi_margin)
+                stacked = _crop_roi(stacked, bbox)
+            t = torch.from_numpy(stacked.copy()).unsqueeze(0)  # (1, 3, h, w)
+            t = F.interpolate(
+                t, size=(img_size, img_size), mode="bilinear", align_corners=False
+            )
+            cropped.append(t.squeeze(0))
+        tensor = torch.stack(cropped, dim=0).to(device, non_blocking=True)
         if device.type == "cuda":
             tensor = tensor.contiguous(memory_format=torch.channels_last)
         with torch.autocast(device_type=device.type, dtype=torch.float16, enabled=use_amp):
@@ -93,6 +100,10 @@ def score_test_split(
     ckpt: Path,
     batch_size: int,
     output_dir: Path,
+    variant: str,
+    img_size: int,
+    use_roi: bool,
+    roi_margin: int,
 ) -> dict[str, float]:
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     use_amp = device.type == "cuda"
@@ -103,7 +114,23 @@ def score_test_split(
         raise ValueError("Test split has no labelled cases.")
 
     state = torch.load(ckpt, map_location=device, weights_only=True)
-    model = build_mobilenetv3_binary().to(device)
+    # Honour the checkpoint's recorded settings when present so eval matches training.
+    ckpt_variant = state.get("variant", variant)
+    ckpt_use_roi = state.get("use_roi", use_roi)
+    ckpt_roi_margin = state.get("roi_margin", roi_margin)
+    ckpt_img_size = state.get("img_size", img_size)
+    if ckpt_variant != variant or ckpt_use_roi != use_roi:
+        print(
+            f"[eval-idh] Overriding CLI args with checkpoint metadata: "
+            f"variant={ckpt_variant} use_roi={ckpt_use_roi} "
+            f"roi_margin={ckpt_roi_margin} img_size={ckpt_img_size}"
+        )
+    variant = ckpt_variant
+    use_roi = ckpt_use_roi
+    roi_margin = ckpt_roi_margin
+    img_size = ckpt_img_size
+
+    model = build_mobilenetv3_binary(variant=variant).to(device)
     model.load_state_dict(state["model"])
     model.eval()
     if device.type == "cuda":
@@ -114,7 +141,10 @@ def score_test_split(
     slice_labels_all: list[int] = []
 
     for record in tqdm(records, desc="eval-idh"):
-        case_prob, slice_probs = _predict_case(record, model, device, use_amp, batch_size)
+        case_prob, slice_probs = _predict_case(
+            record, model, device, use_amp, batch_size,
+            img_size=img_size, use_roi=use_roi, roi_margin=roi_margin,
+        )
         label = int(record["idh_label"])
         case_results.append(
             {
@@ -196,12 +226,30 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--ckpt", type=Path, default=Path("checkpoints/mobilenetv3_idh_best.pt"))
     p.add_argument("--batch-size", type=int, default=16)
     p.add_argument("--output-dir", type=Path, default=Path("outputs/eval_idh"))
+    p.add_argument(
+        "--variant", choices=["small", "large"], default="large",
+        help="Backbone size. Overridden by checkpoint metadata if present.",
+    )
+    p.add_argument("--img-size", type=int, default=224)
+    p.add_argument(
+        "--use-roi", action=argparse.BooleanOptionalAction, default=True
+    )
+    p.add_argument("--roi-margin", type=int, default=10)
     return p.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    score_test_split(args.manifest, args.ckpt, args.batch_size, args.output_dir)
+    score_test_split(
+        args.manifest,
+        args.ckpt,
+        args.batch_size,
+        args.output_dir,
+        variant=args.variant,
+        img_size=args.img_size,
+        use_roi=args.use_roi,
+        roi_margin=args.roi_margin,
+    )
 
 
 if __name__ == "__main__":

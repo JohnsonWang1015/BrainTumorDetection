@@ -13,13 +13,23 @@ def parse_args() -> argparse.Namespace:
         default=Path("datasets/Ultralytics/brain-tumor-abs.yaml"),
         help="Path to dataset YAML",
     )
-    parser.add_argument("--model", default="yolov8n.pt", help="YOLOv8 model variant")
-    parser.add_argument("--epochs", type=int, default=100)
+    parser.add_argument(
+        "--model",
+        default="yolo11n.pt",
+        help="YOLO model variant. yolo11n outperforms yolov8n on similar params.",
+    )
+    parser.add_argument("--epochs", type=int, default=200)
     parser.add_argument("--imgsz", type=int, default=640)
     parser.add_argument("--batch", type=int, default=32)
-    parser.add_argument("--patience", type=int, default=20)
+    parser.add_argument("--patience", type=int, default=30)
     parser.add_argument("--lr0", type=float, default=0.01)
     parser.add_argument("--workers", type=int, default=8)
+    parser.add_argument("--mosaic", type=float, default=1.0)
+    parser.add_argument("--mixup", type=float, default=0.15)
+    parser.add_argument("--copy-paste", type=float, default=0.1)
+    parser.add_argument("--degrees", type=float, default=10.0)
+    parser.add_argument("--scale", type=float, default=0.5)
+    parser.add_argument("--hsv-v", type=float, default=0.4)
     parser.add_argument(
         "--output-dir",
         type=Path,
@@ -53,6 +63,12 @@ def main() -> None:
         amp=True,
         cos_lr=True,
         plots=True,
+        mosaic=args.mosaic,
+        mixup=args.mixup,
+        copy_paste=args.copy_paste,
+        degrees=args.degrees,
+        scale=args.scale,
+        hsv_v=args.hsv_v,
     )
 
     # Copy best weights to checkpoints/
