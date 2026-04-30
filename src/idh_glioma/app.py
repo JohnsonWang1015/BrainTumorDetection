@@ -28,6 +28,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 from idh_glioma.app_idh import predict_idh
+from idh_glioma.app_idh_monai import predict_idh_monai
 from idh_glioma.models.mobilenetv3_classifier import build_mobilenetv3_binary
 
 # ── Constants ────────────────────────────────────────────────────────
@@ -400,6 +401,59 @@ def build_app():  # noqa: ANN201
                         | **WT recall (calibrated)** | 50% (vs 0% at threshold 0.5) |
 
                         Inputs must be 4-modality BraTS-style NIfTI from a single case. The four volumes must share the same shape.
+                        """
+                    )
+
+            with gr.Tab("IDH Mutation Classification (3D MONAI, recommended)"):
+                gr.Markdown(
+                    "**Production pipeline** — MONAI Model Zoo `brats_mri_segmentation` bundle "
+                    "(zero-shot, BraTS-pretrained, Dice 0.926) for the tumor mask, then a 3D "
+                    "DenseNet121 trained with bbox jitter on TCGA-LGG for IDH classification. "
+                    "Calibrated threshold 0.0775 from Youden's J on val. Upload all four "
+                    "NIfTI volumes (FLAIR / T1 / T1Gd / T2) for one BraTS-style case."
+                )
+                with gr.Row():
+                    with gr.Column(scale=1):
+                        m_flair_in = gr.File(label="FLAIR (.nii.gz)", file_types=[".gz", ".nii"])
+                        m_t1_in = gr.File(label="T1 (.nii.gz)", file_types=[".gz", ".nii"])
+                        m_t1gd_in = gr.File(label="T1Gd (.nii.gz)", file_types=[".gz", ".nii"])
+                        m_t2_in = gr.File(label="T2 (.nii.gz)", file_types=[".gz", ".nii"])
+                        m_btn = gr.Button("Run 3D IDH analysis", variant="primary", size="lg")
+                        m_label_out = gr.Label(label="IDH classification", num_top_classes=2)
+                    with gr.Column(scale=2):
+                        m_image_out = gr.Image(
+                            label="Bundle-predicted tumor mask",
+                            type="numpy",
+                            height=350,
+                        )
+                        m_diag_md = gr.Markdown(
+                            label="Report",
+                            value="Upload all four modalities and click **Run 3D IDH analysis**.",
+                        )
+
+                m_btn.click(
+                    fn=predict_idh_monai,
+                    inputs=[m_flair_in, m_t1_in, m_t1gd_in, m_t2_in],
+                    outputs=[m_label_out, m_image_out, m_diag_md],
+                )
+
+                with gr.Accordion("Model Info", open=False):
+                    gr.Markdown(
+                        """
+                        | Item | Details |
+                        |------|---------|
+                        | **Segmentation** | MONAI Model Zoo `brats_mri_segmentation` (SegResNet, 3-channel TC/WT/ET, init_filters=16, BraTS-pretrained) |
+                        | **Seg test Dice** | 0.926 ± 0.031 (zero-shot on TCGA-LGG, 10 cases) |
+                        | **Classifier** | 3D DenseNet121 + bbox jitter (expand 12, shift 6) |
+                        | **Cohort** | TCGA-LGG (45 train / 10 val / 10 test cases) |
+                        | **Test E2E AUC** | 0.75 (predicted-mask ROI; 1.00 with GT-mask ROI) |
+                        | **Test E2E accuracy** | 0.80 |
+                        | **Threshold** | 0.0775 (Youden's J on val, persisted in checkpoint metadata) |
+                        | **Latency** | ~10–16 s/case on RTX PRO 5000 |
+
+                        Two passes: (1) SegResNet bundle generates a binary WT mask via sliding-window inference, then `KeepLargestConnectedComponent` removes FP noise; (2) the 3D bbox of the largest-CC mask is expanded by `margin=4`, the four-modal volume is cropped to that bbox, resampled to 96^3, and run through the DenseNet for IDH probability.
+
+                        Hard cases like TCGA-CS-6669 still fail (visually mimic IDH mutant) — no architectural fix in sight without more training data.
                         """
                     )
 

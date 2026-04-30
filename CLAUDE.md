@@ -139,9 +139,10 @@ uv run tumor-app          # Launch Gradio UI at http://localhost:7860
 python -m idh_glioma.app  # Alternative launch
 ```
 
-Two tabs:
+Three tabs:
 1. **CT/MRI Tumor Detection** — single-image upload (PNG/JPG), MobileNetV3-Small binary classifier (96.4% acc / AUC 0.993) with GradCAM heatmap.
-2. **IDH Mutation Classification (TCGA-LGG)** — upload 4 BraTS-style NIfTI volumes (flair / t1 / t1Gd / t2), runs U-Net 2D segmentation → ROI crop → MobileNetV3-large IDH classifier. Uses the calibrated threshold (Youden's J, default 0.876) stored in the checkpoint metadata. Implementation in `app_idh.py`, wired in via tabs in `app.py`.
+2. **IDH Mutation Classification (2D)** — 4 BraTS-style NIfTI uploads, U-Net 2D + MobileNetV3-large pipeline with calibrated threshold 0.876. Implementation in `app_idh.py`.
+3. **IDH Mutation Classification (3D MONAI, recommended)** — 4 NIfTI uploads, MONAI Model Zoo bundle (zero-shot Dice 0.926) + 3D DenseNet121 (jitter-trained) at threshold 0.0775. E2E AUC 0.75, accuracy 0.80. Implementation in `app_idh_monai.py`.
 
 ## Shell Scripts
 
