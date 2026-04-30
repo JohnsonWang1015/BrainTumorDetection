@@ -13,7 +13,10 @@ from torch.optim import AdamW
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-from idh_glioma.data.datasets import BraTSSliceClassificationDataset
+from idh_glioma.data.datasets import (
+    BraTSSliceClassificationDataset,
+    make_balanced_sampler,
+)
 from idh_glioma.models.mobilenetv3_classifier import build_mobilenetv3_binary
 
 
@@ -76,7 +79,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--manifest", type=Path, default=Path("artifacts/manifest.json")
     )
-    parser.add_argument("--epochs", type=int, default=20)
+    parser.add_argument("--epochs", type=int, default=30)
     parser.add_argument("--batch-size", type=int, default=16)
     parser.add_argument("--profile", choices=["default", "a6000"], default="default")
     parser.add_argument("--num-workers", type=int, default=min(8, os.cpu_count() or 1))
@@ -92,6 +95,23 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--lr", type=float, default=1e-4)
     parser.add_argument("--weight-decay", type=float, default=1e-4)
     parser.add_argument("--warmup-epochs", type=int, default=3)
+    parser.add_argument(
+        "--variant",
+        choices=["small", "large"],
+        default="large",
+        help="MobileNetV3 backbone size. 'large' is preferred for IDH on the small "
+        "TCGA-LGG cohort because the bigger pretrained stem transfers better.",
+    )
+    parser.add_argument(
+        "--use-roi", action=argparse.BooleanOptionalAction, default=True,
+        help="Crop each slice to the tumor ROI before classification.",
+    )
+    parser.add_argument("--roi-margin", type=int, default=10)
+    parser.add_argument("--img-size", type=int, default=224)
+    parser.add_argument("--smooth-window", type=int, default=3,
+        help="Save the checkpoint when the moving-average val AUC over this many "
+        "epochs improves (mitigates noise on a tiny val split).",
+    )
     parser.add_argument(
         "--output", type=Path, default=Path("checkpoints/mobilenetv3_idh_best.pt")
     )
@@ -125,8 +145,20 @@ def main() -> None:
         torch.backends.cuda.matmul.allow_tf32 = args.tf32
         torch.backends.cudnn.allow_tf32 = args.tf32
 
-    train_ds = BraTSSliceClassificationDataset(args.manifest, split="train")
-    val_ds = BraTSSliceClassificationDataset(args.manifest, split="val")
+    train_ds = BraTSSliceClassificationDataset(
+        args.manifest,
+        split="train",
+        img_size=args.img_size,
+        use_roi=args.use_roi,
+        roi_margin=args.roi_margin,
+    )
+    val_ds = BraTSSliceClassificationDataset(
+        args.manifest,
+        split="val",
+        img_size=args.img_size,
+        use_roi=args.use_roi,
+        roi_margin=args.roi_margin,
+    )
     if len(train_ds) == 0 or len(val_ds) == 0:
         raise RuntimeError(
             "No IDH labels found. Please provide --idh-labels CSV during dataset preparation."
@@ -146,9 +178,12 @@ def main() -> None:
     )
 
     use_workers = args.num_workers > 0
+    train_sampler = make_balanced_sampler(
+        train_ds.records, train_ds.num_slices_per_case
+    )
     train_loader_kwargs: dict[str, object] = {
         "batch_size": args.batch_size,
-        "shuffle": True,
+        "sampler": train_sampler,
         "num_workers": args.num_workers,
         "pin_memory": device.type == "cuda",
     }
@@ -167,7 +202,7 @@ def main() -> None:
     train_loader = DataLoader(train_ds, **train_loader_kwargs)
     val_loader = DataLoader(val_ds, **val_loader_kwargs)
 
-    model = build_mobilenetv3_binary().to(device)
+    model = build_mobilenetv3_binary(variant=args.variant).to(device)
     if device.type == "cuda":
         model = model.to(memory_format=torch.channels_last)
     if args.compile:
@@ -190,7 +225,8 @@ def main() -> None:
 
     scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda)
 
-    best_auc = -1.0
+    best_smoothed = -1.0
+    auc_history: list[float] = []
     args.output.parent.mkdir(parents=True, exist_ok=True)
 
     for epoch in range(args.epochs):
@@ -220,25 +256,42 @@ def main() -> None:
         else:
             val_auc = float("nan")
 
-        print(
-            f"[Epoch {epoch + 1:03d}] train_loss={train_loss:.4f} "
-            f"val_loss={val_loss:.4f} val_auc={val_auc:.4f} lr={current_lr:.6f}"
+        if not math.isnan(val_auc):
+            auc_history.append(val_auc)
+        smoothed = (
+            float(np.mean(auc_history[-args.smooth_window :]))
+            if auc_history
+            else float("nan")
         )
 
-        if not math.isnan(val_auc) and val_auc > best_auc:
-            best_auc = val_auc
+        print(
+            f"[Epoch {epoch + 1:03d}] train_loss={train_loss:.4f} "
+            f"val_loss={val_loss:.4f} val_auc={val_auc:.4f} "
+            f"smoothed_auc={smoothed:.4f} lr={current_lr:.6f}"
+        )
+
+        if not math.isnan(smoothed) and smoothed > best_smoothed:
+            best_smoothed = smoothed
             torch.save(
                 {
                     "model": model.state_dict(),
                     "val_loss": val_loss,
                     "val_auc": val_auc,
+                    "smoothed_auc": smoothed,
                     "epoch": epoch + 1,
+                    "variant": args.variant,
+                    "use_roi": args.use_roi,
+                    "roi_margin": args.roi_margin,
+                    "img_size": args.img_size,
                 },
                 args.output,
             )
-            print(f"Saved best checkpoint (auc={val_auc:.4f}): {args.output}")
+            print(
+                f"Saved best checkpoint (smoothed_auc={smoothed:.4f}, "
+                f"auc={val_auc:.4f}): {args.output}"
+            )
 
-    print(f"\nTraining complete. Best val AUC: {best_auc:.4f}")
+    print(f"\nTraining complete. Best smoothed val AUC: {best_smoothed:.4f}")
 
 
 if __name__ == "__main__":

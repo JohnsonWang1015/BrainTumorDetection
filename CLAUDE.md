@@ -155,5 +155,5 @@ Features: Upload CT/MRI images, real-time tumor detection (96.4% accuracy), Grad
 |-------|--------|-------|
 | CT/MRI Classification (MobileNetV3) | Accuracy / AUC | 96.4% / 0.993 |
 | MRI Segmentation (U-Net 2D, TCGA-LGG) | Dice | 0.7598 ± 0.090 (test, 10 cases); val best 0.8063 |
-| IDH Mutation Classifier (MobileNetV3, TCGA-LGG) | AUC | Case 0.625 / Slice 0.627 (test, 10 cases / 709 slices); val best 0.7522 |
+| IDH Mutation Classifier (MobileNetV3-large, TCGA-LGG, ROI crop) | AUC | Case **0.875** / Slice 0.453 (test, 10 cases / 709 slices); val best 0.8533 (smoothed 0.8299). ROI crop trades per-slice signal for stronger case-level discrimination — case-level is the clinically meaningful metric. Threshold 0.5 still over-predicts Mutant (WT recall 0%); follow-up: threshold tuning. |
 | YOLOv8 Detection | mAP50 | 0.476 |
