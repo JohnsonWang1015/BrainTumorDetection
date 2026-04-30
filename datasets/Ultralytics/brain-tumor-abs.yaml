@@ -1,0 +1,12 @@
+# Brain-tumor dataset (Ultralytics) - absolute path version
+# 893 train images, 223 val images
+# Classes: 0=negative (no tumor), 1=positive (tumor present)
+
+path: /mnt/8tb_hdd2/johnson/BrainTumorDetection/datasets/Ultralytics
+train: images/train
+val: images/val
+test:
+
+names:
+  0: negative
+  1: positive
