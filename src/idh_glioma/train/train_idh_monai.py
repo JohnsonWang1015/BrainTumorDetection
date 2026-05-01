@@ -53,10 +53,30 @@ def _tumor_bbox_3d(mask, margin=4):
     return y0, y1, x0, x1, z0, z1
 
 
+def _expand_bbox_uniformly(
+    bbox: tuple[int, int, int, int, int, int],
+    shape: tuple[int, int, int],
+    extra: int,
+) -> tuple[int, int, int, int, int, int]:
+    if extra <= 0:
+        return bbox
+    y0, y1, x0, x1, z0, z1 = bbox
+    h, w, d = shape
+    return (
+        max(y0 - extra, 0),
+        min(y1 + extra, h),
+        max(x0 - extra, 0),
+        min(x1 + extra, w),
+        max(z0 - extra, 0),
+        min(z1 + extra, d),
+    )
+
+
 class TumorVolume3DDataset(Dataset):
     def __init__(
         self, records, project_root, target_size=(96, 96, 96), augment=False, margin=4,
         jitter_expand_max=0, jitter_shift_max=0,
+        context_view_prob=0.0, context_extra_max=0,
     ):
         self.records = [r for r in records if r.get("idh_label") is not None]
         self.root = project_root
@@ -65,6 +85,8 @@ class TumorVolume3DDataset(Dataset):
         self.margin = margin
         self.jitter_expand_max = jitter_expand_max
         self.jitter_shift_max = jitter_shift_max
+        self.context_view_prob = context_view_prob
+        self.context_extra_max = context_extra_max
 
     def __len__(self):
         return len(self.records)
@@ -113,6 +135,13 @@ class TumorVolume3DDataset(Dataset):
             # Guard against collapsed bbox after shift
             if y1 <= y0 or x1 <= x0 or z1 <= z0:
                 y0, y1, x0, x1, z0, z1 = bbox
+            if self.context_view_prob > 0 and np.random.rand() < self.context_view_prob:
+                extra = np.random.randint(1, self.context_extra_max + 1) if self.context_extra_max > 0 else 0
+                y0, y1, x0, x1, z0, z1 = _expand_bbox_uniformly(
+                    (y0, y1, x0, x1, z0, z1),
+                    flair.shape,
+                    extra,
+                )
 
         flair = _zscore(flair[y0:y1, x0:x1, z0:z1])
         t1 = _zscore(t1[y0:y1, x0:x1, z0:z1])
@@ -160,6 +189,10 @@ def parse_args():
                    help="Max random per-side expansion of training bbox (simulates pred-mask looseness).")
     p.add_argument("--jitter-shift-max", type=int, default=6,
                    help="Max random shift of training bbox (simulates pred-mask offset).")
+    p.add_argument("--context-view-prob", type=float, default=0.35,
+                   help="Probability of adding an extra uniform context expansion around the jittered bbox.")
+    p.add_argument("--context-extra-max", type=int, default=6,
+                   help="Max extra voxels per side for the optional context-heavy crop.")
     p.add_argument("--smooth-window", type=int, default=3)
     p.add_argument("--output", type=Path, default=Path("checkpoints/densenet3d_idh.pt"))
     return p.parse_args()
@@ -215,6 +248,7 @@ def main():
     train_ds = TumorVolume3DDataset(
         train_records, project_root, target_size=tuple(args.target_size), augment=True,
         margin=args.margin, jitter_expand_max=args.jitter_expand_max, jitter_shift_max=args.jitter_shift_max,
+        context_view_prob=args.context_view_prob, context_extra_max=args.context_extra_max,
     )
     val_ds = TumorVolume3DDataset(
         val_records, project_root, target_size=tuple(args.target_size), augment=False, margin=args.margin
@@ -286,6 +320,8 @@ def main():
                     "margin": args.margin,
                     "jitter_expand_max": args.jitter_expand_max,
                     "jitter_shift_max": args.jitter_shift_max,
+                    "context_view_prob": args.context_view_prob,
+                    "context_extra_max": args.context_extra_max,
                     "in_channels": 4,
                 },
                 args.output,

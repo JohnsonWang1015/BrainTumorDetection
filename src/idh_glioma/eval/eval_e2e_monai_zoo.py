@@ -24,10 +24,9 @@ from pathlib import Path
 import nibabel as nib
 import numpy as np
 import torch
-import torch.nn.functional as F
 from monai.inferers import sliding_window_inference
 from monai.networks.nets import DenseNet121, SegResNet
-from monai.transforms import KeepLargestConnectedComponent, NormalizeIntensity
+from monai.transforms import NormalizeIntensity
 from sklearn.metrics import (
     ConfusionMatrixDisplay,
     RocCurveDisplay,
@@ -37,6 +36,11 @@ from sklearn.metrics import (
 )
 from tqdm import tqdm
 
+from idh_glioma.infer.e2e_roi import (
+    apply_mask_postprocess,
+    merge_e2e_config,
+    predict_multi_view_idh,
+)
 from idh_glioma.utils import load_json
 
 try:
@@ -46,24 +50,6 @@ try:
     _HAS_MPL = True
 except ImportError:
     _HAS_MPL = False
-
-
-def _bbox3d(mask, margin=4):
-    nz = np.argwhere(mask > 0)
-    if nz.size == 0:
-        return None
-    mn, mx = nz.min(0), nz.max(0) + 1
-    h, w, d = mask.shape
-    return (
-        max(int(mn[0]) - margin, 0), min(int(mx[0]) + margin, h),
-        max(int(mn[1]) - margin, 0), min(int(mx[1]) + margin, w),
-        max(int(mn[2]) - margin, 0), min(int(mx[2]) + margin, d),
-    )
-
-
-def _zsc(c):
-    return (c - c.mean()) / (c.std() + 1e-6)
-
 
 def parse_args():
     p = argparse.ArgumentParser()
@@ -80,6 +66,8 @@ def parse_args():
     p.add_argument("--cls-target-size", type=int, nargs=3, default=(96, 96, 96))
     p.add_argument("--cls-margin", type=int, default=4)
     p.add_argument("--seg-overlap", type=float, default=0.5)
+    p.add_argument("--split", default="test", choices=["train", "val", "test"])
+    p.add_argument("--e2e-config", type=Path, default=Path("artifacts/e2e_idh_config.json"))
     p.add_argument("--output-dir", type=Path, default=Path("outputs/eval_e2e_zoo"))
     return p.parse_args()
 
@@ -104,20 +92,26 @@ def main():
     cls.load_state_dict(cls_state["model"])
     cls.train(False)
     target_size = tuple(cls_state.get("target_size", args.cls_target_size))
-    margin = int(cls_state.get("margin", args.cls_margin))
     threshold = float(cls_state.get("threshold", 0.5))
+    base_margin = int(cls_state.get("margin", args.cls_margin))
+    e2e_cfg = merge_e2e_config(
+        args.e2e_config,
+        fallback_threshold=threshold,
+        fallback_base_margin=base_margin,
+    )
     print(
-        f"[eval-e2e-zoo] cls cfg: target_size={target_size} margin={margin} "
-        f"threshold={threshold:.4f}"
+        f"[eval-e2e-zoo] cls cfg: target_size={target_size} "
+        f"base_margin={e2e_cfg['base_margin']} threshold={e2e_cfg['threshold']:.4f} "
+        f"aggregation={e2e_cfg['aggregation']} views={e2e_cfg['view_margins']} "
+        f"dilate_iters={e2e_cfg['dilate_iters']}"
     )
 
-    keep_largest = KeepLargestConnectedComponent(applied_labels=[1])
     normalize = NormalizeIntensity(nonzero=True, channel_wise=True)
 
     manifest = load_json(args.manifest)
-    records = [r for r in manifest["test"] if r.get("idh_label") is not None]
+    records = [r for r in manifest[args.split] if r.get("idh_label") is not None]
     if not records:
-        raise ValueError("Test split has no labelled cases.")
+        raise ValueError(f"{args.split!r} split has no labelled cases.")
 
     case_results = []
     for r in tqdm(records, desc="eval-e2e-zoo"):
@@ -139,39 +133,42 @@ def main():
             )
         pp = torch.sigmoid(seg_logits).cpu().numpy()[0]
         raw = (pp[1] > 0.5).astype(np.uint8)  # WT channel
-        pred_mask = keep_largest(torch.from_numpy(raw).unsqueeze(0)).squeeze(0).numpy().astype(np.uint8)
+        pred_mask = apply_mask_postprocess(
+            raw,
+            keep_largest=bool(e2e_cfg["keep_largest"]),
+            dilate_iters=int(e2e_cfg["dilate_iters"]),
+        )
 
         inter = (pred_mask * gt).sum()
         dice = (2.0 * inter + 1e-6) / (pred_mask.sum() + gt.sum() + 1e-6)
 
         # Classification pass on predicted-mask ROI
-        bb = _bbox3d(pred_mask, margin=margin)
-        if bb is None:
+        if not pred_mask.any():
             idh_prob = float("nan")
+            view_probs: list[float] = []
         else:
-            f, t1c, tg, t2c = (
-                _zsc(v[bb[0]:bb[1], bb[2]:bb[3], bb[4]:bb[5]])
-                for v in (flair, t1, t1gd, t2)
+            idh_prob, view_probs, _ = predict_multi_view_idh(
+                flair=flair,
+                t1=t1,
+                t1gd=t1gd,
+                t2=t2,
+                pred_mask=pred_mask,
+                cls_model=cls,
+                device=device,
+                target_size=target_size,
+                cfg=e2e_cfg,
+                use_amp=use_amp,
             )
-            crop = np.stack([f, t1c, tg, t2c], axis=0)
-            ct = torch.from_numpy(crop).unsqueeze(0)
-            ct = F.interpolate(ct, size=target_size, mode="trilinear", align_corners=False).to(device)
-            if device.type == "cuda":
-                ct = ct.contiguous(memory_format=torch.channels_last_3d)
-            with torch.inference_mode(), torch.autocast(
-                device_type=device.type, dtype=torch.float16, enabled=use_amp
-            ):
-                logit = cls(ct)
-            idh_prob = float(torch.sigmoid(logit.float()).cpu().item())
 
         case_results.append({
             "case_id": r.get("case_id", ""),
             "label": int(r["idh_label"]),
             "case_prob": idh_prob,
-            "case_pred": int(idh_prob >= threshold) if not np.isnan(idh_prob) else -1,
+            "case_pred": int(idh_prob >= float(e2e_cfg["threshold"])) if not np.isnan(idh_prob) else -1,
             "seg_dice": float(dice),
             "pred_voxels": int(pred_mask.sum()),
             "gt_voxels": int(gt.sum()),
+            "num_views": len(view_probs),
         })
 
     dices = np.array([r["seg_dice"] for r in case_results])
@@ -182,8 +179,10 @@ def main():
     print(f"\n{'=' * 60}")
     print(f"Bundle      : {args.bundle_ckpt}")
     print(f"Classifier  : {args.cls_ckpt}")
-    print(f"Threshold   : {threshold:.4f}")
-    print(f"Test cases  : {len(records)}")
+    print(f"E2E config  : {args.e2e_config}")
+    print(f"Threshold   : {float(e2e_cfg['threshold']):.4f}")
+    print(f"Split       : {args.split}")
+    print(f"Cases       : {len(records)}")
     print(f"{'=' * 60}")
     print(f"[Seg] Dice  mean : {dices.mean():.4f} +/- {dices.std():.4f}")
     print(f"[Seg] Dice median: {np.median(dices):.4f}")
@@ -197,7 +196,19 @@ def main():
     args.output_dir.mkdir(parents=True, exist_ok=True)
     csv_path = args.output_dir / "eval_e2e_zoo_cases.csv"
     with csv_path.open("w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=["case_id", "label", "case_pred", "case_prob", "seg_dice", "pred_voxels", "gt_voxels"])
+        w = csv.DictWriter(
+            f,
+            fieldnames=[
+                "case_id",
+                "label",
+                "case_pred",
+                "case_prob",
+                "seg_dice",
+                "pred_voxels",
+                "gt_voxels",
+                "num_views",
+            ],
+        )
         w.writeheader()
         for r in case_results:
             w.writerow({k: f"{v:.6f}" if isinstance(v, float) else v for k, v in r.items()})

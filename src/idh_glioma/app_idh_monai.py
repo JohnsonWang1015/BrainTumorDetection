@@ -24,10 +24,17 @@ import matplotlib.pyplot as plt
 
 from monai.inferers import sliding_window_inference
 from monai.networks.nets import DenseNet121, SegResNet
-from monai.transforms import KeepLargestConnectedComponent, NormalizeIntensity
+from monai.transforms import NormalizeIntensity
+
+from idh_glioma.infer.e2e_roi import (
+    apply_mask_postprocess,
+    merge_e2e_config,
+    predict_multi_view_idh,
+)
 
 _BUNDLE_CKPT = Path("checkpoints/monai_zoo/brats_mri_segmentation/models/model.pt")
 _CLS_CKPT = Path("checkpoints/densenet3d_idh_jitter.pt")
+_E2E_CONFIG = Path("artifacts/e2e_idh_config.json")
 
 _SEG_MODEL: torch.nn.Module | None = None
 _CLS_MODEL: torch.nn.Module | None = None
@@ -75,31 +82,15 @@ def _get_cls() -> tuple[torch.nn.Module, dict]:
     cls = DenseNet121(spatial_dims=3, in_channels=4, out_channels=1, dropout_prob=0.2).to(dev)
     cls.load_state_dict(state["model"])
     cls.train(False)
-    meta = {
-        "target_size": tuple(state.get("target_size", (96, 96, 96))),
-        "margin": int(state.get("margin", 4)),
-        "threshold": float(state.get("threshold", 0.5)),
-    }
+    meta = merge_e2e_config(
+        _E2E_CONFIG,
+        fallback_threshold=float(state.get("threshold", 0.5)),
+        fallback_base_margin=int(state.get("margin", 4)),
+    )
+    meta["target_size"] = tuple(state.get("target_size", (96, 96, 96)))
     _CLS_MODEL = cls
     _CLS_META = meta
     return _CLS_MODEL, _CLS_META
-
-
-def _bbox3d(mask, margin=4):
-    nz = np.argwhere(mask > 0)
-    if nz.size == 0:
-        return None
-    mn, mx = nz.min(0), nz.max(0) + 1
-    h, w, d = mask.shape
-    return (
-        max(int(mn[0]) - margin, 0), min(int(mx[0]) + margin, h),
-        max(int(mn[1]) - margin, 0), min(int(mx[1]) + margin, w),
-        max(int(mn[2]) - margin, 0), min(int(mx[2]) + margin, d),
-    )
-
-
-def _zsc(c):
-    return (c - c.mean()) / (c.std() + 1e-6)
 
 
 def _render_overview(flair, pred_mask, idh_prob, idh_class, threshold):
@@ -139,7 +130,7 @@ def _render_overview(flair, pred_mask, idh_prob, idh_class, threshold):
     return arr
 
 
-def _build_diagnosis(idh_prob, idh_class, threshold, n_voxels, latency):
+def _build_diagnosis(idh_prob, idh_class, threshold, n_voxels, latency, aggregation, view_margins):
     if np.isnan(idh_prob):
         return (
             "## 3D MONAI IDH Analysis\n\n"
@@ -158,7 +149,9 @@ def _build_diagnosis(idh_prob, idh_class, threshold, n_voxels, latency):
         "## 3D MONAI IDH Analysis\n\n"
         f"**Predicted class**: {label}\n\n"
         f"**Mean tumor-volume probability**: {idh_prob:.4f}\n\n"
-        f"**Decision threshold**: {threshold:.4f} (Youden's J on val)\n\n"
+        f"**Decision threshold**: {threshold:.4f} (macro F1 on val)\n\n"
+        f"**Aggregation**: {aggregation}\n\n"
+        f"**ROI view margins**: {view_margins}\n\n"
         f"**Predicted-tumor voxels**: {n_voxels:,}\n\n"
         f"**Inference time**: {latency * 1000:.0f} ms\n\n"
         f"**Confidence note**: {note}\n\n"
@@ -192,12 +185,10 @@ def predict_idh_monai(flair_path, t1_path, t1gd_path, t2_path):
     seg = _get_seg()
     cls, meta = _get_cls()
     threshold = meta["threshold"]
-    margin = meta["margin"]
     target_size = meta["target_size"]
     dev = _device()
     use_amp = dev.type == "cuda"
     normalize = NormalizeIntensity(nonzero=True, channel_wise=True)
-    keep_largest = KeepLargestConnectedComponent(applied_labels=[1])
 
     img4 = np.stack([t1gd, t1, t2, flair], axis=0)  # bundle order
     img_t = normalize(torch.from_numpy(img4)).unsqueeze(0).to(dev).float()
@@ -205,28 +196,42 @@ def predict_idh_monai(flair_path, t1_path, t1gd_path, t2_path):
         seg_logits = sliding_window_inference(img_t, roi_size=(240, 240, 160), sw_batch_size=1, predictor=seg, overlap=0.5)
     pp = torch.sigmoid(seg_logits).cpu().numpy()[0]
     raw = (pp[1] > 0.5).astype(np.uint8)
-    pred_mask = keep_largest(torch.from_numpy(raw).unsqueeze(0)).squeeze(0).numpy().astype(np.uint8)
+    pred_mask = apply_mask_postprocess(
+        raw,
+        keep_largest=bool(meta["keep_largest"]),
+        dilate_iters=int(meta["dilate_iters"]),
+    )
 
-    bb = _bbox3d(pred_mask, margin=margin)
-    if bb is None:
+    if not pred_mask.any():
         idh_prob = float("nan")
         idh_class = -1
     else:
-        f, t1c, tg, t2c = (_zsc(v[bb[0]:bb[1], bb[2]:bb[3], bb[4]:bb[5]]) for v in (flair, t1, t1gd, t2))
-        crop = np.stack([f, t1c, tg, t2c], axis=0)
-        ct = torch.from_numpy(crop).unsqueeze(0)
-        ct = F.interpolate(ct, size=target_size, mode="trilinear", align_corners=False).to(dev)
-        if dev.type == "cuda":
-            ct = ct.contiguous(memory_format=torch.channels_last_3d)
-        with torch.inference_mode(), torch.autocast(device_type=dev.type, dtype=torch.float16, enabled=use_amp):
-            logit = cls(ct)
-        idh_prob = float(torch.sigmoid(logit.float()).cpu().item())
+        idh_prob, _, _ = predict_multi_view_idh(
+            flair=flair,
+            t1=t1,
+            t1gd=t1gd,
+            t2=t2,
+            pred_mask=pred_mask,
+            cls_model=cls,
+            device=dev,
+            target_size=target_size,
+            cfg=meta,
+            use_amp=use_amp,
+        )
         idh_class = int(idh_prob >= threshold)
 
     n_voxels = int(pred_mask.sum())
     latency = time.perf_counter() - t0
     fig_arr = _render_overview(flair, pred_mask, idh_prob, idh_class, threshold)
-    diag = _build_diagnosis(idh_prob, idh_class, threshold, n_voxels, latency)
+    diag = _build_diagnosis(
+        idh_prob,
+        idh_class,
+        threshold,
+        n_voxels,
+        latency,
+        str(meta["aggregation"]),
+        list(meta["view_margins"]),
+    )
     if np.isnan(idh_prob):
         confidences: dict[str, float] = {}
     else:

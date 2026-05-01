@@ -28,29 +28,15 @@ from typing import cast
 import nibabel as nib
 import numpy as np
 import torch
-import torch.nn.functional as F
 from monai.inferers import sliding_window_inference
 from monai.networks.nets import DenseNet121, SegResNet
-from monai.transforms import KeepLargestConnectedComponent, NormalizeIntensity
+from monai.transforms import NormalizeIntensity
 
-
-def _bbox3d(mask, margin=4):
-    nz = np.argwhere(mask > 0)
-    if nz.size == 0:
-        return None
-    mn, mx = nz.min(0), nz.max(0) + 1
-    h, w, d = mask.shape
-    return (
-        max(int(mn[0]) - margin, 0), min(int(mx[0]) + margin, h),
-        max(int(mn[1]) - margin, 0), min(int(mx[1]) + margin, w),
-        max(int(mn[2]) - margin, 0), min(int(mx[2]) + margin, d),
-    )
-
-
-def _zscore_crop(vol, bbox):
-    y0, y1, x0, x1, z0, z1 = bbox
-    crop = vol[y0:y1, x0:x1, z0:z1]
-    return (crop - crop.mean()) / (crop.std() + 1e-6)
+from idh_glioma.infer.e2e_roi import (
+    apply_mask_postprocess,
+    merge_e2e_config,
+    predict_multi_view_idh,
+)
 
 
 def predict(
@@ -62,6 +48,7 @@ def predict(
     cls_target_size=(96, 96, 96),
     cls_margin=4,
     seg_overlap=0.5,
+    e2e_config: Path | None = None,
 ):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     use_amp = device.type == "cuda"
@@ -95,10 +82,13 @@ def predict(
     cls.load_state_dict(cls_state["model"])
     cls.train(False)
     cls_target_size = tuple(cls_state.get("target_size", cls_target_size))
-    cls_margin = int(cls_state.get("margin", cls_margin))
     cls_threshold = float(cls_state.get("threshold", 0.5))
+    e2e_cfg = merge_e2e_config(
+        e2e_config,
+        fallback_threshold=cls_threshold,
+        fallback_base_margin=int(cls_state.get("margin", cls_margin)),
+    )
 
-    keep_largest = KeepLargestConnectedComponent(applied_labels=[1])
     normalize = NormalizeIntensity(nonzero=True, channel_wise=True)
 
     # ---- Pass 1: bundle segmentation ----
@@ -112,32 +102,34 @@ def predict(
         )
     probs = torch.sigmoid(seg_logits).cpu().numpy()[0]  # (3, H, W, D)
     raw_mask = (probs[1] > 0.5).astype(np.uint8)  # WT channel
-    mask_t = torch.from_numpy(raw_mask).unsqueeze(0)
-    pred_mask = keep_largest(mask_t).squeeze(0).numpy().astype(np.uint8)
+    pred_mask = apply_mask_postprocess(
+        raw_mask,
+        keep_largest=bool(e2e_cfg["keep_largest"]),
+        dilate_iters=int(e2e_cfg["dilate_iters"]),
+    )
     seg_latency = time.perf_counter() - t0
 
     # ---- Pass 2: 3D classifier on the predicted-mask ROI ----
-    bb = _bbox3d(pred_mask, margin=cls_margin)
-    if bb is None:
+    if not pred_mask.any():
         idh_prob = float("nan")
         idh_pred = -1
         cls_latency = 0.0
+        view_probs: list[float] = []
     else:
-        # IDH classifier expects channel order: FLAIR, T1, T1Gd, T2 (the train script's order).
-        flair_c = _zscore_crop(flair, bb)
-        t1_c = _zscore_crop(t1, bb)
-        t1gd_c = _zscore_crop(t1gd, bb)
-        t2_c = _zscore_crop(t2, bb)
-        crop = np.stack([flair_c, t1_c, t1gd_c, t2_c], axis=0)
-        ct = torch.from_numpy(crop).unsqueeze(0)
-        ct = F.interpolate(ct, size=tuple(cls_target_size), mode="trilinear", align_corners=False).to(device)
-        if device.type == "cuda":
-            ct = ct.contiguous(memory_format=torch.channels_last_3d)
         t1c = time.perf_counter()
-        with torch.inference_mode(), torch.autocast(device_type=device.type, dtype=torch.float16, enabled=use_amp):
-            logit = cls(ct)
-        idh_prob = float(torch.sigmoid(logit.float()).cpu().item())
-        idh_pred = int(idh_prob >= cls_threshold)
+        idh_prob, view_probs, _ = predict_multi_view_idh(
+            flair=flair,
+            t1=t1,
+            t1gd=t1gd,
+            t2=t2,
+            pred_mask=pred_mask,
+            cls_model=cls,
+            device=device,
+            target_size=tuple(cls_target_size),
+            cfg=e2e_cfg,
+            use_amp=use_amp,
+        )
+        idh_pred = int(idh_prob >= float(e2e_cfg["threshold"]))
         cls_latency = time.perf_counter() - t1c
 
     output_mask.parent.mkdir(parents=True, exist_ok=True)
@@ -152,7 +144,11 @@ def predict(
         print("Predicted IDH mutation probability: n/a (no tumor predicted)")
     else:
         print(f"Predicted IDH mutation probability: {idh_prob:.4f} ({cls_latency*1000:.0f} ms)")
-        print(f"Predicted IDH class: {idh_pred} (threshold {cls_threshold:.4f})")
+        print(
+            f"Predicted IDH class: {idh_pred} "
+            f"(threshold {float(e2e_cfg['threshold']):.4f}, "
+            f"aggregation={e2e_cfg['aggregation']}, views={len(view_probs)})"
+        )
 
 
 def parse_args():
@@ -171,12 +167,17 @@ def parse_args():
         "--output-mask", type=Path,
         default=Path("outputs/pred_mask_monai_zoo.nii.gz"),
     )
+    p.add_argument(
+        "--e2e-config",
+        type=Path,
+        default=Path("artifacts/e2e_idh_config.json"),
+    )
     return p.parse_args()
 
 
 def main():
     args = parse_args()
-    predict(args.case_dir, args.bundle_ckpt, args.cls_ckpt, args.output_mask)
+    predict(args.case_dir, args.bundle_ckpt, args.cls_ckpt, args.output_mask, e2e_config=args.e2e_config)
 
 
 if __name__ == "__main__":
