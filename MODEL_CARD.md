@@ -157,6 +157,21 @@ Repository-reported evaluation:
 - shared ROI settings such as `view_margins`, `aggregation`, and `dilate_iters`
 - bookkeeping fields like `threshold_split`, `macro_f1`, and linked checkpoints
 
+Current verified values from the file are:
+
+- `threshold = 0.13`
+- `threshold_objective = macro_f1`
+- `aggregation = mean`
+- `view_margins = [0]`
+- `keep_largest = true`
+- `dilate_iters = 0`
+- `macro_f1 = 1.0`
+- `accuracy = 1.0`
+- `wt_recall = 1.0`
+- `mutant_recall = 1.0`
+- `auc = 1.0`
+- `num_valid_cases = 10`
+
 This artifact is consumed by:
 
 - `src/idh_glioma/eval/eval_e2e_monai_zoo.py`
@@ -292,8 +307,8 @@ Checkpoint metadata verified from file:
 
 | Field | Value |
 |---|---|
-| epoch | 9 |
-| val_loss | 0.3893 |
+| epoch | 6 |
+| val_loss | 0.2734 |
 | val_auc | 1.0000 |
 | smoothed_auc | 1.0000 |
 | arch | `densenet121_3d` |
@@ -301,10 +316,12 @@ Checkpoint metadata verified from file:
 | margin | 4 |
 | jitter_expand_max | 12 |
 | jitter_shift_max | 6 |
+| context_view_prob | 0.35 |
+| context_extra_max | 6 |
 | in_channels | 4 |
-| threshold | 0.0775 |
-| threshold_method | `youden_j` |
-| threshold_split | `val` |
+| threshold | `None` |
+| threshold_method | `None` |
+| threshold_split | `None` |
 
 Verified supporting artifacts:
 
@@ -319,6 +336,7 @@ Repository-reported evaluation:
 Interpretation:
 
 - this is the most operationally relevant custom IDH checkpoint in the repo because it models inference-time box noise
+- the runtime decision threshold now lives in `artifacts/e2e_idh_config.json`, not inside this checkpoint
 
 ### 4.8 `yolov8_brain_tumor_best.pt`
 
@@ -398,7 +416,8 @@ Interpretation:
 - BraTS segmentation and IDH pipelines have both 2D and 3D trained checkpoints present locally
 - 3D custom segmentation and both 3D IDH checkpoints were updated on 2026-04-30
 - the main 2D IDH checkpoint is calibrated with a stored threshold and paired with 5-fold CV results
-- the jitter-trained 3D IDH checkpoint is also threshold-calibrated and paired with 5-fold CV results
+- the jitter-trained 3D IDH checkpoint is paired with 5-fold CV results, while the deployed runtime threshold now lives in `artifacts/e2e_idh_config.json`
+- the deployed end-to-end decision rule is now anchored by `artifacts/e2e_idh_config.json` with `threshold=0.13` and ROI postprocess settings shared across app/eval/infer
 - the CT/MRI classifier and YOLO detector were trained earlier in March 2026 and remain available
 
 ### 5.2 Best available options by task

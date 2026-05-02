@@ -2,10 +2,11 @@
 
 本專案提供一個可直接落地的 End-to-End 流程，整合：
 
-- 腦瘤分割（預設 U-Net 2D，並提供 SAM3 介接）
-- IDH mutation 狀態分類（MobileNetV3）
-- YOLOv11 資料匯出與訓練介接（detect/segment/classify 任務）
-- 針對你目前 `datasets/` 目錄下資料集的自動掃描與 manifest 建置
+- 腦瘤分割：2D `UNet` baseline、3D `SegResNet` baseline、MONAI Model Zoo `brats_mri_segmentation`
+- IDH mutation 狀態分類：2D `MobileNetV3` baseline、3D `DenseNet121` ROI classifier
+- End-to-End ROI/config calibration：共享 `artifacts/e2e_idh_config.json`
+- 多來源 IDH manifest 建置：`TCGA-LGG`、`TCGA-GBM`、`UCSF-PDGM`、`EGD`
+- YOLO 匯出與訓練介接（detect/segment/classify 任務）
 
 ---
 
@@ -215,6 +216,18 @@ uv run prepare-idh-multisource \
 完整 contract 見：
 
 - `configs/idh_manifest_v2_contract.yaml`
+
+目前 repo 也已提交一份實際生成結果：
+
+- `artifacts/manifest_v2.json`
+
+在 2026-05-02 這次快照中，它反映的是「本地目前可掃描到的來源」：
+
+- 只有 `brats_tcga_lgg`
+- `cohort_id = tcga_lgg_only`
+- `split = train 45 / val 10 / test 10`
+
+也就是說，多來源 importer 已接上，但若你本地尚未放入 `TCGA-GBM`、`UCSF-PDGM`、`EGD`，輸出的 `manifest_v2` 仍會先退化成目前單來源 `TCGA-LGG` cohort。
 
 ### 5.2 本地資料夾規格
 
@@ -485,6 +498,19 @@ uv run python -c "from monai.bundle import download; \
 | **MONAI Model Zoo + jitter 3D DenseNet (E2E)** | **0.926** | 0.75 | 0.80 |
 
 3D pipeline 訓練資料：TCGA-LGG（45 train / 10 val / 10 test cases）。MONAI bundle 額外從 BraTS 公開競賽 (~500 cases) 預訓練得來。
+
+補充：最新 `artifacts/e2e_idh_config.json` 是重新校準後的 runtime decision rule，不是上表那個歷史 held-out test 結果。它目前記錄：
+
+- `threshold = 0.13`
+- `aggregation = mean`
+- `view_margins = [0]`
+- `keep_largest = true`
+- `dilate_iters = 0`
+- validation `macro_f1 = 1.0`
+- validation `accuracy = 1.0`
+- validation `auc = 1.0`
+
+但這組數值只來自 `10` 個 validation cases，主要用途是固定 app / eval / infer 的共用 decision rule，不應過度解讀成穩定泛化結果。
 
 ---
 

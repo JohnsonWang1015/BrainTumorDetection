@@ -2,17 +2,19 @@
 
 ## 1. Scope
 
-This repository currently uses two active datasets plus one legacy dataset that has been retired from the training flow:
+This repository currently uses two active local datasets, one generated multi-source manifest, and one legacy dataset that has been retired from the training flow:
 
 | Dataset | Primary use | Local source | Status |
 |---|---|---|---|
 | BraTS-TCGA-LGG | MRI segmentation and IDH mutation classification | `datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations` | Active, primary research dataset |
 | Kaggle multimodal CT/MRI dataset | 2D CT/MRI binary tumor classification | `datasets/Kaggle_multimodal/Dataset` | Active |
+| Multi-source IDH manifest v2 | Unified schema for TCGA-LGG / TCGA-GBM / UCSF-PDGM / EGD | `artifacts/manifest_v2.json` | Active schema, currently populated from local TCGA-LGG only |
 | MRIBrainTumor | Earlier segmentation experiments | `datasets/MRIBrainTumor` | Present locally but no longer used in current training pipeline |
 
-This card reflects the repository state inspected on 2026-05-01 from:
+This card reflects the repository state inspected on 2026-05-02 from:
 
 - `artifacts/manifest.json`
+- `artifacts/manifest_v2.json`
 - `artifacts/ct_manifest.json`
 - `artifacts/idh_labels.csv`
 - training/data preparation code under `src/idh_glioma/data/`
@@ -170,7 +172,70 @@ Split behavior in `prepare_ct_data.py`:
 - Mixing CT and MRI in one binary classifier may create domain-shift sensitivity
 - Public dataset license terms are not recorded inside this repository and should be checked at the original source before redistribution
 
-## 4. Legacy Dataset Present but Not Active
+## 4. Multi-Source IDH Expansion Status
+
+### 4.1 Intended use
+
+- unify multiple pre-operative glioma cohorts under one manifest contract
+- support pooled or source-held-out IDH experiments
+- preserve compatibility with the current training code while adding dataset provenance
+
+The active builder is:
+
+- `src/idh_glioma/data/prepare_idh_multisource.py`
+
+The contract is:
+
+- `configs/idh_manifest_v2_contract.yaml`
+
+### 4.2 Supported source datasets
+
+The current importer supports these source identifiers:
+
+| Source | Expected local root | Intended role |
+|---|---|---|
+| `brats_tcga_lgg` | `datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations` | primary local training cohort |
+| `tcga_gbm` | `datasets/TCGA-GBM` | supplement IDH-wildtype coverage |
+| `ucsf_pdgm` | `datasets/UCSF-PDGM` | external cohort first, optional later training |
+| `egd` | `datasets/EGD` | larger mixed-cohort expansion |
+
+### 4.3 Current generated status
+
+Observed from the committed `artifacts/manifest_v2.json`:
+
+| Field | Value |
+|---|---|
+| `manifest_version` | `0.2.0` |
+| `split_strategy.scheme` | `source_holdout` |
+| `cohorts` | `1` |
+| populated source datasets | `brats_tcga_lgg` only |
+| split sizes | `train=45`, `val=10`, `test=10` |
+
+Interpretation:
+
+- the multi-source importer is implemented and versioned
+- the current local workspace did not yet contain `TCGA-GBM`, `UCSF-PDGM`, or `EGD` in importer-readable form when `manifest_v2.json` was generated
+- therefore the committed manifest is still effectively a TCGA-LGG-only cohort with richer provenance fields
+
+### 4.4 Added schema fields in manifest v2
+
+Compared with `artifacts/manifest.json`, `manifest_v2` adds:
+
+- `record_id`
+- `source_dataset`
+- `source_subject_id`
+- `cohort_id`
+- `acquisition_stage`
+- `mask_kind`
+- `label_source`
+- `label_confidence`
+- `inclusion_flags`
+- `qc_flags`
+- `provenance`
+
+These fields are intended to make future cross-dataset training auditable instead of silently mixing cohorts.
+
+## 5. Legacy Dataset Present but Not Active
 
 `datasets/MRIBrainTumor` is still present locally, but repository notes explicitly say it has been removed from the current training path because it is single-modality and does not match the 4-channel BraTS-style pipeline.
 
@@ -179,9 +244,10 @@ Implication:
 - do not treat `MRIBrainTumor` as part of the current benchmarked training setup
 - if it is reintroduced, it should be handled as a separate 1-channel branch with separate documentation and metrics
 
-## 5. Recommended Interpretation
+## 6. Recommended Interpretation
 
 - Use BraTS-TCGA-LGG as the authoritative dataset for segmentation and IDH work in this repository
+- Treat `artifacts/manifest_v2.json` as the forward-compatible schema for future IDH expansion, but not yet as evidence that external cohorts are already populated locally
 - Use the Kaggle multimodal dataset only for the standalone CT/MRI tumor classifier
 - Treat all reported IDH metrics as low-sample research results rather than deployment-ready evidence
 - Preserve `artifacts/manifest.json` and `artifacts/ct_manifest.json` with the checkpoints they produced, because the local split composition directly affects the reported results
