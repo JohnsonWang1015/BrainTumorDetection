@@ -223,11 +223,16 @@ uv run train-idh-monai --output checkpoints/densenet3d_idh_jitter.pt \
 # 校準 IDH threshold
 uv run python scripts/calibrate_idh_threshold.py \
   --ckpt checkpoints/densenet3d_idh_jitter.pt
+# 校準 end-to-end macro-F1 threshold / ROI config
+uv run python scripts/calibrate_idh_e2e.py \
+  --split val \
+  --output artifacts/e2e_idh_config.json
 # 評估
 uv run eval-seg-monai      # 3D Dice (TCGA-LGG): 0.910
 uv run eval-seg-zoo        # MONAI Model Zoo zero-shot Dice: 0.926
 uv run eval-idh-monai      # 3D IDH (GT mask): AUC 1.00
-uv run eval-e2e-zoo        # E2E (bundle + jitter cls): Seg 0.926, AUC 0.75
+uv run eval-e2e-zoo --e2e-config artifacts/e2e_idh_config.json
+                         # E2E (bundle + jitter cls): shared ROI + threshold config
 ```
 
 下載 MONAI Model Zoo BraTS 預訓練 bundle（首次使用）：
@@ -256,7 +261,35 @@ uv run python -c "from monai.bundle import download; \
 ```bash
 uv run infer-monai-zoo \
   --case-dir datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-4942 \
+  --e2e-config artifacts/e2e_idh_config.json \
   --output-mask outputs/TCGA-CS-4942_pred_mask_zoo.nii.gz
+```
+
+### 7.2 End-to-End calibration artifact
+
+`artifacts/e2e_idh_config.json` 現在用來保存 predicted-mask pipeline 的共享設定，供以下路徑共用：
+
+- `uv run eval-e2e-zoo --e2e-config ...`
+- `uv run infer-monai-zoo --e2e-config ...`
+- `src/idh_glioma/app_idh_monai.py`（預設讀取 `artifacts/e2e_idh_config.json`）
+
+這份設定獨立於 classifier checkpoint 內的 GT-mask threshold metadata，目的在於：
+
+- 用 validation split 的 `macro F1` 校準 end-to-end threshold
+- 同步保存 ROI view 與 mask postprocess 參數
+- 避免 app / eval / infer 之間使用不同 decision rule
+
+### 7.3 Phase 2 retrain knobs
+
+若 Phase 1 的 end-to-end calibration 無法穩定拉高 held-out macro F1，可對 3D IDH classifier 啟用更強的 noisy-ROI augmentation：
+
+```bash
+uv run train-idh-monai \
+  --output checkpoints/densenet3d_idh_context.pt \
+  --jitter-expand-max 12 \
+  --jitter-shift-max 6 \
+  --context-view-prob 0.35 \
+  --context-extra-max 6
 ```
 
 - 兩階段：MONAI bundle 切割（zero-shot）→ KeepLargestCC → 3D DenseNet 分類
