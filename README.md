@@ -172,6 +172,240 @@ uv run python -m idh_glioma.data.prepare_dataset \
   --output artifacts/manifest.json
 ```
 
+### 5.1 多來源 IDH manifest v2
+
+若要開始把 `TCGA-GBM`、`UCSF-PDGM`、`EGD` 納入同一套 IDH workflow，請改用新的多來源 manifest builder：
+
+```bash
+uv run python -m idh_glioma.data.prepare_idh_multisource \
+  --dataset-root datasets \
+  --idh-labels artifacts/idh_labels.csv \
+  --output artifacts/manifest_v2.json
+```
+
+安裝後也可直接使用 console script：
+
+```bash
+uv run prepare-idh-multisource \
+  --dataset-root datasets \
+  --idh-labels artifacts/idh_labels.csv \
+  --output artifacts/manifest_v2.json
+```
+
+`manifest_v2` 會保留目前 training code 相容欄位：
+
+- `case_id`
+- `date`
+- `modalities`
+- `mask_path`
+- `idh_label`
+
+並額外加入多來源資訊：
+
+- `source_dataset`
+- `source_subject_id`
+- `cohort_id`
+- `acquisition_stage`
+- `mask_kind`
+- `label_source`
+- `inclusion_flags`
+- `qc_flags`
+- `provenance`
+
+完整 contract 見：
+
+- `configs/idh_manifest_v2_contract.yaml`
+
+### 5.2 本地資料夾規格
+
+`prepare_idh_multisource.py` 目前支援下列來源與預設 root：
+
+- `brats_tcga_lgg` -> `datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations`
+- `tcga_gbm` -> `datasets/TCGA-GBM`
+- `ucsf_pdgm` -> `datasets/UCSF-PDGM`
+- `egd` -> `datasets/EGD`
+
+#### TCGA-LGG
+
+沿用目前單來源流程：
+
+```text
+datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/
+  TCGA-DU-7015/
+    TCGA-DU-7015_1989.06.18_flair.nii.gz
+    TCGA-DU-7015_1989.06.18_t1.nii.gz
+    TCGA-DU-7015_1989.06.18_t1Gd.nii.gz
+    TCGA-DU-7015_1989.06.18_t2.nii.gz
+    TCGA-DU-7015_1989.06.18_GlistrBoost_ManuallyCorrected.nii.gz
+```
+
+#### TCGA-GBM
+
+目前 importer 假設一個 case 一個資料夾，檔名允許 `t1ce` 作為 `t1Gd` alias：
+
+```text
+datasets/TCGA-GBM/
+  TCGA-06-0125/
+    TCGA-06-0125_flair.nii.gz
+    TCGA-06-0125_t1.nii.gz
+    TCGA-06-0125_t1ce.nii.gz
+    TCGA-06-0125_t2.nii.gz
+```
+
+若有 segmentation，可放入與現有 suffix 相容的 mask；若沒有也可，這類 case 仍可當作 classification-only record。
+
+#### UCSF-PDGM
+
+官方 collection 是 skull-stripped / registered NIfTI。Importer 已支援下列常見命名：
+
+- `T2FLAIR` -> `flair`
+- `T1` -> `t1`
+- `T1c_bias` / `T1gad_bias` -> `t1Gd`
+- `T2` -> `t2`
+- `tumor_segmentation` -> segmentation mask
+
+建議本地結構：
+
+```text
+datasets/UCSF-PDGM/
+  UCSF-PDGM-0001/
+    UCSF-PDGM-0001_T2FLAIR.nii.gz
+    UCSF-PDGM-0001_T1.nii.gz
+    UCSF-PDGM-0001_T1c_bias.nii.gz
+    UCSF-PDGM-0001_T2.nii.gz
+    UCSF-PDGM-0001_tumor_segmentation.nii.gz
+```
+
+#### EGD
+
+EGD 論文描述的 structural MRI 檔名是固定的：
+
+- `FLAIR.nii.gz`
+- `T1.nii.gz`
+- `T1GD.nii.gz`
+- `T2.nii.gz`
+
+建議本地結構：
+
+```text
+datasets/EGD/
+  EGD-0001/
+    FLAIR.nii.gz
+    T1.nii.gz
+    T1GD.nii.gz
+    T2.nii.gz
+```
+
+### 5.3 Label join 規格
+
+`prepare_idh_multisource.py` 目前支援下列 label metadata 形式。
+
+#### 通用二元格式
+
+```csv
+case_id,idh_label
+TCGA-DU-7015,1
+TCGA-06-0125,0
+```
+
+#### TCGA-GBM join 表
+
+目前已支援：
+
+- `submitter_id`
+- `paper_IDH_status`
+
+範例：
+
+```tsv
+submitter_id	paper_IDH_status
+TCGA-06-0125	WT
+TCGA-06-0126	IDH1-mutant
+TCGA-06-0127	IDH1 and/or IDH2-mutant
+```
+
+匯入時會自動映成：
+
+- `WT -> 0`
+- `IDH1-mutant -> 1`
+- `IDH1 and/or IDH2-mutant -> 1`
+
+#### UCSF-PDGM clinical metadata
+
+目前已支援：
+
+- `ID`
+- `IDH status`
+
+範例：
+
+```csv
+ID,IDH status
+UCSF-PDGM-0001,Mutant
+UCSF-PDGM-0002,Wildtype
+```
+
+#### EGD genetic labels
+
+目前已支援：
+
+- `subject`
+- `IDH mutation status`
+
+範例：
+
+```csv
+subject,IDH mutation status
+EGD-0001,1
+EGD-0002,0
+EGD-0003,-1
+```
+
+其中：
+
+- `1 = IDH mutant`
+- `0 = IDH wildtype`
+- `-1` 會被視為缺失值並跳過
+
+### 5.4 常用命令
+
+只做目前本地 `TCGA-LGG`：
+
+```bash
+uv run python -m idh_glioma.data.prepare_idh_multisource \
+  --include-sources brats_tcga_lgg \
+  --output artifacts/manifest_v2.json
+```
+
+做 `TCGA-LGG + TCGA-GBM` pooled manifest：
+
+```bash
+uv run python -m idh_glioma.data.prepare_idh_multisource \
+  --include-sources brats_tcga_lgg tcga_gbm \
+  --idh-labels artifacts/idh_labels_tcga_combined.tsv \
+  --output artifacts/manifest_v2.json
+```
+
+把 `UCSF-PDGM` 留作 external cohort：
+
+```bash
+uv run python -m idh_glioma.data.prepare_idh_multisource \
+  --include-sources brats_tcga_lgg tcga_gbm ucsf_pdgm \
+  --split-mode source_holdout \
+  --idh-labels artifacts/idh_labels_multisource.csv \
+  --output artifacts/manifest_v2.json
+```
+
+加入 `EGD` 做更大的 pooled cohort：
+
+```bash
+uv run python -m idh_glioma.data.prepare_idh_multisource \
+  --include-sources brats_tcga_lgg tcga_gbm ucsf_pdgm egd \
+  --split-mode source_holdout \
+  --idh-labels artifacts/idh_labels_multisource.csv \
+  --output artifacts/manifest_v2.json
+```
+
 ---
 
 ## 6. 訓練流程

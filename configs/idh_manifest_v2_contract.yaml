@@ -1,0 +1,204 @@
+project: idh-glioma
+contract: idh-manifest-v2
+version: 0.2.0
+
+purpose:
+  summary: >
+    Backward-compatible manifest contract for expanding the current single-source
+    BraTS-TCGA-LGG pipeline into a multi-source IDH dataset pool spanning
+    TCGA-LGG, TCGA-GBM, UCSF-PDGM, and EGD.
+  goals:
+    - keep current 4-modality MRI training code usable with minimal adapters
+    - preserve source provenance and label provenance per case
+    - distinguish preoperative from post-treatment cohorts
+    - allow source-aware splits and external validation cohorts
+
+backward_compatibility:
+  current_manifest_version: 0.1.0
+  current_top_level_shape:
+    splits:
+      - train
+      - val
+      - test
+  current_record_fields:
+    - case_id
+    - date
+    - modalities
+    - mask_path
+    - idh_label
+  compatibility_rule: >
+    Training and evaluation code that only needs the current fields may consume a
+    v2 record through a compatibility adapter that forwards case_id, date,
+    modalities, mask_path, and idh_label unchanged.
+
+top_level_contract:
+  required_fields:
+    manifest_version: string
+    created_at: iso8601_datetime
+    task: string
+    cohorts: list
+    splits: dict
+  recommended_fields:
+    split_strategy: dict
+    label_semantics: dict
+    notes: list
+
+label_semantics:
+  idh_label:
+    "0": IDH_wildtype
+    "1": IDH_mutant
+  mask_kind:
+    segmentation_gt: curated tumor mask suitable for supervised segmentation
+    pseudo_gt: automatically generated or weakly supervised mask
+    none: no usable segmentation mask
+
+cohort_registry_entry:
+  required_fields:
+    cohort_id: string
+    source_dataset: string
+    acquisition_stage: string
+    intended_use: list
+  recommended_fields:
+    source_url: string
+    license_notes: string
+    priority: integer
+  allowed_values:
+    acquisition_stage:
+      - preop
+      - postop
+      - mixed
+    source_dataset:
+      - brats_tcga_lgg
+      - tcga_gbm
+      - ucsf_pdgm
+      - egd
+
+case_record_contract:
+  required_fields:
+    record_id: string
+    case_id: string
+    source_dataset: string
+    source_subject_id: string
+    cohort_id: string
+    acquisition_stage: string
+    modalities: dict
+    idh_label: integer_or_null
+  recommended_fields:
+    date: string
+    mask_path: string_or_null
+    mask_kind: string
+    label_source: string
+    label_confidence: string
+    source_case_path: string
+    institution: string
+    histology: string_or_null
+    grade: string_or_null
+    molecular_subtype: dict
+    inclusion_flags: dict
+    qc_flags: dict
+    provenance: dict
+
+modalities_contract:
+  required_modalities:
+    - flair
+    - t1
+    - t1Gd
+    - t2
+  optional_modalities:
+    - adc
+    - swi
+    - dwi
+    - perfusion
+  alias_mapping_examples:
+    t1ce:
+      canonical: t1Gd
+    t1c:
+      canonical: t1Gd
+
+split_strategy_contract:
+  required_fields:
+    scheme: string
+    random_state: integer
+  recommended_fields:
+    stratify_by: list
+    holdout_cohorts: list
+    exclusions: list
+  recommended_values:
+    scheme:
+      - pooled_train_val_test
+      - source_holdout
+      - temporal_holdout
+      - institution_holdout
+
+recommended_case_record_example:
+  record_id: tcga_gbm:TCGA-06-0125
+  case_id: TCGA-06-0125
+  source_dataset: tcga_gbm
+  source_subject_id: TCGA-06-0125
+  cohort_id: tcia_preop_pooled
+  acquisition_stage: preop
+  date: unknown
+  modalities:
+    flair: datasets/TCGA-GBM/.../flair.nii.gz
+    t1: datasets/TCGA-GBM/.../t1.nii.gz
+    t1Gd: datasets/TCGA-GBM/.../t1ce.nii.gz
+    t2: datasets/TCGA-GBM/.../t2.nii.gz
+  mask_path: null
+  mask_kind: none
+  idh_label: 0
+  label_source: gdc_clinical_join
+  label_confidence: matched_patient_id
+  inclusion_flags:
+    has_all_required_modalities: true
+    has_idh_label: true
+    eligible_for_segmentation: false
+    eligible_for_3d_idh: true
+  qc_flags:
+    requires_orientation_review: true
+    requires_spacing_review: true
+  provenance:
+    source_collection_url: https://www.cancerimagingarchive.net/collection/tcga-gbm/
+    joined_label_table: artifacts/idh_labels_tcga_combined.csv
+
+cohort_policy:
+  recommended_training_cohorts:
+    - cohort_id: tcga_lgg_only
+      description: direct continuation of current local baseline
+    - cohort_id: tcia_preop_pooled
+      description: pooled TCGA-LGG plus TCGA-GBM preoperative cohort
+    - cohort_id: tcia_plus_egd
+      description: larger pooled preoperative cohort for higher-volume IDH training
+  recommended_external_validation_cohorts:
+    - cohort_id: ucsf_pdgm_external
+      description: first-choice external validation before mixed-source training
+  excluded_from_default_training:
+    - cohort_id: postop_only
+      description: post-treatment datasets should not silently mix into the current preop IDH pipeline
+
+adapter_expectations:
+  manifest_v1_adapter:
+    input: case_record_contract
+    output_fields:
+      - case_id
+      - date
+      - modalities
+      - mask_path
+      - idh_label
+  segmentation_filter:
+    keep_when:
+      - inclusion_flags.eligible_for_segmentation == true
+      - mask_path is not null
+  idh_filter:
+    keep_when:
+      - inclusion_flags.eligible_for_3d_idh == true
+      - idh_label is not null
+
+validation_rules:
+  hard_fail:
+    - missing required modality after alias normalization
+    - idh_label not in [0, 1, null]
+    - source_dataset absent from cohort registry
+  soft_fail:
+    - no segmentation mask for a classification-only cohort
+    - mixed preop and postop records inside a cohort marked preop
+    - modality affine or shape mismatch across a case

@@ -29,6 +29,7 @@ dependencies = [
 
 [project.scripts]
 prepare-mri = "idh_glioma.data.prepare_dataset:main"
+prepare-idh-multisource = "idh_glioma.data.prepare_idh_multisource:main"
 prepare-ct  = "idh_glioma.data.prepare_ct_data:main"
 train-seg   = "idh_glioma.train.train_segmentation:main"
 train-seg-monai = "idh_glioma.train.train_segmentation_monai:main"
