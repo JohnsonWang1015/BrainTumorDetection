@@ -5,6 +5,8 @@ __all__ = [
     "feature_select",
     "gdc_download",
     "maf_parser",
+    "models",
     "prepare",
     "rnaseq_loader",
+    "train",
 ]

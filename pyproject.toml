@@ -52,6 +52,7 @@ infer-monai-zoo = "idh_glioma.infer.pipeline_monai_zoo:main"
 train-yolo  = "idh_glioma.train.train_yolo_detection:main"
 tumor-app   = "idh_glioma.app:main"
 prepare-idh-molecular = "idh_glioma.molecular.prepare:main"
+train-idh-molecular = "idh_glioma.molecular.train:main"
 
 [dependency-groups]
 dev = [
