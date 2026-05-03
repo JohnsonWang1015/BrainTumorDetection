@@ -73,7 +73,9 @@ class LightGBMIDH:
             num_leaves=31,
             min_data_in_leaf=20,
             random_state=self.random_state,
-            n_jobs=-1,
+            n_jobs=2,
+            verbosity=-1,
+            force_col_wise=True,
         )
         model.fit(X, y, sample_weight=sample_weight)
         self.model = model

@@ -31,6 +31,7 @@ uv build
 # Data preparation
 uv run prepare-mri        # Scan BraTS dataset → manifest.json
 uv run prepare-ct         # Scan Kaggle CT/MRI → ct_manifest.json
+uv run prepare-idh-molecular  # Build pooled molecular cohort artifacts
 
 # 2D legacy training (TCGA-LGG)
 uv run train-seg          # U-Net 2D segmentation
@@ -41,6 +42,7 @@ uv run train-yolo         # YOLOv8/v11 detection
 # 3D MONAI training (recommended for seg + IDH)
 uv run train-seg-monai    # SegResNet 3D
 uv run train-idh-monai    # DenseNet121 3D + bbox jitter
+uv run train-idh-molecular # Logistic + LightGBM + MLP (RNA-seq molecular IDH)
 
 # Evaluation
 uv run eval-seg           # 2D U-Net Dice/IoU
@@ -50,6 +52,7 @@ uv run eval-seg-monai     # 3D SegResNet Dice
 uv run eval-seg-zoo       # MONAI Model Zoo bundle (zero-shot)
 uv run eval-idh-monai     # 3D IDH (GT-mask ROI)
 uv run eval-e2e-zoo       # Full pipeline: bundle seg + jitter cls
+uv run eval-idh-molecular # B3 eval: pooled CV + source holdout + GBM minority metrics
 
 # Inference
 uv run infer              # 2D end-to-end pipeline
@@ -88,8 +91,22 @@ src/idh_glioma/
 ├── infer/pipeline.py  # Load volumes → segment → classify → save NIfTI + probability
 ├── integrations/   # SAM3 and YOLOv11 wrappers
 ├── eval/           # Metrics computation + visualization output
+├── molecular/      # TCGA RNA-seq + MAF molecular IDH pipeline (prepare/train/eval)
 └── utils.py        # JSON I/O, path utilities
 ```
+
+### Molecular IDH (RNA-seq) Architecture
+
+- Entry points:
+  - `prepare-idh-molecular` builds `artifacts/molecular/{expression_matrix.parquet,idh_labels.parquet,cohort_manifest.json,feature_panel.json}` from TCGA-GBM + TCGA-LGG molecular drops.
+  - `train-idh-molecular` trains pooled-cohort Logistic / LightGBM / MLP models and writes `checkpoints/molecular_idh/`.
+  - `eval-idh-molecular` runs B3 reporting (`pooled_cv`, `source_holdout`, `minority_metrics`) and writes `artifacts/molecular_idh_eval/` plus figures.
+- Data contract:
+  - Expression matrix index is base ENSG (version stripped), values are `log2(TPM+1)`.
+  - Labels come from aggregated public masked MAF (`IDH1/IDH2` missense).
+  - Fold-aware feature selection is `top-K variance ∪ curated prior panel`.
+- Isolation:
+  - `src/idh_glioma/molecular/` is independent from imaging modules and only shares `utils.py` JSON helpers.
 
 ## Data Flow
 
@@ -192,3 +209,4 @@ Three tabs:
 | IDH Mutation Classifier (MONAI DenseNet121 3D, TCGA-LGG, GT-mask ROI crop) | AUC | Single-split: case **1.000** (test, GT mask). 5-fold CV (`scripts/cv_idh_monai.py`): mean smoothed val AUC **0.916 ± 0.073** (+0.15 vs 2D's 0.764). With predicted-mask E2E (`infer-monai-zoo`, threshold 0.0775): accuracy **0.80**, AUC **0.75**, macro F1 0.69 — jitter recovered the hard case TCGA-CS-6669 to p=0.243 (vs 0.9998 without jitter). |
 | MRI Segmentation (MONAI Model Zoo `brats_mri_segmentation`, zero-shot) | Dice | **0.9257 ± 0.031** (test, WT channel). Beats our trained SegResNet 0.910 with no fine-tuning — bundle was pretrained on full BraTS challenge cohort (~500 cases). Recommended production seg model. |
 | YOLO Detection (best of yolov8n / yolo11n / yolo11s) | mAP50 | 0.497 (yolo11s); mAP50-95 0.347 (yolov8n best for high-IoU). Dataset (893 train / 223 val) saturates at this ceiling — scaling backbone past yolo11s gives diminishing returns. Breaking 0.55 needs more data, not a bigger model. |
+| Molecular IDH Classifier (LightGBM, RNA-seq pooled TCGA-GBM+LGG) | AUC | Pooled 5-fold CV **0.992 ± 0.009** (best of three molecular models); source-holdout AUC: LGG→GBM **0.965**, GBM→LGG **0.956**; GBM-only minority AUPRC **0.947**. |

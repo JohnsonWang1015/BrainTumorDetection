@@ -10,6 +10,58 @@
 
 ---
 
+## Molecular IDH (RNA-seq)
+
+本 repo 現在另外提供一條「分子層」IDH 分類路徑，使用 TCGA-GBM + TCGA-LGG 的 RNA-seq (`log2(TPM+1)`) 與 public masked MAF 標籤，和影像 pipeline 並行。
+
+Quickstart:
+
+```bash
+# 1) Prepare pooled molecular artifacts
+uv run prepare-idh-molecular \
+  --include-sources tcga_gbm tcga_lgg \
+  --gbm-data-root datasets/TCGA-GBM/tcga_gbm_downloads/data \
+  --lgg-data-root datasets/TCGA-LGG-Molecular/tcga_lgg_downloads/data \
+  --output-dir artifacts/molecular \
+  --skip-download
+
+# 2) Train all molecular models
+uv run train-idh-molecular \
+  --input-dir artifacts/molecular \
+  --model all \
+  --top-k 2000 \
+  --save-dir checkpoints/molecular_idh \
+  --seed 42
+
+# 3) Run B3 evaluation
+uv run eval-idh-molecular \
+  --input-dir artifacts/molecular \
+  --checkpoint-dir checkpoints/molecular_idh \
+  --mode all \
+  --output-dir artifacts/molecular_idh_eval \
+  --folds 5 \
+  --seed 42
+```
+
+Example output (real run on current workspace):
+
+```text
+prepare: expression_matrix=(60616 genes x 809 patients), idh_labels=880, labeled_with_expression=759
+train AUC: logistic=1.0000, lightgbm=1.0000, mlp=0.9972
+pooled 5-fold CV AUC: logistic=0.9916±0.0098, lightgbm=0.9924±0.0089, mlp=0.9908±0.0083
+source holdout AUC: LGG->GBM {logistic=0.9801, lightgbm=0.9650, mlp=0.9866}
+source holdout AUC: GBM->LGG {logistic=0.9722, lightgbm=0.9555, mlp=0.9624}
+GBM minority AUPRC: logistic=0.9326, lightgbm=0.9469, mlp=0.9368
+```
+
+Artifacts:
+
+- `artifacts/molecular/{expression_matrix.parquet, idh_labels.parquet, cohort_manifest.json, feature_panel.json}`
+- `checkpoints/molecular_idh/{logistic.joblib, lightgbm.txt, mlp.pt, training_report.json}`
+- `artifacts/molecular_idh_eval/{pooled_cv_results.json, source_holdout_results.json, minority_metrics.json, figures/*.png}`
+
+---
+
 ## 1. 專案結構
 
 ```text
