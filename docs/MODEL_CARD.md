@@ -17,7 +17,7 @@
 |---|---:|---:|---:|---:|
 | Logistic | 0.9916 | 0.0098 | 0.9899 | 0.0135 |
 | LightGBM | 0.9924 | 0.0089 | 0.9896 | 0.0152 |
-| MLP | 0.9908 | 0.0083 | 0.9889 | 0.0118 |
+| MLP | 0.9899 | 0.0085 | 0.9876 | 0.0118 |
 
 #### 2) Source-holdout (bidirectional)
 
@@ -25,10 +25,10 @@
 |---|---|---:|---:|
 | Train LGG -> Test GBM | Logistic | 0.9801 | 0.9514 |
 | Train LGG -> Test GBM | LightGBM | 0.9650 | 0.9290 |
-| Train LGG -> Test GBM | MLP | 0.9866 | 0.9525 |
+| Train LGG -> Test GBM | MLP | 0.9880 | 0.9458 |
 | Train GBM -> Test LGG | Logistic | 0.9722 | 0.9891 |
 | Train GBM -> Test LGG | LightGBM | 0.9555 | 0.9868 |
-| Train GBM -> Test LGG | MLP | 0.9624 | 0.9873 |
+| Train GBM -> Test LGG | MLP | 0.9539 | 0.9846 |
 
 #### 3) Minority metrics on GBM subset (from pooled CV predictions)
 
@@ -36,7 +36,7 @@
 |---|---:|---:|---:|---:|
 | Logistic | 250 | 0.9326 | 0.9444 | 0.0121 |
 | LightGBM | 250 | 0.9469 | 0.9444 | 0.0138 |
-| MLP | 250 | 0.9368 | 0.9444 | 0.0161 |
+| MLP | 250 | 0.9386 | 0.9444 | 0.0151 |
 
 ### Intended use
 
