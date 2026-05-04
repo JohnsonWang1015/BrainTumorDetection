@@ -25,6 +25,8 @@ Where a metric comes from code or artifacts, it is treated as verified from the 
 | `checkpoints/mobilenetv3_ct_best.pt` | 6.0M | 2026-03-21 14:39 | CT/MRI tumor classifier | Present |
 | `checkpoints/yolov8_brain_tumor_best.pt` | 6.0M | 2026-03-28 14:52 | YOLO detector | Present |
 | `checkpoints/monai_zoo/brats_mri_segmentation/models/model.pt` | external bundle | vendor asset | MONAI Model Zoo segmentation | Present |
+| `checkpoints/molecular_idh/{logistic.joblib, lightgbm.txt, mlp.pt}` | ~6M total | 2026-05-04 | Molecular IDH classifier (RNA-seq) | Present |
+| `checkpoints/molecular_idh_multimodal/{logistic.joblib, lightgbm.txt, mlp.pt}` | ~7M total | 2026-05-04 | Molecular IDH classifier (RNA-seq + methylation fusion) | Present |
 
 ## 3. Recommended Models
 
@@ -433,7 +435,42 @@ Interpretation:
 | CT/MRI tumor classification | `mobilenetv3_ct_best.pt` | only active classifier for that branch |
 | Tumor detection | `yolov8_brain_tumor_best.pt` | only local YOLO checkpoint present |
 
-## 6. Caveats
+## 6. Cross-Model Performance Comparison
+
+A single table covering every trained model in the repo. Columns include the metrics requested (`Accuracy`, `AUC`, `macro F1`) plus a task-specific primary metric where it is the convention for that task (Dice for segmentation, mAP for detection, AUPRC for the heavily-imbalanced minority subgroup). `—` means the metric is not reported for that task or split. **Bold** marks the best value per metric within each task group; ★ marks the recommended production model per task.
+
+| Model / Pipeline | Task | Cohort (n) | Accuracy | AUC | macro F1 | Task-specific primary | Notes |
+|---|---|---|---:|---:|---:|---|---|
+| **Segmentation** | | | | | | | |
+| MONAI Model Zoo `brats_mri_segmentation` (zero-shot) ★ | 3D whole-tumor seg | TCGA-LGG (10 test) | — | — | — | **Dice 0.9257 ± 0.031** | pretrained on ~500 BraTS cases |
+| `segresnet_tcga.pt` | 3D whole-tumor seg | TCGA-LGG (10 test) | — | — | — | Dice 0.9101 ± 0.036 (val 0.9176) | custom-trained 3D baseline |
+| `unet2d_tcga_v1.pt` | 2D whole-tumor seg | TCGA-LGG | — | — | — | Dice 0.7598 ± 0.090 (val 0.8063) | 2D legacy baseline |
+| **Tumor binary classification** | | | | | | | |
+| `mobilenetv3_ct_best.pt` ★ | 2D CT/MRI tumor vs healthy | Kaggle CT/MRI (val) | **96.4%** | **0.993** | — | — | val_loss 0.0864; only model in this branch |
+| **IDH classification — Imaging** | | | | | | | |
+| `densenet3d_idh.pt` | 3D IDH (GT-mask ROI, upper bound) | TCGA-LGG (val) | — | val 1.000 (GT-mask only) | — | — | optimistic ceiling, not deployable |
+| `densenet3d_idh_jitter.pt` + Zoo bundle ★ | 3D IDH end-to-end (predicted-mask) | TCGA-LGG (10 E2E test) | **0.80** (E2E) | **0.75** (E2E); 0.9164 ± 0.073 (5-fold CV smoothed) | **0.69** (E2E) | GT-mask case AUC 1.000; jitter-trained for box noise | E2E threshold 0.13 from `e2e_idh_config.json` |
+| `mobilenetv3_idh_best.pt` | 2D IDH (slice → case) | TCGA-LGG | — | 0.875 (case, single-split); 0.7639 ± 0.076 (5-fold CV smoothed) | — | val AUC 0.8533 | calibrated threshold 0.876 (Youden's J) |
+| `mobilenetv3_idh_v3.pt` (early) | 2D IDH (intermediate) | TCGA-LGG (val) | — | val AUC 0.7522 | — | — | kept for comparison |
+| **IDH classification — Molecular (RNA-seq pooled TCGA-GBM+LGG, n=759)** | | | | | | | |
+| `molecular_idh/lightgbm.txt` ★ | Binary IDH (RNA-seq) | TCGA-GBM+LGG | — | **pooled CV 0.9924 ± 0.009**; LGG→GBM 0.965; GBM→LGG 0.956 | — | **GBM minority AUPRC 0.947**, recall@95spec 0.944, Brier 0.014 | best on pooled CV and GBM minority |
+| `molecular_idh/logistic.joblib` | Binary IDH (RNA-seq) | TCGA-GBM+LGG | — | pooled CV 0.9916 ± 0.010; LGG→GBM 0.980; **GBM→LGG 0.972** | — | GBM minority AUPRC 0.933, recall@95spec 0.944, Brier 0.012 | best on cross-cohort GBM→LGG |
+| `molecular_idh/mlp.pt` | Binary IDH (RNA-seq) | TCGA-GBM+LGG | — | pooled CV 0.9899 ± 0.009; **LGG→GBM 0.988**; GBM→LGG 0.954 | — | GBM minority AUPRC 0.939, Brier 0.015 | best on cross-cohort LGG→GBM |
+| **IDH classification — Molecular multi-omics fusion (RNA-seq + methylation, strict subset n=615)** | | | | | | | |
+| `molecular_idh_multimodal/mlp.pt` | Binary IDH (RNA + methylation) | TCGA-GBM+LGG strict | — | **pooled CV 0.9933 ± 0.007**; **LGG→GBM 0.985**; GBM→LGG 0.974 | — | GBM minority AUPRC 0.940, Brier 0.013 | best on pooled CV and LGG→GBM transfer |
+| `molecular_idh_multimodal/lightgbm.txt` ★ | Binary IDH (RNA + methylation) | TCGA-GBM+LGG strict | — | pooled CV 0.9906 ± 0.009; LGG→GBM 0.976; GBM→LGG 0.964 | — | **GBM minority AUPRC 0.943**, recall@95spec 0.944, **Brier 0.0095** (best calibration) | best on minority class and calibration; recommended for GBM IDH calls |
+| `molecular_idh_multimodal/logistic.joblib` | Binary IDH (RNA + methylation) | TCGA-GBM+LGG strict | — | pooled CV 0.9904 ± 0.010; LGG→GBM 0.969; **GBM→LGG 0.977** | — | GBM minority AUPRC 0.914, Brier 0.010 | best on GBM→LGG transfer; smallest model |
+| **Detection** | | | | | | | |
+| `yolov8_brain_tumor_best.pt` ★ | 2D tumor bbox detection | Ultralytics (val) | — | — | — | **mAP50 0.476**, mAP50-95 0.347 | precision 0.451, recall 0.824 |
+
+### Reading the table
+
+- **Accuracy** is reported only when a model has a fixed deployment threshold (`mobilenetv3_ct_best`, end-to-end IDH). Pure classifiers without a chosen threshold report AUC instead, since accuracy depends on the cutoff.
+- **macro F1** is reported only for the end-to-end IDH pipeline because that is where the threshold from `e2e_idh_config.json` is applied. Adding a similar number for the standalone classifiers would require re-applying their stored thresholds, which has not been done in this snapshot.
+- **AUC** is the standard primary metric for the binary classifiers. For molecular models, three AUC values are reported (pooled 5-fold CV, LGG→GBM source-holdout, GBM→LGG source-holdout) so that cohort confound is visible — see B3 strategy in `docs/MODEL_CARD.md`.
+- The molecular multi-omics fusion row gives essentially noise-level AUC change vs the RNA-seq-only baseline (pooled CV +0.0009, GBM minority AUPRC −0.0044 with smaller test n=210), but a real Brier improvement (0.014 → 0.0095, ≈31% better calibration). See `docs/MODEL_CARD.md` for the full B3 side-by-side.
+
+## 7. Caveats
 
 - None of the evaluation scripts were re-run in this session, so test-set metrics are documented from repository artifacts and notes rather than a fresh benchmark pass
 - IDH metrics are based on a very small labeled cohort with strong class imbalance
