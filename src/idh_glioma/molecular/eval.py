@@ -19,25 +19,63 @@ from sklearn.metrics import (
 )
 from sklearn.model_selection import StratifiedKFold
 
-from idh_glioma.molecular.feature_select import load_idh_prior_panel, select_features
+from idh_glioma.molecular.feature_select import (
+    _map_prior_to_gene_ids,
+    load_idh_cpg_panel,
+    load_idh_prior_panel,
+    select_features,
+)
 from idh_glioma.molecular.models import LightGBMIDH, LogisticIDH, MLPIDH
+from idh_glioma.molecular.multimodal import concat_modalities, select_multimodal_features
 from idh_glioma.utils import save_json
 
 MODEL_NAMES = ("logistic", "lightgbm", "mlp")
+MODALITY_CHOICES = ("rnaseq", "methylation")
+DEFAULT_OUTPUT_DIR = Path("artifacts/molecular_idh_eval")
 
 
-def _load_inputs(input_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame | None]:
-    expression = pd.read_parquet(input_dir / "expression_matrix.parquet")
+def _normalize_modalities(modalities: list[str]) -> list[str]:
+    deduped = list(dict.fromkeys(str(modality).strip().lower() for modality in modalities if str(modality).strip()))
+    unknown = sorted(set(deduped) - set(MODALITY_CHOICES))
+    if unknown:
+        raise SystemExit(f"Unsupported modalities: {unknown}. Allowed values: {list(MODALITY_CHOICES)}")
+    if deduped == ["methylation"] or "rnaseq" not in deduped:
+        raise SystemExit("RNA-seq modality is required. Use --modalities rnaseq or rnaseq methylation.")
+    return deduped
+
+
+def _resolve_output_dir(output_dir: Path, modalities: list[str]) -> Path:
+    if len(modalities) > 1 and output_dir == DEFAULT_OUTPUT_DIR:
+        return Path(f"{output_dir}_multimodal")
+    return output_dir
+
+
+def _load_inputs(
+    input_dir: Path,
+    modalities: list[str],
+) -> tuple[dict[str, pd.DataFrame], pd.DataFrame, pd.DataFrame | None]:
     labels = pd.read_parquet(input_dir / "idh_labels.parquet")
-    gene_meta_path = input_dir / "gene_metadata.parquet"
-    gene_metadata = pd.read_parquet(gene_meta_path) if gene_meta_path.exists() else None
     labels = labels.copy()
     labels["patient_id"] = labels["patient_id"].astype(str)
     labels = labels.drop_duplicates(subset=["patient_id"], keep="first")
-    patient_ids = sorted(set(expression.columns.astype(str)) & set(labels["patient_id"]))
+
+    matrices: dict[str, pd.DataFrame] = {}
+    if "rnaseq" in modalities:
+        matrices["rnaseq"] = pd.read_parquet(input_dir / "expression_matrix.parquet")
+    if "methylation" in modalities:
+        matrices["methylation"] = pd.read_parquet(input_dir / "methylation_matrix.parquet")
+
+    common_patients = set(labels["patient_id"].astype(str))
+    for matrix in matrices.values():
+        common_patients &= set(matrix.columns.astype(str))
+    patient_ids = sorted(common_patients)
+
     labels = labels.set_index("patient_id").loc[patient_ids].reset_index()
-    expression = expression[patient_ids]
-    return expression, labels, gene_metadata
+    matrices = {modality: matrix[patient_ids] for modality, matrix in matrices.items()}
+
+    gene_meta_path = input_dir / "gene_metadata.parquet"
+    gene_metadata = pd.read_parquet(gene_meta_path) if gene_meta_path.exists() else None
+    return matrices, labels, gene_metadata
 
 
 def _new_model(model_name: str, seed: int, input_dim: int | None = None):
@@ -66,8 +104,50 @@ def _recall_at_specificity(y_true: np.ndarray, y_prob: np.ndarray, specificity: 
     return float(np.max(valid))
 
 
+def _select_features_by_modality(
+    train_matrices: dict[str, pd.DataFrame],
+    gene_metadata: pd.DataFrame | None,
+    top_k: int,
+) -> dict[str, list[str]]:
+    if list(train_matrices.keys()) == ["rnaseq"]:
+        return {
+            "rnaseq": select_features(
+                X_train_log_tpm=train_matrices["rnaseq"],
+                top_k=top_k,
+                prior_panel=load_idh_prior_panel(),
+                gene_metadata=gene_metadata,
+            )
+        }
+
+    rnaseq_prior = load_idh_prior_panel()
+    mapped_rnaseq_prior = _map_prior_to_gene_ids(
+        rnaseq_prior,
+        train_matrices["rnaseq"].index,
+        gene_metadata=gene_metadata,
+    )
+    prior_panels = {
+        "rnaseq": mapped_rnaseq_prior,
+        "methylation": load_idh_cpg_panel(),
+    }
+    top_k_per_modality = {modality: top_k for modality in train_matrices}
+    return select_multimodal_features(
+        matrices=train_matrices,
+        prior_panels=prior_panels,
+        top_k_per_modality=top_k_per_modality,
+    )
+
+
+def _build_feature_matrix(
+    matrices: dict[str, pd.DataFrame],
+    selected: dict[str, list[str]],
+    patient_ids: list[str],
+) -> pd.DataFrame:
+    selected_matrices = {modality: matrices[modality].loc[features] for modality, features in selected.items()}
+    return concat_modalities(selected_matrices, patient_ids=patient_ids)
+
+
 def _evaluate_pooled_cv(
-    expression: pd.DataFrame,
+    matrices: dict[str, pd.DataFrame],
     labels: pd.DataFrame,
     gene_metadata: pd.DataFrame | None,
     folds: int,
@@ -78,7 +158,6 @@ def _evaluate_pooled_cv(
     patient_ids = labels["patient_id"].astype(str).tolist()
     sources = labels["source"].astype(str).tolist()
     splitter = StratifiedKFold(n_splits=folds, shuffle=True, random_state=seed)
-    prior_panel = load_idh_prior_panel()
 
     fold_rows: list[dict[str, Any]] = []
     results: dict[str, Any] = {"folds": folds, "models": {}}
@@ -89,23 +168,25 @@ def _evaluate_pooled_cv(
         print(f"[INFO] pooled_cv fold {fold_idx + 1}/{folds}", flush=True)
         train_patients = [patient_ids[i] for i in train_idx]
         test_patients = [patient_ids[i] for i in test_idx]
-        X_train_genes = expression[train_patients]
-        selected_features = select_features(
-            X_train_log_tpm=X_train_genes,
-            top_k=top_k,
-            prior_panel=prior_panel,
-            gene_metadata=gene_metadata,
-        )
-        X_train = X_train_genes.loc[selected_features].T.to_numpy(dtype=np.float32)
-        X_test = expression[test_patients].loc[selected_features].T.to_numpy(dtype=np.float32)
+
+        train_matrices = {modality: matrix[train_patients] for modality, matrix in matrices.items()}
+        selected = _select_features_by_modality(train_matrices, gene_metadata=gene_metadata, top_k=top_k)
+        X_train = _build_feature_matrix(train_matrices, selected=selected, patient_ids=train_patients)
+
+        test_matrices = {modality: matrix[test_patients] for modality, matrix in matrices.items()}
+        X_test = _build_feature_matrix(test_matrices, selected=selected, patient_ids=test_patients)
+
         y_train = y[train_idx]
         y_test = y[test_idx]
 
+        X_train_np = X_train.to_numpy(dtype=np.float32)
+        X_test_np = X_test.to_numpy(dtype=np.float32)
+
         for model_name in MODEL_NAMES:
             print(f"[INFO] pooled_cv fold {fold_idx + 1}/{folds} model={model_name}", flush=True)
-            model = _new_model(model_name, seed=seed + fold_idx, input_dim=X_train.shape[1])
-            model.fit(X_train, y_train)
-            probs = model.predict_proba(X_test)[:, 1]
+            model = _new_model(model_name, seed=seed + fold_idx, input_dim=X_train_np.shape[1])
+            model.fit(X_train_np, y_train)
+            probs = model.predict_proba(X_test_np)[:, 1]
             fold_auc = float(roc_auc_score(y_test, probs)) if len(np.unique(y_test)) > 1 else float("nan")
             fold_auprc = float(average_precision_score(y_test, probs))
             results["models"][model_name]["fold_metrics"].append(
@@ -115,7 +196,7 @@ def _evaluate_pooled_cv(
                     "auprc": fold_auprc,
                     "n_train": int(len(train_idx)),
                     "n_test": int(len(test_idx)),
-                    "n_features": int(len(selected_features)),
+                    "n_features": int(X_train_np.shape[1]),
                 }
             )
             for local_idx, patient_id in enumerate(test_patients):
@@ -143,13 +224,12 @@ def _evaluate_pooled_cv(
 
 
 def _evaluate_source_holdout(
-    expression: pd.DataFrame,
+    matrices: dict[str, pd.DataFrame],
     labels: pd.DataFrame,
     gene_metadata: pd.DataFrame | None,
     seed: int,
     top_k: int = 2000,
 ) -> dict[str, Any]:
-    prior_panel = load_idh_prior_panel()
     out: dict[str, Any] = {"directions": {}}
     directions = [("tcga_lgg", "tcga_gbm"), ("tcga_gbm", "tcga_lgg")]
 
@@ -159,15 +239,12 @@ def _evaluate_source_holdout(
         test_ids = labels.loc[labels["source"] == test_source, "patient_id"].astype(str).tolist()
         y_train = labels.set_index("patient_id").loc[train_ids, "idh_label"].to_numpy(dtype=int)
         y_test = labels.set_index("patient_id").loc[test_ids, "idh_label"].to_numpy(dtype=int)
-        X_train_genes = expression[train_ids]
-        selected_features = select_features(
-            X_train_log_tpm=X_train_genes,
-            top_k=top_k,
-            prior_panel=prior_panel,
-            gene_metadata=gene_metadata,
-        )
-        X_train = X_train_genes.loc[selected_features].T.to_numpy(dtype=np.float32)
-        X_test = expression[test_ids].loc[selected_features].T.to_numpy(dtype=np.float32)
+
+        train_matrices = {modality: matrix[train_ids] for modality, matrix in matrices.items()}
+        test_matrices = {modality: matrix[test_ids] for modality, matrix in matrices.items()}
+        selected = _select_features_by_modality(train_matrices, gene_metadata=gene_metadata, top_k=top_k)
+        X_train = _build_feature_matrix(train_matrices, selected=selected, patient_ids=train_ids).to_numpy(dtype=np.float32)
+        X_test = _build_feature_matrix(test_matrices, selected=selected, patient_ids=test_ids).to_numpy(dtype=np.float32)
 
         key = f"train_{train_source}_test_{test_source}"
         out["directions"][key] = {"n_train": len(train_ids), "n_test": len(test_ids), "models": {}}
@@ -277,53 +354,56 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--input-dir", type=Path, default=Path("artifacts/molecular"))
     parser.add_argument("--checkpoint-dir", type=Path, default=Path("checkpoints/molecular_idh"))
     parser.add_argument("--mode", choices=["pooled_cv", "source_holdout", "minority_metrics", "all"], default="all")
-    parser.add_argument("--output-dir", type=Path, default=Path("artifacts/molecular_idh_eval"))
+    parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     parser.add_argument("--folds", type=int, default=5)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--modalities", nargs="+", default=["rnaseq"], choices=MODALITY_CHOICES)
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    args.output_dir.mkdir(parents=True, exist_ok=True)
-    expression, labels, gene_metadata = _load_inputs(args.input_dir)
+    modalities = _normalize_modalities(args.modalities)
+    output_dir = _resolve_output_dir(args.output_dir, modalities)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    matrices, labels, gene_metadata = _load_inputs(args.input_dir, modalities)
 
     cv_results: dict[str, Any] | None = None
     cv_predictions: pd.DataFrame | None = None
 
     if args.mode in {"pooled_cv", "all", "minority_metrics"}:
         cv_results, cv_predictions = _evaluate_pooled_cv(
-            expression=expression,
+            matrices=matrices,
             labels=labels,
             gene_metadata=gene_metadata,
             folds=args.folds,
             seed=args.seed,
         )
-        save_json(cv_results, args.output_dir / "pooled_cv_results.json")
+        save_json(cv_results, output_dir / "pooled_cv_results.json")
         if cv_predictions is not None:
-            cv_predictions.to_parquet(args.output_dir / "pooled_cv_predictions.parquet", index=False)
-        print(f"[INFO] wrote {args.output_dir / 'pooled_cv_results.json'}")
+            cv_predictions.to_parquet(output_dir / "pooled_cv_predictions.parquet", index=False)
+        print(f"[INFO] wrote {output_dir / 'pooled_cv_results.json'}")
 
     if args.mode in {"source_holdout", "all"}:
         source_holdout = _evaluate_source_holdout(
-            expression=expression,
+            matrices=matrices,
             labels=labels,
             gene_metadata=gene_metadata,
             seed=args.seed,
         )
-        save_json(source_holdout, args.output_dir / "source_holdout_results.json")
-        print(f"[INFO] wrote {args.output_dir / 'source_holdout_results.json'}")
+        save_json(source_holdout, output_dir / "source_holdout_results.json")
+        print(f"[INFO] wrote {output_dir / 'source_holdout_results.json'}")
 
     if args.mode in {"minority_metrics", "all"}:
         if cv_predictions is None:
-            cv_predictions = pd.read_parquet(args.output_dir / "pooled_cv_predictions.parquet")
+            cv_predictions = pd.read_parquet(output_dir / "pooled_cv_predictions.parquet")
         minority = _evaluate_minority_metrics(cv_predictions)
-        save_json(minority, args.output_dir / "minority_metrics.json")
-        print(f"[INFO] wrote {args.output_dir / 'minority_metrics.json'}")
+        save_json(minority, output_dir / "minority_metrics.json")
+        print(f"[INFO] wrote {output_dir / 'minority_metrics.json'}")
 
     if cv_predictions is not None and args.mode in {"pooled_cv", "all", "minority_metrics"}:
-        _plot_figures(cv_predictions, args.output_dir)
-        print(f"[INFO] wrote figures under {args.output_dir / 'figures'}")
+        _plot_figures(cv_predictions, output_dir)
+        print(f"[INFO] wrote figures under {output_dir / 'figures'}")
 
 
 if __name__ == "__main__":
