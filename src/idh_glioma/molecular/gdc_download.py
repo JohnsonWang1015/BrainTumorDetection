@@ -21,6 +21,10 @@ DATA_TYPE_TO_SUBDIR = {
     "Masked Somatic Mutation": "maf",
     "Clinical Supplement": "clinical",
 }
+METHYLATION_PLATFORMS = (
+    "Illumina Human Methylation 450",
+    "Illumina Human Methylation 27",
+)
 
 
 @dataclass(frozen=True)
@@ -35,32 +39,40 @@ class FileRecord:
 
 
 def _build_lgg_filter(data_types: list[str]) -> dict[str, Any]:
-    return {
-        "op": "and",
-        "content": [
+    content: list[dict[str, Any]] = [
+        {
+            "op": "in",
+            "content": {
+                "field": "cases.project.project_id",
+                "value": ["TCGA-LGG"],
+            },
+        },
+        {
+            "op": "in",
+            "content": {
+                "field": "data_type",
+                "value": data_types,
+            },
+        },
+        {
+            "op": "in",
+            "content": {
+                "field": "access",
+                "value": ["open"],
+            },
+        },
+    ]
+    if "Methylation Beta Value" in data_types:
+        content.append(
             {
                 "op": "in",
                 "content": {
-                    "field": "cases.project.project_id",
-                    "value": ["TCGA-LGG"],
+                    "field": "platform",
+                    "value": list(METHYLATION_PLATFORMS),
                 },
-            },
-            {
-                "op": "in",
-                "content": {
-                    "field": "data_type",
-                    "value": data_types,
-                },
-            },
-            {
-                "op": "in",
-                "content": {
-                    "field": "access",
-                    "value": ["open"],
-                },
-            },
-        ],
-    }
+            }
+        )
+    return {"op": "and", "content": content}
 
 
 def query_lgg_files(data_types: list[str]) -> list[FileRecord]:
@@ -195,3 +207,28 @@ def download_lgg_dataset(
         summary[subdir] = len(group)
 
     return summary
+
+
+def query_lgg_methylation_files() -> list[FileRecord]:
+    return query_lgg_files(["Methylation Beta Value"])
+
+
+def download_lgg_methylation(
+    base_dir: Path,
+    gdc_client_path: Path | None = None,
+) -> dict[str, int]:
+    records = query_lgg_methylation_files()
+    manifests_dir = base_dir / "manifests"
+    data_dir = base_dir / "data" / "methylation_beta"
+    manifests_dir.mkdir(parents=True, exist_ok=True)
+    data_dir.mkdir(parents=True, exist_ok=True)
+
+    manifest_path = manifests_dir / "methylation_beta_manifest.txt"
+    write_manifest(records, manifest_path)
+    if records:
+        download_via_gdc_client(
+            manifest_path=manifest_path,
+            out_dir=data_dir,
+            gdc_client_path=gdc_client_path,
+        )
+    return {"methylation_beta": len(records)}
