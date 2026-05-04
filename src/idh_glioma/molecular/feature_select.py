@@ -14,6 +14,14 @@ def load_idh_prior_panel(panel_path: Path | None = None) -> set[str]:
     return {str(gene).strip().upper() for gene in genes if str(gene).strip()}
 
 
+def load_idh_cpg_panel(panel_path: Path | None = None) -> set[str]:
+    if panel_path is None:
+        panel_path = Path(__file__).with_name("priors") / "idh_cpg_panel.json"
+    payload = json.loads(panel_path.read_text(encoding="utf-8"))
+    cpg_ids = payload.get("cpg_ids", [])
+    return {str(cpg_id).strip() for cpg_id in cpg_ids if str(cpg_id).strip().startswith("cg")}
+
+
 def _map_prior_to_gene_ids(
     prior_panel: set[str],
     expression_index: pd.Index,
