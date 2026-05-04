@@ -65,3 +65,27 @@ def select_features(
                 selected.append(gene_id)
                 selected_set.add(gene_id)
     return selected
+
+
+def select_features_modality(
+    X_train: pd.DataFrame,
+    top_k: int,
+    prior_ids: set[str] | None = None,
+) -> list[str]:
+    if X_train.empty:
+        return []
+    if top_k <= 0:
+        top_k = 0
+
+    variances = X_train.var(axis=1, ddof=0).sort_values(ascending=False)
+    selected = list(variances.head(top_k).index.astype(str))
+    selected_set = set(selected)
+
+    if prior_ids:
+        index_set = set(X_train.index.astype(str))
+        prior_hits = sorted({str(prior_id) for prior_id in prior_ids if str(prior_id) in index_set})
+        for prior_id in prior_hits:
+            if prior_id not in selected_set:
+                selected.append(prior_id)
+                selected_set.add(prior_id)
+    return selected
