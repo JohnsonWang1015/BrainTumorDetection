@@ -2,22 +2,26 @@
 
 ## 1. Scope
 
-This repository currently uses two active local datasets, one generated multi-source manifest, and one legacy dataset that has been retired from the training flow:
+This repository currently uses three active imaging datasets, two generated molecular cohorts, one multi-source IDH manifest, and one legacy dataset that has been retired from the training flow:
 
 | Dataset | Primary use | Local source | Status |
 |---|---|---|---|
-| BraTS-TCGA-LGG | MRI segmentation and IDH mutation classification | `datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations` | Active, primary research dataset |
+| BraTS-TCGA-LGG | MRI segmentation and IDH mutation classification | `datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations` | Active, primary imaging dataset |
 | Kaggle multimodal CT/MRI dataset | 2D CT/MRI binary tumor classification | `datasets/Kaggle_multimodal/Dataset` | Active |
 | Multi-source IDH manifest v2 | Unified schema for TCGA-LGG / TCGA-GBM / UCSF-PDGM / EGD | `artifacts/manifest_v2.json` | Active schema, currently populated from local TCGA-LGG only |
+| TCGA molecular IDH cohort (RNA-seq) | Pooled molecular IDH classification | `artifacts/molecular/` (built from `datasets/TCGA-GBM`, `datasets/TCGA-LGG-Molecular`) | Active |
+| TCGA multi-omics IDH cohort (RNA-seq + methylation) | Multi-modal molecular IDH fusion | `artifacts/molecular_multimodal/` | Active |
 | MRIBrainTumor | Earlier segmentation experiments | `datasets/MRIBrainTumor` | Present locally but no longer used in current training pipeline |
 
-This card reflects the repository state inspected on 2026-05-02 from:
+This card reflects the repository state inspected on 2026-05-04 from:
 
 - `artifacts/manifest.json`
 - `artifacts/manifest_v2.json`
 - `artifacts/ct_manifest.json`
 - `artifacts/idh_labels.csv`
-- training/data preparation code under `src/idh_glioma/data/`
+- `artifacts/molecular/{cohort_manifest.json, idh_labels.parquet, expression_matrix.parquet, feature_panel.json}`
+- `artifacts/molecular_multimodal/{cohort_manifest.json, idh_labels.parquet, expression_matrix.parquet, methylation_matrix.parquet, feature_panel.json}`
+- training/data preparation code under `src/idh_glioma/data/` and `src/idh_glioma/molecular/`
 - project notes in `README.md` and `CLAUDE.md`
 
 ## 2. BraTS-TCGA-LGG Dataset
@@ -235,7 +239,126 @@ Compared with `artifacts/manifest.json`, `manifest_v2` adds:
 
 These fields are intended to make future cross-dataset training auditable instead of silently mixing cohorts.
 
-## 5. Legacy Dataset Present but Not Active
+## 5. TCGA Molecular IDH Cohort (RNA-seq)
+
+### 5.1 Intended use
+
+- pooled molecular IDH classification across TCGA-GBM and TCGA-LGG
+- runs entirely on tabular omics features and is independent from the imaging pipeline
+- consumed by `train-idh-molecular` and `eval-idh-molecular`
+
+### 5.2 Source data
+
+- `datasets/TCGA-GBM/tcga_gbm_downloads/data/` — GDC RNA-seq STAR-counts and public masked MAF for IDH1/IDH2
+- `datasets/TCGA-LGG-Molecular/tcga_lgg_downloads/data/` — same modality structure for the LGG cohort
+- builder: `src/idh_glioma/molecular/prepare_dataset.py` (entry point `prepare-idh-molecular`)
+
+### 5.3 Generated artifacts
+
+`artifacts/molecular/` holds the prepared cohort:
+
+| File | Meaning |
+|---|---|
+| `expression_matrix.parquet` | wide gene × patient matrix; values are `log2(TPM+1)`; index is base ENSG (version stripped) |
+| `idh_labels.parquet` | per-patient IDH label aggregated from public masked MAF (`1 = IDH1/IDH2 missense mutant`, `0 = wildtype`) |
+| `cohort_manifest.json` | per-source and pooled summaries plus per-patient provenance |
+| `feature_panel.json` | feature-selection contract: `top-K variance ∪ curated prior gene panel` |
+| `gene_metadata.parquet` | gene symbol / biotype lookup table |
+
+### 5.4 Cohort size and label distribution
+
+Observed from the current `artifacts/molecular/cohort_manifest.json`:
+
+| Source | Labeled patients | With expression | Wildtype | Mutant |
+|---|---:|---:|---:|---:|
+| TCGA-GBM | 371 | 250 | 347 | 24 |
+| TCGA-LGG | 509 | 509 | 95 | 414 |
+| **Pooled (used for training)** | **880** | **759** | **442** | **438** |
+
+Additional facts:
+
+- expression matrix shape: `60616` genes × `809` expression patients
+- pooled labeled-with-expression patients: `759` (training and evaluation are restricted to this intersection)
+- the pooled label distribution is roughly balanced (`442` WT vs `438` mutant), but per-source it is highly imbalanced — GBM is `~93%` wildtype and LGG is `~81%` mutant
+- 90 GBM patients had multiple primary aliquots that were collapsed during preparation; 14 LGG patients similarly
+
+### 5.5 Feature panel
+
+- strategy: `variance_top_k_union_prior_panel` with `default_top_k = 2000`
+- prior panel: ~160 curated glioma-relevant gene symbols (e.g. `IDH1`, `IDH2`, `ATRX`, `TP53`, `EGFR`, `MGMT`, immune and stromal markers)
+- selection is fold-aware: for each CV fold the top-K is recomputed on the training half before being unioned with the prior panel
+
+### 5.6 Known risks and limitations
+
+- IDH labels are derived from public masked MAF mutation calls only, so silent or non-coding events are not represented
+- the GBM minority subgroup (`~24` mutants) carries most of the cross-cohort signal — small absolute count means CV variance for GBM-dominant metrics
+- pooled metrics can hide cohort confounding: the B3 evaluation strategy (`pooled_cv` + `source_holdout` + `minority_metrics`) is the recommended way to read this dataset
+
+## 6. TCGA Multi-omics IDH Cohort (RNA-seq + Methylation)
+
+### 6.1 Intended use
+
+- multi-modal molecular IDH classification combining RNA-seq with DNA methylation
+- consumed by `prepare-idh-molecular --modalities rnaseq methylation`, `train-idh-molecular --modalities rnaseq methylation`, and `eval-idh-molecular --modalities rnaseq methylation`
+
+### 6.2 Source data
+
+- same TCGA-GBM and TCGA-LGG molecular drops as Section 5
+- adds GDC methylation arrays: HM27 (older 27k probes, mostly TCGA-GBM) and HM450 (450k probes, mostly TCGA-LGG)
+- methylation loader at `src/idh_glioma/molecular/methylation.py` builds a unified probe intersection per platform
+
+### 6.3 Generated artifacts
+
+`artifacts/molecular_multimodal/`:
+
+| File | Meaning |
+|---|---|
+| `expression_matrix.parquet` | RNA-seq matrix restricted to the multimodal intersection cohort |
+| `methylation_matrix.parquet` | beta-value matrix on the platform intersection; missing probes filled before downstream use |
+| `idh_labels.parquet` | IDH labels for the strict subset |
+| `cohort_manifest.json` | per-source RNA-seq and methylation summaries plus the strict multimodal intersection list |
+| `feature_panel.json` | per-modality contract; RNA-seq uses gene-symbol prior panel, methylation uses a 50-CpG prior panel |
+| `gene_metadata.parquet` | gene metadata shared with the RNA-seq cohort |
+
+### 6.4 Cohort size and label distribution
+
+Observed from the current `artifacts/molecular_multimodal/cohort_manifest.json`:
+
+| Source | Methylation patients | Methylation platforms | Labeled-with-expression |
+|---|---:|---|---:|
+| TCGA-GBM | 423 | HM27 = 283, HM450 = 140 | 250 |
+| TCGA-LGG | 409 | HM27 = 0, HM450 = 409 | 509 |
+
+Strict multimodal intersection (patients with **both** RNA-seq and methylation **and** an IDH label):
+
+| Field | Value |
+|---|---:|
+| `strict_subset_size` | 615 |
+| pooled wildtype | 272 |
+| pooled mutant | 343 |
+| `rnaseq_only_dropped` | ≈ 144 patients (those in the RNA-seq cohort but missing methylation) |
+
+### 6.5 Feature panel
+
+- strategy: `per_modality_variance_top_k_union_prior_panel` with `default_top_k = {rnaseq: 2000, methylation: 2000}`
+- RNA-seq prior: same ~160 gene symbols as the RNA-seq-only cohort
+- methylation prior: 50 curated CpG IDs covering G-CIMP / IDH-related methylation markers
+- selection is again fold-aware and applied per modality before fusion
+
+### 6.6 Cross-platform handling
+
+- HM27 and HM450 share `~26K` overlapping CpGs (`intersection_size = 25978` for TCGA-GBM)
+- TCGA-LGG is HM450-only with `~482K` CpGs available; intersection with GBM keeps only the shared overlap
+- patients with multiple methylation aliquots are collapsed the same way as RNA-seq aliquots
+- NaN cells from platform mismatch are tracked in the manifest (`nan_fill_count`) and filled before model training
+
+### 6.7 Known risks and limitations
+
+- the multi-omics strict subset (`n=615`) is smaller than the RNA-seq pooled cohort (`n=759`) — direct AUC comparisons must use the same denominator
+- HM27 and HM450 differ in probe density and chemistry; treating them as a single feature space introduces platform shift that the prior CpG panel partially mitigates but does not eliminate
+- the GBM minority IDH-mutant count drops from `24` (RNA-seq) to a slightly smaller number after intersection, so multi-omics minority metrics have higher variance than RNA-seq-only minority metrics
+
+## 7. Legacy Dataset Present but Not Active
 
 `datasets/MRIBrainTumor` is still present locally, but repository notes explicitly say it has been removed from the current training path because it is single-modality and does not match the 4-channel BraTS-style pipeline.
 
@@ -244,10 +367,11 @@ Implication:
 - do not treat `MRIBrainTumor` as part of the current benchmarked training setup
 - if it is reintroduced, it should be handled as a separate 1-channel branch with separate documentation and metrics
 
-## 6. Recommended Interpretation
+## 8. Recommended Interpretation
 
-- Use BraTS-TCGA-LGG as the authoritative dataset for segmentation and IDH work in this repository
-- Treat `artifacts/manifest_v2.json` as the forward-compatible schema for future IDH expansion, but not yet as evidence that external cohorts are already populated locally
+- Use BraTS-TCGA-LGG as the authoritative dataset for imaging segmentation and imaging-based IDH work in this repository
+- Use `artifacts/molecular/` (RNA-seq) and `artifacts/molecular_multimodal/` (RNA-seq + methylation) as the molecular IDH cohorts; metrics from the imaging path and the molecular path are not directly comparable because the cohorts and labels differ (BraTS imaging cases vs full TCGA molecular drops)
+- Treat `artifacts/manifest_v2.json` as the forward-compatible schema for future imaging IDH expansion, but not yet as evidence that external imaging cohorts are already populated locally
 - Use the Kaggle multimodal dataset only for the standalone CT/MRI tumor classifier
-- Treat all reported IDH metrics as low-sample research results rather than deployment-ready evidence
-- Preserve `artifacts/manifest.json` and `artifacts/ct_manifest.json` with the checkpoints they produced, because the local split composition directly affects the reported results
+- Treat all reported imaging IDH metrics as low-sample research results; molecular IDH metrics are larger-sample but still TCGA-only and inherit any TCGA cohort biases
+- Preserve `artifacts/manifest.json`, `artifacts/ct_manifest.json`, and the molecular cohort manifests with the checkpoints they produced, because the local split composition directly affects the reported results

@@ -29,9 +29,10 @@ uv build
 
 ```bash
 # Data preparation
-uv run prepare-mri        # Scan BraTS dataset → manifest.json
-uv run prepare-ct         # Scan Kaggle CT/MRI → ct_manifest.json
-uv run prepare-idh-molecular  # Build pooled molecular cohort artifacts
+uv run prepare-mri              # Scan BraTS dataset → manifest.json
+uv run prepare-idh-multisource  # Multi-source IDH manifest_v2 (TCGA-LGG/GBM/UCSF/EGD)
+uv run prepare-ct               # Scan Kaggle CT/MRI → ct_manifest.json
+uv run prepare-idh-molecular    # Build pooled / multimodal molecular cohort artifacts
 
 # 2D legacy training (TCGA-LGG)
 uv run train-seg          # U-Net 2D segmentation
@@ -53,6 +54,7 @@ uv run eval-seg-zoo       # MONAI Model Zoo bundle (zero-shot)
 uv run eval-idh-monai     # 3D IDH (GT-mask ROI)
 uv run eval-e2e-zoo       # Full pipeline: bundle seg + jitter cls
 uv run eval-idh-molecular # B3 eval: pooled CV + source holdout + GBM minority metrics
+                          # Add `--modalities rnaseq methylation` for the multi-omics fusion path
 
 # Inference
 uv run infer              # 2D end-to-end pipeline
@@ -79,11 +81,12 @@ uv run python scripts/cv_idh_monai.py      # 3D MONAI
 src/idh_glioma/
 ├── app.py          # Gradio web UI with GradCAM visualization
 ├── data/           # Dataset preparation and loading
-│   ├── prepare_dataset.py    # BraTS folder → manifest.json (train/val/test splits)
-│   ├── prepare_ct_data.py    # Kaggle CT/MRI → ct_manifest.json
-│   ├── datasets.py           # BraTSSliceSegmentationDataset, BraTSSliceClassificationDataset
-│   ├── ct_datasets.py        # BrainImageDataset for CT/MRI images
-│   └── export_yolo.py        # Manifest → YOLO format conversion
+│   ├── prepare_dataset.py        # BraTS folder → manifest.json (train/val/test splits)
+│   ├── prepare_idh_multisource.py # Multi-source IDH manifest_v2 builder
+│   ├── prepare_ct_data.py        # Kaggle CT/MRI → ct_manifest.json
+│   ├── datasets.py               # BraTSSliceSegmentationDataset, BraTSSliceClassificationDataset
+│   ├── ct_datasets.py            # BrainImageDataset for CT/MRI images
+│   └── export_yolo.py            # Manifest → YOLO format conversion
 ├── models/         # Neural network architectures
 │   ├── unet2d.py                 # 4-channel input → 1-channel segmentation
 │   └── mobilenetv3_classifier.py # MobileNetV3-Small binary classifier
@@ -91,7 +94,11 @@ src/idh_glioma/
 ├── infer/pipeline.py  # Load volumes → segment → classify → save NIfTI + probability
 ├── integrations/   # SAM3 and YOLOv11 wrappers
 ├── eval/           # Metrics computation + visualization output
-├── molecular/      # TCGA RNA-seq + MAF molecular IDH pipeline (prepare/train/eval)
+├── molecular/      # TCGA RNA-seq + methylation molecular IDH pipeline
+│   ├── prepare_dataset.py        # Build pooled / multimodal cohort artifacts
+│   ├── train.py                  # Logistic + LightGBM + MLP (single- or multi-modal)
+│   ├── eval.py                   # B3 reporting (pooled CV, source holdout, minority)
+│   └── methylation.py            # GDC HM27/HM450 methylation loader
 └── utils.py        # JSON I/O, path utilities
 ```
 

@@ -3,7 +3,8 @@
 本專案提供一個可直接落地的 End-to-End 流程，整合：
 
 - 腦瘤分割：2D `UNet` baseline、3D `SegResNet` baseline、MONAI Model Zoo `brats_mri_segmentation`
-- IDH mutation 狀態分類：2D `MobileNetV3` baseline、3D `DenseNet121` ROI classifier
+- IDH mutation 狀態分類（影像）：2D `MobileNetV3` baseline、3D `DenseNet121` ROI classifier
+- IDH mutation 狀態分類（分子）：RNA-seq Logistic / LightGBM / MLP，以及 RNA-seq + methylation 多模態融合
 - End-to-End ROI/config calibration：共享 `artifacts/e2e_idh_config.json`
 - 多來源 IDH manifest 建置：`TCGA-LGG`、`TCGA-GBM`、`UCSF-PDGM`、`EGD`
 - YOLO 匯出與訓練介接（detect/segment/classify 任務）
@@ -107,6 +108,7 @@ brain-tumor-detection/
 ├── src/idh_glioma/
 │   ├── data/
 │   │   ├── prepare_dataset.py
+│   │   ├── prepare_idh_multisource.py
 │   │   ├── datasets.py
 │   │   └── export_yolo.py
 │   ├── models/
@@ -115,6 +117,11 @@ brain-tumor-detection/
 │   ├── train/
 │   │   ├── train_segmentation.py
 │   │   └── train_idh_classifier.py
+│   ├── molecular/                 # RNA-seq / multi-omics IDH pipeline
+│   │   ├── prepare_dataset.py
+│   │   ├── train.py
+│   │   ├── eval.py
+│   │   └── methylation.py
 │   ├── integrations/
 │   │   ├── sam3_runner.py
 │   │   └── yolov11_runner.py
@@ -646,7 +653,7 @@ uv run train-idh-monai \
 - 自動讀取 ckpt metadata 中的 calibrated threshold
 - Latency ~10–16 s/case（RTX PRO 5000）
 
-### 7.2 2D legacy pipeline
+### 7.4 2D legacy pipeline
 
 ```bash
 uv run python -m idh_glioma.infer.pipeline \

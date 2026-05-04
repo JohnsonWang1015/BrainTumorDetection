@@ -420,6 +420,7 @@ Interpretation:
 - the main 2D IDH checkpoint is calibrated with a stored threshold and paired with 5-fold CV results
 - the jitter-trained 3D IDH checkpoint is paired with 5-fold CV results, while the deployed runtime threshold now lives in `artifacts/e2e_idh_config.json`
 - the deployed end-to-end decision rule is now anchored by `artifacts/e2e_idh_config.json` with `threshold=0.13` and ROI postprocess settings shared across app/eval/infer
+- the molecular IDH checkpoints (`checkpoints/molecular_idh/` for RNA-seq and `checkpoints/molecular_idh_multimodal/` for RNA-seq + methylation fusion) were trained on 2026-05-04 with B3 evaluation artifacts present under `artifacts/molecular_idh_eval/` and `artifacts/molecular_idh_multimodal_eval/`
 - the CT/MRI classifier and YOLO detector were trained earlier in March 2026 and remain available
 
 ### 5.2 Best available options by task
@@ -432,6 +433,10 @@ Interpretation:
 | 2D IDH baseline | `mobilenetv3_idh_best.pt` | calibrated, metadata-complete, CV-backed |
 | 3D IDH upper bound | `densenet3d_idh.pt` | perfect val/test report under GT-mask ROI |
 | 3D IDH practical custom model | `densenet3d_idh_jitter.pt` | trained for predicted-mask ROI noise |
+| Molecular IDH (RNA-seq, pooled) | `molecular_idh/lightgbm.txt` | best pooled CV AUC and best GBM minority AUPRC |
+| Molecular IDH (RNA-seq, cross-cohort GBM→LGG) | `molecular_idh/logistic.joblib` | strongest GBM→LGG transfer AUC |
+| Molecular IDH (multi-omics, pooled / LGG→GBM) | `molecular_idh_multimodal/mlp.pt` | best pooled CV and best LGG→GBM transfer |
+| Molecular IDH (multi-omics, calibration) | `molecular_idh_multimodal/lightgbm.txt` | best Brier score (~31% better than RNA-seq-only) |
 | CT/MRI tumor classification | `mobilenetv3_ct_best.pt` | only active classifier for that branch |
 | Tumor detection | `yolov8_brain_tumor_best.pt` | only local YOLO checkpoint present |
 
