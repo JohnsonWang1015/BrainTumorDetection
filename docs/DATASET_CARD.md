@@ -18,6 +18,7 @@
 | TCGA-GBM-Molecular | 391 | 468 (public masked) | 599 | 293 | 371 | 250 |
 | TCGA-LGG-Molecular | 534 | 530 | 537 | 516 | 509 | 509 |
 | Pooled | 925 | 998 | 1136 | 809 | 880 | 759 |
+| Pooled strict multi-modal (RNA-seq + methylation) | — | — | — | 615 | 615 | 615 |
 
 ### IDH Label Distribution (from MAF aggregation)
 
@@ -26,6 +27,14 @@
 | TCGA-GBM-Molecular | 24 | 347 | 6.5% |
 | TCGA-LGG-Molecular | 414 | 95 | 81.3% |
 | Pooled labels | 438 | 442 | 49.8% |
+
+### Methylation array (real run, 2026-05-04)
+
+| Source | Methylation files on disk | HM27 files | HM450 files | Methylation patients (after aliquot dedup) | RNA-seq patients | Strict overlap patients | Intersection CpGs |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| TCGA-GBM-Molecular | 450 | 295 | 155 | 423 | 293 | 210 | 25,978 |
+| TCGA-LGG-Molecular | 495 | 0 | 495 | 409 | 516 | 405 | 482,421 |
+| Pooled strict subset | 945 | 295 | 650 | 832 | 809 | 615 | 25,978 (after cross-source intersection) |
 
 ### Notes
 

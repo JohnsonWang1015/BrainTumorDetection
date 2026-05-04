@@ -49,12 +49,27 @@
 - Any clinical diagnosis or treatment decision support.
 - Prospective deployment on non-TCGA cohorts without external validation.
 - Use as a replacement for pathology/genomics workflows in patient care.
-- Multi-omics fusion claims (methylation/CNV/survival/subtype), which are not part of v1.
+- CNV/survival/subtype claims, which are not part of this release.
+
+### Multi-omics fusion (RNA-seq + methylation)
+
+#### B3 side-by-side comparison (real eval run, `--mode all --folds 5 --seed 42`)
+
+| Report | RNA-seq-only baseline | Multi-omics fusion | Lift (multi - baseline) |
+|---|---:|---:|---:|
+| Pooled 5-fold CV best AUC | 0.9924 (LightGBM) | 0.9933 (MLP) | +0.0009 |
+| Source holdout AUC: LGG -> GBM (best model) | 0.9880 (MLP) | 0.9847 (MLP) | -0.0034 |
+| Source holdout AUC: GBM -> LGG (best model) | 0.9722 (Logistic) | 0.9772 (Logistic) | +0.0050 |
+| GBM minority AUPRC (best model) | 0.9469 (LightGBM, n=250) | 0.9425 (LightGBM, n=210) | -0.0044 |
+| GBM minority recall @95% specificity (best model) | 0.9444 | 0.9444 | +0.0000 |
+| GBM minority Brier (best model) | 0.0138 | 0.0095 | -0.0043 |
+
+Observed outcome on this cohort: pooled CV improved slightly, GBM->LGG transfer improved, but LGG->GBM and GBM minority AUPRC did not improve.
 
 ### Risks and limitations (verbatim from spec)
 
-1. **Cohort confound** — pooled training mixes LGG (mostly IDH-mutant) and GBM (mostly IDH-wildtype). The model may learn cohort identity rather than true IDH biology. The source-holdout metric is the key diagnostic.
-2. **Retrospective TCGA cohort** — not prospectively collected; subject to selection bias; not validated for clinical decision-making.
-3. **Population specificity** — IDH-mutant cases concentrate in LGG. Performance in IDH-wildtype-only populations is untested and likely degraded.
-4. **Aliquot selection sensitivity** — the primary-tumor + alphabetically-first rule is an arbitrary tiebreaker; not ablated in v1.
-5. **Public MAF only** — controlled-access MAFs would add validation power but require GDC token; v1 uses only `aliquot_ensemble_masked.maf.gz` public files.
+1. **Smaller training set in strict mode** — multi-modal subset is ~600 vs RNA-seq-only 759, increasing variance.
+2. **HM27 platform ceiling** — intersecting to HM27 caps methylation resolution at ~27K CpGs vs HM450's ~485K.
+3. **Batch effects across aliquots** — methylation and RNA-seq may come from different sample/aliquot for the same patient.
+4. **M-value clipping** — extreme beta values (~0 or ~1) lose information after the `[0.001, 0.999]` clip.
+5. **Cohort confound persists** — same diagnosis caveat as RNA-seq-only B3; pooled CV remains LGG-vs-GBM susceptible.

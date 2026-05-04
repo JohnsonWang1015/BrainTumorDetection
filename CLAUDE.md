@@ -95,12 +95,13 @@ src/idh_glioma/
 └── utils.py        # JSON I/O, path utilities
 ```
 
-### Molecular IDH (RNA-seq) Architecture
+### Molecular IDH (RNA-seq / Multi-omics) Architecture
 
 - Entry points:
   - `prepare-idh-molecular` builds `artifacts/molecular/{expression_matrix.parquet,idh_labels.parquet,cohort_manifest.json,feature_panel.json}` from TCGA-GBM + TCGA-LGG molecular drops.
   - `train-idh-molecular` trains pooled-cohort Logistic / LightGBM / MLP models and writes `checkpoints/molecular_idh/`.
   - `eval-idh-molecular` runs B3 reporting (`pooled_cv`, `source_holdout`, `minority_metrics`) and writes `artifacts/molecular_idh_eval/` plus figures.
+  - Multi-omics mode is enabled with `--modalities rnaseq methylation` and writes `artifacts/molecular_multimodal/`, `checkpoints/molecular_idh_multimodal/`, and `artifacts/molecular_idh_multimodal_eval/` when default output directories are used.
 - Data contract:
   - Expression matrix index is base ENSG (version stripped), values are `log2(TPM+1)`.
   - Labels come from aggregated public masked MAF (`IDH1/IDH2` missense).
@@ -210,3 +211,4 @@ Three tabs:
 | MRI Segmentation (MONAI Model Zoo `brats_mri_segmentation`, zero-shot) | Dice | **0.9257 ± 0.031** (test, WT channel). Beats our trained SegResNet 0.910 with no fine-tuning — bundle was pretrained on full BraTS challenge cohort (~500 cases). Recommended production seg model. |
 | YOLO Detection (best of yolov8n / yolo11n / yolo11s) | mAP50 | 0.497 (yolo11s); mAP50-95 0.347 (yolov8n best for high-IoU). Dataset (893 train / 223 val) saturates at this ceiling — scaling backbone past yolo11s gives diminishing returns. Breaking 0.55 needs more data, not a bigger model. |
 | Molecular IDH Classifier (LightGBM, RNA-seq pooled TCGA-GBM+LGG) | AUC | Pooled 5-fold CV **0.992 ± 0.009** (best of three molecular models); source-holdout AUC: LGG→GBM **0.965**, GBM→LGG **0.956**; GBM-only minority AUPRC **0.947**. |
+| Molecular IDH Classifier (RNA-seq + methylation multi-omics) | AUC | Pooled 5-fold CV best **0.993 ± 0.007** (MLP); source-holdout best AUC: LGG→GBM **0.985** (MLP), GBM→LGG **0.977** (Logistic); GBM-only minority AUPRC best **0.942** (LightGBM). |

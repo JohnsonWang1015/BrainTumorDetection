@@ -60,6 +60,43 @@ Artifacts:
 - `checkpoints/molecular_idh/{logistic.joblib, lightgbm.txt, mlp.pt, training_report.json}`
 - `artifacts/molecular_idh_eval/{pooled_cv_results.json, source_holdout_results.json, minority_metrics.json, figures/*.png}`
 
+## Multi-omics fusion (RNA-seq + methylation)
+
+Quickstart:
+
+```bash
+# 1) Prepare strict multi-modal cohort
+uv run prepare-idh-molecular \
+  --modalities rnaseq methylation \
+  --skip-download \
+  --gbm-data-root datasets/TCGA-GBM/tcga_gbm_downloads/data \
+  --lgg-data-root datasets/TCGA-LGG-Molecular/tcga_lgg_downloads/data \
+  --output-dir artifacts/molecular_multimodal
+
+# 2) Train multi-modal molecular models
+uv run train-idh-molecular \
+  --modalities rnaseq methylation \
+  --input-dir artifacts/molecular_multimodal \
+  --top-k 2000 \
+  --seed 42
+
+# 3) Evaluate B3 reports for multi-modal fusion
+MPLCONFIGDIR=/tmp/mplconfig uv run eval-idh-molecular \
+  --modalities rnaseq methylation \
+  --input-dir artifacts/molecular_multimodal \
+  --checkpoint-dir checkpoints/molecular_idh_multimodal \
+  --mode all \
+  --output-dir artifacts/molecular_idh_multimodal_eval \
+  --folds 5 \
+  --seed 42
+```
+
+Latest real run summary (`2026-05-04`):
+
+- Pooled 5-fold CV best AUC: `0.9933 ± 0.0067` (MLP)
+- Source-holdout best AUC: `0.9847` (LGG->GBM, MLP) and `0.9772` (GBM->LGG, Logistic)
+- GBM minority AUPRC best: `0.9425` (LightGBM)
+
 ---
 
 ## 1. 專案結構
