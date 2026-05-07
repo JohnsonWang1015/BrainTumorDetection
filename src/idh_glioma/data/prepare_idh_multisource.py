@@ -46,6 +46,26 @@ ACQUISITION_STAGE_DEFAULTS = {
     "egd": "preop",
 }
 
+DOWNLOAD_RECIPES = {
+    "brats_tcga_lgg": (
+        "TCIA: BraTS-TCGA-LGG Pre-operative collection. Download via TCIA NBIA "
+        "Data Retriever or aspera. See docs/MULTISOURCE_IDH_DOWNLOADS.md."
+    ),
+    "tcga_gbm": (
+        "TCIA: BraTS-TCGA-GBM Pre-operative collection (imaging only — the local "
+        "datasets/TCGA-GBM/ today contains molecular drops, not imaging). "
+        "See docs/MULTISOURCE_IDH_DOWNLOADS.md."
+    ),
+    "ucsf_pdgm": (
+        "TCIA: UCSF-PDGM. Requires a credentialed-access request approved by "
+        "the data owners before download. See docs/MULTISOURCE_IDH_DOWNLOADS.md."
+    ),
+    "egd": (
+        "Erasmus Glioma Database (XNAT-style release). License terms apply. "
+        "See docs/MULTISOURCE_IDH_DOWNLOADS.md."
+    ),
+}
+
 
 def _canonical_suffix(path: Path) -> str | None:
     stem = path.name.replace(".nii.gz", "")
@@ -369,6 +389,11 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--val-ratio", type=float, default=0.15)
     parser.add_argument("--test-ratio", type=float, default=0.15)
+    parser.add_argument(
+        "--strict",
+        action="store_true",
+        help="Fail with a non-zero exit code if any --include-sources entry is missing locally.",
+    )
     return parser.parse_args()
 
 
@@ -376,12 +401,14 @@ def main() -> None:
     args = parse_args()
     label_map = load_label_map(args.idh_labels)
     all_records: list[dict[str, Any]] = []
-    missing_sources: list[str] = []
+    per_source_counts: dict[str, int] = {}
+    missing_sources: list[tuple[str, Path]] = []
     for source_dataset in args.include_sources:
         try:
             root = infer_source_root(args.dataset_root, source_dataset)
         except FileNotFoundError:
-            missing_sources.append(source_dataset)
+            expected = args.dataset_root / SOURCE_DEFAULTS[source_dataset]
+            missing_sources.append((source_dataset, expected))
             continue
         case_dirs = collect_case_dirs(root)
         records = build_multisource_manifest(
@@ -391,7 +418,34 @@ def main() -> None:
             acquisition_stage=ACQUISITION_STAGE_DEFAULTS[source_dataset],
             label_map=label_map,
         )
+        per_source_counts[source_dataset] = len(records)
         all_records.extend(records)
+
+    empty_sources = [src for src, count in per_source_counts.items() if count == 0]
+
+    if missing_sources or empty_sources:
+        print()
+        print("=" * 72)
+        problem_count = len(missing_sources) + len(empty_sources)
+        print(f"  WARNING: {problem_count} requested source(s) unusable")
+        print("=" * 72)
+        for src, expected in missing_sources:
+            print(f"  - {src}  [missing on disk]")
+            print(f"      expected at: {expected}")
+            print(f"      how to get : {DOWNLOAD_RECIPES.get(src, 'see docs/MULTISOURCE_IDH_DOWNLOADS.md')}")
+        for src in empty_sources:
+            expected = args.dataset_root / SOURCE_DEFAULTS[src]
+            print(f"  - {src}  [folder exists but contains 0 case records]")
+            print(f"      scanned at : {expected}")
+            print(f"      likely cause: case dirs not in expected layout (e.g. molecular drop, not imaging)")
+            print(f"      how to fix : {DOWNLOAD_RECIPES.get(src, 'see docs/MULTISOURCE_IDH_DOWNLOADS.md')}")
+        print("=" * 72)
+        print()
+        if args.strict:
+            raise SystemExit(
+                f"--strict was set and {problem_count} source(s) are unusable. "
+                "Either download/relocate the missing cohorts or remove them from --include-sources."
+            )
 
     if not all_records:
         raise SystemExit("No source records found. Check dataset roots and selected sources.")
@@ -410,9 +464,11 @@ def main() -> None:
         output_path=args.output,
     )
     print(f"Saved multi-source manifest to {args.output}")
-    print({name: len(records) for name, records in splits.items()})
+    print(f"  per-source records: {per_source_counts}")
+    print(f"  splits: {dict((name, len(records)) for name, records in splits.items())}")
     if missing_sources:
-        print(f"Skipped missing sources: {missing_sources}")
+        skipped = [src for src, _ in missing_sources]
+        print(f"  skipped missing sources: {skipped}  (rerun with --strict to fail instead)")
 
 
 if __name__ == "__main__":
