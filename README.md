@@ -94,9 +94,17 @@ MPLCONFIGDIR=/tmp/mplconfig uv run eval-idh-molecular \
 
 Latest real run summary (`2026-05-04`):
 
-- Pooled 5-fold CV best AUC: `0.9933 ± 0.0067` (MLP)
+- Pooled 5-fold CV best AUC: `0.9933 ± 0.0067` (MLP, early concat)
 - Source-holdout best AUC: `0.9847` (LGG->GBM, MLP) and `0.9772` (GBM->LGG, Logistic)
-- GBM minority AUPRC best: `0.9425` (LightGBM)
+- GBM minority AUPRC best: `0.9502` (**per-modality LightGBM, late fusion via mean of probs**) — beats RNA-seq-only LightGBM (`0.9469`) and early-concat LightGBM (`0.9425`).
+
+Reproduce the late-fusion result:
+
+```bash
+uv run python scripts/exp_late_fusion_idh.py \
+  --input-dir artifacts/molecular_multimodal \
+  --output artifacts/molecular_idh_multimodal_eval/late_fusion_results.json
+```
 
 ---
 
