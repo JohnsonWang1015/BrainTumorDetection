@@ -111,7 +111,11 @@ def main():
         raise ValueError("Test split is empty.")
 
     tf = _build_transforms()
-    test_ds = CacheDataset(data=test_data, transform=tf, cache_rate=1.0, num_workers=args.num_workers)
+    # ``cache_rate=1.0`` with multi-process loaders triggers a MONAI race
+    # condition that occasionally drops channels for list-of-paths LoadImaged
+    # on large cohorts (observed on BraTS 2021 with 188 test cases). Cache
+    # serially to keep the fast path correct.
+    test_ds = CacheDataset(data=test_data, transform=tf, cache_rate=1.0, num_workers=0)
     loader = DataLoader(test_ds, batch_size=1, shuffle=False, num_workers=args.num_workers, pin_memory=device.type == "cuda")
 
     state = torch.load(args.ckpt, map_location=device, weights_only=True)

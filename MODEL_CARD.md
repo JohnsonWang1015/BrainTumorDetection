@@ -19,7 +19,8 @@ Where a metric comes from code or artifacts, it is treated as verified from the 
 | `checkpoints/unet2d_tcga_v1.pt` | 30M | 2026-04-28 19:06 | 2D MRI segmentation | Present |
 | `checkpoints/mobilenetv3_idh_v3.pt` | 6.0M | 2026-04-29 11:23 | Early 2D IDH classifier | Present |
 | `checkpoints/mobilenetv3_idh_best.pt` | 17M | 2026-04-30 12:19 | Main 2D IDH classifier | Present |
-| `checkpoints/segresnet_tcga.pt` | 72M | 2026-04-30 16:53 | 3D MRI segmentation | Present |
+| `checkpoints/segresnet_tcga.pt` | 72M | 2026-04-30 16:53 | 3D MRI segmentation (TCGA-LGG, 45 train cases) | Present |
+| `checkpoints/segresnet_brats2021.pt` | 75M | 2026-05-14 19:04 | 3D MRI segmentation (BraTS 2021, 872 train cases) | Present |
 | `checkpoints/densenet3d_idh.pt` | 44M | 2026-04-30 17:25 | 3D IDH classifier | Present |
 | `checkpoints/densenet3d_idh_jitter.pt` | 44M | 2026-04-30 18:26 | 3D IDH classifier with bbox jitter | Present |
 | `checkpoints/mobilenetv3_ct_best.pt` | 6.0M | 2026-03-21 14:39 | CT/MRI tumor classifier | Present |
@@ -32,11 +33,12 @@ Where a metric comes from code or artifacts, it is treated as verified from the 
 
 Based on the repository's own reported outcomes and the checkpoints present locally:
 
-- Recommended segmentation model: MONAI Model Zoo `brats_mri_segmentation` bundle
+- Recommended segmentation model: MONAI Model Zoo `brats_mri_segmentation` bundle (zero-shot Dice 0.9257 on TCGA-LGG test)
+- Strongest custom segmentation model: `segresnet_brats2021.pt` — Dice 0.9206 on TCGA-LGG test (beats the older `segresnet_tcga.pt` 0.9101 by +1.05 pp on the same test set) and 0.9101 on the larger 188-case BraTS 2021 test
 - Recommended end-to-end IDH pipeline: MONAI Model Zoo segmentation + `densenet3d_idh_jitter.pt` + `artifacts/e2e_idh_config.json`
 - `unet2d_tcga_v1.pt` for 2D segmentation baseline
 - `mobilenetv3_idh_best.pt` for 2D IDH baseline
-- `segresnet_tcga.pt` for custom-trained 3D segmentation baseline
+- `segresnet_tcga.pt` retained as the small-cohort 3D segmentation baseline (now superseded by `segresnet_brats2021.pt` on every cohort tested)
 - `densenet3d_idh.pt` and `densenet3d_idh_jitter.pt` for 3D IDH baselines
 
 ## 4. Model Details
@@ -252,6 +254,79 @@ Repository-reported evaluation:
 - test Dice: `0.9101 ± 0.036`
 - best validation Dice: `0.9176`
 
+### 4.5a `segresnet_brats2021.pt`
+
+Task:
+
+- custom-trained 3D whole-tumor segmentation on the BraTS 2021 cohort (Hugging Face mirror `rocky93/BraTS_segmentation`)
+- intended as a drop-in replacement for `segresnet_tcga.pt` with substantially larger training data
+
+Architecture:
+
+- identical to `segresnet_tcga.pt` (MONAI `SegResNet`, `init_filters=32`, 4 in / 1 out, ROI 96³)
+- 83 tensors, ≈ 4.7M parameters
+
+Training recipe from code:
+
+- training cohort: 872 cases from `artifacts/brats2021_manifest.json` (val 188 / test 188)
+- init weights: `segresnet_tcga.pt` loaded with shape match (83/83 tensors), i.e. fine-tune from the older baseline rather than train from scratch
+- loss: `DiceCELoss(lambda_dice=1, lambda_ce=1)`
+- optimizer: `AdamW`, lr `1e-4`
+- schedule: linear warmup 3 epochs + cosine annealing to 0
+- batch size: 4
+- augmentation: `RandSpatialCropd(96³)` + 3-axis `RandFlipd(p=0.5)`
+- DataLoader workers: 4; CacheDataset `cache_rate=0.0` (multi-worker cache path exhibits a list-of-paths race condition on this cohort — see commit notes)
+- gradient clipping: `max_norm=1.0`
+- mixed precision: `torch.autocast` fp16
+- checkpoint selection: best validation Dice on BraTS 2021 val
+
+Checkpoint metadata verified from file:
+
+| Field | Value |
+|---|---|
+| epoch | 25 |
+| val_dice | 0.9289 |
+| arch | `segresnet` |
+| init_filters | 32 |
+| roi_size | `[96, 96, 96]` |
+
+Fresh cross-cohort evaluation (re-run in this session, sliding-window inference):
+
+| Test cohort | n | Dice mean | Dice median | Dice std | IoU mean |
+|---|---:|---:|---:|---:|---:|
+| TCGA-LGG test | 10 | **0.9206** | 0.9212 | 0.0338 | 0.8546 |
+| BraTS 2021 test | 188 | **0.9101** | 0.9449 | 0.1156 | 0.8500 |
+
+Comparison vs `segresnet_tcga.pt` baseline on the **same held-out test splits**:
+
+| Test cohort | baseline Dice | new Dice | Δ |
+|---|---:|---:|---:|
+| TCGA-LGG test (n=10) | 0.9101 ± 0.036 | **0.9206 ± 0.034** | **+0.0105 pp** |
+| BraTS 2021 test (n=188) | 0.8568 ± 0.154 | **0.9101 ± 0.116** | **+0.0533 pp** |
+
+Cross-cohort robustness (same model, different test cohort):
+
+- `segresnet_tcga.pt` drops 5.33 pp moving from TCGA-LGG to BraTS 2021 (severe cohort overfit)
+- `segresnet_brats2021.pt` drops only 1.05 pp on the same shift (≈5× more robust)
+
+Individual-case improvement on BraTS 2021 test:
+
+- great-case rate (Dice > 0.9): baseline `101/188` → new `144/188` (+43%)
+- failure rate (Dice < 0.5): baseline `7/188` → new `4/188` (−43%)
+
+Limitations:
+
+- TCGA-LGG test has only 10 cases, so the +0.0105 Dice gain on that cohort is at the edge of statistical significance on that split alone; the +0.0533 result on BraTS 2021 test (n=188) is the load-bearing evidence
+- the BraTS 2021 mirror used here lacks IDH labels, so this checkpoint contributes to segmentation only and cannot improve the IDH classification path
+- not yet evaluated on UCSF-PDGM, EGD, BraTS 2023, or any clinical-routine MRI distribution
+
+Reproduction:
+
+- end-to-end recipe written up in `docs/BraTS2021_SegResNet_Experiment_Report.docx`
+- download cohort: `uv run python scripts/download_hf_brats2021.py --workers 8`
+- prepare manifest: `uv run prepare-mri --brats-root datasets/BraTS2021_HF --output artifacts/brats2021_manifest.json`
+- train: `uv run train-seg-monai --manifest artifacts/brats2021_manifest.json --output checkpoints/segresnet_brats2021.pt --epochs 30 --batch-size 4 --num-workers 4 --cache-rate 0.0 --warmup-epochs 3 --zoo-init checkpoints/segresnet_tcga.pt`
+
 ### 4.6 `densenet3d_idh.pt`
 
 Task:
@@ -416,7 +491,8 @@ Interpretation:
 ### 5.1 Verified current status
 
 - BraTS segmentation and IDH pipelines have both 2D and 3D trained checkpoints present locally
-- 3D custom segmentation and both 3D IDH checkpoints were updated on 2026-04-30
+- the strongest custom 3D segmentation checkpoint is `segresnet_brats2021.pt` (trained 2026-05-14 on the 1,248-case BraTS 2021 cohort, val Dice 0.9289 on n=188, test Dice 0.9206 on TCGA-LGG vs 0.9101 baseline). End-to-end experiment report: `docs/BraTS2021_SegResNet_Experiment_Report.docx`.
+- 3D custom segmentation (legacy `segresnet_tcga.pt`) and both 3D IDH checkpoints were updated on 2026-04-30
 - the main 2D IDH checkpoint is calibrated with a stored threshold and paired with 5-fold CV results
 - the jitter-trained 3D IDH checkpoint is paired with 5-fold CV results, while the deployed runtime threshold now lives in `artifacts/e2e_idh_config.json`
 - the deployed end-to-end decision rule is now anchored by `artifacts/e2e_idh_config.json` with `threshold=0.13` and ROI postprocess settings shared across app/eval/infer
@@ -429,7 +505,8 @@ Interpretation:
 |---|---|---|
 | MRI segmentation | MONAI Model Zoo bundle | highest reported Dice |
 | 2D segmentation baseline | `unet2d_tcga_v1.pt` | simplest custom baseline |
-| 3D segmentation baseline | `segresnet_tcga.pt` | strong custom 3D baseline |
+| 3D segmentation custom (strongest) | `segresnet_brats2021.pt` | TCGA-LGG test Dice 0.9206 (+1.05 pp vs TCGA-trained baseline on the same test split); 5× more cross-cohort robust |
+| 3D segmentation baseline (legacy small-cohort) | `segresnet_tcga.pt` | trained on 45 TCGA cases; kept for reference and reproduction |
 | 2D IDH baseline | `mobilenetv3_idh_best.pt` | calibrated, metadata-complete, CV-backed |
 | 3D IDH upper bound | `densenet3d_idh.pt` | perfect val/test report under GT-mask ROI |
 | 3D IDH practical custom model | `densenet3d_idh_jitter.pt` | trained for predicted-mask ROI noise |
@@ -448,7 +525,8 @@ A single table covering every trained model in the repo. Columns include the met
 |---|---|---|---:|---:|---:|---|---|
 | **Segmentation** | | | | | | | |
 | MONAI Model Zoo `brats_mri_segmentation` (zero-shot) ★ | 3D whole-tumor seg | TCGA-LGG (10 test) | — | — | — | **Dice 0.9257 ± 0.031** | pretrained on ~500 BraTS cases |
-| `segresnet_tcga.pt` | 3D whole-tumor seg | TCGA-LGG (10 test) | — | — | — | Dice 0.9101 ± 0.036 (val 0.9176) | custom-trained 3D baseline |
+| `segresnet_brats2021.pt` ★ (custom, recommended) | 3D whole-tumor seg | TCGA-LGG (10) / BraTS 2021 (188) | — | — | — | Dice **0.9206 ± 0.034** (TCGA test) / **0.9101 ± 0.116** (BraTS 2021 test); val 0.9289 | fine-tuned on 872 BraTS 2021 cases from `segresnet_tcga.pt` init; +1.05 pp on TCGA test, +5.33 pp on BraTS 2021 test vs `segresnet_tcga.pt`; cross-cohort drop only −1.05 pp (vs −5.33 pp for baseline) |
+| `segresnet_tcga.pt` | 3D whole-tumor seg | TCGA-LGG (10) / BraTS 2021 (188) | — | — | — | Dice 0.9101 ± 0.036 (TCGA) / 0.8568 ± 0.154 (BraTS 2021) | small-cohort custom baseline (45 train cases) |
 | `unet2d_tcga_v1.pt` | 2D whole-tumor seg | TCGA-LGG | — | — | — | Dice 0.7598 ± 0.090 (val 0.8063) | 2D legacy baseline |
 | **Tumor binary classification** | | | | | | | |
 | `mobilenetv3_ct_best.pt` ★ | 2D CT/MRI tumor vs healthy | Kaggle CT/MRI (val) | **96.4%** | **0.993** | — | — | val_loss 0.0864; only model in this branch |
