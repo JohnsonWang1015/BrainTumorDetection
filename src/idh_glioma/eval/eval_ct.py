@@ -49,6 +49,7 @@ def evaluate(
     ckpt: Path,
     modality: str,
     batch_size: int,
+    num_workers: int,
     output_dir: Path,
     img_size: int,
 ) -> dict[str, float]:
@@ -57,7 +58,13 @@ def evaluate(
     ds = BrainImageDataset(manifest, split="test", modality=modality, img_size=img_size, augment=False)
     if len(ds) == 0:
         raise ValueError("Test split is empty — check manifest path and modality filter.")
-    loader = DataLoader(ds, batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=device.type == "cuda")
+    loader = DataLoader(
+        ds,
+        batch_size=batch_size,
+        shuffle=False,
+        num_workers=num_workers,
+        pin_memory=device.type == "cuda",
+    )
 
     state = torch.load(ckpt, map_location=device, weights_only=True)
     model = build_mobilenetv3_binary(num_input_channels=3).to(device)
@@ -137,6 +144,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--ckpt", type=Path, default=Path("checkpoints/mobilenetv3_ct_best.pt"))
     p.add_argument("--modality", choices=["ct", "mri", "both"], default="both")
     p.add_argument("--batch-size", type=int, default=64)
+    p.add_argument("--num-workers", type=int, default=0)
     p.add_argument("--img-size", type=int, default=224)
     p.add_argument("--output-dir", type=Path, default=Path("outputs"))
     return p.parse_args()
@@ -144,7 +152,15 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    evaluate(args.manifest, args.ckpt, args.modality, args.batch_size, args.output_dir, args.img_size)
+    evaluate(
+        args.manifest,
+        args.ckpt,
+        args.modality,
+        args.batch_size,
+        args.num_workers,
+        args.output_dir,
+        args.img_size,
+    )
 
 
 if __name__ == "__main__":
