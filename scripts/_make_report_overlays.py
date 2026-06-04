@@ -76,6 +76,47 @@ seg_overlay("TCGA-DU-7301", "outputs/batch_unet2d/TCGA-DU-7301_pred_mask.nii.gz"
             "SEGMENTATION FAILURE", "seg_failure.png", "Legacy U-Net 2D")
 
 
+# --- IDH end-to-end montage: success (TN) + false-positive + false-negative ---
+def idh_montage():
+    # Operating threshold 0.13 (val-selected by macro-F1, artifacts/e2e_idh_config.json).
+    # (case_id, e2e pred mask, true label, pred label, P(mutant), tag)
+    items = [
+        ("TCGA-HT-8111", "outputs/e2e_TCGA-HT-8111_pred.nii.gz", 1, 1, 0.202,
+         "SUCCESS (TP)\nMut -> Mut"),
+        ("TCGA-CS-6669", "outputs/e2e_TCGA-CS-6669_pred.nii.gz", 0, 1, 0.138,
+         "FAILURE (FP)\nWT -> Mut"),
+        ("TCGA-DU-8162", "outputs/e2e_TCGA-DU-8162_pred.nii.gz", 0, 1, 0.216,
+         "FAILURE (FP)\nWT -> Mut"),
+    ]
+    fig, axes = plt.subplots(1, 3, figsize=(13.5, 4.8))
+    for ax, (cid, pp, lab, pred, prob, tag) in zip(axes, items):
+        ax.axis("off")
+        rec = cases[cid]
+        flair = load(rec["modalities"]["flair"])
+        gt = load(rec["mask_path"])
+        pmask = load(pp)
+        z = best_slice(gt)
+        img = np.rot90(flair[:, :, z])
+        g = np.rot90(gt[:, :, z] > 0)
+        p = np.rot90(pmask[:, :, z] > 0)
+        ax.imshow(img, cmap="gray")
+        ax.contour(g, colors="lime", linewidths=1.0)
+        if p.any():
+            ax.contour(p, colors="red", linewidths=1.0)
+        color = "green" if lab == pred else "red"
+        ax.set_title(f"{tag}\n{cid}\nP(mut)={prob:.3f}",
+                     color=color, fontsize=10)
+    fig.suptitle("IDH End-to-End (MONAI bundle seg + DenseNet121, threshold 0.13)\n"
+                 "GT (green) vs Pred mask (red)", fontsize=12)
+    fig.tight_layout()
+    fig.savefig(OUT / "idh_e2e_montage.png", dpi=110, bbox_inches="tight")
+    plt.close(fig)
+    print("[idh] E2E montage -> idh_e2e_montage.png")
+
+
+idh_montage()
+
+
 # --- CT/MRI classification montage ---
 ct = [
     ("datasets/Kaggle_multimodal/Dataset/Brain Tumor CT scan Images/Tumor/ct_tumor (917).jpg",

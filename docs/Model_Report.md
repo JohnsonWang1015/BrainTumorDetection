@@ -41,7 +41,7 @@
 | 膠質瘤分割（3D，自訓） | **MONAI SegResNet 3D** | sliding-window + DiceCE，較 2D +0.15 Dice 且 std 減半 |
 | 膠質瘤分割（3D，**生產推薦**） | **MONAI Model Zoo `brats_mri_segmentation`** | 在完整 BraTS（~500 cases）預訓練、zero-shot 即勝過自訓模型 |
 | IDH 分類（2D） | **MobileNetV3-Large** | ROI crop、校準閾值 0.876（Youden's J） |
-| IDH 分類（3D，**生產推薦**） | **MONAI DenseNet121 3D** | GT-mask ROI crop + bbox jitter，閾值 0.0775 |
+| IDH 分類（3D，**生產推薦**） | **MONAI DenseNet121 3D** | GT-mask ROI crop + bbox jitter，閾值 0.13（val macro-F1 選出） |
 | 分子 IDH 分類 | **Logistic / LightGBM / MLP** | pooled-cohort；多體學以 per-modality late fusion |
 | 腫瘤偵測 | **YOLOv8n / YOLO11n / YOLO11s** | 偵測框，資料量為主要瓶頸 |
 
@@ -59,7 +59,7 @@
 | 分割 MONAI Model Zoo bundle（zero-shot） | Dice | **0.926 ± 0.031**（test, WT channel）— 生產推薦 |
 | IDH 分類 MobileNetV3-Large 2D | AUC（case） | 0.875（single-split）；5-fold CV 0.764 ± 0.076 |
 | IDH 分類 DenseNet121 3D（GT-mask ROI） | AUC（case） | 5-fold CV **0.916 ± 0.073**（+0.15 vs 2D） |
-| IDH 端到端（預測遮罩，閾值 0.0775） | Acc / AUC / macroF1 | **0.80** / **0.75** / 0.69 |
+| IDH 端到端（預測遮罩，閾值 0.13，test 10 cases） | Acc / AUC / macroF1 | **0.80** / **0.75** / 0.44 |
 | YOLO 偵測（best） | mAP50 | 0.497（yolo11s） |
 | 分子 IDH（LightGBM, RNA-seq pooled） | AUC | pooled 5-fold CV **0.992 ± 0.009** |
 | 分子 IDH（RNA-seq + methylation 多體學） | AUC | pooled 5-fold CV best **0.993 ± 0.007**（MLP）；GBM 少數類 AUPRC best **0.9502**（per-modality late fusion） |
@@ -95,20 +95,73 @@
 | ❌ 失敗（偽陽性 FP） | `ct_healthy (264).jpg` | Healthy | Tumor | 0.999 | 高信心**誤判**為腫瘤 |
 | ❌ 失敗（偽陰性 FN） | `ct_tumor (291).jpg` | Tumor | Healthy | 0.006 | 高信心**漏掉**腫瘤 |
 
-**失敗模式分析**：錯誤多集中於 CT（健康/腫瘤對比較低）與部分 MRI 腫瘤類型（pituitary / meningioma 訊號偏弱，prob 接近閾值）。偽陽性常出現在帶有明顯亮區或偽影的健康影像。
+**錯誤分布（test 1,443 張，52 張錯誤）**
+
+| 維度 | 切分 | 錯誤數 / 總數 | 錯誤率 |
+|------|------|---------------|--------|
+| 錯誤類型 | 偽陰性 FN（Tumor→Healthy） | **42** / 52 | 81% 的錯誤 |
+| 錯誤類型 | 偽陽性 FP（Healthy→Tumor） | **10** / 52 | 19% 的錯誤 |
+| 模態 | CT scan | 28 / 693 | 4.0% |
+| 模態 | MRI | 24 / 750 | 3.2% |
+
+**失敗模式分析**：
+- **以偽陰性為主**（42/52，81%）——模型傾向把訊號偏弱的腫瘤判成健康。許多漏判的 P(tumor) 極低（如 `ct_tumor (291).jpg` P=0.006、`ct_tumor (191).jpg` P=0.029），屬高信心漏判而非邊界猶豫，反映這些腫瘤在影像上對比確實微弱。
+- **CT 與 MRI 錯誤率相近**（4.0% vs 3.2%）——CT 略高，符合 CT 軟組織對比較弱的物理特性，但差距不大，並非單一模態崩潰。
+- **偽陽性少但信心高**：FP 僅 10 例，常出現在帶明顯亮區或偽影的健康影像（如 `ct_healthy (264).jpg` P=0.999），被誤認為腫瘤強化。
+- **臨床取捨**：以腫瘤偵測而言，FN（漏掉腫瘤）比 FP 風險更高。若部署為篩檢工具，可下調閾值（< 0.5）以提高 recall，代價是增加 FP 與後續複查量。
 
 ### IDH 突變分類（3D 端到端，DenseNet121 + 預測遮罩）
 
-以 BraTS-TCGA-LGG test 10 cases 為例（閾值 0.0775）：
+![IDH end-to-end montage](report_assets/idh_e2e_montage.png)
 
-| 類型 | 案例 | 真實 | 預測 | P(mutant) | 說明 |
-|------|------|------|------|-----------|------|
-| ✅ 成功 | TCGA-CS-4942 | Mut(1) | Mut(1) | 1.000 | 高信心正確 |
-| ✅ 成功 | TCGA-CS-6669 | WT(0) | WT(0) | 0.138 | jitter 訓練成功救回的難案例 |
-| ❌ 失敗（FN） | TCGA-HT-8111 | Mut(1) | WT(0) | 0.202 | 突變漏判 |
-| ❌ 失敗（FP） | TCGA-DU-8162 | WT(0) | Mut(1) | 0.216 | 野生型誤判為突變 |
+> 端到端推論：MONAI bundle 分割 → 以預測遮罩 bbox 裁切 ROI → DenseNet121 IDH 分類。操作閾值 **0.13**（於 val 以 macro-F1 選出，`artifacts/e2e_idh_config.json`）。綠線 = GT 遮罩，紅線 = 預測遮罩。標題綠色 = IDH 判讀正確、紅色 = 錯誤。
 
-> 端到端（含分割誤差傳遞）：Accuracy 0.80、AUC 0.75。多數錯誤的機率落在閾值附近（0.20–0.22），反映 ROI 邊界誤差對 IDH 判讀的敏感性。
+**Test 10 cases 完整結果**（閾值 0.13，依 P(mutant) 由高到低）：
+
+| 案例 | 真實 | P(mutant) | 預測 | seg Dice | 結果 |
+|------|------|-----------|------|----------|------|
+| TCGA-DU-7301 | Mut(1) | 0.423 | Mut(1) | 0.959 | ✅ TP |
+| TCGA-DU-A6S8 | Mut(1) | 0.396 | Mut(1) | 0.879 | ✅ TP |
+| TCGA-FG-7634 | Mut(1) | 0.336 | Mut(1) | 0.952 | ✅ TP |
+| TCGA-DU-7304 | Mut(1) | 0.244 | Mut(1) | 0.883 | ✅ TP |
+| TCGA-DU-8162 | WT(0) | 0.216 | Mut(1) | 0.886 | ❌ FP |
+| TCGA-HT-A61A | Mut(1) | 0.204 | Mut(1) | 0.923 | ✅ TP |
+| TCGA-HT-8111 | Mut(1) | 0.202 | Mut(1) | 0.953 | ✅ TP |
+| TCGA-CS-4944 | Mut(1) | 0.196 | Mut(1) | 0.958 | ✅ TP |
+| TCGA-CS-5393 | Mut(1) | 0.192 | Mut(1) | 0.912 | ✅ TP |
+| TCGA-CS-6669 | WT(0) | 0.138 | Mut(1) | 0.948 | ❌ FP |
+
+> Test 混淆：TP 8、FP 2、TN 0、FN 0 → **Accuracy 0.80、AUC 0.75**、mutant recall 8/8 = **1.00**、WT recall 0/2 = **0.00**。在 0.13 這個高敏感操作點上，10 例的 P(mutant) 全數 > 0.13，故全判 Mut：8 個真突變全中（recall 1.0），但 2 個野生型（DU-8162 P=0.216、CS-6669 P=0.138）被推過閾值成偽陽性。**分割 Dice 仍高（0.88–0.96）卻無法救回 WT**——瓶頸在 IDH 分類頭對 WT 的低特異度，而非分割品質。提高閾值（如 ~0.21）可救回 CS-6669 一例 TN，但同時把 P 較低的真突變推成 FN，整體 accuracy 不升反降，這是小樣本下閾值難以兩全的典型現象。
+
+**Val 10 cases 完整結果**（同一閾值 0.13，依 P(mutant) 由高到低）：
+
+| 案例 | 真實 | P(mutant) | 預測 | seg Dice | 結果 |
+|------|------|-----------|------|----------|------|
+| TCGA-CS-4942 | Mut(1) | 1.000 | Mut(1) | 0.952 | ✅ TP |
+| TCGA-HT-8563 | Mut(1) | 0.666 | Mut(1) | 0.965 | ✅ TP |
+| TCGA-CS-6666 | Mut(1) | 0.552 | Mut(1) | 0.959 | ✅ TP |
+| TCGA-DU-A5TU | Mut(1) | 0.338 | Mut(1) | 0.888 | ✅ TP |
+| TCGA-DU-7306 | Mut(1) | 0.277 | Mut(1) | 0.892 | ✅ TP |
+| TCGA-DU-5872 | Mut(1) | 0.204 | Mut(1) | 0.944 | ✅ TP |
+| TCGA-DU-7302 | Mut(1) | 0.160 | Mut(1) | 0.911 | ✅ TP |
+| TCGA-DU-8168 | Mut(1) | 0.133 | Mut(1) | 0.935 | ✅ TP |
+| TCGA-DU-6404 | WT(0) | 0.124 | WT(0) | 0.960 | ✅ TN |
+| TCGA-CS-6186 | WT(0) | 0.105 | WT(0) | 0.938 | ✅ TN |
+
+> Val 混淆：TP 8、TN 2、FP 0、FN 0 → **Accuracy 1.00、AUC 1.00**（10 例全對；TCGA-CS-4942 高信心 P=1.000）。閾值正是在此 split 上選出的，故 val 完美分離（2 個 WT 的 P 皆 < 0.13）；test 落差到 0.80 反映 65-case 小樣本單一拆分的高變異——以 5-fold CV 衡量更穩健（下表）。
+
+**5-fold 交叉驗證（3D DenseNet121，`scripts/cv_idh_monai.py`）**
+
+| Fold | n_train / n_val | val 類別 (WT/Mut) | raw val AUC | smoothed AUC | best epoch |
+|------|-----------------|-------------------|-------------|--------------|------------|
+| 0 | 51 / 13 | 2 / 11 | 1.000 | 1.000 | 1 |
+| 1 | 51 / 13 | 2 / 11 | 0.818 | 0.864 | 10 |
+| 2 | 51 / 13 | 2 / 11 | 0.727 | 0.818 | 8 |
+| 3 | 51 / 13 | 3 / 10 | 0.900 | 0.900 | 30 |
+| 4 | 52 / 12 | 2 / 10 | 1.000 | 1.000 | 8 |
+| **平均** | | | 0.889 ± 0.106 | **0.916 ± 0.073** | |
+
+> CV 平均 smoothed val AUC **0.916 ± 0.073**，較 2D（0.764）高 +0.15。每折 val 僅 12–13 例（其中 WT 僅 2–3 例），單一錯判即大幅擺動 AUC，這是 ±0.07 變異的來源；smoothed（取訓練後期數個 epoch 的滑動平均）比 raw（±0.106）穩定許多，故以 smoothed 為報告值。
 
 ---
 
@@ -120,6 +173,7 @@
 
 > **TCGA-CS-6669 | Dice = 0.794**（此圖為端到端預測遮罩；該案例在純分割 MONAI 評估中 Dice 0.838）。
 > 綠線 = Ground Truth，紅線 = 預測。兩者輪廓高度吻合，腫瘤主體與邊界皆精確捕捉。
+> ⚠️ 注意：同一案例 CS-6669 **分割成功**（Dice 0.79/0.84）但 **IDH 端到端判讀失敗**（WT 被判成 Mut，P=0.138 > 閾值 0.13，見第 4 節）——印證「分割品質好 ≠ IDH 判讀正確」，下游分類頭才是端到端的瓶頸。
 
 ### ❌ 失敗案例 — Legacy U-Net 2D
 
