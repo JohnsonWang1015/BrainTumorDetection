@@ -257,3 +257,84 @@ def seg_multislice(cid="TCGA-HT-8111", n=5):
 
 
 seg_multislice()
+
+
+# --- Segmentation error decomposition: TP / FN / FP per case (where Dice loss comes from) ---
+def seg_error_decomp(cids=("TCGA-HT-8111", "TCGA-DU-8162", "TCGA-CS-6669")):
+    """Color-code each E2E prediction into TP (correct overlap), FN (missed GT),
+    and FP (over-segmentation) so the figure literally shows where the Dice loss
+    lives — reinforcing that the loss is peripheral FP, not main-body contour error."""
+    from matplotlib.colors import ListedColormap
+    from matplotlib.patches import Patch
+    fig, axes = plt.subplots(1, len(cids), figsize=(4.5 * len(cids), 5.0))
+    if len(cids) == 1:
+        axes = [axes]
+    for ax, cid in zip(axes, cids):
+        ax.axis("off")
+        rec = cases[cid]
+        flair = load(rec["modalities"]["flair"])
+        gt = load(rec["mask_path"])
+        pred = load(f"outputs/e2e_{cid}_pred.nii.gz")
+        z = best_slice(gt)
+        img = np.rot90(flair[:, :, z])
+        g = np.rot90(gt[:, :, z] > 0)
+        p = np.rot90(pred[:, :, z] > 0)
+        lbl = np.zeros(g.shape, dtype=int)          # 0 bg, 1 TP, 2 FN, 3 FP
+        lbl[g & p] = 1
+        lbl[g & ~p] = 2
+        lbl[~g & p] = 3
+        ax.imshow(img, cmap="gray")
+        masked = np.ma.masked_where(lbl == 0, lbl)
+        cmap = ListedColormap(["#ffd400", "#00d400", "#ff2b2b"])  # TP / FN / FP
+        ax.imshow(masked, cmap=cmap, vmin=1, vmax=3, alpha=0.45)
+        tp = int((g & p).sum())
+        fn = int((g & ~p).sum())
+        fp = int((~g & p).sum())
+        ax.set_title(f"{cid}\nDice={dice(gt, pred):.3f}  (slice z={z})\n"
+                     f"TP={tp}  FN={fn}  FP={fp}", fontsize=10)
+    handles = [Patch(color="#ffd400", label="TP (correct overlap)"),
+               Patch(color="#00d400", label="FN (missed GT)"),
+               Patch(color="#ff2b2b", label="FP (over-segmentation)")]
+    fig.legend(handles=handles, loc="lower center", ncol=3, fontsize=10, frameon=False)
+    fig.suptitle("Segmentation error decomposition (MONAI bundle E2E, best tumor slice)\n"
+                 "where the Dice loss comes from: correct overlap vs missed vs extra voxels",
+                 fontsize=12)
+    fig.tight_layout(rect=(0, 0.06, 1, 0.91))
+    fig.savefig(OUT / "seg_error_decomp.png", dpi=110, bbox_inches="tight")
+    plt.close(fig)
+    print("[seg] error decomposition -> seg_error_decomp.png")
+
+
+seg_error_decomp()
+
+
+# --- Cross-modality consistency: same 3D prediction overlaid on all 4 input modalities ---
+def seg_modalities(cid="TCGA-HT-8111"):
+    """Overlay the identical GT/Pred contours on FLAIR / T1 / T1Gd / T2 to show the
+    3D prediction tracks the anatomical tumor boundary, not one modality's intensity."""
+    rec = cases[cid]
+    mods = [("flair", "FLAIR"), ("t1", "T1"), ("t1Gd", "T1Gd"), ("t2", "T2")]
+    gt = load(rec["mask_path"])
+    pred = load(f"outputs/e2e_{cid}_pred.nii.gz")
+    z = best_slice(gt)
+    g = np.rot90(gt[:, :, z] > 0)
+    p = np.rot90(pred[:, :, z] > 0)
+    fig, axes = plt.subplots(1, 4, figsize=(15, 4.4))
+    for ax, (key, name) in zip(axes, mods):
+        ax.axis("off")
+        img = np.rot90(load(rec["modalities"][key])[:, :, z])
+        ax.imshow(img, cmap="gray")
+        ax.contour(g, colors="lime", linewidths=1.0)
+        if p.any():
+            ax.contour(p, colors="red", linewidths=1.0)
+        ax.set_title(name, fontsize=12)
+    fig.suptitle(f"{cid} — one 3D prediction overlaid on all 4 input modalities "
+                 f"(slice z={z}, Dice = {dice(gt, pred):.3f})\nGT (green) vs Pred (red)",
+                 fontsize=12)
+    fig.tight_layout(rect=(0, 0, 1, 0.9))
+    fig.savefig(OUT / "seg_modalities.png", dpi=110, bbox_inches="tight")
+    plt.close(fig)
+    print(f"[seg] cross-modality panel ({cid}) -> seg_modalities.png")
+
+
+seg_modalities()

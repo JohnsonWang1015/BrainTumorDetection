@@ -5,8 +5,8 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 541 nodes · 768 edges · 65 communities detected
-- Extraction: 61% EXTRACTED · 39% INFERRED · 0% AMBIGUOUS · INFERRED: 301 edges (avg confidence: 0.5)
+- 545 nodes · 778 edges · 65 communities detected
+- Extraction: 61% EXTRACTED · 39% INFERRED · 0% AMBIGUOUS · INFERRED: 307 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## God Nodes (most connected - your core abstractions)
@@ -56,28 +56,28 @@ Cohesion: 0.11
 Nodes (11): BraTSSliceClassificationDataset, Tests for IDH classification dataset helpers (ROI crop + balanced sampler).  Run, Manifest entry pointing at fake nifti paths; load_nifti is monkey-patched in the, test_classification_dataset_no_roi_keeps_full_slice(), test_classification_dataset_roi_returns_expected_shape(), _write_synthetic_manifest(), apply_profile(), main() (+3 more)
 
 ### Community 5 - "Community 5"
+Cohesion: 0.24
+Nodes (16): best_slice(), ct_gallery_extended(), dice(), idh_montage(), load(), Generate figures for the model report:   1. Segmentation overlays (FLAIR + GT gr, 8-panel gallery (CT + MRI x TP/TN/FP/FN) with REAL probabilities pulled     from, Row of 3 MONAI-bundle segmentation results (FLAIR + GT green + Pred red). (+8 more)
+
+### Community 6 - "Community 6"
 Cohesion: 0.21
 Nodes (14): build_app(), _build_diagnosis(), _collect_examples(), _fig_to_array(), _get_model(), _gradcam(), main(), _overlay_heatmap() (+6 more)
 
-### Community 6 - "Community 6"
+### Community 7 - "Community 7"
 Cohesion: 0.29
 Nodes (14): _build_feature_matrix(), _evaluate_minority_metrics(), _evaluate_pooled_cv(), _evaluate_source_holdout(), _load_inputs(), main(), _new_model(), _normalize_modalities() (+6 more)
 
-### Community 7 - "Community 7"
+### Community 8 - "Community 8"
 Cohesion: 0.14
 Nodes (0): 
 
-### Community 8 - "Community 8"
+### Community 9 - "Community 9"
 Cohesion: 0.27
 Nodes (13): build_multisource_manifest(), build_payload(), _canonical_suffix(), classify_modalities(), collect_case_dirs(), _infer_date(), infer_source_root(), load_label_map() (+5 more)
 
-### Community 9 - "Community 9"
+### Community 10 - "Community 10"
 Cohesion: 0.22
 Nodes (10): Dataset, _expand_bbox_uniformly(), main(), _make_balanced_sampler(), parse_args(), 3D IDH classifier with MONAI on the TCGA-LGG cohort.  Crops the 4-channel multim, _run_epoch(), _tumor_bbox_3d() (+2 more)
-
-### Community 10 - "Community 10"
-Cohesion: 0.28
-Nodes (12): best_slice(), ct_gallery_extended(), dice(), idh_montage(), load(), Generate figures for the model report:   1. Segmentation overlays (FLAIR + GT gr, 8-panel gallery (CT + MRI x TP/TN/FP/FN) with REAL probabilities pulled     from, Row of 3 MONAI-bundle segmentation results (FLAIR + GT green + Pred red). (+4 more)
 
 ### Community 11 - "Community 11"
 Cohesion: 0.35
@@ -269,11 +269,11 @@ Nodes (0):
 
 ### Community 58 - "Community 58"
 Cohesion: 1.0
-Nodes (1): Training entry points.
+Nodes (0): 
 
 ### Community 59 - "Community 59"
 Cohesion: 1.0
-Nodes (0): 
+Nodes (1): Training entry points.
 
 ### Community 60 - "Community 60"
 Cohesion: 1.0
@@ -296,11 +296,11 @@ Cohesion: 1.0
 Nodes (0): 
 
 ## Knowledge Gaps
-- **45 isolated node(s):** `Unit tests for end-to-end ROI helpers used by the MONAI pipeline.`, `Tests for Phase 2 3D IDH ROI augmentation helpers.`, `Tests for end-to-end calibration config loading.`, `Pick the optimal IDH classification threshold on the val split.  Uses case-level`, `5-fold stratified CV for the 3D MONAI IDH classifier.  Pools every labelled case` (+40 more)
+- **47 isolated node(s):** `Unit tests for end-to-end ROI helpers used by the MONAI pipeline.`, `Tests for Phase 2 3D IDH ROI augmentation helpers.`, `Tests for end-to-end calibration config loading.`, `Pick the optimal IDH classification threshold on the val split.  Uses case-level`, `5-fold stratified CV for the 3D MONAI IDH classifier.  Pools every labelled case` (+42 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **Thin community `Community 58`** (2 nodes): `__init__.py`, `Training entry points.`
+- **Thin community `Community 58`** (2 nodes): `test_manifest_adapters.py`, `test_to_legacy_manifest_record_keeps_training_fields()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 59`** (2 nodes): `test_manifest_adapters.py`, `test_to_legacy_manifest_record_keeps_training_fields()`
+- **Thin community `Community 59`** (2 nodes): `__init__.py`, `Training entry points.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Community 60`** (2 nodes): `test_eval.py`, `test_eval_main_all_modes_writes_outputs()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
