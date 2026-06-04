@@ -88,6 +88,25 @@
 
 > 綠色標題 = 預測正確；紅色標題 = 預測錯誤。閾值 0.5。整體測試集 Accuracy 96.4%（1,443 張中 52 張錯誤）。
 
+**8-case 推論藝廊（CT + MRI 各模態 × TP / TN / FP / FN）**
+
+![CT/MRI 8-case gallery](report_assets/cls_ct_gallery.png)
+
+> 上排為判讀正確（TP / TN），下排為錯誤（FP / FN），兩種模態（CT、MRI）皆涵蓋。**所有 P(tumor) 直接取自 `outputs/eval_ct_predictions.csv`**，即評估當下模型實際輸出，非事後重算。
+>
+> | 面板 | 模態 | 影像 | 真實 | 預測 | P(tumor) | 觀察 |
+> |------|------|------|------|------|----------|------|
+> | TP | CT | `ct_tumor (917)` | Tumor | Tumor | 1.000 | 高信心正確 |
+> | TN | CT | `ct_healthy (955)` | Healthy | Healthy | 0.000 | 健康腦完美排除 |
+> | TP | MRI | `glioma (246)` | Tumor | Tumor | 1.000 | 膠質瘤強化清晰 |
+> | TN | MRI | `mri_healthy (196)` | Healthy | Healthy | 0.000 | 高信心正確 |
+> | FP | CT | `ct_healthy (264)` | Healthy | Tumor | 0.999 | 亮區/偽影誤判為強化 |
+> | FN | CT | `ct_tumor (291)` | Tumor | Healthy | 0.006 | 對比微弱、高信心漏判 |
+> | FP | MRI | `mri_healthy (1005)` | Healthy | Tumor | 0.692 | 唯二 MRI 偽陽性之一，信心偏低（接近閾值） |
+> | FN | MRI | `meningioma (55)` | Tumor | Healthy | 0.000 | 腦膜瘤（非膠質瘤）型態與訓練分布差異大 |
+>
+> 兩個模態的偽陽性數都很少（CT 8、MRI 僅 2），且 MRI 偽陽性信心明顯較低（0.692，貼近 0.5）；偽陰性則多為高信心（P≈0），代表這些腫瘤在影像上對比確實微弱，而非模型猶豫。
+
 | 類型 | 案例 | 真實 | 預測 | P(tumor) | 說明 |
 |------|------|------|------|----------|------|
 | ✅ 成功 | `ct_tumor (917).jpg` | Tumor | Tumor | 1.000 | 高信心正確 |
@@ -174,6 +193,19 @@
 > **TCGA-CS-6669 | Dice = 0.794**（此圖為端到端預測遮罩；該案例在純分割 MONAI 評估中 Dice 0.838）。
 > 綠線 = Ground Truth，紅線 = 預測。兩者輪廓高度吻合，腫瘤主體與邊界皆精確捕捉。
 > ⚠️ 注意：同一案例 CS-6669 **分割成功**（Dice 0.79/0.84）但 **IDH 端到端判讀失敗**（WT 被判成 Mut，P=0.138 > 閾值 0.13，見第 4 節）——印證「分割品質好 ≠ IDH 判讀正確」，下游分類頭才是端到端的瓶頸。
+
+### 多案例推論藝廊 — MONAI Model Zoo bundle（3D，端到端遮罩）
+
+![Segmentation multi-case gallery](report_assets/seg_gallery.png)
+
+> 三個 test 案例的端到端預測遮罩（最佳腫瘤切片）。綠線 = GT、紅線 = 預測，輪廓在腫瘤主體上高度吻合。
+> 圖中 Dice（0.72–0.79）為**端到端管線遮罩**之數值，略低於純分割 MONAI 評估（同案例 0.84–0.96，見下方對照表）——差距來自端到端 resample 與後處理差異，以及周邊切片的零星偽陽性（見下圖）。
+
+### 體積一致性 — 跨切片逐層檢視（TCGA-HT-8111）
+
+![Segmentation multi-slice view](report_assets/seg_multislice.png)
+
+> 沿腫瘤的 5 個等距軸向切片。中段切片（z=98–122）GT 與預測幾乎完全重疊，邊界貼合；首切片（z=86）出現數個**零星偽陽性小斑**（散落紅圈），尾切片（z=135）僅殘餘極小區域。這正解釋了為何同一案例的端到端 Dice（0.723）低於純分割評估（0.955）——腫瘤主體分割優秀，Dice 損失主要來自周邊切片的少量假陽性體素，而非主體輪廓誤差。
 
 ### ❌ 失敗案例 — Legacy U-Net 2D
 

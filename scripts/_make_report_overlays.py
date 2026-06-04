@@ -4,7 +4,9 @@
 """
 from __future__ import annotations
 
+import csv
 import json
+import os
 from pathlib import Path
 
 import matplotlib
@@ -141,3 +143,117 @@ fig.tight_layout()
 fig.savefig(OUT / "cls_ct_montage.png", dpi=110, bbox_inches="tight")
 plt.close(fig)
 print("[cls] CT montage -> cls_ct_montage.png")
+
+
+# --- Extended CT/MRI classification gallery: 2x4 real examples across both modalities ---
+def ct_gallery_extended():
+    """8-panel gallery (CT + MRI x TP/TN/FP/FN) with REAL probabilities pulled
+    from outputs/eval_ct_predictions.csv so the figure matches the eval run exactly."""
+    pred_csv = ROOT / "outputs" / "eval_ct_predictions.csv"
+    by_name = {}
+    if pred_csv.exists():
+        for r in csv.DictReader(open(pred_csv)):
+            by_name[os.path.basename(r["path"])] = (
+                int(r["label"]), int(r["pred"]), float(r["prob_tumor"]))
+
+    D = "datasets/Kaggle_multimodal/Dataset"
+    # (relative path, modality tag, outcome tag) — probs/labels come from the CSV.
+    picks = [
+        (f"{D}/Brain Tumor CT scan Images/Tumor/ct_tumor (917).jpg",   "CT",  "TP"),
+        (f"{D}/Brain Tumor CT scan Images/Healthy/ct_healthy (955).jpg","CT",  "TN"),
+        (f"{D}/Brain Tumor MRI images/Tumor/glioma (246).jpg",          "MRI", "TP"),
+        (f"{D}/Brain Tumor MRI images/Healthy/mri_healthy (196).jpg",   "MRI", "TN"),
+        (f"{D}/Brain Tumor CT scan Images/Healthy/ct_healthy (264).jpg","CT",  "FP"),
+        (f"{D}/Brain Tumor CT scan Images/Tumor/ct_tumor (291).jpg",    "CT",  "FN"),
+        (f"{D}/Brain Tumor MRI images/Healthy/mri_healthy (1005).jpg",  "MRI", "FP"),
+        (f"{D}/Brain Tumor MRI images/Tumor/meningioma (55).jpg",       "MRI", "FN"),
+    ]
+    fig, axes = plt.subplots(2, 4, figsize=(15, 8))
+    for ax, (p, modtag, outcome) in zip(axes.ravel(), picks):
+        ax.axis("off")
+        fp = ROOT / p
+        name = os.path.basename(p)
+        if fp.exists():
+            ax.imshow(mpimg.imread(str(fp)), cmap="gray")
+        lab, pred, prob = by_name.get(name, (None, None, float("nan")))
+        truth = {1: "Tumor", 0: "Healthy"}.get(lab, "?")
+        guess = {1: "Tumor", 0: "Healthy"}.get(pred, "?")
+        ok = (lab == pred)
+        color = "green" if ok else "red"
+        mark = "OK" if ok else "X"
+        ax.set_title(f"[{mark}] {modtag} {outcome}: {truth} -> {guess}\n{name}\nP(tumor)={prob:.3f}",
+                     color=color, fontsize=9)
+    fig.suptitle("CT/MRI Tumor Classification (MobileNetV3-Small) — 8-case inference gallery\n"
+                 "top: correct (TP/TN)   bottom: errors (FP/FN)   |   real probs from eval_ct_predictions.csv",
+                 fontsize=13)
+    fig.tight_layout(rect=(0, 0, 1, 0.95))
+    fig.savefig(OUT / "cls_ct_gallery.png", dpi=110, bbox_inches="tight")
+    plt.close(fig)
+    print("[cls] extended CT/MRI gallery -> cls_ct_gallery.png")
+
+
+ct_gallery_extended()
+
+
+# --- Segmentation gallery: all 3 available E2E predicted masks (MONAI bundle) ---
+def seg_gallery():
+    """Row of 3 MONAI-bundle segmentation results (FLAIR + GT green + Pred red)."""
+    items = ["TCGA-HT-8111", "TCGA-DU-8162", "TCGA-CS-6669"]
+    fig, axes = plt.subplots(1, 3, figsize=(13.5, 4.9))
+    for ax, cid in zip(axes, items):
+        ax.axis("off")
+        rec = cases[cid]
+        flair = load(rec["modalities"]["flair"])
+        gt = load(rec["mask_path"])
+        pred = load(f"outputs/e2e_{cid}_pred.nii.gz")
+        z = best_slice(gt)
+        img = np.rot90(flair[:, :, z])
+        ax.imshow(img, cmap="gray")
+        ax.contour(np.rot90(gt[:, :, z] > 0), colors="lime", linewidths=1.1)
+        ax.contour(np.rot90(pred[:, :, z] > 0), colors="red", linewidths=1.1)
+        ax.set_title(f"{cid}\nDice = {dice(gt, pred):.3f}", fontsize=11)
+    fig.suptitle("MONAI Model Zoo bundle segmentation — multi-case inference\n"
+                 "GT (green) vs Pred (red), best tumor slice", fontsize=13)
+    fig.tight_layout(rect=(0, 0, 1, 0.93))
+    fig.savefig(OUT / "seg_gallery.png", dpi=110, bbox_inches="tight")
+    plt.close(fig)
+    print("[seg] multi-case gallery -> seg_gallery.png")
+
+
+seg_gallery()
+
+
+# --- Multi-slice volumetric view of the best segmentation case ---
+def seg_multislice(cid="TCGA-HT-8111", n=5):
+    """Show n evenly spaced axial slices through the tumor to demonstrate
+    volumetric consistency of the 3D bundle prediction."""
+    rec = cases[cid]
+    flair = load(rec["modalities"]["flair"])
+    gt = load(rec["mask_path"])
+    pred = load(f"outputs/e2e_{cid}_pred.nii.gz")
+    zs = np.where((gt > 0).sum(axis=(0, 1)) > 0)[0]
+    if len(zs) == 0:
+        return
+    sel = np.linspace(zs[0], zs[-1], n).astype(int)
+    fig, axes = plt.subplots(1, n, figsize=(3.0 * n, 3.4))
+    for ax, z in zip(axes, sel):
+        ax.axis("off")
+        img = np.rot90(flair[:, :, z])
+        ax.imshow(img, cmap="gray")
+        g = np.rot90(gt[:, :, z] > 0)
+        p = np.rot90(pred[:, :, z] > 0)
+        if g.any():
+            ax.contour(g, colors="lime", linewidths=1.0)
+        if p.any():
+            ax.contour(p, colors="red", linewidths=1.0)
+        ax.set_title(f"slice z={z}", fontsize=10)
+    fig.suptitle(f"{cid} — volumetric segmentation across tumor slices "
+                 f"(overall Dice = {dice(gt, pred):.3f})\nGT (green) vs Pred (red)",
+                 fontsize=12)
+    fig.tight_layout(rect=(0, 0, 1, 0.9))
+    fig.savefig(OUT / "seg_multislice.png", dpi=110, bbox_inches="tight")
+    plt.close(fig)
+    print(f"[seg] multi-slice view ({cid}) -> seg_multislice.png")
+
+
+seg_multislice()
