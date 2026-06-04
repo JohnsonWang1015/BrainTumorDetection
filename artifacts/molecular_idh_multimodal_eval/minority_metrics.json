@@ -1,0 +1,23 @@
+{
+  "source": "tcga_gbm",
+  "models": {
+    "logistic": {
+      "n_samples": 210,
+      "auprc": 0.9141033430984412,
+      "recall_at_95_specificity": 0.9444444444444444,
+      "brier_score": 0.010395328831248442
+    },
+    "lightgbm": {
+      "n_samples": 210,
+      "auprc": 0.9424918443609582,
+      "recall_at_95_specificity": 0.9444444444444444,
+      "brier_score": 0.009526624342983774
+    },
+    "mlp": {
+      "n_samples": 210,
+      "auprc": 0.9400526112216224,
+      "recall_at_95_specificity": 0.9444444444444444,
+      "brier_score": 0.012775316414635224
+    }
+  }
+}

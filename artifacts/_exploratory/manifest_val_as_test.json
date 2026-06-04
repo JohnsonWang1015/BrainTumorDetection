@@ -1,0 +1,788 @@
+{
+  "train": [
+    {
+      "case_id": "TCGA-DU-7015",
+      "date": "1989.06.18",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7015/TCGA-DU-7015_1989.06.18_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7015/TCGA-DU-7015_1989.06.18_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7015/TCGA-DU-7015_1989.06.18_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7015/TCGA-DU-7015_1989.06.18_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7015/TCGA-DU-7015_1989.06.18_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-HT-7879",
+      "date": "1998.10.09",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7879/TCGA-HT-7879_1998.10.09_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7879/TCGA-HT-7879_1998.10.09_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7879/TCGA-HT-7879_1998.10.09_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7879/TCGA-HT-7879_1998.10.09_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7879/TCGA-HT-7879_1998.10.09_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-5854",
+      "date": "1995.11.04",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5854/TCGA-DU-5854_1995.11.04_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5854/TCGA-DU-5854_1995.11.04_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5854/TCGA-DU-5854_1995.11.04_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5854/TCGA-DU-5854_1995.11.04_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5854/TCGA-DU-5854_1995.11.04_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 0
+    },
+    {
+      "case_id": "TCGA-DU-5855",
+      "date": "1995.12.17",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5855/TCGA-DU-5855_1995.12.17_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5855/TCGA-DU-5855_1995.12.17_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5855/TCGA-DU-5855_1995.12.17_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5855/TCGA-DU-5855_1995.12.17_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5855/TCGA-DU-5855_1995.12.17_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-CS-5397",
+      "date": "2001.03.15",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-5397/TCGA-CS-5397_2001.03.15_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-5397/TCGA-CS-5397_2001.03.15_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-5397/TCGA-CS-5397_2001.03.15_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-5397/TCGA-CS-5397_2001.03.15_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-5397/TCGA-CS-5397_2001.03.15_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 0
+    },
+    {
+      "case_id": "TCGA-FG-5964",
+      "date": "2001.05.11",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-5964/TCGA-FG-5964_2001.05.11_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-5964/TCGA-FG-5964_2001.05.11_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-5964/TCGA-FG-5964_2001.05.11_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-5964/TCGA-FG-5964_2001.05.11_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-5964/TCGA-FG-5964_2001.05.11_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-8167",
+      "date": "1997.04.02",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8167/TCGA-DU-8167_1997.04.02_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8167/TCGA-DU-8167_1997.04.02_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8167/TCGA-DU-8167_1997.04.02_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8167/TCGA-DU-8167_1997.04.02_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8167/TCGA-DU-8167_1997.04.02_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-HT-7686",
+      "date": "1995.06.29",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7686/TCGA-HT-7686_1995.06.29_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7686/TCGA-HT-7686_1995.06.29_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7686/TCGA-HT-7686_1995.06.29_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7686/TCGA-HT-7686_1995.06.29_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7686/TCGA-HT-7686_1995.06.29_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-7018",
+      "date": "1991.12.20",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7018/TCGA-DU-7018_1991.12.20_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7018/TCGA-DU-7018_1991.12.20_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7018/TCGA-DU-7018_1991.12.20_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7018/TCGA-DU-7018_1991.12.20_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7018/TCGA-DU-7018_1991.12.20_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-7008",
+      "date": "1983.07.23",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7008/TCGA-DU-7008_1983.07.23_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7008/TCGA-DU-7008_1983.07.23_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7008/TCGA-DU-7008_1983.07.23_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7008/TCGA-DU-7008_1983.07.23_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7008/TCGA-DU-7008_1983.07.23_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-6542",
+      "date": "1996.05.08",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-6542/TCGA-DU-6542_1996.05.08_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-6542/TCGA-DU-6542_1996.05.08_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-6542/TCGA-DU-6542_1996.05.08_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-6542/TCGA-DU-6542_1996.05.08_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-6542/TCGA-DU-6542_1996.05.08_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-HT-7694",
+      "date": "1995.04.04",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7694/TCGA-HT-7694_1995.04.04_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7694/TCGA-HT-7694_1995.04.04_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7694/TCGA-HT-7694_1995.04.04_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7694/TCGA-HT-7694_1995.04.04_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7694/TCGA-HT-7694_1995.04.04_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-5851",
+      "date": "1995.04.28",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5851/TCGA-DU-5851_1995.04.28_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5851/TCGA-DU-5851_1995.04.28_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5851/TCGA-DU-5851_1995.04.28_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5851/TCGA-DU-5851_1995.04.28_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5851/TCGA-DU-5851_1995.04.28_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-7309",
+      "date": "1996.08.31",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7309/TCGA-DU-7309_1996.08.31_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7309/TCGA-DU-7309_1996.08.31_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7309/TCGA-DU-7309_1996.08.31_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7309/TCGA-DU-7309_1996.08.31_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7309/TCGA-DU-7309_1996.08.31_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-HT-8114",
+      "date": "1998.10.30",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8114/TCGA-HT-8114_1998.10.30_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8114/TCGA-HT-8114_1998.10.30_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8114/TCGA-HT-8114_1998.10.30_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8114/TCGA-HT-8114_1998.10.30_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8114/TCGA-HT-8114_1998.10.30_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-HT-7680",
+      "date": "1997.02.02",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7680/TCGA-HT-7680_1997.02.02_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7680/TCGA-HT-7680_1997.02.02_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7680/TCGA-HT-7680_1997.02.02_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7680/TCGA-HT-7680_1997.02.02_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7680/TCGA-HT-7680_1997.02.02_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 0
+    },
+    {
+      "case_id": "TCGA-DU-A5TR",
+      "date": "1997.07.26",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TR/TCGA-DU-A5TR_1997.07.26_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TR/TCGA-DU-A5TR_1997.07.26_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TR/TCGA-DU-A5TR_1997.07.26_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TR/TCGA-DU-A5TR_1997.07.26_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TR/TCGA-DU-A5TR_1997.07.26_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-A6S7",
+      "date": "1998.05.13",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A6S7/TCGA-DU-A6S7_1998.05.13_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A6S7/TCGA-DU-A6S7_1998.05.13_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A6S7/TCGA-DU-A6S7_1998.05.13_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A6S7/TCGA-DU-A6S7_1998.05.13_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A6S7/TCGA-DU-A6S7_1998.05.13_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-A5TS",
+      "date": "1997.07.26",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TS/TCGA-DU-A5TS_1997.07.26_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TS/TCGA-DU-A5TS_1997.07.26_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TS/TCGA-DU-A5TS_1997.07.26_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TS/TCGA-DU-A5TS_1997.07.26_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TS/TCGA-DU-A5TS_1997.07.26_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-HT-7602",
+      "date": "1995.11.03",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7602/TCGA-HT-7602_1995.11.03_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7602/TCGA-HT-7602_1995.11.03_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7602/TCGA-HT-7602_1995.11.03_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7602/TCGA-HT-7602_1995.11.03_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7602/TCGA-HT-7602_1995.11.03_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-7294",
+      "date": "1989.01.04",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7294/TCGA-DU-7294_1989.01.04_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7294/TCGA-DU-7294_1989.01.04_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7294/TCGA-DU-7294_1989.01.04_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7294/TCGA-DU-7294_1989.01.04_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7294/TCGA-DU-7294_1989.01.04_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-FG-6691",
+      "date": "2002.04.05",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-6691/TCGA-FG-6691_2002.04.05_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-6691/TCGA-FG-6691_2002.04.05_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-6691/TCGA-FG-6691_2002.04.05_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-6691/TCGA-FG-6691_2002.04.05_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-6691/TCGA-FG-6691_2002.04.05_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-A5TW",
+      "date": "1998.02.28",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TW/TCGA-DU-A5TW_1998.02.28_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TW/TCGA-DU-A5TW_1998.02.28_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TW/TCGA-DU-A5TW_1998.02.28_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TW/TCGA-DU-A5TW_1998.02.28_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TW/TCGA-DU-A5TW_1998.02.28_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-HT-7690",
+      "date": "1996.03.12",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7690/TCGA-HT-7690_1996.03.12_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7690/TCGA-HT-7690_1996.03.12_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7690/TCGA-HT-7690_1996.03.12_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7690/TCGA-HT-7690_1996.03.12_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7690/TCGA-HT-7690_1996.03.12_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-FG-A4MT",
+      "date": "2002.02.12",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-A4MT/TCGA-FG-A4MT_2002.02.12_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-A4MT/TCGA-FG-A4MT_2002.02.12_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-A4MT/TCGA-FG-A4MT_2002.02.12_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-A4MT/TCGA-FG-A4MT_2002.02.12_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-A4MT/TCGA-FG-A4MT_2002.02.12_GlistrBoost.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-7299",
+      "date": "1991.04.17",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7299/TCGA-DU-7299_1991.04.17_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7299/TCGA-DU-7299_1991.04.17_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7299/TCGA-DU-7299_1991.04.17_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7299/TCGA-DU-7299_1991.04.17_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7299/TCGA-DU-7299_1991.04.17_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-HT-7884",
+      "date": "1998.09.13",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7884/TCGA-HT-7884_1998.09.13_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7884/TCGA-HT-7884_1998.09.13_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7884/TCGA-HT-7884_1998.09.13_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7884/TCGA-HT-7884_1998.09.13_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7884/TCGA-HT-7884_1998.09.13_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-CS-6665",
+      "date": "2001.08.17",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6665/TCGA-CS-6665_2001.08.17_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6665/TCGA-CS-6665_2001.08.17_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6665/TCGA-CS-6665_2001.08.17_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6665/TCGA-CS-6665_2001.08.17_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6665/TCGA-CS-6665_2001.08.17_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-FG-6689",
+      "date": "2002.03.26",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-6689/TCGA-FG-6689_2002.03.26_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-6689/TCGA-FG-6689_2002.03.26_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-6689/TCGA-FG-6689_2002.03.26_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-6689/TCGA-FG-6689_2002.03.26_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-6689/TCGA-FG-6689_2002.03.26_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-7300",
+      "date": "1991.08.14",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7300/TCGA-DU-7300_1991.08.14_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7300/TCGA-DU-7300_1991.08.14_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7300/TCGA-DU-7300_1991.08.14_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7300/TCGA-DU-7300_1991.08.14_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7300/TCGA-DU-7300_1991.08.14_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-HT-8018",
+      "date": "1997.04.11",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8018/TCGA-HT-8018_1997.04.11_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8018/TCGA-HT-8018_1997.04.11_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8018/TCGA-HT-8018_1997.04.11_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8018/TCGA-HT-8018_1997.04.11_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8018/TCGA-HT-8018_1997.04.11_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-CS-5396",
+      "date": "2001.03.02",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-5396/TCGA-CS-5396_2001.03.02_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-5396/TCGA-CS-5396_2001.03.02_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-5396/TCGA-CS-5396_2001.03.02_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-5396/TCGA-CS-5396_2001.03.02_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-5396/TCGA-CS-5396_2001.03.02_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-A5TY",
+      "date": "1997.07.09",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TY/TCGA-DU-A5TY_1997.07.09_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TY/TCGA-DU-A5TY_1997.07.09_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TY/TCGA-DU-A5TY_1997.07.09_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TY/TCGA-DU-A5TY_1997.07.09_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TY/TCGA-DU-A5TY_1997.07.09_GlistrBoost.nii.gz",
+      "idh_label": 0
+    },
+    {
+      "case_id": "TCGA-DU-7019",
+      "date": "1994.09.08",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7019/TCGA-DU-7019_1994.09.08_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7019/TCGA-DU-7019_1994.09.08_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7019/TCGA-DU-7019_1994.09.08_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7019/TCGA-DU-7019_1994.09.08_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7019/TCGA-DU-7019_1994.09.08_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-CS-6188",
+      "date": "2001.08.12",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6188/TCGA-CS-6188_2001.08.12_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6188/TCGA-CS-6188_2001.08.12_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6188/TCGA-CS-6188_2001.08.12_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6188/TCGA-CS-6188_2001.08.12_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6188/TCGA-CS-6188_2001.08.12_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 0
+    },
+    {
+      "case_id": "TCGA-DU-8166",
+      "date": "1997.03.22",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8166/TCGA-DU-8166_1997.03.22_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8166/TCGA-DU-8166_1997.03.22_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8166/TCGA-DU-8166_1997.03.22_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8166/TCGA-DU-8166_1997.03.22_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8166/TCGA-DU-8166_1997.03.22_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-5874",
+      "date": "1995.05.10",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5874/TCGA-DU-5874_1995.05.10_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5874/TCGA-DU-5874_1995.05.10_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5874/TCGA-DU-5874_1995.05.10_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5874/TCGA-DU-5874_1995.05.10_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5874/TCGA-DU-5874_1995.05.10_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-7298",
+      "date": "1991.03.24",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7298/TCGA-DU-7298_1991.03.24_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7298/TCGA-DU-7298_1991.03.24_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7298/TCGA-DU-7298_1991.03.24_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7298/TCGA-DU-7298_1991.03.24_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7298/TCGA-DU-7298_1991.03.24_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-CS-6668",
+      "date": "2001.10.25",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6668/TCGA-CS-6668_2001.10.25_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6668/TCGA-CS-6668_2001.10.25_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6668/TCGA-CS-6668_2001.10.25_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6668/TCGA-CS-6668_2001.10.25_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6668/TCGA-CS-6668_2001.10.25_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-8164",
+      "date": "1997.01.11",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8164/TCGA-DU-8164_1997.01.11_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8164/TCGA-DU-8164_1997.01.11_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8164/TCGA-DU-8164_1997.01.11_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8164/TCGA-DU-8164_1997.01.11_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8164/TCGA-DU-8164_1997.01.11_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-A5TT",
+      "date": "1998.03.18",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TT/TCGA-DU-A5TT_1998.03.18_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TT/TCGA-DU-A5TT_1998.03.18_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TT/TCGA-DU-A5TT_1998.03.18_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TT/TCGA-DU-A5TT_1998.03.18_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TT/TCGA-DU-A5TT_1998.03.18_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 0
+    },
+    {
+      "case_id": "TCGA-HT-7473",
+      "date": "1997.08.26",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7473/TCGA-HT-7473_1997.08.26_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7473/TCGA-HT-7473_1997.08.26_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7473/TCGA-HT-7473_1997.08.26_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7473/TCGA-HT-7473_1997.08.26_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-7473/TCGA-HT-7473_1997.08.26_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-7010",
+      "date": "1986.03.07",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7010/TCGA-DU-7010_1986.03.07_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7010/TCGA-DU-7010_1986.03.07_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7010/TCGA-DU-7010_1986.03.07_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7010/TCGA-DU-7010_1986.03.07_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7010/TCGA-DU-7010_1986.03.07_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-FG-6692",
+      "date": "2002.06.06",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-6692/TCGA-FG-6692_2002.06.06_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-6692/TCGA-FG-6692_2002.06.06_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-6692/TCGA-FG-6692_2002.06.06_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-6692/TCGA-FG-6692_2002.06.06_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-FG-6692/TCGA-FG-6692_2002.06.06_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 0
+    },
+    {
+      "case_id": "TCGA-DU-7014",
+      "date": "1986.06.18",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7014/TCGA-DU-7014_1986.06.18_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7014/TCGA-DU-7014_1986.06.18_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7014/TCGA-DU-7014_1986.06.18_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7014/TCGA-DU-7014_1986.06.18_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7014/TCGA-DU-7014_1986.06.18_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": null
+    }
+  ],
+  "val": [
+    {
+      "case_id": "TCGA-CS-6186",
+      "date": "2000.06.01",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6186/TCGA-CS-6186_2000.06.01_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6186/TCGA-CS-6186_2000.06.01_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6186/TCGA-CS-6186_2000.06.01_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6186/TCGA-CS-6186_2000.06.01_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6186/TCGA-CS-6186_2000.06.01_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 0
+    },
+    {
+      "case_id": "TCGA-DU-8168",
+      "date": "1997.05.03",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8168/TCGA-DU-8168_1997.05.03_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8168/TCGA-DU-8168_1997.05.03_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8168/TCGA-DU-8168_1997.05.03_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8168/TCGA-DU-8168_1997.05.03_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8168/TCGA-DU-8168_1997.05.03_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-HT-8563",
+      "date": "1998.12.09",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8563/TCGA-HT-8563_1998.12.09_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8563/TCGA-HT-8563_1998.12.09_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8563/TCGA-HT-8563_1998.12.09_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8563/TCGA-HT-8563_1998.12.09_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8563/TCGA-HT-8563_1998.12.09_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-5872",
+      "date": "1995.02.23",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5872/TCGA-DU-5872_1995.02.23_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5872/TCGA-DU-5872_1995.02.23_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5872/TCGA-DU-5872_1995.02.23_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5872/TCGA-DU-5872_1995.02.23_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5872/TCGA-DU-5872_1995.02.23_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-A5TU",
+      "date": "1998.03.12",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TU/TCGA-DU-A5TU_1998.03.12_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TU/TCGA-DU-A5TU_1998.03.12_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TU/TCGA-DU-A5TU_1998.03.12_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TU/TCGA-DU-A5TU_1998.03.12_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TU/TCGA-DU-A5TU_1998.03.12_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-7306",
+      "date": "1993.05.12",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7306/TCGA-DU-7306_1993.05.12_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7306/TCGA-DU-7306_1993.05.12_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7306/TCGA-DU-7306_1993.05.12_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7306/TCGA-DU-7306_1993.05.12_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7306/TCGA-DU-7306_1993.05.12_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-CS-6666",
+      "date": "2001.11.09",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6666/TCGA-CS-6666_2001.11.09_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6666/TCGA-CS-6666_2001.11.09_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6666/TCGA-CS-6666_2001.11.09_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6666/TCGA-CS-6666_2001.11.09_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6666/TCGA-CS-6666_2001.11.09_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-7302",
+      "date": "1991.12.03",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7302/TCGA-DU-7302_1991.12.03_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7302/TCGA-DU-7302_1991.12.03_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7302/TCGA-DU-7302_1991.12.03_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7302/TCGA-DU-7302_1991.12.03_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7302/TCGA-DU-7302_1991.12.03_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-6404",
+      "date": "1985.06.29",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-6404/TCGA-DU-6404_1985.06.29_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-6404/TCGA-DU-6404_1985.06.29_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-6404/TCGA-DU-6404_1985.06.29_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-6404/TCGA-DU-6404_1985.06.29_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-6404/TCGA-DU-6404_1985.06.29_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 0
+    },
+    {
+      "case_id": "TCGA-CS-4942",
+      "date": "1997.02.22",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-4942/TCGA-CS-4942_1997.02.22_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-4942/TCGA-CS-4942_1997.02.22_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-4942/TCGA-CS-4942_1997.02.22_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-4942/TCGA-CS-4942_1997.02.22_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-4942/TCGA-CS-4942_1997.02.22_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    }
+  ],
+  "test": [
+    {
+      "case_id": "TCGA-CS-6186",
+      "date": "2000.06.01",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6186/TCGA-CS-6186_2000.06.01_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6186/TCGA-CS-6186_2000.06.01_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6186/TCGA-CS-6186_2000.06.01_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6186/TCGA-CS-6186_2000.06.01_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6186/TCGA-CS-6186_2000.06.01_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 0
+    },
+    {
+      "case_id": "TCGA-DU-8168",
+      "date": "1997.05.03",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8168/TCGA-DU-8168_1997.05.03_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8168/TCGA-DU-8168_1997.05.03_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8168/TCGA-DU-8168_1997.05.03_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8168/TCGA-DU-8168_1997.05.03_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-8168/TCGA-DU-8168_1997.05.03_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-HT-8563",
+      "date": "1998.12.09",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8563/TCGA-HT-8563_1998.12.09_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8563/TCGA-HT-8563_1998.12.09_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8563/TCGA-HT-8563_1998.12.09_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8563/TCGA-HT-8563_1998.12.09_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-HT-8563/TCGA-HT-8563_1998.12.09_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-5872",
+      "date": "1995.02.23",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5872/TCGA-DU-5872_1995.02.23_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5872/TCGA-DU-5872_1995.02.23_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5872/TCGA-DU-5872_1995.02.23_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5872/TCGA-DU-5872_1995.02.23_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-5872/TCGA-DU-5872_1995.02.23_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-A5TU",
+      "date": "1998.03.12",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TU/TCGA-DU-A5TU_1998.03.12_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TU/TCGA-DU-A5TU_1998.03.12_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TU/TCGA-DU-A5TU_1998.03.12_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TU/TCGA-DU-A5TU_1998.03.12_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-A5TU/TCGA-DU-A5TU_1998.03.12_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-7306",
+      "date": "1993.05.12",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7306/TCGA-DU-7306_1993.05.12_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7306/TCGA-DU-7306_1993.05.12_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7306/TCGA-DU-7306_1993.05.12_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7306/TCGA-DU-7306_1993.05.12_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7306/TCGA-DU-7306_1993.05.12_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-CS-6666",
+      "date": "2001.11.09",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6666/TCGA-CS-6666_2001.11.09_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6666/TCGA-CS-6666_2001.11.09_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6666/TCGA-CS-6666_2001.11.09_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6666/TCGA-CS-6666_2001.11.09_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-6666/TCGA-CS-6666_2001.11.09_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-7302",
+      "date": "1991.12.03",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7302/TCGA-DU-7302_1991.12.03_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7302/TCGA-DU-7302_1991.12.03_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7302/TCGA-DU-7302_1991.12.03_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7302/TCGA-DU-7302_1991.12.03_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-7302/TCGA-DU-7302_1991.12.03_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    },
+    {
+      "case_id": "TCGA-DU-6404",
+      "date": "1985.06.29",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-6404/TCGA-DU-6404_1985.06.29_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-6404/TCGA-DU-6404_1985.06.29_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-6404/TCGA-DU-6404_1985.06.29_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-6404/TCGA-DU-6404_1985.06.29_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-DU-6404/TCGA-DU-6404_1985.06.29_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 0
+    },
+    {
+      "case_id": "TCGA-CS-4942",
+      "date": "1997.02.22",
+      "modalities": {
+        "flair": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-4942/TCGA-CS-4942_1997.02.22_flair.nii.gz",
+        "t1": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-4942/TCGA-CS-4942_1997.02.22_t1.nii.gz",
+        "t1Gd": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-4942/TCGA-CS-4942_1997.02.22_t1Gd.nii.gz",
+        "t2": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-4942/TCGA-CS-4942_1997.02.22_t2.nii.gz"
+      },
+      "mask_path": "datasets/BraTS-TCGA-LGG/Pre-operative_TCGA_LGG_NIfTI_and_Segmentations/TCGA-CS-4942/TCGA-CS-4942_1997.02.22_GlistrBoost_ManuallyCorrected.nii.gz",
+      "idh_label": 1
+    }
+  ]
+}

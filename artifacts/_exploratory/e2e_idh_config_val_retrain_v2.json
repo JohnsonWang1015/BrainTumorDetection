@@ -1,0 +1,21 @@
+{
+  "keep_largest": true,
+  "dilate_iters": 0,
+  "base_margin": 4,
+  "view_margins": [
+    0
+  ],
+  "aggregation": "mean",
+  "threshold": 0.2099999999999999,
+  "threshold_objective": "macro_f1",
+  "macro_f1": 0.8666666666666667,
+  "accuracy": 0.9,
+  "wt_recall": 1.0,
+  "mutant_recall": 0.875,
+  "auc": 0.9375,
+  "threshold_split": "val",
+  "num_valid_cases": 10,
+  "num_total_cases": 10,
+  "cls_ckpt": "checkpoints/densenet3d_idh_retrain_v2.pt",
+  "bundle_ckpt": "checkpoints/monai_zoo/brats_mri_segmentation/models/model.pt"
+}

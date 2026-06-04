@@ -1,0 +1,46 @@
+{
+  "directions": {
+    "train_tcga_lgg_test_tcga_gbm": {
+      "n_train": 509,
+      "n_test": 250,
+      "models": {
+        "logistic": {
+          "auc": 0.9801245210727969,
+          "auprc": 0.951358024691358,
+          "status": "ok"
+        },
+        "lightgbm": {
+          "auc": 0.9650383141762452,
+          "auprc": 0.9290014805915154,
+          "status": "ok"
+        },
+        "mlp": {
+          "auc": 0.9880268199233716,
+          "auprc": 0.9458112874779541,
+          "status": "ok"
+        }
+      }
+    },
+    "train_tcga_gbm_test_tcga_lgg": {
+      "n_train": 250,
+      "n_test": 509,
+      "models": {
+        "logistic": {
+          "auc": 0.972184083396898,
+          "auprc": 0.9890833581050229,
+          "status": "ok"
+        },
+        "lightgbm": {
+          "auc": 0.9555047037884566,
+          "auprc": 0.986789204768113,
+          "status": "ok"
+        },
+        "mlp": {
+          "auc": 0.9539282990083906,
+          "auprc": 0.9845679835772913,
+          "status": "ok"
+        }
+      }
+    }
+  }
+}

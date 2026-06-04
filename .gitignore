@@ -17,6 +17,8 @@ mri_brats_compat_sample/
 *.engine
 *.zip
 *.log
+*.parquet
+*.h5
 
 # Local Claude Code session state (per-project plugin/data/memory dir)
 .claude/

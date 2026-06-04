@@ -1,0 +1,5703 @@
+{
+  "sources": {
+    "tcga_gbm": {
+      "labeled_patients": 371,
+      "expression_patients": 293,
+      "labeled_with_expression": 250,
+      "unlabeled_expression_patients": 43,
+      "label_distribution": {
+        "wildtype": 347,
+        "mutant": 24
+      },
+      "missing_mapping_file_uuids": [],
+      "multiple_primary_aliquots": 90
+    },
+    "tcga_lgg": {
+      "labeled_patients": 509,
+      "expression_patients": 516,
+      "labeled_with_expression": 509,
+      "unlabeled_expression_patients": 7,
+      "label_distribution": {
+        "wildtype": 95,
+        "mutant": 414
+      },
+      "missing_mapping_file_uuids": [],
+      "multiple_primary_aliquots": 14
+    }
+  },
+  "pooled": {
+    "labeled_patients": 880,
+    "expression_patients": 809,
+    "labeled_with_expression": 759,
+    "label_distribution": {
+      "wildtype": 442,
+      "mutant": 438
+    },
+    "num_genes": 60616
+  },
+  "patients": [
+    {
+      "patient_id": "TCGA-02-0003",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "75d67809-394d-4146-8c4a-fd4f558b1df2",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-02-0016",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "bca7eaef-0c0b-4264-bad8-f06bacfe8586",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-02-0026",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "66930c94-a85f-47a2-9829-5eeebd0448f9",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-02-0033",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "6b7ab5c5-620a-4cc3-a6dc-69e4aa8ac3f0",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-02-0038",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "4ce4dd1e-b115-43d4-b680-259cdf8662f4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-02-0039",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "3e4a3dd5-1688-4b56-9b64-55f6addd447e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-02-0047",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "6835ae68-2f18-4239-ac8c-6a8291101e45",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-02-0055",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "cadd9094-eb64-401c-9fd1-43db4cc9360a",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-02-0070",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "43579ef7-e1c1-4c8e-8033-b63eebbf2f5d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-02-2466",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "0f5edda3-5b39-48be-a2c7-6c495b49c249",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-02-2470",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "8a3b0191-d125-40ad-9811-c412b6329ab8",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-02-2483",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "170ed38a-fdce-4c28-a8ed-982d6a21add0",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-02-2485",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "67d9092b-ae85-4687-b092-3012dbfab47a",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-02-2486",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "f241eee0-28ea-4700-ba91-d3d50c2f7e48",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0125",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "354c79ce-261d-4543-8868-3eee6d7455b7",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0129",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "819b706a-5f79-47b3-963c-72e445b7c9b5",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0130",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "b2bfc3b2-5c31-47aa-b008-5b959d0f8b0a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0132",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "50131614-6680-40a9-a26f-b69741146c8c",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0138",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "1c091fe9-f2ca-478c-95be-b924f30c4c75",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0139",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "77b98b70-9bef-4e81-9eac-91467c322d4b",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0140",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "0e274ebf-c78b-4a23-b85f-835674f62a0a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0141",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "9fe6ce79-5cf5-47b8-8379-5e67ab35892e",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0145",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "a4e993e8-cfc0-431e-8f7b-4d58b364061e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0152",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "2e1570c4-b1b2-4e1d-9df8-c3ca40e1dee1",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0154",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "a29643d9-e0e5-4fb3-b7db-090e0a4948a0",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0155",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "456a121c-a767-43a4-8d7a-30e4d8107a62",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0156",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "0995910f-1cc6-47aa-84fd-aba625d4f689",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0157",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "cd358773-9979-40c8-b34f-57afcc820dea",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0158",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "06e61218-fbda-4a4f-a9ec-16ccf5255ded",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0162",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "87ce045c-22b9-4f8d-909d-ae1878e07e70",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0166",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "b7a15790-9999-4fd2-b327-9584e1445c1f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0167",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "4006124f-a213-4d56-843f-0764b5f4a89b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0168",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "a04f2c22-87db-420d-b673-33fd9e48c89e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0169",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "9e81bb0c-30cc-4bb5-960a-80fa862a6822",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0171",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "2bdfdcec-cb7d-4e83-9257-f2c851a6a469",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0174",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "abd6fd67-0b35-4405-a835-da1d56fa64a5",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0176",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "2993bb8a-03d8-460e-a317-861563827d9c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0178",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "614ea667-8b70-4b0b-bb7c-a5c5b30490fc",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0184",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "60da8783-0760-4366-8647-f3284195592f",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0185",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "43fd871e-74dc-4b9a-9101-e836c3f67b9a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0187",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "22f5836e-3ed4-45e7-94a2-dfafd689ac05",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0190",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "27ee0eba-2f11-447b-a153-c8dc679d5fc6",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0192",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "2d10fd52-8ff4-4f78-a674-6388d34f3e12",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0195",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "319a6f57-afe8-40b8-aa8c-194b68adbcaa",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0197",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "30375ae3-f85f-4721-bef4-3094fe8bf38a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0208",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "f72906ff-3f23-431d-a528-31254705f78c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0210",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "4b4d9eb1-5ceb-49e5-8ff2-d24ab8d60356",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0211",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "54bde4b3-b158-4836-a593-68b414076832",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0214",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "e6ee7bbd-f3c8-46da-a7b2-f5d801408888",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0216",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "e588111a-5276-4b7c-b3f6-86d1e84ff3d5",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0219",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "4268518f-c025-4f8f-8d28-a23372797625",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0221",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "d8b840c7-e6cd-4cf9-824f-131fb18bf3b4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0238",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "090d3905-3ea0-43a6-b802-192255146583",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0644",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "03fc636b-9e3d-42ea-88cf-8081539a9859",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0645",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "3524be8c-d600-492a-b912-f712ad158a8e",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0646",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "39dc32b6-8c47-4ae9-8c03-8be648d5cbc9",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0648",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "f7ee2427-a1bf-4f0f-b4b1-274b693ed41e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0649",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "c2cd78e5-babb-4f6f-9988-6bab8c2bd217",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0675",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "4bed9101-07f4-4d76-b79f-6eb8de04bd19",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0678",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "ddaed459-ab19-4f75-a1a9-72761287c6f5",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0680",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "64a2ddbe-3614-409a-af16-170a1471db2a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0681",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "c410d37e-e445-4f5f-8937-e6796dd52364",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0686",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "088a7d23-5acc-4db8-8ccb-ca8221b765ac",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0743",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "cae1f29a-9b4e-4dcb-a3c1-b4b662a32907",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0744",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "6f71bc72-6878-478a-98af-da45cfbb4bd1",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0745",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "51eb0c58-e29a-4e05-8b1e-93cbe016c05f",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0747",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "3fef7878-8d16-44c6-8d24-a6de90b66747",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0749",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "4af1f2b3-5b91-4fea-9268-70435ee322f2",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0750",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "4b88ba3b-6b4b-42b4-a64d-d45358cef26d",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0875",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "29326853-4718-4666-a8aa-de5326e25802",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0876",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "1261fa8c-a831-4f06-aca6-9cb96625a32b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0877",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "b7155621-2b01-4524-857a-a1f1ca0a527a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0878",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "38a55896-f00e-418d-bc18-4ca30da378ef",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0879",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "88e8d6b4-b638-4c5f-8286-ab5c193f5339",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0881",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "4350b4e7-6a37-43d8-8eaa-b5f4846e943d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0882",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "6a0df69c-6211-4db9-a278-fc7b2a2bb92c",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-0939",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "e8a86041-dd34-405e-96d5-b413631a0808",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-1084",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "fc338856-23c2-4988-b4a4-ab387055274d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-1086",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "3e56e05a-a920-4bed-a863-8d968ae8909b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-1087",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "9af0ac1c-2106-413b-bd64-c1d13db34c27",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-1800",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "db471ff3-aa48-4e3d-946b-8dfc8c379ad5",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-1801",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "bf06a259-01f7-4487-80ac-b090a16f4ac3",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-1802",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "5b02eedb-7b3b-45b2-9552-74b3828da597",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-1804",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "1e659c79-eb29-4be8-b279-9a825f2cd157",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-1805",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "3561d728-6997-436d-8b40-e2988013e1f3",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-1806",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "80ca584a-28f6-4bd8-b1ec-7c169e9a2817",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-2557",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "278eb29c-4e2d-4ed0-b938-43335a274b9e",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-2558",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "554056ed-3d15-43df-baca-38683f381695",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-2559",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "00cce172-4b2b-4cb5-b6dd-47c9627972af",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-2561",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "55d27295-1e5e-45bf-a4b5-d731f3e538ff",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-2562",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "896c4e8b-9cb3-4b39-8ced-9da68d56757e",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-2563",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "232c3577-fe73-4c74-99c8-51c82a6aca1c",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-2564",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "283abca3-1ff3-4fa8-bf62-fa1b1cc2067b",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-2565",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "8936f86b-336c-4f7e-b5f5-7006c4ac19b7",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-2566",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "9c1d847d-dab7-4226-b140-95a244a22310",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-2567",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "068454cb-7789-4814-80a0-1935c6a08798",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-2569",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "0dfece20-8425-42b1-a50a-fcf81f997351",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-2570",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "be4d40d0-2df8-49c9-8e19-88aa97861776",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-5408",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "09326c4e-9905-444f-aa11-f2944045e455",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-5410",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "90cae234-f47d-4d36-b623-f602c8933228",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-5411",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "77c261f0-384c-4906-a57e-7c3b35c17041",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-5412",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "b4a5675d-b5c7-4b94-a8ca-b97b24cecca3",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-5413",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "0aa2e992-c3ad-4509-8d82-399b0d760565",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-5414",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "0237d4e6-241d-4fb5-a59b-078bd4bd4b2d",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-5415",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "14e6f46e-a34a-41c6-bd22-1f46fd76836b",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-5416",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "072f2d4e-db08-40c2-891a-9199e47fcac3",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-5417",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "b9f22a3d-f54f-40d3-a2d2-7b2788eb4d64",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-5418",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "290757b3-5525-445a-a675-00de0bc54e86",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-5856",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "7189b5ed-8bd7-4cb8-97d1-0b66f829f97c",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-5858",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "2ada884e-1839-4bb0-ba03-7f04085f0a07",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-5859",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "9813657d-da8b-4b27-9815-4b7d7b4bbac4",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-6388",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "d6278bca-8b01-4761-8457-6a67c63c78b1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-6389",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "7fcacc2d-12f1-438b-b70d-615f627f431f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-6390",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "d4649bc7-09d2-4d90-bafd-0bec72429b00",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-6391",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "41ec562e-7d07-4953-9a63-f6dc68696f77",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-6693",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "cd6e4f25-3b32-4fd3-9454-f06b0cf25d32",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-6694",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "90bb68a5-2311-4e19-80d4-35bf447456cd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-6695",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "60913ab3-15e5-4978-8ca8-e1a74f82f9e4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-6697",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "450dbf45-d1f1-4a0f-acc4-1210c1f21d10",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-6698",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "947e7903-a7f6-44c0-a40d-310fdfa5cc76",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-6699",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "5a30c998-2b04-4f65-9427-777b2c609c49",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-6700",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "c91fff43-9a50-4a7c-afb4-3484de935a7e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-A5U0",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "09445310-8c2b-4bf1-b619-bfe8b3f9a5e8",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-A5U1",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "75c3d182-f026-4cfe-be32-a6bf4420ee13",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-A6S0",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "952293c8-b957-43ce-bc2e-c975fb57afa1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-A6S1",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "29669cdf-d335-41ee-8bfa-7fdb854a1fe0",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-A7TK",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "444a2332-9e52-4cf8-94d9-07a8b829633e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-A7TL",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "a7dce4a1-a72c-471e-bce0-92da1948e7d3",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-06-AABW",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "477a4ae1-84c0-49f2-b3b3-4015b8c26f18",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-08-0386",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "72f34773-218d-41e0-93dc-7aae1ed50cee",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0615",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "d2b53768-5501-4b6d-a005-aaaa65131c62",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0616",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "44eeae34-4bf4-47d8-aae4-b8916f80bb42",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0618",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "960d4a78-b91d-46d6-b90f-a1a134ffd751",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0619",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "651cc270-e577-40ba-9c8d-e4c36e5118ca",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0657",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "a866e948-e290-43d5-935b-dac2abbd04e6",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0662",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "ec8b5d60-3513-4a7b-9f91-440ec0516150",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0670",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "1032db62-edd9-4532-ab62-af652f39f0dd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0691",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "145dabfe-a6df-4c9d-a7ac-937e0f9af003",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0692",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "79fe87a6-d02d-445d-ac00-9817974f8189",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0772",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "9d938732-9077-4d77-ba5b-e8354babf909",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0773",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "79b13451-ebba-405d-9557-4dfe88d1b5af",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0775",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "54bbc769-1001-4bdc-991a-e1ef0b969aef",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0778",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "bac4b715-8e3a-4a2b-888e-7eb382f47a5c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0818",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "d863d32c-ed50-4644-9ee1-7464bd79e1e0",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0819",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "92f7ddd7-b0ae-4788-93c1-c2d7f093c92c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0820",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "b3bcadad-8758-4cd4-a1cc-6c0db24d24ba",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0821",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "37657888-bb13-429b-800c-deb8a6bdf27c",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0822",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "0c3a3074-ce20-4faa-ab61-5fd52f0563fe",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0826",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "459bf195-8e11-4b92-835c-95b98886580a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0827",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "a5973818-0553-403f-b1d6-4d3e75b20e94",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0828",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "cf145507-ee07-4a9b-b2d1-87a2b6d90878",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-0829",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "d1961e33-d23b-45eb-a022-1943dbf5c298",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-1089",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "f2d80fcc-cc6e-4335-9fec-36abcd3fc67a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-1092",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "b5b955dc-8bcc-4465-aee2-f302783d9ac8",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-1093",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "cf2e2654-325d-433b-9a56-731a32e16dba",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-1095",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "2e4989d4-fde3-4da7-b656-5e07dcf28b14",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-1597",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "7b8c7e1e-6df9-4b64-9d94-5f16c3dda92a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-1598",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "edf6d70c-dced-441c-8098-d53ae856143e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-1599",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "23bf357b-285b-4ccc-956c-cb502503e556",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-1600",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "fb0dbfdf-9d25-47ea-9fb6-bc9da9a56931",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-3644",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "203ca3d5-b954-4938-8653-c4fdbb60e4f6",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-3646",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "d6e60bb5-179c-4fbe-97b9-5cf849727ad1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-3648",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "afbd1975-263b-404b-a738-886bf25c0223",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-3650",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "53d676ac-d7aa-48b1-8d7b-494ee3dfce2a",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-3651",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "ad9b1842-b8ce-456f-a739-956f1f02bd96",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-3652",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "5c6c31d5-326b-44ea-9c7a-519ac446da3b",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-3653",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "179e130e-fe52-473e-8a5f-35d230458e69",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-5295",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "0d880932-47ab-4b88-b00e-6921d2be5936",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-5299",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "0a67ab18-ab07-4307-9606-1f2e2f089230",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-12-5301",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "e9e8d1d1-1c59-4cd5-9059-740733d094e1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-0736",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "c66cf9f2-a9c2-4b4b-8281-ac1593e87246",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-0781",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "685a7e87-51f7-4da9-9ae1-659b1ff3c249",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-0786",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "c9b30fe5-f8f1-43a9-9c9d-5ec4fd26040d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-0787",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "5deef317-126d-4435-ba6a-f36ba2c17018",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-0789",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "0c6f8fe2-455f-4fa5-8a0f-92ad75c938f5",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-0790",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "689956e8-e5b8-4d66-a83d-9fc0c82fc2c6",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-0812",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "a057f848-fecb-4705-b512-54bea68fc9cb",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-0813",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "fc09d3be-0201-4838-abec-c08e3a568b9d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-0817",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "b7196540-a319-41a0-befd-c363e511ac1d",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-0865",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "717e77de-9276-4ad9-bb49-e333b7bf2df3",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-0866",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "168d5c05-89b0-4c26-95a1-dd2d34d16882",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-0867",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "0da1dde2-3a7d-43a1-81a4-0c9b12efcfa9",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-0871",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "0d0543f2-195a-4ab8-8331-a1b57fc673dc",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-1034",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "7f21d9fd-fd8a-44ec-b01f-93ded2b6babf",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-1037",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "eea85d25-8866-479a-9fc5-6d8fd529e847",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-1396",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "9df853fe-f193-4dd7-a6dc-095262f2e03a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-1401",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "e0e1a2b4-2874-448c-b28e-2c2c8184d7a1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-1402",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "4d804ce4-aa09-4ffb-b2b6-d1e71af42b9c",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-1451",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "4649293d-11cc-4da4-b083-c7647e44fd60",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-1453",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "e8863676-0fff-4787-8545-f783e4b1f21f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-1454",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "bd8b2d58-2b3a-47f5-b020-7b4aca81d3e1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-1455",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "2c4ef6db-ff34-4258-a531-32345845832c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-1795",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "eb7892cc-7f41-4797-a794-84c4f79df3ed",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-1821",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "1c98c99d-80ae-4fcc-9197-d1a2b7d8ac96",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-1823",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "70e189c6-3dc5-47ce-8d74-4aa4d90a2437",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-1825",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "a9671acb-4933-4825-8757-233e9ecf7b4f",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-1827",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "1fbcfcc7-43b6-4335-aeee-90329bddab6e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-1829",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "f3c448ec-974c-433f-a552-f57f64453628",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-2554",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "60d81796-e5cb-4166-ad2e-32ce787268f2",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-2555",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "b9794d24-e3e9-4422-9965-211f4c9c55e9",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-14-4157",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "2bac85df-4900-41cd-a2ae-e33db7abd9d1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-15-0742",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "91f35b8f-8c60-4716-8c90-b52b40ef56b3",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-15-1444",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "3f3cea14-b553-4e0b-a255-a15999e760fe",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-16-0846",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "5839c040-bff3-4c8d-82ee-45d0bc793963",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-16-0849",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "9278a510-405e-4dd0-a083-a368234581ad",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-16-0850",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "0d82cb5e-2e4e-4879-9b7e-b929fb590c0a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-16-1045",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "2f3ed4ce-16b8-447d-9b18-d1e95d21de76",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-16-1056",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "a88ed7cf-0ddf-4040-b542-3510dff18c7d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-16-1063",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "97fa5798-8412-4934-8d55-616cdf251386",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-16-1460",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "cefe943b-5892-4254-a884-bb5414b0194c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-0955",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "e59793f7-ada8-4176-abfd-620635e2fb86",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-0957",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "2458c146-74ef-4c2a-b2b4-1bb6ab5292a9",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-1385",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "6410bbd2-aeb4-4c5e-aa6b-38acac7333ed",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-1386",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "931f8492-0d56-4250-aefb-7b2bca8259da",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-1387",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "82ff78cf-87af-475f-9eae-0d6137734028",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-1388",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "3609a255-f79f-4fbd-85b1-7d054daf2ccb",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-1389",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "2c956eb1-35be-4653-b43b-04df722e82f2",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-1390",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "e676c661-cae3-4755-a90f-e632a3d82850",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-1787",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "1a23f004-dde1-4a0e-8991-0686182e92a5",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-1791",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "876d7b5c-5f1b-46a2-86a0-d9ce88af6b65",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-2619",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "04b7f592-863c-4885-8075-daecac90cf78",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-2620",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "f2eb8d3a-ee6e-4180-921d-0ef8f7d1ead5",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-2624",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "a0bbc7d1-79dd-4f74-b0fb-c56fb6c06db0",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-2625",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "9537cbb7-6018-4894-a091-ab11d50dd9c9",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-2629",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "2f837f98-b8e4-4b61-a6a9-547e6055fa23",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-2631",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "1f3b0d72-84cb-44ba-801b-a8d58baf2849",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-4065",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "61e83633-f517-4616-aae0-71b17b1ea32e",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-4068",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "92c89e9a-6b2f-4861-8aa6-1556d449e024",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-5947",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "bbd69e9d-cc49-4476-83ff-43ed928c7414",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-5952",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "59209c08-84ab-476a-9346-bc7599f21e4e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-5955",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "a429b161-cfac-461b-ac19-08dbb3a9468f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-5956",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "057eaa35-f130-4b26-bbde-9d52edfdb212",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-5958",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "1eb6f6ba-c24e-45ba-aa85-e6ad04484c7a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-5959",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "07c46064-9fb9-4aad-9289-187d156c9d27",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-5960",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "4bc70225-3511-4571-8029-7ac499e60742",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-19-A60I",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "f2a896dc-4074-454f-9fac-8f23ac850b16",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-26-1442",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "a1ec31bd-715d-4589-b7fc-951c79023c33",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-26-5132",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "9930cbcd-1db8-433a-bbe1-2a821edc3000",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-26-5133",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "22085d53-b816-4c33-b1ef-6f199775f39c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-26-5134",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "f93cd112-520d-408d-a15d-3451f2bacdfd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-26-5135",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "bec610b2-9082-429d-8aef-6cbf3bb7a020",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-26-5136",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "1b8cc228-a020-4418-be03-ad409d781728",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-26-5139",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "fb2874e9-62d9-4a8c-9d67-d36b0be0737d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-27-1830",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "56c0c169-5480-4d14-b0d7-bd4214d0e7cf",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-27-1831",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "72183176-d844-452e-8736-303686bac768",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-27-1832",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "9790bcec-796f-4ca9-ab62-b40b69d3a222",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-27-1834",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "9ac00a37-7f08-4c9f-ab77-4019a05c5083",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-27-1835",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "3e599f68-2ba6-4fef-99aa-4b0bdf31e9bb",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-27-1837",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "3a3c6a53-219d-4048-a012-9e9a2594c72d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-27-2519",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "3071ca0c-c031-4fe2-a534-e7de322bc4ae",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-27-2521",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "69531d59-6508-4074-a63a-27b047121681",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-27-2523",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "5d90192a-0271-4169-ba9d-e52cf081a5c3",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-27-2524",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "6f1de6d4-722d-46de-a586-593224079064",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-27-2526",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "d6a91466-993b-48f3-bbbf-aadd628e8e99",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-27-2528",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "5416b72f-7e75-4fab-a0e0-5396b5bf6cbe",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-28-1747",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "20445437-9781-49d6-b55a-afafcc33c459",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-28-1753",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "41e3970d-06d0-442a-b41e-128b6e0e743c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-28-2499",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "e88a253a-4d6b-483c-9e85-692241ff1d19",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-28-2509",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "16b32013-0291-458e-b637-f73ccbaee84f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-28-2510",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "c5edc8d9-bae8-4841-802c-919dc0d4c055",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-28-2513",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "2b542440-46c8-49b4-8657-a01e864b3f80",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-28-2514",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "7a7637d0-110f-4809-a79f-9eead03c762b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-28-5204",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "5a2427b9-3e21-4ae3-bde7-06efcdf2bea3",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-28-5207",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "5de95bee-c987-47a2-a375-5cc5458f22fd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-28-5208",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "21b8a64f-800c-45bc-b7a4-a2e666330549",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-28-5209",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "9c73dcae-262a-4473-a999-3ec148b733ed",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-28-5213",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "155e74da-ebd4-4f87-ac74-7bf9fd74644f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-28-5215",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "006aabaf-a659-436d-baed-f59795f934cf",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-28-5216",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "a586c240-b39c-4674-9276-1fa0a67503c5",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-28-5218",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "39f91c2c-9527-4185-aa04-eb42e7fab7c1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-28-5220",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "d44fbbb6-168a-4454-aa47-7da08a8949b6",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-32-1970",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "69f7dc91-32d1-4359-850f-860aab36e433",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-32-1980",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "6fa64d4a-8a11-4b3e-852c-bf916c82259f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-32-1982",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "6a94fd13-1867-4fc2-aa6d-c0ad48ac4390",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-32-2615",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "31050be4-da9b-4691-9a70-93d1dda4695a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-32-2616",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "5ab9f2d4-e7da-4337-a0e0-24c3a79800c4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-32-2632",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "744c9d5a-ea71-4888-b36b-c1a286715d7b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-32-2634",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "dfbc7136-f7f7-4c2f-93a1-c46b2247cce5",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-32-2638",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "e1f33468-f9c4-4b1a-8cd5-b2c77cc80dc9",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-32-4213",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "7b5011b5-5816-4c25-ad72-31152b70b9a0",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-32-5222",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "20db3a49-ca35-4562-bc96-7e98c381830f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-41-2571",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "f982722f-ae1d-4b7a-b445-0646517acb0f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-41-2572",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "f9fd3da8-5a2d-4f4d-a91c-4ab3f8666a97",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-41-3915",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "617be06c-8001-41ab-be2c-2a4050fe6ccc",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-41-4097",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "3449e073-b0f2-4498-b9db-18e8593ef580",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-41-5651",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "570657de-da5c-4b5a-9b85-7753729722b6",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-76-4925",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "bc8a7421-4529-42de-a66c-f815138fe015",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-76-4926",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "b4abde15-98d3-4e78-9170-6c372de5c0f3",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-76-4927",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "00426c02-8fec-4862-92e6-876a81533b9e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-76-4928",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "3bd5dd10-0de9-495a-a94a-c57ecd63c097",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-76-4929",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "b4881576-f6a5-4ed0-a4a4-227f4bb73d7c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-76-4931",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "81ddd54e-ce35-4a15-ba5c-a58b5cac12ff",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-76-4932",
+      "source": "tcga_gbm",
+      "selected_file_uuid": "2a4e4787-3070-40e4-955e-32d61402a33d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-4938",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "a282f56a-0884-40d2-b099-acf15dead7c7",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-4941",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "20443648-a8c8-41ef-b589-d4a42a288277",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-4942",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "81c11217-7d87-49a6-ae93-3c107b5fc2ec",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-4943",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "bb459bb7-ff32-431d-897e-c1c60bce3a93",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-4944",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ddda9728-45af-4d0b-b6de-0c85e3a93ff8",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-5390",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "146ff077-a728-492d-a33b-b8e4ccaa16f1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-5393",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "5d8b78aa-c6c0-42cd-8ba2-3f39b2a12bbd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-5394",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "40da8335-2b0a-4dca-9580-255bbde86756",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-5395",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f2298168-e5da-464b-9a5f-d1f6a01e4068",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-5396",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7a2cd40f-7835-4323-b454-4e7da6253b5e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-5397",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "0d76075c-fb5f-49fc-aaf0-2dbfd6d1bc64",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-6186",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "97a3cfa9-1504-406d-819c-c75fa4e42c24",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-6188",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7fc3fecc-8b19-415f-b58c-4c344795deb8",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-6290",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "a47a69f0-b18d-4056-9d60-455bc93dacf3",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-6665",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "38657792-ba50-4dfe-8cef-d3c403756e44",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-6666",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "494f195a-c5ba-4a7c-a72b-3f2d33164476",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-6667",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "2a54e344-4f90-4de3-a507-d4667aa07728",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-6668",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "63dd6d04-3055-49d1-b666-3f8ca739edc3",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-6669",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "35bb846d-310e-4750-a13d-f051ee420d4f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-CS-6670",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "8e7557fc-63da-4457-8572-0fcf59b8b428",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-5270",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "2c7ecb00-2262-45c0-bf5e-8ad2c4ca2c8e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-5273",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "e2dad1ec-1a90-4ab5-bb54-9d4fa0c62524",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-5274",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "a065734c-d1d5-410b-8ed3-7f9e144dc90d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-5275",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "24e48951-3bc0-44ff-afb2-a44eac9cf537",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-5276",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "74bb3ac7-66ab-4389-94fd-0d9693c7c3d1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-5277",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ae50e9b3-c2d9-465a-8489-018a53527b14",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-5278",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1479d34c-7226-4f50-a3bb-e646b5dd9a47",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-5279",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "4234539e-d8f7-4408-b6f3-e2f5476e38ff",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-5280",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "d07fba61-ff49-4349-b090-5dd81af96ef6",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-5281",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f549754c-a2b3-4970-aa03-39e5e31f49d8",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A4X9",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "8a7434b9-1690-4026-8084-ebc49a4f813b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A4XA",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "23505fd3-8a7f-40ea-82e7-b5b6f7557857",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A4XB",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "aca54307-630b-400a-b03b-63b055d4c170",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A4XC",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "803a721f-ae8a-4bb3-8b81-495544ea3c4e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A4XD",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "5cee2a08-fe03-4460-8394-1e7ab0ada6bd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A4XE",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "19a294f1-350f-4cbc-b451-5083a25a2beb",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A4XF",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7d1b75d4-d2cc-43d0-95cc-464124c5eefa",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A4XG",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "63085c99-6251-4875-be47-401c6aba4858",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A4XH",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "d6d2876d-9624-4f5f-9a5a-366cbc5889d1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A64L",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "d3944323-90ae-4db4-895c-b8e9dd7cfb40",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A64O",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "03adfb2d-63a4-43fb-87ae-0d174116490e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A64P",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "09ecfabd-fc24-4c01-ae78-890f4f0bbaa6",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A64Q",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "cae5e7a1-9394-4aa6-bad0-6e9fa31e73b7",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A64R",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "3e0184b4-cc2d-4956-96b1-71b4ae79e4d4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A64S",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "0a2571b8-6932-487c-9190-1fbe4e1728d9",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A64U",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c6a93a2c-a832-40b4-a335-f01b6aa22f3c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A64V",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c18e0d24-80d2-4164-b456-46350af32cc0",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A64W",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "e31db1ec-c949-488a-a44c-3b75d867a77d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A64X",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f7f9b098-6176-4c94-9684-605c51af16ba",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A75K",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c6152857-4bda-4a48-abdc-346b5752ba0e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A75L",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ab2205b2-a9aa-451c-8f52-ba9e00722d62",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A75M",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "8723c7c0-1c79-45f5-ab15-d4a54a58440c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A75O",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "03622878-db1a-45b0-a6ac-ad5389afd3fd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DB-A75P",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "4759bd5b-043d-4348-943c-39fe8434941c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DH-5140",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "2eecdfac-0657-4e12-8312-56f8c59ac698",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DH-5141",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1f5ce994-2dc1-4924-89f9-f6e92e78d5d4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DH-5142",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f791d60d-2873-4fa6-a777-c525b04dba40",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DH-5143",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "88021d16-b553-4543-8e2b-e693c01a277d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DH-5144",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "4eaa3447-5f01-4986-873c-31524224d454",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DH-A669",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "656075d1-1c58-411e-a8a5-54bac666293d",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DH-A66B",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "6cd83368-4978-4ef4-a1b8-f2d8f9cf9d7e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DH-A66D",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "2b17dbd1-12e0-4494-a62e-dd2b28160a3c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DH-A66F",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "79f28022-1bbf-4a4a-bca1-f3e3b51442c6",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DH-A66G",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "0a654803-712b-4cb7-81fb-8d926a77e75a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DH-A7UR",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "4bc5e73d-719a-46a1-9453-9d3ba02598fb",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DH-A7US",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ced38b35-e7cd-49de-be9e-ba150ebe972d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DH-A7UT",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "5033a52a-3748-41cb-9783-9b69e91004fb",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DH-A7UU",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "d529459b-b78c-4651-902f-8daa6f1415e1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DH-A7UV",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "37b6f784-ef0b-4f74-b93f-20b12a6959c5",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-5847",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1627ea47-3fa0-405b-970d-bfb1cae72ece",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-5849",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ab40f4b4-3eab-484e-bef3-7fa916a9cb9f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-5851",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "6316a950-ba08-4f1d-bbb7-b67329acf87c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-5852",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7b089561-d449-4b86-bff0-6aa5eed1c8de",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-5853",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "9512ac3b-38d0-41fd-b3a9-a6a9f13cbb54",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-5854",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c487a484-4f21-4eff-b61f-c9294aec5d72",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-5855",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "9066b51d-b57f-484b-95ef-74f4a7a6880a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-5870",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "2c6f1855-541b-4761-8f27-836d2ee0223a",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-5871",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "6a45f231-e207-4e03-8951-ee12f22364f3",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-5872",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "73d1e125-5a76-4975-803d-eb99413e3503",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-5874",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "2c75e8fe-f58a-4cea-bd83-20fb0374a128",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6392",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "a635eeb0-963b-45b4-8929-f0f1f4dc0142",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6393",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "02fa930a-9947-49e2-9d77-95fea53ba469",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6394",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "d7c0a5c7-36ab-45e8-b8e9-78d231de48aa",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6395",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "af44aa49-f28e-4a03-bc22-9f99aef5b210",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6396",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "158153ce-a7f7-4e5f-b83a-1cfcf9a0b47a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6397",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "032b52ae-de5f-4f4c-989f-cd28cce9a400",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6399",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "6d0c91ea-55dd-4c1c-b7b0-503957001490",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6400",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "b32639d9-5855-415b-abbd-86f94b9b1832",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6401",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7f4c77cb-a49e-408f-a649-d5f333042325",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6402",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "fe95e3cf-1ace-4b4c-bde4-fb3904476d1f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6403",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ac7e9e0c-1eea-4ac7-9da6-bea4036a17f3",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6404",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "2102681e-f055-40cf-944a-9dcc08ca4485",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6405",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "aa01cdee-0c68-434b-a19f-314fc2f7b962",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6406",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "8653684f-c022-4acf-92ac-62759dc4a99f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6407",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "3e4fa9b3-c02d-4237-b503-1c3e87377e17",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6408",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "8e5f650e-c9d0-4cfb-aaf8-738b589e49c7",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6410",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "598640a3-cc0d-433c-afba-639ed42e3d13",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-6542",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "3491bc61-f79b-4fcf-93c8-577fb6cb7971",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7006",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "9910b4c2-f121-446b-9364-c101871d713b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7007",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c5cbbd7b-a31b-4db7-a71b-ffb1140d7599",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7008",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "b679ed5e-e8a8-44fc-af8e-9730fed91838",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7009",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "bcf37fc6-ef72-4fc0-9567-c731400ec6f7",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7010",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "930f7608-a79b-438c-a910-0b6b6035d73e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7011",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "250c72dd-eeb3-4b45-a26c-cb72ede81bcc",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7012",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "fa5686f5-2931-43e9-853a-53b28ca19e39",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7013",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "32550b81-9853-4cd1-8590-f6c62f38f3e5",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7014",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "cef1ef24-67c2-4035-ace6-00580812befc",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7015",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "dff492f1-7fdc-4ff6-b868-c355cedd6cad",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7018",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "3b913a37-3c9f-40f7-b845-5ce59f1cab92",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7019",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c577dbcb-4a47-479f-94d7-c0973492f1c6",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7290",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c270cc65-75b4-4cc1-8537-86504e8b7215",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7292",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "6050fca2-bb31-4c3d-8c37-f9c42e59e29a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7294",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "d55de9b7-8baf-4628-9c2f-00c53f2d80be",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7298",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1aa0340b-6dfd-4365-8135-a894debc723d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7299",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "55323d9f-ddce-41a3-a577-72032c7261e5",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7300",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "b7eb335b-ec56-4e27-894d-6015b1481c6e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7301",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "8a01f93c-19f3-4399-b63a-b0bd2d132d6f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7302",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "a3882dd3-e3d2-44ef-ac01-0155653f8c01",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7304",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "0e484714-300e-4825-a40b-e28667339c72",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7306",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "556b67e4-2987-45a0-978f-2ca76a50fab4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-7309",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "b3315c31-3b2a-4053-8c74-35a6e9a9e4b4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-8158",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "5acb5f4b-7569-4c6d-9b05-57f3fe92ef00",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-8161",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "0a2a899a-5dcb-44dd-aab7-5b13001c3e02",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-8162",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ea69f170-b197-4538-a182-54f05d80f0bc",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-8163",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ff3cfce9-61a3-4c0a-808b-eaa13955ca6b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-8164",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "51e56ffc-afc4-4342-89b0-010d3e536ed7",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-8165",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "abf367b5-41fc-42f0-8b08-16f58930e78c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-8166",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7650dbf6-6782-4043-a99a-4e3fe299f03c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-8167",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "fd1fe541-61b7-4556-807c-6ef4d3608008",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-8168",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "e2e15f7f-d848-4d82-a21b-292a98549de7",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A5TP",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "5ac83dd9-263c-4510-a1b2-96a49fe91625",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A5TR",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "eb1f3e1c-e307-4f4a-9b3e-5d1462d782aa",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A5TS",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f00aa8f3-6acb-49bb-ae65-bfc0008fa52e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A5TT",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "56832d95-02a4-4d80-94f3-eb51157adbd1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A5TU",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "4b5a3053-b06d-4b3a-9460-54bd39453502",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A5TW",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "625c7f57-de1e-45ad-959a-2995973761bc",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A5TY",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "fed31248-bed3-4c9f-a2cc-afd2860df510",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A6S2",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "cf8a56c9-fd42-4f5e-b9bb-b25896ce9a5f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A6S3",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "e67af2ff-1da7-4f26-88f0-6cba812ff306",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A6S6",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1a519c62-8e59-4004-8250-a860e6c53f4e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A6S7",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "67bec45d-ed1e-41c5-9c61-4d7fb1592450",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A6S8",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "4970fef6-b0d5-4a5a-975f-170b970c2c48",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A76K",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "9173ab2e-758c-446c-9b0c-435265cf8462",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A76L",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "6c325ebc-d594-4b0f-af95-7b72f4292744",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A76O",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "73a770c4-bb92-44f5-b3c1-cc9a60536a6b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A76R",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f89451d9-6170-442f-8f51-8c7cb5277d7d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A7T6",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "bb0413fb-ec3e-46bc-98ce-c27d59073fda",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A7T8",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "cbc74c15-3a01-4eca-8a35-4d3b0d0ccab4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A7TA",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "69cb65ea-67fc-4d62-9b16-6c6901cf0761",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A7TB",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "8fcc58b7-834f-43df-b0a5-375e59dc3bed",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A7TC",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "53061e36-95a1-48a3-94dd-0cb6cee4caea",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A7TD",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ffaca8b3-a2d7-42dc-9d42-920a38fe2147",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A7TG",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "837fbf69-20e7-4395-96ce-c67cd7b294b0",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A7TI",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7fe2d652-2dc5-4ac0-87d8-94fe389b8be0",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-DU-A7TJ",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "e2508712-3024-4a83-a095-c926d5df7721",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-5302",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "157da8a2-76e1-4b4c-8015-97b2240a68a9",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-5303",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "6a636161-3e75-406d-abff-1279948cab86",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-5304",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "44626f2e-12ab-445d-bcb8-612d51fae0cf",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-5305",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "aee6c864-2f94-4bca-a816-d85963b67b1b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-5307",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ba48abc9-c26f-4251-8811-0accc26cc251",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-5311",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "2e09b29e-2181-42c5-b73f-04e2b3b7c4a0",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-5318",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "3f79a944-6621-4820-b93f-ae791bc07917",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-5319",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "94ed30cb-750d-4053-8a68-86159fbc97ac",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-5322",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "b8c20797-44bb-4242-9a57-5f13cf6aef67",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7YD",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "9682e769-c86f-4250-819b-f9c0b267f292",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7YE",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "5cc420bf-ffe7-4f28-8395-4fc01df8efe9",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7YH",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "6d9588ee-b1ab-4343-aa5a-f25676c3682c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7YI",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "68d60af3-d62d-4f70-a1de-43511f11d880",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7YJ",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "dbfd78dc-8e25-4cab-ac20-fcd0e5fcf421",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7YK",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1a3c2108-067b-4bd4-b3e9-e0a938e5e706",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7YL",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "0c50e19e-8d93-4925-989b-0cf4b189cb05",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7YM",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7a3b74df-2726-42c3-8c9e-1f90bc2fd952",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7YN",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "4840ded1-30a1-4bdf-b4d6-ea1d5f81aa11",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7YO",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "387acfe6-b3d0-487b-bdb3-aed972623735",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7YQ",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "890599ec-249a-4ba6-93fa-6935b7a76d39",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7YS",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f077f07b-cd36-4be7-89dc-bbbc4e095aad",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7YU",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "b65e20ec-c7d5-488f-91b8-5f46ceeff8f0",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7YV",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "4d73cbe9-34c3-47e8-a808-206b60cb78fa",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7YW",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "d3a5fae3-7ac9-478d-ac80-5ba3f2af75f6",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7YY",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "cf6e38ad-bf51-4314-8cb0-e50f95aee9ff",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7Z2",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "d20cf786-ccae-4aba-a46b-06355adf7e0a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7Z3",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ac87ca70-c4f5-4ad5-83de-e51bc3db5e59",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7Z4",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "79004a29-facf-444c-82e4-7f2b0444e11e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-E1-A7Z6",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1f1d615b-a488-47b0-84ea-d8d55846ad07",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-EZ-7264",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "0d0e09e2-f8bd-459a-b8a3-a3d3153d613e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-F6-A8O3",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "474a4fe1-6930-4306-a9da-1b96621f1e22",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-F6-A8O4",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "95c405c6-ca3a-402a-8618-f68ff36d0146",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-5962",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "8ec2e880-ca86-498d-a756-89904f9c478c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-5963",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "aada521d-26d3-4372-9ed5-0d316c892428",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-5964",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c98764c8-ffc9-4981-bba5-98226fc3f744",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-5965",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "61e22db8-4196-4d4a-9bd2-4741e35d1687",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-6688",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f3f687a3-9619-4ab9-a5d1-35f31422b472",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-6689",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "2b8002fa-b726-4708-81f3-4835e9e827a8",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-6690",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "d5485df7-7ebc-4610-991e-b91b70a38c3e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-6691",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "38d3dd3f-a75c-4c2c-b6b5-5211766c2639",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-6692",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "55e06fa1-6ad0-4f14-a00f-a8c5b151f4c1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-7634",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "129572ca-ded1-46f8-beb7-ef394008fb5f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-7636",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c8f47778-9fbe-4d10-9e0a-ad0f9191a1a4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-7637",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7db26754-b3ec-42d9-851f-992763dafe95",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-7638",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "3c3e003d-0154-4a02-9fd6-8c8d46462ddd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-7641",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "88e0a449-4b87-4407-be02-88e5244fd4f7",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-7643",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "2f537305-9b56-4665-a6ca-40d6445c17d8",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-8181",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c2adc3f8-6571-42f4-8def-cba1b5cec712",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-8182",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "e6eb8011-81cc-4108-a272-aca860c7bb2d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-8185",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "16012786-0fe7-4c37-8329-385f167af195",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-8186",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "acd4c126-d740-4c6d-83b5-eb3369db6542",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-8187",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "0fef1095-6616-447e-ada3-87035d8aa011",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-8188",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "6db9234e-8f03-48d2-8dcd-cb0c68a801dc",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-8189",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "47eb37d3-46b2-4eff-abd0-0a80205856a8",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-8191",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "68d36a43-d948-45a0-8fc5-3b1fe1bd5cdd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A4MT",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "2aaf76c3-9473-4ed2-93c6-780571f3c818",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A4MU",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "2a435688-85fd-41e6-989b-bcca5fe4c6f1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A4MW",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "a5a1f9e9-1193-47f9-af1c-0afb0ed2e408",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A4MX",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "808ce69b-541c-4fc0-9713-298c10c3afc6",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A4MY",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7b49c69f-9115-4155-a8bc-b5361d9d7145",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A60J",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "be715478-b298-45a0-ba8f-d4f193f4dfe6",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A60K",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "da434ec8-9265-4ae7-8d1a-9a5bf2f1220b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A60L",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "83242421-ffb1-4318-b1b6-e251dfc6cacb",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A6IZ",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "dc944bdf-f066-4603-837d-fba14607a154",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A6J1",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "470c4595-1baa-446e-9163-836bff64d639",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A6J3",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "01adc305-77a7-4bda-8744-e2440d8b141b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A70Y",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "e2a24dbf-30a7-47c5-877a-f5d100cb99a4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A70Z",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "93c5114b-9e42-4409-ade7-ba97dd0801ca",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A710",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "adf8c473-d1f6-4f9b-86b7-bf90c8cf27e5",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A711",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "aeb57860-e81a-4712-a89d-8344c9bb2cc1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A713",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "e8ae248f-fd8c-43eb-b4e4-a2beebde93ac",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A87N",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "68cc3bd0-7207-4526-8cda-1c5af53c5426",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FG-A87Q",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "942ca390-cffc-4d62-afaf-1be68b203edf",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-FN-7833",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "94781f52-8bf3-4376-88f0-2a79d3f2c677",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7467",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "9e519f4d-6578-4617-9f47-09a60f213465",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7468",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7cdc56cf-2e0e-467e-8e96-5b2391309b7f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7469",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "866bb067-d79f-48b2-988d-4b2f278f1b56",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7470",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "fe377618-2fba-4327-88c5-8f27223e0011",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7471",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ab283c8a-593f-47a9-a9ab-be3f941eefa3",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7472",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "34ca630b-6156-4468-b95e-ac2ff035ef96",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7473",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "fcf77250-0aa4-490e-be76-5acdbe89a56b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7474",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "37a710fa-7e94-4bef-8078-9101fe36eada",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7475",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "b6587f62-ba78-4162-bb4d-c61d6c648b5c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7476",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "edf8cd42-b56c-4711-97a0-4d1e07eb8937",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7477",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "fa5c7886-733f-4846-8a9e-2755675b2beb",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7478",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "6e84463c-a825-4f3a-bfee-477bc75585eb",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7479",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "50ac9c1a-dafe-47da-b7fb-24f475e59167",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7480",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "62fecc2b-0647-4f59-9c3f-b449a7516d26",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7481",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "533b33a9-078a-4e54-97cf-9cd0ca386b08",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7482",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "bdefacfb-a31b-43fd-9430-25ae73831a19",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7483",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "4606da14-25cc-46cb-bf61-47d26dd7f2c7",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7485",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "9f69c4b7-2cd3-45ba-b00d-014cd8842744",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7601",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "155b732b-3603-4035-94d4-57a81a23a0d1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7602",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "37384b91-f610-47e2-bdd5-e53804735b17",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7603",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1cf48022-6d8c-412c-804d-52e0e28560ec",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7604",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c685d0cc-424c-4d94-a9cf-94083c53bf31",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7605",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7f6e9b08-8773-4c55-b9ba-e77ad39f3f26",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7606",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "971f68bc-ff85-4c0f-a6df-f7482c779f37",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7607",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c4d9d7ac-b97e-42fd-8b0d-436cf663f33d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7608",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "85d1cb46-f6ab-425b-a115-62d6fc49d1bf",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7609",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "cd5b7d84-e52c-4081-932f-280a299b6c81",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7610",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "8a554929-80f9-4ee5-a7a1-b4236f992709",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7611",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7c571e7e-c394-42a8-9a93-6252f3fea878",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7616",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "45fdd443-97c8-4b1c-955b-7e7e98b7cba1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7620",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "b4f06db1-f648-422d-815e-cc8e1127bdbe",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7676",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "82a87b6b-5675-421b-b012-f8d2a0e3ee42",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7677",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "41ee2106-8de9-46ac-a189-a650ce5c5fdf",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7680",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "a288fb00-99c9-4449-864a-6863340543af",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7681",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "52f1f0dc-344b-4486-985f-eb24e6325fee",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7684",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "19dae81b-4f8a-44d3-a9dc-ef12e0ee9712",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7686",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "42d79bcd-223d-47b8-a4bf-8440533452c1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7687",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "3307a47a-845c-4c0c-8d0e-48b94a374ca0",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7688",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "cf0b5536-779c-45fc-9286-d5eedf81ff5f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7689",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f3d7c049-c6c7-435b-8dad-c9c37af26175",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7690",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "115d0e2f-af7b-427e-a13a-b6635a64d253",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7691",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "60353a97-9450-4d7d-b06a-4eba61df7012",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7692",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "9efc3f2e-19a2-4219-8eb6-de8fc4924262",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7693",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1b9b52fa-0c2a-42b6-8ae3-6afa40f161cd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7694",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "197da8d8-fb90-4d07-9170-0fe7560a5ffa",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7695",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "593d0d14-f328-454c-a124-73c5cd77675f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7854",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ecd72fab-f423-4540-b8db-2bdc158deebb",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7855",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "71107c3c-f403-42a0-9f61-d580e661c1fd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7856",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "690c6ed8-034c-4cd5-8492-ad48d4194b0e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7857",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "53e35c02-1a71-4de2-9ceb-f8c3b3c3a15a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7858",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "108ca883-3ad7-4a56-b92d-dba9cf0c879a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7860",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "77b1c8d4-c019-4bf0-9c34-b3abc0878fcc",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7873",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "eabf6558-3a83-4ef2-a145-655b1d442fb4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7874",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "3eb4fd25-65ee-42a7-aaf1-46c3371b8d59",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7875",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "835d5f3e-8373-44c9-8530-b3494cd836ad",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7877",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "deafc746-7108-4c54-9329-0268316d70dd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7879",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "753e9119-cb36-4fc8-81db-2ad1b0517a1f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7880",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "83cd627b-cf83-4f94-a965-aff6e2e4ebfd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7881",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "a5341597-9a88-4cf0-bc52-f08b349107f1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7882",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "3914e701-be71-4537-aa41-aadca2a9228c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7884",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "9e1f65eb-bd0b-44e3-bd84-da9705c675f6",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-7902",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "2b9d46dd-cef6-46df-8c4e-d135e0fd5740",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8010",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "d932f824-5573-41f5-85e7-b6d7b7abf098",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8011",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "eff6b9f4-a65f-4d09-8197-13d774cae5c4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8012",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ae06a69d-d2b5-4912-9d90-39dd917b03d1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8013",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "0058f38c-d05f-4c60-bcf6-cd8f6ce1c4ff",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8015",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "8c946222-d70e-4c69-8a4f-28a79982fcd9",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8018",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "22e77be6-20d5-4ca1-adcd-bc13ac7eefb8",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8019",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "bc9a5ab1-fb9c-4fc9-949a-34574c15d475",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8104",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1a3ff7f1-f063-4651-89ac-4745c8de0f63",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8105",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "8184059f-1889-41da-8a3b-b1a65c2217f0",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8106",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "dad64609-983e-4201-b16c-1ed9b77864cb",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8107",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "5a7c9588-ee50-48a5-8f66-ce890a21a3e5",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8108",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7d65bae5-77a0-4061-b6c3-ddad0c25b17d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8109",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "fb0d1a45-9afa-40ad-b8d6-051a0e32c7e4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8110",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "32ad2003-1d66-4464-9efd-29b1b4063154",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8111",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "fd56a2b7-128e-4e51-a18f-df0b89ff0b0f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8113",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ea2b0769-ab76-4a82-9552-5a7a1ff85cf1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8114",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "e9b3d05e-b735-47ac-93cb-97be31bac8ee",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8558",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "8ae206f0-70e9-4503-bece-d4dedda72001",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8563",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "42363eec-ca19-444b-9f45-de3d0fd9e848",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-8564",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "620833e1-3bc7-4ff1-a191-0f6f3e821d33",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A4DS",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "cf3a81af-317b-4454-9b7d-b3795a87bdca",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A4DV",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f66d2f11-b3c9-495e-839f-6f364e5b7d69",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A5R5",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "bf2fc9fb-db30-4be8-8934-d395b2019aae",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A5R7",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "645b99ff-42c5-4499-a2a6-a67b9bbf3811",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A5R9",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c42b5736-d339-4b29-9e0e-ce239a9f89dd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A5RA",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "4887f226-5521-49bd-a627-0974885daf7c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A5RB",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "454affa6-2a1e-4f77-a850-94822c7a5eb8",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A5RC",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "5aa563d5-135f-413f-a4c8-2431e8f8cfa1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A614",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "a3492937-5910-4d94-9f0b-f532ff603c62",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A615",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f9e66753-bfd5-491f-9daf-d6f2aff71021",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A616",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "8cc5ac6c-040f-4472-acd5-2bbd35537f56",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A617",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "74a531ff-e3be-4ef7-8eff-68d3047fe277",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A618",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "5d93683d-bf7b-4279-aab3-561834bc0767",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A619",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "0fc1b0dd-0211-4a5c-a4dc-b73b3754dfb7",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A61A",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "dbb576f4-052b-4b34-8c35-37413826d8cb",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A61B",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1ad5ae98-b0b6-4601-b835-d2c2babcd6da",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A61C",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "4f293f23-1418-459d-8749-e0e7454f638d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A74H",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "03af23fe-d4d3-4c79-9e12-22283c64ce0f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A74J",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "0cd3bd7b-6496-489d-aeca-62348e101b25",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A74K",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "a58f3356-ee00-4705-b583-a68e683f6e8a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A74L",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "aeb0f385-fcd0-4ae1-8c2d-0a67f3d8b0c5",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HT-A74O",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "3fb67f35-aa15-4e36-93b0-cc872266ff04",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HW-7486",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "a592fdde-b880-4901-9a35-cbea7326e2dd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HW-7487",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "15551add-2d6a-4a0b-ab47-5bc45859e474",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HW-7489",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "584b0549-8773-4e6d-bbeb-4e3272c29954",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HW-7490",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "6e158bd7-d736-48fa-8aca-f29c9f5c4d7c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HW-7491",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "e2e6f197-b31d-4f93-9e97-b1b002762a3b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HW-7493",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "e9b23266-33aa-47c2-90ed-7545736c45cf",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HW-7495",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f463b53d-1634-4be0-a940-ec135ea41df7",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HW-8319",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "20235747-5ae6-48b0-b74a-e06f1b153718",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HW-8320",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "e5af84eb-219c-41f3-94a4-bc81a0e791ab",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HW-8321",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "e91a15d8-0cb7-4fb1-bd8e-a8192e92526c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HW-8322",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "95875cb2-a046-49f0-a545-92fba82bd141",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HW-A5KJ",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "b7505999-5630-4683-8066-ec880aa863be",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HW-A5KK",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c54ab8eb-ce2f-4bd6-93bf-8e7ce33e4f6b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HW-A5KL",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "e5bd5161-78d4-4ffa-a45c-95d2d7963af9",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-HW-A5KM",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "fc2e96aa-b226-4393-adb1-5b3a0a4365d8",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-IK-7675",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "106669c1-e20c-4ed8-863c-3ada529f58a4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-IK-8125",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "e90a37ef-cf17-4a5a-b08c-c6efb1f8b287",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-KT-A74X",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "00362664-cb13-4998-a26c-618dba69ea00",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-KT-A7W1",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "e96ccf15-7661-4a6d-9226-a7127887e3cb",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A5ET",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "3a44ac02-62bc-4773-be2e-904416ca3488",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A5EU",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "b8421615-c8ed-4639-abab-5c55433f84bd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A5EV",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7349fbd4-c919-45a5-8ed2-1f61b9fec87f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A5EW",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "411783e2-5f61-4056-af80-8253c34df8a3",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A5EX",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ad27802e-0364-4c3e-805c-7c923733b94c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A5EY",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "38278b70-346c-4727-b672-5934ff20bb40",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A5EZ",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "d533e7df-d05e-4501-848b-ebde39845cb9",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A5F0",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "b0522297-7359-4e5c-a6f7-41df7c928bbd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A5F1",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "fa5b33ce-9f46-40cc-8cfc-122a6a2c1dc8",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A5F2",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "cb8e6a48-6d0a-462a-949f-899f183872c3",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A5F4",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "67921546-40cb-46d4-95df-0307e664a097",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A5F6",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "33f4bf27-b3c4-49e7-b9f7-c310c91834de",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A72U",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "dc356a7f-f87b-4e8f-80b7-a81a515b3258",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A72W",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "5e40ed04-6d5b-4dbb-938f-d1b9c04a6d57",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A72X",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "5c2d142e-ab5e-44d5-bc85-c4f49ed83aa3",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A72Z",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "bab7a25b-5297-4c02-bd50-3cd0b5a6e086",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A730",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "60a5538f-4d15-47c7-82aa-c9a983776f02",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A731",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "aecd7f3f-f566-46c0-b632-fb229664a237",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A733",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "bc4bf8df-ec60-4ce7-b857-ba8ea1730173",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A735",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "6cf97a5c-c566-48e3-ba69-17fb0268312a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A736",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "af7ec774-1cbd-4f9b-9408-343728cc973d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A737",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "8a9e7c17-cfb4-4924-bd70-c8afcaeb6954",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A77W",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "0e566bdd-6bb8-43d3-bef8-8386fe9e2c0c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A77X",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "b1eaeb04-0497-444b-8e58-8579b3ec384a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A780",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7e60701a-866b-49fc-bd62-9bad40a5d68d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-P5-A781",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "dc8a63df-28c0-4b0e-b13a-1d4c7aa91ba2",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A65R",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "53c61db2-c20d-47f8-9e81-eaa0eac92e78",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A65S",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "06fbec23-68bc-49ef-8a2a-3c5289d146e2",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A65V",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7579c409-84fe-4986-a5cd-9e966fe4b94e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A65X",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "51835252-f1fc-462d-8d33-291355c6243f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A65Z",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1cf0eea7-8dd9-45be-ae42-b7278ca6a814",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A6CS",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "5605142d-c2b9-4537-bef9-a1071641e948",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A6CU",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "02c69ef2-120a-40df-9f8a-b1429e89b675",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A6CV",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "cb63052c-7208-4cd8-9290-47c5f3fb17e2",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A6CW",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "4b4deca0-b67d-4c1d-a127-1dcd7fb9fb0f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A6CX",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "d77faae8-0b0e-4e82-9312-bd1a480a6d73",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A6CY",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7a191855-a85e-47cd-988d-4e7f5c9912f6",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A6CZ",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "50ca780d-13b1-4132-a6c9-90217cf1b4b8",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A6X3",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "09460119-0661-4fe5-8004-56b005929dae",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A6X4",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "0d551c2a-a684-4b1e-bc8e-a30b0ee01cd7",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A6X5",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "df3117d6-fa35-4cad-92a9-0a127b1be40b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A6X8",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "febf694d-811a-4fcd-b498-e9451fdc0d4e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A6X9",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "baddba08-619b-4a38-9b1d-367a6ee8dd0d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A6XA",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "bab37edf-5e92-445f-bae4-e5e34d9c1660",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A6XC",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "464d7fea-5ca6-4110-8e37-e02d368f6b3f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A86X",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c31bed22-8912-45e9-ae1a-543106821c8e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-QH-A870",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "4bd0485b-95e4-4324-b83d-c751e9c26017",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-R8-A6MK",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "15eadac3-48d0-44f4-be28-8427a5c6b62b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-R8-A6ML",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f4cd993a-8568-4c66-a85d-3592faa96f0c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-R8-A6MO",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "2a9c43fe-e2f7-43e0-822c-1f80d7cc004c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-R8-A6YH",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "4c188c79-7cc1-4c4c-acde-e13b4ca32102",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-R8-A73M",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "fb7dce3c-22a0-4a64-86b7-3fa350c5ba51",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-RY-A83X",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "a323d790-07ec-4d6e-839e-eed8c9263216",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-RY-A83Y",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1d63e7f1-d283-4010-ac49-4611f0715838",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-RY-A83Z",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "27cd7914-1edc-4408-9548-c688b130e8a6",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-RY-A840",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "337381f8-4597-48fa-9f7e-bca3bf2cd48b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-RY-A843",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1b399b3e-f333-4933-82c5-b8f51a84ca96",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-RY-A845",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "5656c424-7f57-4917-ae6e-82c0891830a9",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-RY-A847",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1928e314-d29f-4cb5-b261-c9fe40609e8c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6TS",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "d071d7c7-6196-4282-b03d-b008610ad670",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6TU",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1e259185-71cc-408b-b6d4-60329ffa3bbd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6TV",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "9007f94b-5cb1-421f-8ad3-7333920370af",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6TW",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1165226c-f95c-4977-b9c4-78de4586686c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6TX",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "22942918-e44c-4c8f-b134-ef93a01c36bc",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6TY",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "fcce9b35-b8d6-4e32-966a-6db935c39234",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6TZ",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "69881b60-ba69-4d69-bde7-baa75cfc5a95",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6U0",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "0aabdda2-2fac-440e-ba01-1c9d23fbf387",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6U1",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "9d3e8119-07ff-4f3b-8cfe-b25bbb65dc53",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6U2",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "78012546-6d9a-479a-bcfb-e60248811e61",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6U5",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "70574e3b-be25-4280-b8b4-790d1eed2cb4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6U6",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "a59ce3cb-489c-439a-ac9d-5ddb659f1cdc",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6U8",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ec5dcd5c-b2ea-4bfd-8f80-51de4d489701",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6U9",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "87852a13-22cd-43ef-9408-e09dd18e0e78",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6UA",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "0fe60909-1b03-445f-a370-736dd562027b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6UB",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "19dd5eb9-8394-45a4-bb47-01bc3f25d136",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6WD",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7c698bc3-4d6e-4811-b07b-b1f68e053898",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6WE",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "9eac3510-fd52-472d-b926-39c7a9d23fa2",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6WG",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1a6fac5e-79d2-4772-899e-2b37a4bdcd66",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6WH",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "718780ae-f6f9-42be-a2d3-08b25b9e67cf",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6WI",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "6153637f-c83d-4211-88ee-a98f269f59d3",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6WL",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7205737e-fa89-4a7d-83ef-8042dd34ba8d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6WM",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "479f933e-a088-4c53-a4d1-eaf9a3a9ad39",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6WN",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "5863c42a-25d4-4140-93f8-10c1f8d2d410",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6WO",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "448b0d51-24f0-4eb7-b882-8d726d1741db",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6WP",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "723383fc-ba09-4470-a3e0-6ae3432ca407",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A6WQ",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c8a1eb21-bfb9-4708-9bc0-65c211f0dc3e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7IQ",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "583991e4-58f3-48d7-9d55-82cff699036e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7IS",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "29b2658b-d286-4826-b2f4-c61f5c1716cb",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7IX",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "4f18d266-99d5-4f2d-b7c2-123f62891bfd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7IY",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "2405376b-d8c6-4803-8269-43a4c9edafb6",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7IZ",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "df2baefb-4c65-420d-af0a-3f28608ce5b4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7J0",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "8a3475a0-21d4-4144-bb01-ae92ec7d11a9",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7J1",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "b1c41433-20be-49d8-b3d2-87dc7beeb3a8",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7J2",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f1daaec0-df43-45da-8524-29484dfbecc4",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7J3",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "d7bd7e6f-7299-449e-9d14-a43ddcf6af23",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7QW",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "cba8e68c-f4bb-441d-8df3-68bae3f78aaa",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7QX",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f8c2b389-824f-4b24-80cb-6a0ee9cba131",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7QY",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "681c600b-143c-42ee-9dd4-b52f513a769d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7QZ",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "62fe1bbe-c2b1-4ac9-9896-1819d2a2b89b",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7R1",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "1725ee1b-d90d-456e-a468-dd36528b539a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7R2",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "50f233cf-29f3-4a01-996f-8d47896c01c7",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7R3",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "fc630c41-6424-481d-b870-54310c267d96",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7R4",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "54abae10-2c3d-4691-8d32-d60fda9daa4a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7R7",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "2123d3f7-0163-4ee4-b29e-58c86e3ac864",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A7R8",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "5e8d0e50-a6c9-40bb-9c83-213999e91cca",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A89V",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "5fb4fe76-133e-4fbd-a188-12727e66e767",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-S9-A89Z",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "fda3f170-c8ae-4ddc-ad87-5d4bae3715ad",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A7C3",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "4f09e602-35f5-4ba6-baf8-3aa685247099",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A7C4",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "646772cb-ce5f-4642-8e8f-b1a0d34ca5bc",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A7C5",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "19b6a615-3f4e-4cfa-93ec-cbb7ced98f51",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A7CA",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f742e688-2bb0-458e-96e8-1a2d22af1bf9",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A7CF",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "2b0165c3-c280-4c9a-91f0-a5c4674d0fb7",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A84B",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "85ae2772-c110-4bbb-a33f-e7215fed89f2",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A84C",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "5e3b73ea-6843-43bd-b34d-8b8e4d6310cc",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A84F",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "9376b978-2dfd-4a9a-a6dd-4a91d46ba9ad",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A84G",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7551cce5-daf3-480a-855b-f6e28792239a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A84H",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f685135a-5d45-47e8-b4a1-efad788adabd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A84I",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "23898395-d7e4-4496-bbd3-1440bb7159ad",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A84J",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "b9a05d45-2810-4b04-be83-7914b882462e",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A84L",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ae876604-1041-43af-81ef-732cdb087d4f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A84M",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "bb246a2d-fc4b-4440-9275-05f4f34855de",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A84O",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "9d8ebf25-1484-43a3-b7ef-a8a35290112a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A84Q",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "dd0e1e41-fa5e-41b2-918d-984743b7f12d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A84R",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "8240143f-af20-467c-96e5-e509ba2c116a",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A84S",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "57113c43-489a-4b3d-9a69-954bfec106a7",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TM-A84T",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "9552fd13-d00a-4772-9d8b-1d13f18d8a75",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TQ-A7RF",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "3e3ead73-d0d7-457c-a195-f858fa17b103",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TQ-A7RG",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "23490f22-f7bd-4f7b-9aa9-fe86045849d6",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TQ-A7RH",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "a9cf7a99-2560-48f9-bf43-ed1882d1a291",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TQ-A7RI",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "bc4c4be8-39c8-49f9-8a07-974e2ff4f47f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TQ-A7RJ",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f76b12c8-b003-4c11-a89b-2189310b1ad2",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TQ-A7RK",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "20d53979-2159-415a-a473-77c10e7de89b",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TQ-A7RM",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "0d7d0e69-5f42-4685-a2ab-5e02afaa35f9",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TQ-A7RN",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f1898cd6-326e-41ce-ad79-8c98da8e5546",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TQ-A7RO",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "58b4f56d-9783-4aac-bc24-3d7ed34492ee",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TQ-A7RP",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "574900c0-8a4a-4987-b786-b3e25886165c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TQ-A7RQ",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "a25f0d45-bfa8-4e0c-a739-dbc138dcbe5d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TQ-A7RR",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f1d7818a-ce93-4966-b1c4-5f301e74e1b0",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TQ-A7RS",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "d33b57c6-d3e2-48f0-af64-b2b5845a4f5f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TQ-A7RU",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "fcaa6907-146e-4dac-90b9-65a37ff3291f",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TQ-A7RV",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "344e2894-3239-484b-b944-3be65ff8fa89",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TQ-A7RW",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "b5c421d8-3e4c-4590-9e3e-3eec6ea988ab",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-TQ-A8XE",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "38ef393f-39e8-4916-a3fa-443fdfd932d5",
+      "multiple_primary_aliquots": true,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-VM-A8C8",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "4765e902-f2a1-4ea4-925a-683086b5334d",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-VM-A8C9",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "98ae3d17-2cca-40e8-a04c-a6a5a5db0b33",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-VM-A8CA",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "ac8f6ad3-b0df-48ed-972c-9654392f2eaa",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-VM-A8CB",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "97ba1a13-1527-406a-b9aa-9b34bd7d2ecc",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-VM-A8CD",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c6276aa1-b514-4338-bd20-f3f9c0bece93",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-VM-A8CE",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "c8a16b5e-f8e4-40a1-b29b-3228e8de9eaa",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-VM-A8CF",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "87107154-cb0e-49b6-b472-97b2da306c42",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-VM-A8CH",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "b1691ae7-2833-49b3-ad40-96913399d398",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-VV-A829",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "41806157-0e4b-4b45-bc38-f0009a8b86b1",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-VV-A86M",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "7cbb5d63-810b-4fc7-a31f-17882f20d5f8",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-VW-A7QS",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "f5702a31-4fc8-45cd-802d-817de33dd4bd",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-VW-A8FI",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "640a5b45-8d37-48c4-8d78-90e848071d50",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-W9-A837",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "48d51274-eba4-4fbf-b5eb-4ddc07a27121",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-WH-A86K",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "47c36249-1551-4845-9f6b-6f2a785f39c5",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-WY-A858",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "00831dfd-0859-4e24-9672-36f0d47984c6",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-WY-A859",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "05da738f-9316-4346-ac68-59aec3c16569",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-WY-A85A",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "3efa8a3e-17f2-43ea-9e5e-cfe0623b350c",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-WY-A85B",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "d2435a77-2eb7-4de5-8e6a-44521a71b0cf",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-WY-A85C",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "9908b233-1fd5-4c57-8164-22c195dd8752",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-WY-A85D",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "dae98574-88ac-4fe9-809d-b31cbb70c143",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    },
+    {
+      "patient_id": "TCGA-WY-A85E",
+      "source": "tcga_lgg",
+      "selected_file_uuid": "e0cacaf0-e9dc-44e9-9172-5ef741360c63",
+      "multiple_primary_aliquots": false,
+      "missing_tpm_ratio": 0.0
+    }
+  ]
+}

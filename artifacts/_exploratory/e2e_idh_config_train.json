@@ -1,0 +1,22 @@
+{
+  "keep_largest": true,
+  "dilate_iters": 1,
+  "base_margin": 4,
+  "view_margins": [
+    0,
+    4
+  ],
+  "aggregation": "mean",
+  "threshold": 0.06,
+  "threshold_objective": "macro_f1",
+  "macro_f1": 0.8646153846153846,
+  "accuracy": 0.9318181818181818,
+  "wt_recall": 0.7142857142857143,
+  "mutant_recall": 0.972972972972973,
+  "auc": 0.9150579150579151,
+  "threshold_split": "train",
+  "num_valid_cases": 44,
+  "num_total_cases": 44,
+  "cls_ckpt": "checkpoints/densenet3d_idh_jitter.pt",
+  "bundle_ckpt": "checkpoints/monai_zoo/brats_mri_segmentation/models/model.pt"
+}
