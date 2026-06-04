@@ -195,32 +195,109 @@ def ct_gallery_extended():
 ct_gallery_extended()
 
 
-# --- Segmentation gallery: all 3 available E2E predicted masks (MONAI bundle) ---
+# --- Segmentation gallery: every available E2E predicted mask (MONAI bundle) ---
 def seg_gallery():
-    """Row of 3 MONAI-bundle segmentation results (FLAIR + GT green + Pred red)."""
-    items = ["TCGA-HT-8111", "TCGA-DU-8162", "TCGA-CS-6669"]
-    fig, axes = plt.subplots(1, 3, figsize=(13.5, 4.9))
-    for ax, cid in zip(axes, items):
+    """Grid of all MONAI-bundle E2E segmentation results (FLAIR + GT green + Pred red),
+    sorted best -> worst Dice so the spread of quality is visible at a glance."""
+    import glob
+    import re
+    cids = sorted(
+        re.sub(r"^.*e2e_(.+)_pred\.nii\.gz$", r"\1", p)
+        for p in glob.glob("outputs/e2e_*_pred.nii.gz")
+    )
+    cids = [c for c in cids if c in cases]
+    scored = []
+    for cid in cids:
+        gt = load(cases[cid]["mask_path"])
+        pred = load(f"outputs/e2e_{cid}_pred.nii.gz")
+        scored.append((dice(gt, pred), cid))
+    scored.sort(reverse=True)
+
+    n = len(scored)
+    ncol = 5 if n > 6 else 3
+    nrow = (n + ncol - 1) // ncol
+    fig, axes = plt.subplots(nrow, ncol, figsize=(2.9 * ncol, 3.2 * nrow))
+    axes = np.atleast_1d(axes).ravel()
+    for ax in axes:
         ax.axis("off")
+    for ax, (d, cid) in zip(axes, scored):
         rec = cases[cid]
         flair = load(rec["modalities"]["flair"])
         gt = load(rec["mask_path"])
         pred = load(f"outputs/e2e_{cid}_pred.nii.gz")
         z = best_slice(gt)
-        img = np.rot90(flair[:, :, z])
-        ax.imshow(img, cmap="gray")
-        ax.contour(np.rot90(gt[:, :, z] > 0), colors="lime", linewidths=1.1)
-        ax.contour(np.rot90(pred[:, :, z] > 0), colors="red", linewidths=1.1)
-        ax.set_title(f"{cid}\nDice = {dice(gt, pred):.3f}", fontsize=11)
-    fig.suptitle("MONAI Model Zoo bundle segmentation — multi-case inference\n"
+        ax.imshow(np.rot90(flair[:, :, z]), cmap="gray")
+        ax.contour(np.rot90(gt[:, :, z] > 0), colors="lime", linewidths=1.0)
+        if (pred[:, :, z] > 0).any():
+            ax.contour(np.rot90(pred[:, :, z] > 0), colors="red", linewidths=1.0)
+        ax.set_title(f"{cid}\nDice = {d:.3f}", fontsize=9)
+    fig.suptitle(f"MONAI Model Zoo bundle segmentation — all {n} test cases (sorted by Dice)\n"
                  "GT (green) vs Pred (red), best tumor slice", fontsize=13)
-    fig.tight_layout(rect=(0, 0, 1, 0.93))
+    fig.tight_layout(rect=(0, 0, 1, 0.94))
     fig.savefig(OUT / "seg_gallery.png", dpi=110, bbox_inches="tight")
     plt.close(fig)
-    print("[seg] multi-case gallery -> seg_gallery.png")
+    print(f"[seg] multi-case gallery ({n} cases) -> seg_gallery.png")
 
 
 seg_gallery()
+
+
+# --- 3D orbiting GIF of the tumor: GT (green) vs predicted (red) surfaces ---
+def seg_orbit_gif(cid="TCGA-DU-7301", n_frames=36, step=2):
+    """Render GT and predicted tumor surfaces (marching cubes) and orbit the camera
+    360 deg to produce a rotating 3D .gif. Geometry is computed once; only the view
+    azimuth changes per frame, so all n_frames share the same mesh."""
+    import imageio.v2 as imageio
+    from skimage import measure
+    from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+
+    rec = cases[cid]
+    gt = (load(rec["mask_path"]) > 0).astype(np.uint8)
+    pred = (load(f"outputs/e2e_{cid}_pred.nii.gz") > 0).astype(np.uint8)
+    d = dice(gt, pred)
+
+    def mesh(vol):
+        # pad so marching_cubes closes surfaces touching the volume border
+        v = np.pad(vol, 1)
+        verts, faces, _, _ = measure.marching_cubes(v, level=0.5, step_size=step)
+        return verts, faces
+
+    gv, gf = mesh(gt)
+    pv, pf = mesh(pred)
+
+    fig = plt.figure(figsize=(5.2, 5.2))
+    ax = fig.add_subplot(111, projection="3d")
+    # GT as a faint translucent green shell for reference (drawn first / behind).
+    ax.add_collection3d(Poly3DCollection(gv[gf], alpha=0.12, facecolor="lime", edgecolor="none"))
+    # Predicted tumor as the main shaded surface (depth-lit via plot_trisurf).
+    ax.plot_trisurf(
+        pv[:, 0], pv[:, 1], pf, pv[:, 2],
+        cmap="YlOrRd", linewidth=0, antialiased=True, shade=True, alpha=0.95,
+    )
+    allv = np.vstack([gv, pv])
+    mins, maxs = allv.min(0), allv.max(0)
+    ctr = (mins + maxs) / 2
+    rad = (maxs - mins).max() / 2 * 1.1
+    ax.set_xlim(ctr[0] - rad, ctr[0] + rad)
+    ax.set_ylim(ctr[1] - rad, ctr[1] + rad)
+    ax.set_zlim(ctr[2] - rad, ctr[2] + rad)
+    ax.set_box_aspect((1, 1, 1))
+    ax.set_axis_off()
+    fig.suptitle(f"{cid} — 3D tumor: GT (green) vs Pred (red)\nDice = {d:.3f}", fontsize=11)
+
+    frames = []
+    for azim in np.linspace(0, 360, n_frames, endpoint=False):
+        ax.view_init(elev=18, azim=float(azim))
+        fig.canvas.draw()
+        frames.append(np.asarray(fig.canvas.buffer_rgba())[..., :3].copy())
+    plt.close(fig)
+
+    gif_path = OUT / "seg_orbit_3d.gif"
+    imageio.mimsave(str(gif_path), frames, duration=0.08, loop=0)
+    print(f"[seg] 3D orbit gif ({cid}, {n_frames} frames) -> seg_orbit_3d.gif")
+
+
+seg_orbit_gif()
 
 
 # --- Multi-slice volumetric view of the best segmentation case ---
@@ -338,3 +415,154 @@ def seg_modalities(cid="TCGA-HT-8111"):
 
 
 seg_modalities()
+
+
+# --- 3D MRI glass-brain orbit: translucent brain shell with the tumor nested inside ---
+def mri_orbit_gif(cid="TCGA-HT-8111", n_frames=36, brain_step=3, tumor_step=2):
+    """Render the skull-stripped FLAIR brain as a translucent 'glass' shell (marching
+    cubes on the non-zero brain region — BraTS volumes are skull-stripped, so >0 is
+    brain), then nest the GT (green) and predicted (red) tumor surfaces inside it and
+    orbit the camera 360 deg. Unlike seg_orbit_3d.gif (tumor meshes only), this places
+    the tumor in its anatomical context so you can see *where in the brain* it sits."""
+    import imageio.v2 as imageio
+    from skimage import measure
+    from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+    from scipy import ndimage
+
+    rec = cases[cid]
+    flair = load(rec["modalities"]["flair"]).astype(np.float32)
+    gt = (load(rec["mask_path"]) > 0).astype(np.uint8)
+    pred = (load(f"outputs/e2e_{cid}_pred.nii.gz") > 0).astype(np.uint8)
+    d = dice(gt, pred)  # full-mask Dice (incl. peripheral FP), reported honestly
+
+    def largest_cc(vol):
+        """Keep only the largest 3D connected component — for the orbit we render the
+        main tumor body, dropping the scattered peripheral FP specks that would
+        otherwise clutter the glass brain (those FP are quantified in seg_error_decomp)."""
+        lab, n = ndimage.label(vol)
+        if n <= 1:
+            return vol
+        sizes = ndimage.sum(vol, lab, index=range(1, n + 1))
+        return (lab == (int(np.argmax(sizes)) + 1)).astype(np.uint8)
+
+    gt = largest_cc(gt)
+    pred = largest_cc(pred)
+
+    # Brain mask = non-zero FLAIR, lightly cleaned (close holes, drop specks) so the
+    # marching-cubes shell is a single smooth surface rather than noisy fragments.
+    brain = flair > (flair[flair > 0].mean() * 0.10)
+    brain = ndimage.binary_closing(brain, iterations=2)
+    brain = ndimage.binary_fill_holes(brain)
+
+    def mesh(vol, step):
+        v = np.pad(vol.astype(np.uint8), 1)
+        verts, faces, _, _ = measure.marching_cubes(v, level=0.5, step_size=step)
+        return verts, faces
+
+    bv, bf = mesh(brain, brain_step)
+    gv, gf = mesh(gt, tumor_step)
+    pv, pf = mesh(pred, tumor_step)
+
+    fig = plt.figure(figsize=(5.4, 5.4))
+    ax = fig.add_subplot(111, projection="3d")
+    # Glass brain: very low alpha so the tumor inside stays visible through the shell.
+    ax.add_collection3d(Poly3DCollection(
+        bv[bf], alpha=0.06, facecolor="#7fb3ff", edgecolor="none"))
+    # GT shell (faint green) for reference, predicted tumor as the solid red body.
+    ax.add_collection3d(Poly3DCollection(
+        gv[gf], alpha=0.18, facecolor="lime", edgecolor="none"))
+    ax.plot_trisurf(
+        pv[:, 0], pv[:, 1], pf, pv[:, 2],
+        color="#ff2b2b", linewidth=0, antialiased=True, shade=True, alpha=0.95,
+    )
+    mins, maxs = bv.min(0), bv.max(0)
+    ctr = (mins + maxs) / 2
+    rad = (maxs - mins).max() / 2 * 1.05
+    ax.set_xlim(ctr[0] - rad, ctr[0] + rad)
+    ax.set_ylim(ctr[1] - rad, ctr[1] + rad)
+    ax.set_zlim(ctr[2] - rad, ctr[2] + rad)
+    ax.set_box_aspect((1, 1, 1))
+    ax.set_axis_off()
+    fig.suptitle(f"{cid} — 3D MRI glass brain + tumor orbit\n"
+                 f"brain shell (blue) · GT (green) · Pred (red)  |  Dice = {d:.3f}",
+                 fontsize=11)
+
+    frames = []
+    for azim in np.linspace(0, 360, n_frames, endpoint=False):
+        ax.view_init(elev=12, azim=float(azim))
+        fig.canvas.draw()
+        frames.append(np.asarray(fig.canvas.buffer_rgba())[..., :3].copy())
+    plt.close(fig)
+
+    gif_path = OUT / "mri_orbit_3d.gif"
+    imageio.mimsave(str(gif_path), frames, duration=0.08, loop=0)
+    print(f"[seg] 3D MRI glass-brain orbit ({cid}, {n_frames} frames) -> mri_orbit_3d.gif")
+
+
+mri_orbit_gif()
+
+
+# --- IDH end-to-end gallery: all 10 test cases, real probs from eval_e2e_zoo CSV ---
+def idh_e2e_gallery():
+    """Grid of every test case's IDH end-to-end result (FLAIR + GT green + Pred-mask
+    red), titled with truth -> prediction and the real P(mutant) pulled from
+    outputs/eval_e2e_zoo/eval_e2e_zoo_cases.csv. Sorted WT-first then by probability so
+    the decision threshold (0.13) reads left-to-right. Green title = correct, red = error."""
+    csv_path = ROOT / "outputs" / "eval_e2e_zoo" / "eval_e2e_zoo_cases.csv"
+    cfg = json.load(open("artifacts/e2e_idh_config.json"))
+    thr = float(cfg["threshold"])
+    rows = list(csv.DictReader(open(csv_path)))
+    items = []
+    for r in rows:
+        cid = r["case_id"]
+        if cid not in cases:
+            continue
+        items.append({
+            "cid": cid,
+            "label": int(r["label"]),
+            "pred": int(r["case_pred"]),
+            "prob": float(r["case_prob"]),
+            "seg_dice": float(r["seg_dice"]),
+        })
+    # WT (label 0) first, then by ascending P(mutant) so threshold ordering is visible.
+    items.sort(key=lambda x: (x["label"], x["prob"]))
+
+    n = len(items)
+    ncol = 5
+    nrow = (n + ncol - 1) // ncol
+    fig, axes = plt.subplots(nrow, ncol, figsize=(2.9 * ncol, 3.4 * nrow))
+    axes = np.atleast_1d(axes).ravel()
+    for ax in axes:
+        ax.axis("off")
+    name = {1: "Mut", 0: "WT"}
+    for ax, it in zip(axes, items):
+        cid = it["cid"]
+        rec = cases[cid]
+        flair = load(rec["modalities"]["flair"])
+        gt = load(rec["mask_path"])
+        pmask = load(f"outputs/e2e_{cid}_pred.nii.gz")
+        z = best_slice(gt)
+        ax.imshow(np.rot90(flair[:, :, z]), cmap="gray")
+        ax.contour(np.rot90(gt[:, :, z] > 0), colors="lime", linewidths=1.0)
+        if (pmask[:, :, z] > 0).any():
+            ax.contour(np.rot90(pmask[:, :, z] > 0), colors="red", linewidths=1.0)
+        ok = it["label"] == it["pred"]
+        outcome = ("TP" if it["label"] == 1 else "TN") if ok else \
+                  ("FP" if it["pred"] == 1 else "FN")
+        color = "green" if ok else "red"
+        mark = "OK" if ok else "X"
+        ax.set_title(
+            f"[{mark}] {outcome}  {name[it['label']]} -> {name[it['pred']]}\n"
+            f"{cid}\nP(mut)={it['prob']:.3f}  seg Dice={it['seg_dice']:.3f}",
+            color=color, fontsize=8.5)
+    fig.suptitle(
+        f"IDH End-to-End — all {n} test cases (MONAI bundle seg + DenseNet121, threshold {thr:.2f})\n"
+        "GT (green) vs Pred mask (red) · sorted WT-first then by P(mutant) · real probs from eval CSV",
+        fontsize=12)
+    fig.tight_layout(rect=(0, 0, 1, 0.93))
+    fig.savefig(OUT / "idh_e2e_gallery.png", dpi=110, bbox_inches="tight")
+    plt.close(fig)
+    print(f"[idh] E2E gallery ({n} cases) -> idh_e2e_gallery.png")
+
+
+idh_e2e_gallery()

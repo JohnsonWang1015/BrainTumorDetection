@@ -1,25 +1,25 @@
 # Graph Report - .  (2026-06-04)
 
 ## Corpus Check
-- 82 files · ~0 words
+- 83 files · ~0 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 545 nodes · 778 edges · 65 communities detected
-- Extraction: 61% EXTRACTED · 39% INFERRED · 0% AMBIGUOUS · INFERRED: 307 edges (avg confidence: 0.5)
+- 555 nodes · 794 edges · 67 communities detected
+- Extraction: 60% EXTRACTED · 40% INFERRED · 0% AMBIGUOUS · INFERRED: 314 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## God Nodes (most connected - your core abstractions)
 1. `UNet2D` - 12 edges
 2. `BrainImageDataset` - 11 edges
-3. `main()` - 10 edges
-4. `main()` - 9 edges
-5. `_make_fake_dataset()` - 8 edges
-6. `predict_idh()` - 8 edges
-7. `main()` - 8 edges
-8. `main()` - 8 edges
-9. `CaseLevelSampler` - 8 edges
-10. `main()` - 7 edges
+3. `load()` - 10 edges
+4. `main()` - 10 edges
+5. `main()` - 9 edges
+6. `_make_fake_dataset()` - 8 edges
+7. `dice()` - 8 edges
+8. `predict_idh()` - 8 edges
+9. `main()` - 8 edges
+10. `main()` - 8 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Tests for IDH classification dataset helpers (ROI crop + balanced sampler).  Run` --uses--> `BraTSSliceClassificationDataset`  [INFERRED]
@@ -44,20 +44,20 @@ Cohesion: 0.08
 Nodes (18): _fit_per_modality(), _load_inputs(), main(), _new_base(), parse_args(), _per_modality_probs(), Late-fusion experiment for the multi-omics molecular IDH cohort.  Hypothesis: ea, _recall_at_specificity() (+10 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.09
-Nodes (28): _augment_cls(), _augment_seg(), BraTSSliceSegmentationDataset, CaseLevelSampler, _crop_roi(), load_nifti(), make_balanced_sampler(), Random spatial + intensity augmentations for classification (image only, C,H,W). (+20 more)
+Cohesion: 0.08
+Nodes (20): _augment_cls(), _augment_seg(), BraTSSliceClassificationDataset, _crop_roi(), load_nifti(), make_balanced_sampler(), Random spatial + intensity augmentations for classification (image only, C,H,W)., Build a WeightedRandomSampler that balances IDH=0 vs IDH=1 across an epoch. (+12 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.12
 Nodes (24): _build_diagnosis(), _classify_tumor_slices(), _device(), _get_cls_model(), _get_seg_model(), _load_nifti(), predict_idh(), IDH classification handler for the Gradio app.  Exposes :func:`predict_idh` -- g (+16 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.11
-Nodes (11): BraTSSliceClassificationDataset, Tests for IDH classification dataset helpers (ROI crop + balanced sampler).  Run, Manifest entry pointing at fake nifti paths; load_nifti is monkey-patched in the, test_classification_dataset_no_roi_keeps_full_slice(), test_classification_dataset_roi_returns_expected_shape(), _write_synthetic_manifest(), apply_profile(), main() (+3 more)
+Cohesion: 0.17
+Nodes (22): best_slice(), ct_gallery_extended(), dice(), idh_e2e_gallery(), idh_montage(), load(), mri_orbit_gif(), Generate figures for the model report:   1. Segmentation overlays (FLAIR + GT gr (+14 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.24
-Nodes (16): best_slice(), ct_gallery_extended(), dice(), idh_montage(), load(), Generate figures for the model report:   1. Segmentation overlays (FLAIR + GT gr, 8-panel gallery (CT + MRI x TP/TN/FP/FN) with REAL probabilities pulled     from, Row of 3 MONAI-bundle segmentation results (FLAIR + GT green + Pred red). (+8 more)
+Cohesion: 0.17
+Nodes (14): BraTSSliceSegmentationDataset, CaseLevelSampler, Shuffles at the *case* level so that all slices of a case are yielded     consec, apply_profile(), dice_loss(), focal_loss(), main(), parse_args() (+6 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.21
@@ -172,60 +172,60 @@ Cohesion: 0.53
 Nodes (5): _build_transforms(), main(), parse_args(), Evaluate the MONAI SegResNet checkpoint on the held-out test split.  Mirrors eva, _records_to_monai()
 
 ### Community 34 - "Community 34"
+Cohesion: 0.53
+Nodes (5): apply_profile(), main(), parse_args(), Returns (mean_loss, all_probs, all_labels)., run_epoch()
+
+### Community 35 - "Community 35"
 Cohesion: 0.6
 Nodes (5): export_split(), main(), mask_to_bbox(), normalize_to_uint8(), parse_args()
 
-### Community 35 - "Community 35"
+### Community 36 - "Community 36"
 Cohesion: 0.53
 Nodes (5): _bbox3d(), main(), parse_args(), predict(), End-to-end inference with MONAI 3D models (SegResNet + DenseNet121).  Mirrors in
 
-### Community 36 - "Community 36"
+### Community 37 - "Community 37"
 Cohesion: 0.67
 Nodes (5): test_prepare_multimodal_missing_methylation_dir_exits(), test_prepare_multimodal_writes_all_artifacts(), _write_maf(), _write_methylation(), _write_rnaseq()
 
-### Community 37 - "Community 37"
+### Community 38 - "Community 38"
 Cohesion: 0.7
 Nodes (4): build_methylation_matrix(), discover_methylation_files(), parse_sesame_txt(), _platform_from_cpg_count()
 
-### Community 38 - "Community 38"
+### Community 39 - "Community 39"
 Cohesion: 0.6
 Nodes (4): main(), parse_args(), predict(), End-to-end inference combining the MONAI Model Zoo brats bundle (seg) with our 3
 
-### Community 39 - "Community 39"
+### Community 40 - "Community 40"
 Cohesion: 0.7
 Nodes (4): test_lightgbm_predict_proba_and_roundtrip(), test_logistic_predict_proba_and_roundtrip(), test_mlp_predict_proba_and_roundtrip(), _toy_data()
 
-### Community 40 - "Community 40"
+### Community 41 - "Community 41"
 Cohesion: 0.5
 Nodes (1): Tests for Phase 2 3D IDH ROI augmentation helpers.
 
-### Community 41 - "Community 41"
+### Community 42 - "Community 42"
 Cohesion: 0.67
 Nodes (3): _case_prob(), main(), Pick the optimal IDH classification threshold on the val split.  Uses case-level
 
-### Community 42 - "Community 42"
-Cohesion: 0.67
-Nodes (2): ensure_dir(), save_json()
-
 ### Community 43 - "Community 43"
 Cohesion: 0.67
-Nodes (3): main(), parse_args(), Evaluate the MONAI Model Zoo `brats_mri_segmentation` bundle on TCGA-LGG.  Zero-
+Nodes (3): main(), parse_args(), Generate and save MONAI-bundle segmentation masks for every case in a split.  Re
 
 ### Community 44 - "Community 44"
 Cohesion: 0.67
-Nodes (3): main(), parse_args(), End-to-end evaluation: MONAI Model Zoo bundle (seg) + 3D DenseNet (cls).  Comput
+Nodes (2): ensure_dir(), save_json()
 
 ### Community 45 - "Community 45"
 Cohesion: 0.67
-Nodes (3): main(), parse_args(), Train YOLOv8 brain-tumor detection model on Ultralytics brain-tumor dataset.
+Nodes (3): main(), parse_args(), Evaluate the MONAI Model Zoo `brats_mri_segmentation` bundle on TCGA-LGG.  Zero-
 
 ### Community 46 - "Community 46"
-Cohesion: 0.5
-Nodes (0): 
+Cohesion: 0.67
+Nodes (3): main(), parse_args(), End-to-end evaluation: MONAI Model Zoo bundle (seg) + 3D DenseNet (cls).  Comput
 
 ### Community 47 - "Community 47"
-Cohesion: 0.83
-Nodes (3): test_build_expression_matrix_merges_samples_and_logs(), test_parse_rnaseq_tsv_skips_summary_rows(), _write_rnaseq()
+Cohesion: 0.67
+Nodes (3): main(), parse_args(), Train YOLOv8 brain-tumor detection model on Ultralytics brain-tumor dataset.
 
 ### Community 48 - "Community 48"
 Cohesion: 0.5
@@ -233,47 +233,47 @@ Nodes (0):
 
 ### Community 49 - "Community 49"
 Cohesion: 0.83
-Nodes (3): test_build_methylation_matrix_intersection_transform_and_dedup(), test_parse_sesame_txt_preserves_nan_values(), _write_sesame()
+Nodes (3): test_build_expression_matrix_merges_samples_and_logs(), test_parse_rnaseq_tsv_skips_summary_rows(), _write_rnaseq()
 
 ### Community 50 - "Community 50"
-Cohesion: 0.83
-Nodes (3): test_prepare_main_end_to_end_with_mock_data(), _write_maf(), _write_rnaseq()
+Cohesion: 0.5
+Nodes (0): 
 
 ### Community 51 - "Community 51"
 Cohesion: 0.83
-Nodes (3): test_aggregate_idh_labels_marks_wildtype_when_no_idh_mutation(), test_extract_idh_status_detects_idh1_idh2_missense(), _write_maf()
+Nodes (3): test_build_methylation_matrix_intersection_transform_and_dedup(), test_parse_sesame_txt_preserves_nan_values(), _write_sesame()
 
 ### Community 52 - "Community 52"
-Cohesion: 0.67
-Nodes (1): 5-fold stratified CV for the 3D MONAI IDH classifier.  Pools every labelled case
+Cohesion: 0.83
+Nodes (3): test_prepare_main_end_to_end_with_mock_data(), _write_maf(), _write_rnaseq()
 
 ### Community 53 - "Community 53"
-Cohesion: 0.67
-Nodes (1): 5-fold stratified cross-validation for the IDH classifier.  Pools every labelled
+Cohesion: 0.83
+Nodes (3): test_aggregate_idh_labels_marks_wildtype_when_no_idh_mutation(), test_extract_idh_status_detects_idh1_idh2_missense(), _write_maf()
 
 ### Community 54 - "Community 54"
 Cohesion: 0.67
-Nodes (0): 
+Nodes (1): 5-fold stratified CV for the 3D MONAI IDH classifier.  Pools every labelled case
 
 ### Community 55 - "Community 55"
 Cohesion: 0.67
-Nodes (2): Project a manifest-v2-style record into the current training shape., to_legacy_manifest_record()
+Nodes (1): 5-fold stratified cross-validation for the IDH classifier.  Pools every labelled
 
 ### Community 56 - "Community 56"
 Cohesion: 0.67
-Nodes (2): build_mobilenetv3_binary(), Build a MobileNetV3 binary classifier.      ``variant="small"`` keeps backwards
+Nodes (0): 
 
 ### Community 57 - "Community 57"
 Cohesion: 0.67
-Nodes (0): 
+Nodes (2): Project a manifest-v2-style record into the current training shape., to_legacy_manifest_record()
 
 ### Community 58 - "Community 58"
-Cohesion: 1.0
-Nodes (0): 
+Cohesion: 0.67
+Nodes (2): build_mobilenetv3_binary(), Build a MobileNetV3 binary classifier.      ``variant="small"`` keeps backwards
 
 ### Community 59 - "Community 59"
-Cohesion: 1.0
-Nodes (1): Training entry points.
+Cohesion: 0.67
+Nodes (0): 
 
 ### Community 60 - "Community 60"
 Cohesion: 1.0
@@ -281,7 +281,7 @@ Nodes (0):
 
 ### Community 61 - "Community 61"
 Cohesion: 1.0
-Nodes (0): 
+Nodes (1): Training entry points.
 
 ### Community 62 - "Community 62"
 Cohesion: 1.0
@@ -295,38 +295,46 @@ Nodes (0):
 Cohesion: 1.0
 Nodes (0): 
 
+### Community 65 - "Community 65"
+Cohesion: 1.0
+Nodes (0): 
+
+### Community 66 - "Community 66"
+Cohesion: 1.0
+Nodes (0): 
+
 ## Knowledge Gaps
-- **47 isolated node(s):** `Unit tests for end-to-end ROI helpers used by the MONAI pipeline.`, `Tests for Phase 2 3D IDH ROI augmentation helpers.`, `Tests for end-to-end calibration config loading.`, `Pick the optimal IDH classification threshold on the val split.  Uses case-level`, `5-fold stratified CV for the 3D MONAI IDH classifier.  Pools every labelled case` (+42 more)
+- **51 isolated node(s):** `Unit tests for end-to-end ROI helpers used by the MONAI pipeline.`, `Tests for Phase 2 3D IDH ROI augmentation helpers.`, `Tests for end-to-end calibration config loading.`, `Pick the optimal IDH classification threshold on the val split.  Uses case-level`, `5-fold stratified CV for the 3D MONAI IDH classifier.  Pools every labelled case` (+46 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **Thin community `Community 58`** (2 nodes): `test_manifest_adapters.py`, `test_to_legacy_manifest_record_keeps_training_fields()`
+- **Thin community `Community 60`** (2 nodes): `test_manifest_adapters.py`, `test_to_legacy_manifest_record_keeps_training_fields()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 59`** (2 nodes): `__init__.py`, `Training entry points.`
+- **Thin community `Community 61`** (2 nodes): `__init__.py`, `Training entry points.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 60`** (2 nodes): `test_eval.py`, `test_eval_main_all_modes_writes_outputs()`
+- **Thin community `Community 62`** (2 nodes): `test_eval.py`, `test_eval_main_all_modes_writes_outputs()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 61`** (2 nodes): `test_feature_select.py`, `test_select_features_top_k_and_prior_union_fold_aware()`
+- **Thin community `Community 63`** (2 nodes): `test_feature_select.py`, `test_select_features_top_k_and_prior_union_fold_aware()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 62`** (2 nodes): `test_train_eval_multimodal.py`, `test_train_eval_multimodal_end_to_end()`
+- **Thin community `Community 64`** (2 nodes): `test_train_eval_multimodal.py`, `test_train_eval_multimodal_end_to_end()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 63`** (2 nodes): `test_idh_cpg_panel.py`, `test_idh_cpg_panel_schema()`
+- **Thin community `Community 65`** (2 nodes): `test_idh_cpg_panel.py`, `test_idh_cpg_panel_schema()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 64`** (1 nodes): `model.ts`
+- **Thin community `Community 66`** (1 nodes): `model.ts`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `UNet2D` connect `Community 3` to `Community 2`?**
+- **Why does `UNet2D` connect `Community 3` to `Community 5`?**
   _High betweenness centrality (0.014) - this node is a cross-community bridge._
-- **Why does `BraTSSliceClassificationDataset` connect `Community 4` to `Community 2`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+- **Why does `BraTSSliceClassificationDataset` connect `Community 2` to `Community 34`?**
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
+- **Why does `CaseLevelSampler` connect `Community 5` to `Community 2`?**
+  _High betweenness centrality (0.007) - this node is a cross-community bridge._
 - **Are the 9 inferred relationships involving `UNet2D` (e.g. with `IDH classification handler for the Gradio app.  Exposes :func:`predict_idh` -- g` and `Return mean per-slice IDH probability across tumor-bearing slices.`) actually correct?**
   _`UNet2D` has 9 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 6 inferred relationships involving `BrainImageDataset` (e.g. with `Unit tests for the CT/MRI data pipeline.  Run with:     uv run pytest tests/ -v` and `Create a minimal fake Kaggle-style folder tree with tiny images.`) actually correct?**
   _`BrainImageDataset` has 6 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 9 inferred relationships involving `load()` (e.g. with `seg_overlay()` and `idh_montage()`) actually correct?**
+  _`load()` has 9 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 9 inferred relationships involving `main()` (e.g. with `parse_args()` and `_normalize_modalities()`) actually correct?**
   _`main()` has 9 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 8 inferred relationships involving `main()` (e.g. with `parse_args()` and `_normalize_modalities()`) actually correct?**
-  _`main()` has 8 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 6 inferred relationships involving `_make_fake_dataset()` (e.g. with `test_collect_images_counts()` and `test_build_manifest_both()`) actually correct?**
-  _`_make_fake_dataset()` has 6 INFERRED edges - model-reasoned connections that need verification._

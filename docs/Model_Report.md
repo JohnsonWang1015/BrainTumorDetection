@@ -135,6 +135,12 @@
 
 > 端到端推論：MONAI bundle 分割 → 以預測遮罩 bbox 裁切 ROI → DenseNet121 IDH 分類。操作閾值 **0.13**（於 val 以 macro-F1 選出，`artifacts/e2e_idh_config.json`）。綠線 = GT 遮罩，紅線 = 預測遮罩。標題綠色 = IDH 判讀正確、紅色 = 錯誤。
 
+#### 全 10 例 test 推論藝廊
+
+![IDH end-to-end gallery](report_assets/idh_e2e_gallery.png)
+
+> 全部 10 個 test 案例的端到端 IDH 判讀（每格標題的 P(mut) 與 seg Dice 直接讀自 `outputs/eval_e2e_zoo/eval_e2e_zoo_cases.csv`，與評估數值完全一致）。依「WT 優先、再按 P(mutant) 遞增」排序，閾值 0.13 的決策邊界因而由左至右可讀。綠色標題 = 判讀正確（TP/TN）、紅色 = 錯誤（FP/FN）。可一眼看出兩個失敗例（TCGA-CS-6669、TCGA-DU-8162，皆 WT→Mut 偽陽性）的分割 Dice 仍高（0.89–0.95），呼應「瓶頸在分類頭的 WT 特異度，而非分割」的結論。
+
 **Test 10 cases 完整結果**（閾值 0.13，依 P(mutant) 由高到低）：
 
 | 案例 | 真實 | P(mutant) | 預測 | seg Dice | 結果 |
@@ -226,6 +232,15 @@
 ![Segmentation across modalities](report_assets/seg_modalities.png)
 
 > 同一個 3D 預測（紅線）與 GT（綠線）疊在 **FLAIR / T1 / T1Gd / T2** 四個輸入模態的同一切片上。輪廓在四種模態上都貼合腫瘤邊界——代表模型鎖定的是**解剖結構**，而非單一模態的亮度特徵（例如 FLAIR 的高訊號水腫或 T1Gd 的強化環）。這也說明 4-channel 輸入提供了互補資訊，預測不會因任一模態對比較弱而崩潰。
+
+### 3D 視覺化 — 環繞動畫
+
+| MRI 玻璃腦 + 腫瘤環繞（TCGA-HT-8111） | 腫瘤表面環繞 GT vs Pred（TCGA-DU-7301） |
+|:---:|:---:|
+| ![3D MRI glass-brain orbit](report_assets/mri_orbit_3d.gif) | ![3D tumor surface orbit](report_assets/seg_orbit_3d.gif) |
+
+> **左**：以 marching cubes 把去顱 FLAIR 的腦組織重建為半透明「玻璃腦」外殼（BraTS 已去顱，非零區即為腦），再把腫瘤主體（紅 = 預測、綠 = GT）嵌入其中環繞 360°——可看出腫瘤位於**左額葉**的解剖位置。為求畫面乾淨，腫瘤僅取最大連通元件（周邊零星偽陽性已於上方「誤差分解」量化，標題 Dice 0.723 仍為含 FP 的完整遮罩值）。
+> **右**：純腫瘤表面的 GT（綠）vs 預測（紅）環繞，凸顯三維形狀吻合度。兩段皆由 `scripts/_make_report_overlays.py` 以同一批端到端遮罩產生。
 
 ### ❌ 失敗案例 — Legacy U-Net 2D
 
