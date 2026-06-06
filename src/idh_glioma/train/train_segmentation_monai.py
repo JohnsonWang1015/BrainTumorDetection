@@ -94,10 +94,15 @@ def _binarize_label(label):
 def _maybe_load_zoo_init(model, zoo_init):
     if not zoo_init:
         return
-    print(f"[train-seg-monai] Loading zoo weights from {zoo_init}")
-    state = torch.load(zoo_init, map_location="cpu", weights_only=True)
-    if "state_dict" in state:
-        state = state["state_dict"]
+    print(f"[train-seg-monai] Loading init weights from {zoo_init}")
+    # ``weights_only=False`` so we can also accept our own training checkpoints
+    # which carry epoch/val_dice scalars alongside the ``model`` state dict.
+    state = torch.load(zoo_init, map_location="cpu", weights_only=False)
+    if isinstance(state, dict):
+        for key in ("state_dict", "model"):
+            if key in state and isinstance(state[key], dict):
+                state = state[key]
+                break
     own = model.state_dict()
     loaded = 0
     skipped = []
@@ -108,7 +113,7 @@ def _maybe_load_zoo_init(model, zoo_init):
         else:
             skipped.append(k)
     model.load_state_dict(own)
-    print(f"[train-seg-monai] zoo init: loaded {loaded} tensors, skipped {len(skipped)} (incompat shapes)")
+    print(f"[train-seg-monai] init: loaded {loaded} tensors, skipped {len(skipped)} (incompat shapes)")
 
 
 def parse_args():

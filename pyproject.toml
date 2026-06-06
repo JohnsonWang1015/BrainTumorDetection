@@ -34,6 +34,7 @@ dependencies = [
 prepare-mri = "idh_glioma.data.prepare_dataset:main"
 prepare-idh-multisource = "idh_glioma.data.prepare_idh_multisource:main"
 prepare-ct  = "idh_glioma.data.prepare_ct_data:main"
+prepare-kaggle-4class = "idh_glioma.data.prepare_kaggle_4class:main"
 train-seg   = "idh_glioma.train.train_segmentation:main"
 train-seg-monai = "idh_glioma.train.train_segmentation_monai:main"
 train-idh   = "idh_glioma.train.train_idh_classifier:main"

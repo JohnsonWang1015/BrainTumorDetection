@@ -2,13 +2,23 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from dataclasses import dataclass
 from pathlib import Path
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
 MODALITIES = ("flair", "t1", "t1Gd", "t2")
-MASK_PRIORITY = ("GlistrBoost_ManuallyCorrected", "GlistrBoost")
+# Mask filename suffixes in descending preference order. ``GlistrBoost*`` are
+# the TCGA-LGG conventions; ``seg`` is the BraTS 2021 / Hugging Face mirror
+# convention.
+MASK_PRIORITY = ("GlistrBoost_ManuallyCorrected", "GlistrBoost", "seg")
+# BraTS 2021 ships ``*_t1ce.nii.gz`` for the post-contrast T1 modality the
+# rest of this codebase calls ``t1Gd``. Canonicalize at parse time.
+_MODALITY_SYNONYMS: dict[str, str] = {"t1ce": "t1Gd"}
+# Directory names like ``BraTS2021_00000`` use the whole name as the case id;
+# they intentionally lack a scan-date token.
+_BRATS_DIR_PATTERN = re.compile(r"^BraTS\d{4}_\d+$")
 
 
 @dataclass
@@ -25,25 +35,35 @@ def parse_case_folder(case_dir: Path) -> CaseRecord | None:
     if not nii_files:
         return None
 
+    is_brats_2021 = bool(_BRATS_DIR_PATTERN.match(case_dir.name))
+
     modality_map: dict[str, str] = {}
     mask_path = ""
+    mask_priority_idx = len(MASK_PRIORITY)
     case_id = case_dir.name
     date = "unknown"
 
     for f in nii_files:
         stem = f.name.replace(".nii.gz", "")
         parts = stem.split("_")
-        if len(parts) < 3:
-            continue
-        case_id = parts[0]
-        date = parts[1]
+        if not is_brats_2021:
+            # TCGA-LGG layout: ``<patient>_<YYYYMMDD>_<...>_<suffix>.nii.gz``
+            if len(parts) < 3:
+                continue
+            case_id = parts[0]
+            date = parts[1]
+
         suffix = parts[-1]
-        if suffix in MODALITIES:
-            modality_map[suffix] = str(f)
-        for mname in MASK_PRIORITY:
+        canon = _MODALITY_SYNONYMS.get(suffix, suffix)
+        if canon in MODALITIES:
+            modality_map[canon] = str(f)
+
+        for idx, mname in enumerate(MASK_PRIORITY):
             if stem.endswith(mname):
-                if not mask_path or mname == MASK_PRIORITY[0]:
+                if idx < mask_priority_idx:
                     mask_path = str(f)
+                    mask_priority_idx = idx
+                break
 
     if any(k not in modality_map for k in MODALITIES):
         return None
