@@ -1,6 +1,6 @@
-# 🧠 Brain Glioma — Segmentation + IDH Mutation Detection
+# Brain Glioma — Segmentation + IDH Mutation Detection
 
-> 一套可直接落地的 **End-to-End 腦膠質瘤分析平台**:從 MRI 影像做腫瘤**分割**、預測 **IDH 突變狀態**(影像 + 分子兩條路徑),並提供互動式 Web UI。
+> 一套可直接落地的 **End-to-End 腦膠質瘤分析平台**：從 MRI 影像做腫瘤**分割**、預測 **IDH 突變狀態**(影像 + 分子兩條路徑)，並提供互動式 Web UI。
 
 <p>
 <img alt="python" src="https://img.shields.io/badge/python-3.12-blue">
@@ -21,7 +21,7 @@
 | 🧬 **IDH 突變分類(影像)** | 4 模態 MRI → IDH mutant/wildtype | DenseNet121 3D (ROI) |
 | 🔬 **IDH 突變分類(分子)** | RNA-seq / methylation → IDH 狀態 | LightGBM / MLP 多體學融合 |
 
-> IDH 突變狀態是膠質瘤分級與治療決策的關鍵生物標記;本專案同時從**影像**與**分子**兩個層面預測它。
+> IDH 突變狀態是膠質瘤分級與治療決策的關鍵生物標記；本專案同時從**影像**與**分子**兩個層面預測它。
 
 ---
 
@@ -30,14 +30,14 @@
 | 模型 | 指標 | 數值 |
 |------|------|------|
 | **CT/MRI 偵測** (MobileNetV3-Large) | Accuracy / AUC / ECE | **99.65% / 0.9997 / 0.0026** (TTA 下 AUC 1.0000;溫度校準後 ECE 0.026→0.0026) |
-| **分割** (MONAI Zoo, zero-shot) | Dice | **0.926** |
+| **分割** (MONAI Zoo， zero-shot) | Dice | **0.926** |
 | **分割** (SegResNet 3D) | Dice | 0.910 |
-| **IDH 影像** (DenseNet121 3D, GT-mask ROI) | AUC | 1.00 (single-split) / CV **0.916 ± 0.073** |
+| **IDH 影像** (DenseNet121 3D， GT-mask ROI) | AUC | 1.00 (single-split) / CV **0.916 ± 0.073** |
 | **IDH 影像** (E2E predicted-mask) | Accuracy / AUC | 0.80 / 0.75 |
-| **IDH 分子** (LightGBM, RNA-seq) | Pooled 5-fold CV AUC | **0.992 ± 0.009** |
+| **IDH 分子** (LightGBM， RNA-seq) | Pooled 5-fold CV AUC | **0.992 ± 0.009** |
 | **IDH 分子** (RNA-seq + methylation 多體學) | Pooled 5-fold CV AUC | **0.993 ± 0.007** |
 
-<sub>影像模型訓練資料:TCGA-LGG(45 train / 10 val / 10 test cases);MONAI bundle 另在 BraTS 公開競賽 (~500 cases) 預訓練。分子模型:TCGA-GBM + TCGA-LGG pooled cohort。數字為 in-dataset benchmark,非臨床泛化證據。</sub>
+<sub>影像模型訓練資料:TCGA-LGG(45 train / 10 val / 10 test cases)；MONAI bundle 另在 BraTS 公開競賽 (~500 cases) 預訓練。分子模型:TCGA-GBM + TCGA-LGG pooled cohort。數字為 in-dataset benchmark，非臨床泛化證據。</sub>
 
 ---
 
@@ -78,7 +78,7 @@ uv run infer-monai-zoo \
    methylation      (log2(TPM+1))                (pooled / multi-omics)
 ```
 
-`configs/pipeline_contract.yaml` 定義統一資料契約(輸入模態、標註優先序、split 規則、輸出格式),讓 U-Net / MobileNetV3 / SAM3 / YOLOv11 共用同一套資料語意。
+`configs/pipeline_contract.yaml` 定義統一資料契約(輸入模態、標註優先序、split 規則、輸出格式)，讓 U-Net / MobileNetV3 / SAM3 / YOLOv11 共用同一套資料語意。
 
 ---
 
@@ -159,16 +159,16 @@ src/idh_glioma/
 | 資料集 | 用途 | 狀態 |
 |--------|------|------|
 | **BraTS-TCGA-LGG** (4 模態 flair/t1/t1Gd/t2 + mask) | 分割 + IDH 影像 | ✅ 主力 cohort |
-| **TCGA-GBM / UCSF-PDGM / EGD** | 多來源 IDH 擴充 | 🔌 importer 已接,放入即用 |
+| **TCGA-GBM / UCSF-PDGM / EGD** | 多來源 IDH 擴充 | 🔌 importer 已接，放入即用 |
 | **TCGA-GBM + LGG 分子層** (RNA-seq / methylation) | 分子 IDH | ✅ |
-| **Kaggle CT/MRI** | 二元腫瘤偵測 | ✅ (6,732 train / 1,443 test) |
+| **Kaggle CT/MRI** | 二元腫瘤偵測 | ✅ (6，732 train / 1，443 test) |
 
-> ⚠️ `datasets/MRIBrainTumor/`(2020 單模態挑戰賽)**已停用** —— 早期用 4 個 symlink 假裝多模態導致 Dice 低落,現已移除。分割與 IDH 分類統一使用真 4 模態的 TCGA-LGG。
+> ⚠️ `datasets/MRIBrainTumor/`(2020 單模態挑戰賽)**已停用** —— 早期用 4 個 symlink 假裝多模態導致 Dice 低落，現已移除。分割與 IDH 分類統一使用真 4 模態的 TCGA-LGG。
 
 <details>
 <summary><b>IDH 標籤準備 (cBioPortal)</b></summary>
 
-`artifacts/idh_labels.csv` 已從 cBioPortal 公開臨床資料填好(study `lgggbm_tcga_pub` 的 `IDH_STATUS`,64/65 cases 匹配)。格式:
+`artifacts/idh_labels.csv` 已從 cBioPortal 公開臨床資料填好(study `lgggbm_tcga_pub` 的 `IDH_STATUS`，64/65 cases 匹配)。格式:
 
 ```csv
 case_id,idh_label     # 0 = IDH wildtype, 1 = IDH mutant
@@ -204,16 +204,16 @@ uv run prepare-idh-multisource \
   --output artifacts/manifest_v2.json
 ```
 
-`manifest_v2` 保留 training 相容欄位 (`case_id` / `modalities` / `mask_path` / `idh_label`),並加上 `source_dataset` / `cohort_id` / `acquisition_stage` / `qc_flags` / `provenance` 等多來源資訊。完整 contract 見 `configs/idh_manifest_v2_contract.yaml`。
+`manifest_v2` 保留 training 相容欄位 (`case_id` / `modalities` / `mask_path` / `idh_label`)，並加上 `source_dataset` / `cohort_id` / `acquisition_stage` / `qc_flags` / `provenance` 等多來源資訊。完整 contract 見 `configs/idh_manifest_v2_contract.yaml`。
 
-支援的來源與預設路徑、各資料集命名規則(T1c/t1ce → t1Gd alias 等)、各來源 label join 表格式,詳見 `prepare_idh_multisource.py` 的 docstring。
+支援的來源與預設路徑、各資料集命名規則(T1c/t1ce → t1Gd alias 等)、各來源 label join 表格式，詳見 `prepare_idh_multisource.py` 的 docstring。
 </details>
 
 ---
 
 ## 🔬 分子 IDH (RNA-seq / 多體學)
 
-與影像 pipeline 並行的「分子層」路徑,使用 TCGA-GBM + LGG 的 RNA-seq(`log2(TPM+1)`)與 public masked MAF 標籤。
+與影像 pipeline 並行的「分子層」路徑，使用 TCGA-GBM + LGG 的 RNA-seq(`log2(TPM+1)`)與 public masked MAF 標籤。
 
 ```bash
 # 1) Pooled 分子 artifacts
@@ -239,9 +239,9 @@ uv run eval-idh-molecular  --modalities rnaseq methylation --input-dir artifacts
 ```
 
 最新結果:
-- Pooled 5-fold CV best AUC **0.993 ± 0.007**(MLP, early concat)
-- Source-holdout best AUC **0.985**(LGG→GBM, MLP)/ **0.977**(GBM→LGG, Logistic)
-- GBM minority AUPRC best **0.9502**(per-modality LightGBM, late fusion via mean of probs)
+- Pooled 5-fold CV best AUC **0.993 ± 0.007**(MLP， early concat)
+- Source-holdout best AUC **0.985**(LGG→GBM， MLP)/ **0.977**(GBM→LGG， Logistic)
+- GBM minority AUPRC best **0.9502**(per-modality LightGBM， late fusion via mean of probs)
   → 勝過 RNA-seq-only LightGBM(0.9469)與 early-concat LightGBM(0.9425)
 
 重現 late-fusion:`uv run python scripts/exp_late_fusion_idh.py --input-dir artifacts/molecular_multimodal --output artifacts/molecular_idh_multimodal_eval/late_fusion_results.json`
@@ -252,10 +252,10 @@ uv run eval-idh-molecular  --modalities rnaseq methylation --input-dir artifacts
 ## 🧪 訓練要點 (best practices)
 
 - **分割**:Focal + Dice loss、mask resize 一律 `mode="nearest"`、cosine warmup、依 val Dice 存檔。
-- **CT/MRI 偵測**:MobileNetV3-Large + ImageNet 預訓練、cosine warmup、label smoothing 0.05、EMA(0.999)、**依 val AUC 存檔**、可選 `--tta`(水平翻轉平均)、**溫度校準**(`calibrate_ct_temperature.py`,T≈0.51,ECE→0.0026,不影響準確率)。
+- **CT/MRI 偵測**:MobileNetV3-Large + ImageNet 預訓練、cosine warmup、label smoothing 0.05、EMA(0.999)、**依 val AUC 存檔**、可選 `--tta`(水平翻轉平均)、**溫度校準**(`calibrate_ct_temperature.py`，T≈0.51，ECE→0.0026，不影響準確率)。
 - **IDH 影像**:3 模態 z-score(非 ImageNet 正規化)、`pos_weight = sqrt(neg/pos)` 處理 imbalance、bbox jitter 增強。
 - **效能**:`channels_last`、AMP、TF32、`pin_memory` + `non_blocking`、NIfTI `lru_cache` per-worker 清快取。
-- **常見坑**:不要對 MobileNetV3 用 `torch.jit.trace`(SE block 有資料相依控制流);root 分割區常 99% 滿,pip 安裝用 `TMPDIR=/mnt/8tb_hdd2/johnson/tmp`。
+- **常見坑**:不要對 MobileNetV3 用 `torch.jit.trace`(SE block 有資料相依控制流);root 分割區常 99% 滿，pip 安裝用 `TMPDIR=/mnt/8tb_hdd2/johnson/tmp`。
 
 ---
 
@@ -280,7 +280,7 @@ Base image:`pytorch/pytorch:2.5.1-cuda12.1-cudnn9-runtime`
 | **YOLOv11** | `idh_glioma.integrations.yolov11_runner` | detect / segment / classify |
 | **YOLO 匯出** | `idh_glioma.data.export_yolo` | manifest → YOLO 格式 |
 
-參考:[SAM3](https://github.com/facebookresearch/sam3) ·  [SAM3 權重](https://huggingface.co/facebook/sam3) ·  [YOLOv11](https://docs.ultralytics.com/models/yolo11/)
+參考：[SAM3](https://github.com/facebookresearch/sam3) ·  [SAM3 權重](https://huggingface.co/facebook/sam3) ·  [YOLOv11](https://docs.ultralytics.com/models/yolo11/)
 
 ---
 
@@ -294,20 +294,19 @@ uv build                         # 打包 wheel
 
 - Python 3.12(`.python-version` 釘住)
 - 所有模組使用 `from __future__ import annotations`
-- 每次實驗後 `uv lock` 並提交 `uv.lock`,避免套件漂移
+- 每次實驗後 `uv lock` 並提交 `uv.lock`，避免套件漂移
 
 ---
 
 ## 🗺️ Roadmap
 
-- [x] 加上 **LICENSE**(Apache-2.0)
-- [x] CT 偵測補 **ECE 校準指標** + **溫度校準**(`eval-ct` 輸出 ECE;`scripts/calibrate_ct_temperature.py` 將 ECE 降到 0.0026)
-- [ ] 多分類腫瘤**類型**(glioma / meningioma / pituitary)
-- [ ] CI/CD(GitHub Actions:pytest + type check)
-- [ ] 放入真實 TCGA-GBM / UCSF-PDGM / EGD,跑 source-holdout 泛化
+- [x] CT 偵測補 **ECE 校準指標** + **溫度校準** (`eval-ct` 輸出 ECE;`scripts/calibrate_ct_temperature.py` 將 ECE 降到 0.0026)
+- [ ] 多分類腫瘤**類型** (glioma / meningioma / pituitary)
+- [ ] CI/CD (GitHub Actions:pytest + type check)
+- [ ] 放入真實 TCGA-GBM / UCSF-PDGM / EGD，跑 source-holdout 泛化
 
 ---
 
 ## 📄 License
 
-[Apache License 2.0](LICENSE) © 2026 Johnson Wang. 原始碼、腳本與文件依此授權;資料集與模型權重保留各自的授權條款。
+[Apache License 2.0](LICENSE) © 2026 Johnson Wang. 原始碼、腳本與文件依此授權；資料集與模型權重保留各自的授權條款。
