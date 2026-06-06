@@ -13,7 +13,7 @@ Outputs
 Usage::
 
     uv run eval-seg-monai
-    uv run eval-seg-monai --ckpt checkpoints/segresnet_tcga.pt
+    uv run eval-seg-monai --ckpt checkpoints/segresnet_tcga.pt   # previous baseline
 """
 
 from __future__ import annotations
@@ -91,7 +91,7 @@ def _build_transforms():
 def parse_args():
     p = argparse.ArgumentParser(description="Evaluate MONAI SegResNet on TCGA-LGG test split")
     p.add_argument("--manifest", type=Path, default=Path("artifacts/manifest.json"))
-    p.add_argument("--ckpt", type=Path, default=Path("checkpoints/segresnet_tcga.pt"))
+    p.add_argument("--ckpt", type=Path, default=Path("checkpoints/segresnet_brats2021.pt"))
     p.add_argument("--roi-size", type=int, nargs=3, default=(96, 96, 96))
     p.add_argument("--sw-batch-size", type=int, default=2)
     p.add_argument("--overlap", type=float, default=0.5)

@@ -4,12 +4,116 @@
   "graph": {},
   "nodes": [
     {
+      "label": "test_prepare_dataset.py",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L1",
+      "id": "test_prepare_dataset",
+      "community": 13
+    },
+    {
+      "label": "_touch()",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L24",
+      "id": "test_prepare_dataset_touch",
+      "community": 13
+    },
+    {
+      "label": "_make_tcga_case()",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L29",
+      "id": "test_prepare_dataset_make_tcga_case",
+      "community": 13
+    },
+    {
+      "label": "_make_brats2021_case()",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L38",
+      "id": "test_prepare_dataset_make_brats2021_case",
+      "community": 13
+    },
+    {
+      "label": "test_tcga_case_id_and_date_unchanged()",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L50",
+      "id": "test_prepare_dataset_test_tcga_case_id_and_date_unchanged",
+      "community": 13
+    },
+    {
+      "label": "test_tcga_prefers_manually_corrected_mask()",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L60",
+      "id": "test_prepare_dataset_test_tcga_prefers_manually_corrected_mask",
+      "community": 13
+    },
+    {
+      "label": "test_tcga_falls_back_to_plain_glistrboost()",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L70",
+      "id": "test_prepare_dataset_test_tcga_falls_back_to_plain_glistrboost",
+      "community": 13
+    },
+    {
+      "label": "test_brats2021_case_id_is_dir_name()",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L83",
+      "id": "test_prepare_dataset_test_brats2021_case_id_is_dir_name",
+      "community": 13
+    },
+    {
+      "label": "test_brats2021_t1ce_is_mapped_to_t1Gd()",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L92",
+      "id": "test_prepare_dataset_test_brats2021_t1ce_is_mapped_to_t1gd",
+      "community": 13
+    },
+    {
+      "label": "test_brats2021_seg_is_used_as_mask()",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L102",
+      "id": "test_prepare_dataset_test_brats2021_seg_is_used_as_mask",
+      "community": 13
+    },
+    {
+      "label": "test_brats2021_missing_modality_returns_none()",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L110",
+      "id": "test_prepare_dataset_test_brats2021_missing_modality_returns_none",
+      "community": 13
+    },
+    {
+      "label": "test_parses_real_brats2021_case()",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L130",
+      "id": "test_prepare_dataset_test_parses_real_brats2021_case",
+      "community": 13
+    },
+    {
+      "label": "Unit tests for ``prepare_dataset.parse_case_folder``.  Covers two case-folder la",
+      "file_type": "rationale",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L1",
+      "id": "test_prepare_dataset_rationale_1",
+      "community": 13
+    },
+    {
       "label": "test_e2e_roi.py",
       "file_type": "code",
       "source_file": "tests/test_e2e_roi.py",
       "source_location": "L1",
       "id": "test_e2e_roi",
-      "community": 27
+      "community": 29
     },
     {
       "label": "test_apply_mask_postprocess_keeps_largest_component()",
@@ -17,7 +121,7 @@
       "source_file": "tests/test_e2e_roi.py",
       "source_location": "L15",
       "id": "test_e2e_roi_test_apply_mask_postprocess_keeps_largest_component",
-      "community": 27
+      "community": 29
     },
     {
       "label": "test_build_roi_boxes_clips_expanded_views_to_volume_bounds()",
@@ -25,7 +129,7 @@
       "source_file": "tests/test_e2e_roi.py",
       "source_location": "L23",
       "id": "test_e2e_roi_test_build_roi_boxes_clips_expanded_views_to_volume_bounds",
-      "community": 27
+      "community": 29
     },
     {
       "label": "test_aggregate_probs_supports_mean_and_median()",
@@ -33,7 +137,7 @@
       "source_file": "tests/test_e2e_roi.py",
       "source_location": "L33",
       "id": "test_e2e_roi_test_aggregate_probs_supports_mean_and_median",
-      "community": 27
+      "community": 29
     },
     {
       "label": "test_eval_pipeline_aggregation_contract_matches_shared_helper()",
@@ -41,7 +145,7 @@
       "source_file": "tests/test_e2e_roi.py",
       "source_location": "L38",
       "id": "test_e2e_roi_test_eval_pipeline_aggregation_contract_matches_shared_helper",
-      "community": 27
+      "community": 29
     },
     {
       "label": "Unit tests for end-to-end ROI helpers used by the MONAI pipeline.",
@@ -49,7 +153,7 @@
       "source_file": "tests/test_e2e_roi.py",
       "source_location": "L1",
       "id": "test_e2e_roi_rationale_1",
-      "community": 27
+      "community": 29
     },
     {
       "label": "test_prepare_idh_multisource.py",
@@ -57,7 +161,7 @@
       "source_file": "tests/test_prepare_idh_multisource.py",
       "source_location": "L1",
       "id": "test_prepare_idh_multisource",
-      "community": 8
+      "community": 10
     },
     {
       "label": "test_classify_modalities_normalizes_t1ce_alias()",
@@ -65,7 +169,7 @@
       "source_file": "tests/test_prepare_idh_multisource.py",
       "source_location": "L18",
       "id": "test_prepare_idh_multisource_test_classify_modalities_normalizes_t1ce_alias",
-      "community": 8
+      "community": 10
     },
     {
       "label": "test_classify_modalities_normalizes_ucsf_pdgm_aliases()",
@@ -73,7 +177,7 @@
       "source_file": "tests/test_prepare_idh_multisource.py",
       "source_location": "L32",
       "id": "test_prepare_idh_multisource_test_classify_modalities_normalizes_ucsf_pdgm_aliases",
-      "community": 8
+      "community": 10
     },
     {
       "label": "test_classify_modalities_normalizes_egd_aliases()",
@@ -81,7 +185,7 @@
       "source_file": "tests/test_prepare_idh_multisource.py",
       "source_location": "L46",
       "id": "test_prepare_idh_multisource_test_classify_modalities_normalizes_egd_aliases",
-      "community": 8
+      "community": 10
     },
     {
       "label": "test_classify_modalities_requires_all_four_modalities()",
@@ -89,7 +193,7 @@
       "source_file": "tests/test_prepare_idh_multisource.py",
       "source_location": "L60",
       "id": "test_prepare_idh_multisource_test_classify_modalities_requires_all_four_modalities",
-      "community": 8
+      "community": 10
     },
     {
       "label": "test_build_multisource_manifest_allows_maskless_classification_case()",
@@ -97,7 +201,7 @@
       "source_file": "tests/test_prepare_idh_multisource.py",
       "source_location": "L71",
       "id": "test_prepare_idh_multisource_test_build_multisource_manifest_allows_maskless_classification_case",
-      "community": 8
+      "community": 10
     },
     {
       "label": "test_split_multisource_records_keeps_external_cohort_out_of_train()",
@@ -105,7 +209,7 @@
       "source_file": "tests/test_prepare_idh_multisource.py",
       "source_location": "L93",
       "id": "test_prepare_idh_multisource_test_split_multisource_records_keeps_external_cohort_out_of_train",
-      "community": 8
+      "community": 10
     },
     {
       "label": "test_split_multisource_records_keeps_unlabeled_cases_in_train()",
@@ -113,7 +217,7 @@
       "source_file": "tests/test_prepare_idh_multisource.py",
       "source_location": "L129",
       "id": "test_prepare_idh_multisource_test_split_multisource_records_keeps_unlabeled_cases_in_train",
-      "community": 8
+      "community": 10
     },
     {
       "label": "test_infer_source_root_finds_default_lgg_and_gbm_locations()",
@@ -121,7 +225,7 @@
       "source_file": "tests/test_prepare_idh_multisource.py",
       "source_location": "L163",
       "id": "test_prepare_idh_multisource_test_infer_source_root_finds_default_lgg_and_gbm_locations",
-      "community": 8
+      "community": 10
     },
     {
       "label": "test_load_label_map_reads_binary_case_labels()",
@@ -129,7 +233,7 @@
       "source_file": "tests/test_prepare_idh_multisource.py",
       "source_location": "L176",
       "id": "test_prepare_idh_multisource_test_load_label_map_reads_binary_case_labels",
-      "community": 8
+      "community": 10
     },
     {
       "label": "test_load_label_map_reads_ucsf_pdgm_metadata_columns()",
@@ -137,7 +241,7 @@
       "source_file": "tests/test_prepare_idh_multisource.py",
       "source_location": "L191",
       "id": "test_prepare_idh_multisource_test_load_label_map_reads_ucsf_pdgm_metadata_columns",
-      "community": 8
+      "community": 10
     },
     {
       "label": "test_load_label_map_reads_tcga_join_columns()",
@@ -145,7 +249,7 @@
       "source_file": "tests/test_prepare_idh_multisource.py",
       "source_location": "L207",
       "id": "test_prepare_idh_multisource_test_load_label_map_reads_tcga_join_columns",
-      "community": 8
+      "community": 10
     },
     {
       "label": "test_load_label_map_reads_egd_label_sheet_columns()",
@@ -153,7 +257,7 @@
       "source_file": "tests/test_prepare_idh_multisource.py",
       "source_location": "L224",
       "id": "test_prepare_idh_multisource_test_load_label_map_reads_egd_label_sheet_columns",
-      "community": 8
+      "community": 10
     },
     {
       "label": "test_build_payload_emits_manifest_v2_shape()",
@@ -161,7 +265,7 @@
       "source_file": "tests/test_prepare_idh_multisource.py",
       "source_location": "L240",
       "id": "test_prepare_idh_multisource_test_build_payload_emits_manifest_v2_shape",
-      "community": 8
+      "community": 10
     },
     {
       "label": "test_e2e_train_roi.py",
@@ -169,7 +273,7 @@
       "source_file": "tests/test_e2e_train_roi.py",
       "source_location": "L1",
       "id": "test_e2e_train_roi",
-      "community": 43
+      "community": 45
     },
     {
       "label": "test_expand_bbox_uniformly_grows_all_sides_and_clips()",
@@ -177,7 +281,7 @@
       "source_file": "tests/test_e2e_train_roi.py",
       "source_location": "L8",
       "id": "test_e2e_train_roi_test_expand_bbox_uniformly_grows_all_sides_and_clips",
-      "community": 43
+      "community": 45
     },
     {
       "label": "test_expand_bbox_uniformly_noop_for_non_positive_extra()",
@@ -185,7 +289,7 @@
       "source_file": "tests/test_e2e_train_roi.py",
       "source_location": "L15",
       "id": "test_e2e_train_roi_test_expand_bbox_uniformly_noop_for_non_positive_extra",
-      "community": 43
+      "community": 45
     },
     {
       "label": "Tests for Phase 2 3D IDH ROI augmentation helpers.",
@@ -193,7 +297,7 @@
       "source_file": "tests/test_e2e_train_roi.py",
       "source_location": "L1",
       "id": "test_e2e_train_roi_rationale_1",
-      "community": 43
+      "community": 45
     },
     {
       "label": "test_idh_dataset.py",
@@ -201,7 +305,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L1",
       "id": "test_idh_dataset",
-      "community": 10
+      "community": 0
     },
     {
       "label": "test_tumor_bbox_empty_returns_none()",
@@ -209,7 +313,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L31",
       "id": "test_idh_dataset_test_tumor_bbox_empty_returns_none",
-      "community": 10
+      "community": 0
     },
     {
       "label": "test_tumor_bbox_tight_with_margin()",
@@ -217,7 +321,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L36",
       "id": "test_idh_dataset_test_tumor_bbox_tight_with_margin",
-      "community": 10
+      "community": 0
     },
     {
       "label": "test_tumor_bbox_clips_at_image_edges()",
@@ -225,7 +329,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L48",
       "id": "test_idh_dataset_test_tumor_bbox_clips_at_image_edges",
-      "community": 10
+      "community": 0
     },
     {
       "label": "test_crop_roi_passthrough_when_bbox_none()",
@@ -233,7 +337,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L60",
       "id": "test_idh_dataset_test_crop_roi_passthrough_when_bbox_none",
-      "community": 10
+      "community": 0
     },
     {
       "label": "test_crop_roi_shapes()",
@@ -241,7 +345,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L66",
       "id": "test_idh_dataset_test_crop_roi_shapes",
-      "community": 10
+      "community": 0
     },
     {
       "label": "test_balanced_sampler_weight_distribution()",
@@ -249,7 +353,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L77",
       "id": "test_idh_dataset_test_balanced_sampler_weight_distribution",
-      "community": 10
+      "community": 0
     },
     {
       "label": "test_balanced_sampler_single_class_falls_back_to_uniform()",
@@ -257,7 +361,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L91",
       "id": "test_idh_dataset_test_balanced_sampler_single_class_falls_back_to_uniform",
-      "community": 10
+      "community": 0
     },
     {
       "label": "_write_synthetic_manifest()",
@@ -265,7 +369,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L104",
       "id": "test_idh_dataset_write_synthetic_manifest",
-      "community": 10
+      "community": 0
     },
     {
       "label": "_fake_volume()",
@@ -273,7 +377,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L128",
       "id": "test_idh_dataset_fake_volume",
-      "community": 10
+      "community": 0
     },
     {
       "label": "test_classification_dataset_roi_returns_expected_shape()",
@@ -281,7 +385,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L137",
       "id": "test_idh_dataset_test_classification_dataset_roi_returns_expected_shape",
-      "community": 10
+      "community": 0
     },
     {
       "label": "test_classification_dataset_no_roi_keeps_full_slice()",
@@ -289,7 +393,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L162",
       "id": "test_idh_dataset_test_classification_dataset_no_roi_keeps_full_slice",
-      "community": 10
+      "community": 0
     },
     {
       "label": "Tests for IDH classification dataset helpers (ROI crop + balanced sampler).  Run",
@@ -297,7 +401,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L1",
       "id": "test_idh_dataset_rationale_1",
-      "community": 10
+      "community": 0
     },
     {
       "label": "Manifest entry pointing at fake nifti paths; load_nifti is monkey-patched in the",
@@ -305,7 +409,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L105",
       "id": "test_idh_dataset_rationale_105",
-      "community": 10
+      "community": 0
     },
     {
       "label": "test_ct_datasets.py",
@@ -425,7 +529,7 @@
       "source_file": "src/idh_glioma/train/__init__.py",
       "source_location": "L1",
       "id": "init",
-      "community": 62
+      "community": 64
     },
     {
       "label": "test_manifest_adapters.py",
@@ -433,7 +537,7 @@
       "source_file": "tests/test_manifest_adapters.py",
       "source_location": "L1",
       "id": "test_manifest_adapters",
-      "community": 63
+      "community": 65
     },
     {
       "label": "test_to_legacy_manifest_record_keeps_training_fields()",
@@ -441,7 +545,7 @@
       "source_file": "tests/test_manifest_adapters.py",
       "source_location": "L6",
       "id": "test_manifest_adapters_test_to_legacy_manifest_record_keeps_training_fields",
-      "community": 63
+      "community": 65
     },
     {
       "label": "test_e2e_calibration_config.py",
@@ -449,7 +553,7 @@
       "source_file": "tests/test_e2e_calibration_config.py",
       "source_location": "L1",
       "id": "test_e2e_calibration_config",
-      "community": 28
+      "community": 30
     },
     {
       "label": "test_load_e2e_config_returns_default_when_file_missing()",
@@ -457,7 +561,7 @@
       "source_file": "tests/test_e2e_calibration_config.py",
       "source_location": "L13",
       "id": "test_e2e_calibration_config_test_load_e2e_config_returns_default_when_file_missing",
-      "community": 28
+      "community": 30
     },
     {
       "label": "test_load_e2e_config_merges_saved_values()",
@@ -465,7 +569,7 @@
       "source_file": "tests/test_e2e_calibration_config.py",
       "source_location": "L20",
       "id": "test_e2e_calibration_config_test_load_e2e_config_merges_saved_values",
-      "community": 28
+      "community": 30
     },
     {
       "label": "test_macro_f1_threshold_search_prefers_balanced_threshold()",
@@ -473,7 +577,7 @@
       "source_file": "tests/test_e2e_calibration_config.py",
       "source_location": "L29",
       "id": "test_e2e_calibration_config_test_macro_f1_threshold_search_prefers_balanced_threshold",
-      "community": 28
+      "community": 30
     },
     {
       "label": "test_threshold_search_breaks_macro_f1_ties_toward_preferred_threshold()",
@@ -481,7 +585,7 @@
       "source_file": "tests/test_e2e_calibration_config.py",
       "source_location": "L38",
       "id": "test_e2e_calibration_config_test_threshold_search_breaks_macro_f1_ties_toward_preferred_threshold",
-      "community": 28
+      "community": 30
     },
     {
       "label": "Tests for end-to-end calibration config loading.",
@@ -489,7 +593,71 @@
       "source_file": "tests/test_e2e_calibration_config.py",
       "source_location": "L1",
       "id": "test_e2e_calibration_config_rationale_1",
-      "community": 28
+      "community": 30
+    },
+    {
+      "label": "test_prepare_kaggle_4class.py",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L1",
+      "id": "test_prepare_kaggle_4class",
+      "community": 7
+    },
+    {
+      "label": "_make_fake_kaggle4()",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L23",
+      "id": "test_prepare_kaggle_4class_make_fake_kaggle4",
+      "community": 7
+    },
+    {
+      "label": "test_collect_split_dir_counts()",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L33",
+      "id": "test_prepare_kaggle_4class_test_collect_split_dir_counts",
+      "community": 7
+    },
+    {
+      "label": "test_collect_split_dir_missing_class_raises()",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L43",
+      "id": "test_prepare_kaggle_4class_test_collect_split_dir_missing_class_raises",
+      "community": 7
+    },
+    {
+      "label": "test_build_manifest_uses_testing_as_held_out()",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L51",
+      "id": "test_prepare_kaggle_4class_test_build_manifest_uses_testing_as_held_out",
+      "community": 7
+    },
+    {
+      "label": "test_stratified_split_balanced_per_class()",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L60",
+      "id": "test_prepare_kaggle_4class_test_stratified_split_balanced_per_class",
+      "community": 7
+    },
+    {
+      "label": "test_write_manifest_round_trip()",
+      "file_type": "code",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L72",
+      "id": "test_prepare_kaggle_4class_test_write_manifest_round_trip",
+      "community": 7
+    },
+    {
+      "label": "Tests for the Kaggle 4-class manifest builder.",
+      "file_type": "rationale",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L1",
+      "id": "test_prepare_kaggle_4class_rationale_1",
+      "community": 7
     },
     {
       "label": "calibrate_idh_threshold.py",
@@ -497,7 +665,7 @@
       "source_file": "scripts/calibrate_idh_threshold.py",
       "source_location": "L1",
       "id": "calibrate_idh_threshold",
-      "community": 44
+      "community": 46
     },
     {
       "label": "_case_prob()",
@@ -505,7 +673,7 @@
       "source_file": "scripts/calibrate_idh_threshold.py",
       "source_location": "L29",
       "id": "calibrate_idh_threshold_case_prob",
-      "community": 44
+      "community": 46
     },
     {
       "label": "main()",
@@ -513,7 +681,7 @@
       "source_file": "scripts/calibrate_idh_threshold.py",
       "source_location": "L54",
       "id": "calibrate_idh_threshold_main",
-      "community": 44
+      "community": 46
     },
     {
       "label": "Pick the optimal IDH classification threshold on the val split.  Uses case-level",
@@ -521,7 +689,7 @@
       "source_file": "scripts/calibrate_idh_threshold.py",
       "source_location": "L1",
       "id": "calibrate_idh_threshold_rationale_1",
-      "community": 44
+      "community": 46
     },
     {
       "label": "cv_idh_monai.py",
@@ -529,7 +697,7 @@
       "source_file": "scripts/cv_idh_monai.py",
       "source_location": "L1",
       "id": "cv_idh_monai",
-      "community": 56
+      "community": 58
     },
     {
       "label": "main()",
@@ -537,7 +705,7 @@
       "source_file": "scripts/cv_idh_monai.py",
       "source_location": "L31",
       "id": "cv_idh_monai_main",
-      "community": 56
+      "community": 58
     },
     {
       "label": "5-fold stratified CV for the 3D MONAI IDH classifier.  Pools every labelled case",
@@ -545,7 +713,7 @@
       "source_file": "scripts/cv_idh_monai.py",
       "source_location": "L1",
       "id": "cv_idh_monai_rationale_1",
-      "community": 56
+      "community": 58
     },
     {
       "label": "_make_e2e_masks.py",
@@ -553,7 +721,7 @@
       "source_file": "scripts/_make_e2e_masks.py",
       "source_location": "L1",
       "id": "make_e2e_masks",
-      "community": 45
+      "community": 47
     },
     {
       "label": "parse_args()",
@@ -561,7 +729,7 @@
       "source_file": "scripts/_make_e2e_masks.py",
       "source_location": "L28",
       "id": "make_e2e_masks_parse_args",
-      "community": 45
+      "community": 47
     },
     {
       "label": "main()",
@@ -569,7 +737,7 @@
       "source_file": "scripts/_make_e2e_masks.py",
       "source_location": "L44",
       "id": "make_e2e_masks_main",
-      "community": 45
+      "community": 47
     },
     {
       "label": "Generate and save MONAI-bundle segmentation masks for every case in a split.  Re",
@@ -577,7 +745,7 @@
       "source_file": "scripts/_make_e2e_masks.py",
       "source_location": "L1",
       "id": "make_e2e_masks_rationale_1",
-      "community": 45
+      "community": 47
     },
     {
       "label": "exp_late_fusion_idh.py",
@@ -1017,7 +1185,7 @@
       "source_file": "scripts/cv_idh.py",
       "source_location": "L1",
       "id": "cv_idh",
-      "community": 57
+      "community": 59
     },
     {
       "label": "main()",
@@ -1025,7 +1193,7 @@
       "source_file": "scripts/cv_idh.py",
       "source_location": "L33",
       "id": "cv_idh_main",
-      "community": 57
+      "community": 59
     },
     {
       "label": "5-fold stratified cross-validation for the IDH classifier.  Pools every labelled",
@@ -1033,7 +1201,7 @@
       "source_file": "scripts/cv_idh.py",
       "source_location": "L1",
       "id": "cv_idh_rationale_1",
-      "community": 57
+      "community": 59
     },
     {
       "label": "batch_unet_inference.py",
@@ -1041,7 +1209,7 @@
       "source_file": "scripts/batch_unet_inference.py",
       "source_location": "L1",
       "id": "batch_unet_inference",
-      "community": 14
+      "community": 16
     },
     {
       "label": "zscore()",
@@ -1049,7 +1217,7 @@
       "source_file": "scripts/batch_unet_inference.py",
       "source_location": "L14",
       "id": "batch_unet_inference_zscore",
-      "community": 14
+      "community": 16
     },
     {
       "label": "find_modality()",
@@ -1057,7 +1225,7 @@
       "source_file": "scripts/batch_unet_inference.py",
       "source_location": "L18",
       "id": "batch_unet_inference_find_modality",
-      "community": 14
+      "community": 16
     },
     {
       "label": "load_case()",
@@ -1065,7 +1233,7 @@
       "source_file": "scripts/batch_unet_inference.py",
       "source_location": "L25",
       "id": "batch_unet_inference_load_case",
-      "community": 14
+      "community": 16
     },
     {
       "label": "infer_case()",
@@ -1073,7 +1241,7 @@
       "source_file": "scripts/batch_unet_inference.py",
       "source_location": "L43",
       "id": "batch_unet_inference_infer_case",
-      "community": 14
+      "community": 16
     },
     {
       "label": "save_outputs()",
@@ -1081,7 +1249,7 @@
       "source_file": "scripts/batch_unet_inference.py",
       "source_location": "L74",
       "id": "batch_unet_inference_save_outputs",
-      "community": 14
+      "community": 16
     },
     {
       "label": "collect_cases()",
@@ -1089,7 +1257,7 @@
       "source_file": "scripts/batch_unet_inference.py",
       "source_location": "L111",
       "id": "batch_unet_inference_collect_cases",
-      "community": 14
+      "community": 16
     },
     {
       "label": "parse_args()",
@@ -1097,7 +1265,7 @@
       "source_file": "scripts/batch_unet_inference.py",
       "source_location": "L118",
       "id": "batch_unet_inference_parse_args",
-      "community": 14
+      "community": 16
     },
     {
       "label": "main()",
@@ -1105,7 +1273,7 @@
       "source_file": "scripts/batch_unet_inference.py",
       "source_location": "L139",
       "id": "batch_unet_inference_main",
-      "community": 14
+      "community": 16
     },
     {
       "label": "infer_segresnet_native.py",
@@ -1113,7 +1281,7 @@
       "source_file": "scripts/infer_segresnet_native.py",
       "source_location": "L1",
       "id": "infer_segresnet_native",
-      "community": 29
+      "community": 31
     },
     {
       "label": "_records_to_monai()",
@@ -1121,7 +1289,7 @@
       "source_file": "scripts/infer_segresnet_native.py",
       "source_location": "L43",
       "id": "infer_segresnet_native_records_to_monai",
-      "community": 29
+      "community": 31
     },
     {
       "label": "_build_transforms()",
@@ -1129,7 +1297,7 @@
       "source_file": "scripts/infer_segresnet_native.py",
       "source_location": "L60",
       "id": "infer_segresnet_native_build_transforms",
-      "community": 29
+      "community": 31
     },
     {
       "label": "parse_args()",
@@ -1137,7 +1305,7 @@
       "source_file": "scripts/infer_segresnet_native.py",
       "source_location": "L73",
       "id": "infer_segresnet_native_parse_args",
-      "community": 29
+      "community": 31
     },
     {
       "label": "main()",
@@ -1145,7 +1313,7 @@
       "source_file": "scripts/infer_segresnet_native.py",
       "source_location": "L87",
       "id": "infer_segresnet_native_main",
-      "community": 29
+      "community": 31
     },
     {
       "label": "Generate native-space SegResNet 3D segmentation masks for chosen cases.  `eval-s",
@@ -1153,7 +1321,7 @@
       "source_file": "scripts/infer_segresnet_native.py",
       "source_location": "L1",
       "id": "infer_segresnet_native_rationale_1",
-      "community": 29
+      "community": 31
     },
     {
       "label": "calibrate_idh_e2e.py",
@@ -1161,7 +1329,7 @@
       "source_file": "scripts/calibrate_idh_e2e.py",
       "source_location": "L1",
       "id": "calibrate_idh_e2e",
-      "community": 21
+      "community": 23
     },
     {
       "label": "_parse_view_margin_set()",
@@ -1169,7 +1337,7 @@
       "source_file": "scripts/calibrate_idh_e2e.py",
       "source_location": "L35",
       "id": "calibrate_idh_e2e_parse_view_margin_set",
-      "community": 21
+      "community": 23
     },
     {
       "label": "parse_args()",
@@ -1177,7 +1345,7 @@
       "source_file": "scripts/calibrate_idh_e2e.py",
       "source_location": "L39",
       "id": "calibrate_idh_e2e_parse_args",
-      "community": 21
+      "community": 23
     },
     {
       "label": "_load_models()",
@@ -1185,7 +1353,7 @@
       "source_file": "scripts/calibrate_idh_e2e.py",
       "source_location": "L71",
       "id": "calibrate_idh_e2e_load_models",
-      "community": 21
+      "community": 23
     },
     {
       "label": "_predict_seg_mask()",
@@ -1193,7 +1361,7 @@
       "source_file": "scripts/calibrate_idh_e2e.py",
       "source_location": "L97",
       "id": "calibrate_idh_e2e_predict_seg_mask",
-      "community": 21
+      "community": 23
     },
     {
       "label": "main()",
@@ -1201,7 +1369,7 @@
       "source_file": "scripts/calibrate_idh_e2e.py",
       "source_location": "L123",
       "id": "calibrate_idh_e2e_main",
-      "community": 21
+      "community": 23
     },
     {
       "label": "Tune end-to-end IDH settings on a manifest split using macro F1.  Runs the full",
@@ -1209,7 +1377,55 @@
       "source_file": "scripts/calibrate_idh_e2e.py",
       "source_location": "L1",
       "id": "calibrate_idh_e2e_rationale_1",
-      "community": 21
+      "community": 23
+    },
+    {
+      "label": "download_hf_brats2021.py",
+      "file_type": "code",
+      "source_file": "scripts/download_hf_brats2021.py",
+      "source_location": "L1",
+      "id": "download_hf_brats2021",
+      "community": 32
+    },
+    {
+      "label": "list_cases()",
+      "file_type": "code",
+      "source_file": "scripts/download_hf_brats2021.py",
+      "source_location": "L38",
+      "id": "download_hf_brats2021_list_cases",
+      "community": 32
+    },
+    {
+      "label": "download_cases()",
+      "file_type": "code",
+      "source_file": "scripts/download_hf_brats2021.py",
+      "source_location": "L50",
+      "id": "download_hf_brats2021_download_cases",
+      "community": 32
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "scripts/download_hf_brats2021.py",
+      "source_location": "L68",
+      "id": "download_hf_brats2021_main",
+      "community": 32
+    },
+    {
+      "label": "Download the BraTS 2021 mirror hosted on Hugging Face (no auth required).  Sourc",
+      "file_type": "rationale",
+      "source_file": "scripts/download_hf_brats2021.py",
+      "source_location": "L1",
+      "id": "download_hf_brats2021_rationale_1",
+      "community": 32
+    },
+    {
+      "label": "Download all files for the given cases in parallel via snapshot_download.      `",
+      "file_type": "rationale",
+      "source_file": "scripts/download_hf_brats2021.py",
+      "source_location": "L51",
+      "id": "download_hf_brats2021_rationale_51",
+      "community": 32
     },
     {
       "label": "prepare_datalist.py",
@@ -1217,7 +1433,7 @@
       "source_file": "checkpoints/monai_zoo/brats_mri_segmentation/scripts/prepare_datalist.py",
       "source_location": "L1",
       "id": "prepare_datalist",
-      "community": 30
+      "community": 33
     },
     {
       "label": "produce_sample_dict()",
@@ -1225,7 +1441,7 @@
       "source_file": "checkpoints/monai_zoo/brats_mri_segmentation/scripts/prepare_datalist.py",
       "source_location": "L10",
       "id": "prepare_datalist_produce_sample_dict",
-      "community": 30
+      "community": 33
     },
     {
       "label": "produce_datalist()",
@@ -1233,7 +1449,7 @@
       "source_file": "checkpoints/monai_zoo/brats_mri_segmentation/scripts/prepare_datalist.py",
       "source_location": "L29",
       "id": "prepare_datalist_produce_datalist",
-      "community": 30
+      "community": 33
     },
     {
       "label": "main()",
@@ -1241,7 +1457,7 @@
       "source_file": "checkpoints/monai_zoo/brats_mri_segmentation/scripts/prepare_datalist.py",
       "source_location": "L46",
       "id": "prepare_datalist_main",
-      "community": 30
+      "community": 33
     },
     {
       "label": "This function is used to split the dataset.     It will produce \"train_size\" num",
@@ -1249,7 +1465,7 @@
       "source_file": "checkpoints/monai_zoo/brats_mri_segmentation/scripts/prepare_datalist.py",
       "source_location": "L30",
       "id": "prepare_datalist_rationale_30",
-      "community": 30
+      "community": 33
     },
     {
       "label": "split the dataset and output the data list into a json file.",
@@ -1257,7 +1473,7 @@
       "source_file": "checkpoints/monai_zoo/brats_mri_segmentation/scripts/prepare_datalist.py",
       "source_location": "L47",
       "id": "prepare_datalist_rationale_47",
-      "community": 30
+      "community": 33
     },
     {
       "label": "download_tcga_gbm.py",
@@ -1265,7 +1481,7 @@
       "source_file": "datasets/TCGA-GBM/download_tcga_gbm.py",
       "source_location": "L1",
       "id": "download_tcga_gbm",
-      "community": 22
+      "community": 24
     },
     {
       "label": "check_gdc_client()",
@@ -1273,7 +1489,7 @@
       "source_file": "datasets/TCGA-GBM/download_tcga_gbm.py",
       "source_location": "L59",
       "id": "download_tcga_gbm_check_gdc_client",
-      "community": 22
+      "community": 24
     },
     {
       "label": "read_manifest()",
@@ -1281,7 +1497,7 @@
       "source_file": "datasets/TCGA-GBM/download_tcga_gbm.py",
       "source_location": "L68",
       "id": "download_tcga_gbm_read_manifest",
-      "community": 22
+      "community": 24
     },
     {
       "label": "match_file()",
@@ -1289,7 +1505,7 @@
       "source_file": "datasets/TCGA-GBM/download_tcga_gbm.py",
       "source_location": "L84",
       "id": "download_tcga_gbm_match_file",
-      "community": 22
+      "community": 24
     },
     {
       "label": "write_manifest()",
@@ -1297,7 +1513,7 @@
       "source_file": "datasets/TCGA-GBM/download_tcga_gbm.py",
       "source_location": "L94",
       "id": "download_tcga_gbm_write_manifest",
-      "community": 22
+      "community": 24
     },
     {
       "label": "download_manifest()",
@@ -1305,7 +1521,7 @@
       "source_file": "datasets/TCGA-GBM/download_tcga_gbm.py",
       "source_location": "L123",
       "id": "download_tcga_gbm_download_manifest",
-      "community": 22
+      "community": 24
     },
     {
       "label": "main()",
@@ -1313,7 +1529,7 @@
       "source_file": "datasets/TCGA-GBM/download_tcga_gbm.py",
       "source_location": "L141",
       "id": "download_tcga_gbm_main",
-      "community": 22
+      "community": 24
     },
     {
       "label": "app_idh.py",
@@ -1433,7 +1649,7 @@
       "source_file": "src/idh_glioma/train/__init__.py",
       "source_location": "L1",
       "id": "init_rationale_1",
-      "community": 62
+      "community": 64
     },
     {
       "label": "utils.py",
@@ -1441,7 +1657,7 @@
       "source_file": "src/idh_glioma/utils.py",
       "source_location": "L1",
       "id": "utils",
-      "community": 46
+      "community": 48
     },
     {
       "label": "ensure_dir()",
@@ -1449,7 +1665,7 @@
       "source_file": "src/idh_glioma/utils.py",
       "source_location": "L8",
       "id": "utils_ensure_dir",
-      "community": 46
+      "community": 48
     },
     {
       "label": "save_json()",
@@ -1457,7 +1673,7 @@
       "source_file": "src/idh_glioma/utils.py",
       "source_location": "L13",
       "id": "utils_save_json",
-      "community": 46
+      "community": 48
     },
     {
       "label": "load_json()",
@@ -1465,7 +1681,7 @@
       "source_file": "src/idh_glioma/utils.py",
       "source_location": "L19",
       "id": "utils_load_json",
-      "community": 46
+      "community": 48
     },
     {
       "label": "app.py",
@@ -1473,7 +1689,7 @@
       "source_file": "src/idh_glioma/app.py",
       "source_location": "L1",
       "id": "app",
-      "community": 6
+      "community": 8
     },
     {
       "label": "_get_model()",
@@ -1481,7 +1697,7 @@
       "source_file": "src/idh_glioma/app.py",
       "source_location": "L63",
       "id": "app_get_model",
-      "community": 6
+      "community": 8
     },
     {
       "label": "_gradcam()",
@@ -1489,7 +1705,7 @@
       "source_file": "src/idh_glioma/app.py",
       "source_location": "L92",
       "id": "app_gradcam",
-      "community": 6
+      "community": 8
     },
     {
       "label": "_overlay_heatmap()",
@@ -1497,7 +1713,7 @@
       "source_file": "src/idh_glioma/app.py",
       "source_location": "L137",
       "id": "app_overlay_heatmap",
-      "community": 6
+      "community": 8
     },
     {
       "label": "_fig_to_array()",
@@ -1505,7 +1721,7 @@
       "source_file": "src/idh_glioma/app.py",
       "source_location": "L152",
       "id": "app_fig_to_array",
-      "community": 6
+      "community": 8
     },
     {
       "label": "predict()",
@@ -1513,7 +1729,7 @@
       "source_file": "src/idh_glioma/app.py",
       "source_location": "L161",
       "id": "app_predict",
-      "community": 6
+      "community": 8
     },
     {
       "label": "_build_diagnosis()",
@@ -1521,7 +1737,7 @@
       "source_file": "src/idh_glioma/app.py",
       "source_location": "L225",
       "id": "app_build_diagnosis",
-      "community": 6
+      "community": 8
     },
     {
       "label": "_collect_examples()",
@@ -1529,7 +1745,7 @@
       "source_file": "src/idh_glioma/app.py",
       "source_location": "L259",
       "id": "app_collect_examples",
-      "community": 6
+      "community": 8
     },
     {
       "label": "build_app()",
@@ -1537,7 +1753,7 @@
       "source_file": "src/idh_glioma/app.py",
       "source_location": "L270",
       "id": "app_build_app",
-      "community": 6
+      "community": 8
     },
     {
       "label": "main()",
@@ -1545,7 +1761,7 @@
       "source_file": "src/idh_glioma/app.py",
       "source_location": "L467",
       "id": "app_main",
-      "community": 6
+      "community": 8
     },
     {
       "label": "Gradio web interface for CT/MRI brain tumor detection.  Launch::      python -m",
@@ -1553,7 +1769,7 @@
       "source_file": "src/idh_glioma/app.py",
       "source_location": "L1",
       "id": "app_rationale_1",
-      "community": 6
+      "community": 8
     },
     {
       "label": "Compute GradCAM heatmap from last convolutional layer.",
@@ -1561,7 +1777,7 @@
       "source_file": "src/idh_glioma/app.py",
       "source_location": "L97",
       "id": "app_rationale_97",
-      "community": 6
+      "community": 8
     },
     {
       "label": "Overlay GradCAM heatmap on original image.",
@@ -1569,7 +1785,7 @@
       "source_file": "src/idh_glioma/app.py",
       "source_location": "L142",
       "id": "app_rationale_142",
-      "community": 6
+      "community": 8
     },
     {
       "label": "Run tumor detection on uploaded image.      Returns (label_confidences, gradcam_",
@@ -1577,7 +1793,7 @@
       "source_file": "src/idh_glioma/app.py",
       "source_location": "L162",
       "id": "app_rationale_162",
-      "community": 6
+      "community": 8
     },
     {
       "label": "Gather a handful of example images from each category.",
@@ -1585,7 +1801,7 @@
       "source_file": "src/idh_glioma/app.py",
       "source_location": "L260",
       "id": "app_rationale_260",
-      "community": 6
+      "community": 8
     },
     {
       "label": "app_idh_monai.py",
@@ -1593,7 +1809,7 @@
       "source_file": "src/idh_glioma/app_idh_monai.py",
       "source_location": "L1",
       "id": "app_idh_monai",
-      "community": 18
+      "community": 20
     },
     {
       "label": "_device()",
@@ -1601,7 +1817,7 @@
       "source_file": "src/idh_glioma/app_idh_monai.py",
       "source_location": "L45",
       "id": "app_idh_monai_device",
-      "community": 18
+      "community": 20
     },
     {
       "label": "_get_seg()",
@@ -1609,7 +1825,7 @@
       "source_file": "src/idh_glioma/app_idh_monai.py",
       "source_location": "L58",
       "id": "app_idh_monai_get_seg",
-      "community": 18
+      "community": 20
     },
     {
       "label": "_get_cls()",
@@ -1617,7 +1833,7 @@
       "source_file": "src/idh_glioma/app_idh_monai.py",
       "source_location": "L76",
       "id": "app_idh_monai_get_cls",
-      "community": 18
+      "community": 20
     },
     {
       "label": "_render_overview()",
@@ -1625,7 +1841,7 @@
       "source_file": "src/idh_glioma/app_idh_monai.py",
       "source_location": "L96",
       "id": "app_idh_monai_render_overview",
-      "community": 18
+      "community": 20
     },
     {
       "label": "_build_diagnosis()",
@@ -1633,7 +1849,7 @@
       "source_file": "src/idh_glioma/app_idh_monai.py",
       "source_location": "L133",
       "id": "app_idh_monai_build_diagnosis",
-      "community": 18
+      "community": 20
     },
     {
       "label": "predict_idh_monai()",
@@ -1641,7 +1857,7 @@
       "source_file": "src/idh_glioma/app_idh_monai.py",
       "source_location": "L165",
       "id": "app_idh_monai_predict_idh_monai",
-      "community": 18
+      "community": 20
     },
     {
       "label": "3D MONAI IDH classification handler for the Gradio app.  Production pipeline: MO",
@@ -1649,7 +1865,7 @@
       "source_file": "src/idh_glioma/app_idh_monai.py",
       "source_location": "L1",
       "id": "app_idh_monai_rationale_1",
-      "community": 18
+      "community": 20
     },
     {
       "label": "sam3_runner.py",
@@ -1657,7 +1873,7 @@
       "source_file": "src/idh_glioma/integrations/sam3_runner.py",
       "source_location": "L1",
       "id": "sam3_runner",
-      "community": 31
+      "community": 34
     },
     {
       "label": "_load_sam3_model()",
@@ -1665,7 +1881,7 @@
       "source_file": "src/idh_glioma/integrations/sam3_runner.py",
       "source_location": "L11",
       "id": "sam3_runner_load_sam3_model",
-      "community": 31
+      "community": 34
     },
     {
       "label": "_normalize_to_uint8()",
@@ -1673,7 +1889,7 @@
       "source_file": "src/idh_glioma/integrations/sam3_runner.py",
       "source_location": "L24",
       "id": "sam3_runner_normalize_to_uint8",
-      "community": 31
+      "community": 34
     },
     {
       "label": "run_sam3_inference()",
@@ -1681,7 +1897,7 @@
       "source_file": "src/idh_glioma/integrations/sam3_runner.py",
       "source_location": "L30",
       "id": "sam3_runner_run_sam3_inference",
-      "community": 31
+      "community": 34
     },
     {
       "label": "parse_args()",
@@ -1689,7 +1905,7 @@
       "source_file": "src/idh_glioma/integrations/sam3_runner.py",
       "source_location": "L49",
       "id": "sam3_runner_parse_args",
-      "community": 31
+      "community": 34
     },
     {
       "label": "main()",
@@ -1697,7 +1913,7 @@
       "source_file": "src/idh_glioma/integrations/sam3_runner.py",
       "source_location": "L60",
       "id": "sam3_runner_main",
-      "community": 31
+      "community": 34
     },
     {
       "label": "yolov11_runner.py",
@@ -1705,7 +1921,7 @@
       "source_file": "src/idh_glioma/integrations/yolov11_runner.py",
       "source_location": "L1",
       "id": "yolov11_runner",
-      "community": 32
+      "community": 35
     },
     {
       "label": "train_yolov11()",
@@ -1713,7 +1929,7 @@
       "source_file": "src/idh_glioma/integrations/yolov11_runner.py",
       "source_location": "L7",
       "id": "yolov11_runner_train_yolov11",
-      "community": 32
+      "community": 35
     },
     {
       "label": "validate_yolov11()",
@@ -1721,7 +1937,7 @@
       "source_file": "src/idh_glioma/integrations/yolov11_runner.py",
       "source_location": "L18",
       "id": "yolov11_runner_validate_yolov11",
-      "community": 32
+      "community": 35
     },
     {
       "label": "predict_yolov11()",
@@ -1729,7 +1945,7 @@
       "source_file": "src/idh_glioma/integrations/yolov11_runner.py",
       "source_location": "L25",
       "id": "yolov11_runner_predict_yolov11",
-      "community": 32
+      "community": 35
     },
     {
       "label": "parse_args()",
@@ -1737,7 +1953,7 @@
       "source_file": "src/idh_glioma/integrations/yolov11_runner.py",
       "source_location": "L32",
       "id": "yolov11_runner_parse_args",
-      "community": 32
+      "community": 35
     },
     {
       "label": "main()",
@@ -1745,7 +1961,7 @@
       "source_file": "src/idh_glioma/integrations/yolov11_runner.py",
       "source_location": "L56",
       "id": "yolov11_runner_main",
-      "community": 32
+      "community": 35
     },
     {
       "label": "methylation_loader.py",
@@ -1753,7 +1969,7 @@
       "source_file": "src/idh_glioma/molecular/methylation_loader.py",
       "source_location": "L1",
       "id": "methylation_loader",
-      "community": 40
+      "community": 42
     },
     {
       "label": "parse_sesame_txt()",
@@ -1761,7 +1977,7 @@
       "source_file": "src/idh_glioma/molecular/methylation_loader.py",
       "source_location": "L10",
       "id": "methylation_loader_parse_sesame_txt",
-      "community": 40
+      "community": 42
     },
     {
       "label": "discover_methylation_files()",
@@ -1769,7 +1985,7 @@
       "source_file": "src/idh_glioma/molecular/methylation_loader.py",
       "source_location": "L28",
       "id": "methylation_loader_discover_methylation_files",
-      "community": 40
+      "community": 42
     },
     {
       "label": "_platform_from_cpg_count()",
@@ -1777,7 +1993,7 @@
       "source_file": "src/idh_glioma/molecular/methylation_loader.py",
       "source_location": "L42",
       "id": "methylation_loader_platform_from_cpg_count",
-      "community": 40
+      "community": 42
     },
     {
       "label": "build_methylation_matrix()",
@@ -1785,7 +2001,7 @@
       "source_file": "src/idh_glioma/molecular/methylation_loader.py",
       "source_location": "L50",
       "id": "methylation_loader_build_methylation_matrix",
-      "community": 40
+      "community": 42
     },
     {
       "label": "clinical_parser.py",
@@ -1793,7 +2009,7 @@
       "source_file": "src/idh_glioma/molecular/clinical_parser.py",
       "source_location": "L1",
       "id": "clinical_parser",
-      "community": 33
+      "community": 36
     },
     {
       "label": "_local_name()",
@@ -1801,7 +2017,7 @@
       "source_file": "src/idh_glioma/molecular/clinical_parser.py",
       "source_location": "L9",
       "id": "clinical_parser_local_name",
-      "community": 33
+      "community": 36
     },
     {
       "label": "_safe_int()",
@@ -1809,7 +2025,7 @@
       "source_file": "src/idh_glioma/molecular/clinical_parser.py",
       "source_location": "L13",
       "id": "clinical_parser_safe_int",
-      "community": 33
+      "community": 36
     },
     {
       "label": "_find_first_text()",
@@ -1817,7 +2033,7 @@
       "source_file": "src/idh_glioma/molecular/clinical_parser.py",
       "source_location": "L25",
       "id": "clinical_parser_find_first_text",
-      "community": 33
+      "community": 36
     },
     {
       "label": "parse_clinical_xml()",
@@ -1825,7 +2041,7 @@
       "source_file": "src/idh_glioma/molecular/clinical_parser.py",
       "source_location": "L35",
       "id": "clinical_parser_parse_clinical_xml",
-      "community": 33
+      "community": 36
     },
     {
       "label": "aggregate_clinical()",
@@ -1833,7 +2049,7 @@
       "source_file": "src/idh_glioma/molecular/clinical_parser.py",
       "source_location": "L57",
       "id": "clinical_parser_aggregate_clinical",
-      "community": 33
+      "community": 36
     },
     {
       "label": "train.py",
@@ -1841,7 +2057,7 @@
       "source_file": "src/idh_glioma/molecular/train.py",
       "source_location": "L1",
       "id": "train",
-      "community": 15
+      "community": 17
     },
     {
       "label": "_normalize_modalities()",
@@ -1849,7 +2065,7 @@
       "source_file": "src/idh_glioma/molecular/train.py",
       "source_location": "L27",
       "id": "train_normalize_modalities",
-      "community": 15
+      "community": 17
     },
     {
       "label": "_resolve_save_dir()",
@@ -1857,7 +2073,7 @@
       "source_file": "src/idh_glioma/molecular/train.py",
       "source_location": "L37",
       "id": "train_resolve_save_dir",
-      "community": 15
+      "community": 17
     },
     {
       "label": "_load_training_inputs()",
@@ -1865,7 +2081,7 @@
       "source_file": "src/idh_glioma/molecular/train.py",
       "source_location": "L43",
       "id": "train_load_training_inputs",
-      "community": 15
+      "community": 17
     },
     {
       "label": "_aligned_training_set()",
@@ -1873,7 +2089,7 @@
       "source_file": "src/idh_glioma/molecular/train.py",
       "source_location": "L58",
       "id": "train_aligned_training_set",
-      "community": 15
+      "community": 17
     },
     {
       "label": "_select_features_by_modality()",
@@ -1881,7 +2097,7 @@
       "source_file": "src/idh_glioma/molecular/train.py",
       "source_location": "L77",
       "id": "train_select_features_by_modality",
-      "community": 15
+      "community": 17
     },
     {
       "label": "_build_feature_matrix()",
@@ -1889,7 +2105,7 @@
       "source_file": "src/idh_glioma/molecular/train.py",
       "source_location": "L106",
       "id": "train_build_feature_matrix",
-      "community": 15
+      "community": 17
     },
     {
       "label": "parse_args()",
@@ -1897,7 +2113,7 @@
       "source_file": "src/idh_glioma/molecular/train.py",
       "source_location": "L115",
       "id": "train_parse_args",
-      "community": 15
+      "community": 17
     },
     {
       "label": "main()",
@@ -1905,7 +2121,7 @@
       "source_file": "src/idh_glioma/molecular/train.py",
       "source_location": "L126",
       "id": "train_main",
-      "community": 15
+      "community": 17
     },
     {
       "label": "models.py",
@@ -2129,7 +2345,7 @@
       "source_file": "src/idh_glioma/molecular/prepare.py",
       "source_location": "L1",
       "id": "prepare",
-      "community": 12
+      "community": 14
     },
     {
       "label": "_load_file_to_patient_map()",
@@ -2137,7 +2353,7 @@
       "source_file": "src/idh_glioma/molecular/prepare.py",
       "source_location": "L22",
       "id": "prepare_load_file_to_patient_map",
-      "community": 12
+      "community": 14
     },
     {
       "label": "_build_source_bundle()",
@@ -2145,7 +2361,7 @@
       "source_file": "src/idh_glioma/molecular/prepare.py",
       "source_location": "L28",
       "id": "prepare_build_source_bundle",
-      "community": 12
+      "community": 14
     },
     {
       "label": "_merge_labels()",
@@ -2153,7 +2369,7 @@
       "source_file": "src/idh_glioma/molecular/prepare.py",
       "source_location": "L42",
       "id": "prepare_merge_labels",
-      "community": 12
+      "community": 14
     },
     {
       "label": "_build_manifest()",
@@ -2161,7 +2377,7 @@
       "source_file": "src/idh_glioma/molecular/prepare.py",
       "source_location": "L53",
       "id": "prepare_build_manifest",
-      "community": 12
+      "community": 14
     },
     {
       "label": "_resolve_methylation_source_root()",
@@ -2169,7 +2385,7 @@
       "source_file": "src/idh_glioma/molecular/prepare.py",
       "source_location": "L126",
       "id": "prepare_resolve_methylation_source_root",
-      "community": 12
+      "community": 14
     },
     {
       "label": "_load_methylation_file_map()",
@@ -2177,7 +2393,7 @@
       "source_file": "src/idh_glioma/molecular/prepare.py",
       "source_location": "L135",
       "id": "prepare_load_methylation_file_map",
-      "community": 12
+      "community": 14
     },
     {
       "label": "_normalize_modalities()",
@@ -2185,7 +2401,7 @@
       "source_file": "src/idh_glioma/molecular/prepare.py",
       "source_location": "L150",
       "id": "prepare_normalize_modalities",
-      "community": 12
+      "community": 14
     },
     {
       "label": "_resolve_output_dir()",
@@ -2193,7 +2409,7 @@
       "source_file": "src/idh_glioma/molecular/prepare.py",
       "source_location": "L165",
       "id": "prepare_resolve_output_dir",
-      "community": 12
+      "community": 14
     },
     {
       "label": "parse_args()",
@@ -2201,7 +2417,7 @@
       "source_file": "src/idh_glioma/molecular/prepare.py",
       "source_location": "L171",
       "id": "prepare_parse_args",
-      "community": 12
+      "community": 14
     },
     {
       "label": "main()",
@@ -2209,7 +2425,7 @@
       "source_file": "src/idh_glioma/molecular/prepare.py",
       "source_location": "L198",
       "id": "prepare_main",
-      "community": 12
+      "community": 14
     },
     {
       "label": "rnaseq_loader.py",
@@ -2217,7 +2433,7 @@
       "source_file": "src/idh_glioma/molecular/rnaseq_loader.py",
       "source_location": "L1",
       "id": "rnaseq_loader",
-      "community": 19
+      "community": 21
     },
     {
       "label": "ExpressionBuildInfo",
@@ -2225,7 +2441,7 @@
       "source_file": "src/idh_glioma/molecular/rnaseq_loader.py",
       "source_location": "L11",
       "id": "rnaseq_loader_expressionbuildinfo",
-      "community": 19
+      "community": 21
     },
     {
       "label": "_normalize_gene_id()",
@@ -2233,7 +2449,7 @@
       "source_file": "src/idh_glioma/molecular/rnaseq_loader.py",
       "source_location": "L18",
       "id": "rnaseq_loader_normalize_gene_id",
-      "community": 19
+      "community": 21
     },
     {
       "label": "_read_rnaseq_table()",
@@ -2241,7 +2457,7 @@
       "source_file": "src/idh_glioma/molecular/rnaseq_loader.py",
       "source_location": "L22",
       "id": "rnaseq_loader_read_rnaseq_table",
-      "community": 19
+      "community": 21
     },
     {
       "label": "parse_rnaseq_tsv()",
@@ -2249,7 +2465,7 @@
       "source_file": "src/idh_glioma/molecular/rnaseq_loader.py",
       "source_location": "L39",
       "id": "rnaseq_loader_parse_rnaseq_tsv",
-      "community": 19
+      "community": 21
     },
     {
       "label": "_pick_expression_file()",
@@ -2257,7 +2473,7 @@
       "source_file": "src/idh_glioma/molecular/rnaseq_loader.py",
       "source_location": "L52",
       "id": "rnaseq_loader_pick_expression_file",
-      "community": 19
+      "community": 21
     },
     {
       "label": "_select_patient_files()",
@@ -2265,7 +2481,7 @@
       "source_file": "src/idh_glioma/molecular/rnaseq_loader.py",
       "source_location": "L60",
       "id": "rnaseq_loader_select_patient_files",
-      "community": 19
+      "community": 21
     },
     {
       "label": "build_expression_matrix()",
@@ -2273,7 +2489,7 @@
       "source_file": "src/idh_glioma/molecular/rnaseq_loader.py",
       "source_location": "L89",
       "id": "rnaseq_loader_build_expression_matrix",
-      "community": 19
+      "community": 21
     },
     {
       "label": "feature_select.py",
@@ -2281,7 +2497,7 @@
       "source_file": "src/idh_glioma/molecular/feature_select.py",
       "source_location": "L1",
       "id": "feature_select",
-      "community": 34
+      "community": 37
     },
     {
       "label": "load_idh_prior_panel()",
@@ -2289,7 +2505,7 @@
       "source_file": "src/idh_glioma/molecular/feature_select.py",
       "source_location": "L9",
       "id": "feature_select_load_idh_prior_panel",
-      "community": 34
+      "community": 37
     },
     {
       "label": "load_idh_cpg_panel()",
@@ -2297,7 +2513,7 @@
       "source_file": "src/idh_glioma/molecular/feature_select.py",
       "source_location": "L17",
       "id": "feature_select_load_idh_cpg_panel",
-      "community": 34
+      "community": 37
     },
     {
       "label": "_map_prior_to_gene_ids()",
@@ -2305,7 +2521,7 @@
       "source_file": "src/idh_glioma/molecular/feature_select.py",
       "source_location": "L25",
       "id": "feature_select_map_prior_to_gene_ids",
-      "community": 34
+      "community": 37
     },
     {
       "label": "select_features()",
@@ -2313,7 +2529,7 @@
       "source_file": "src/idh_glioma/molecular/feature_select.py",
       "source_location": "L53",
       "id": "feature_select_select_features",
-      "community": 34
+      "community": 37
     },
     {
       "label": "select_features_modality()",
@@ -2321,7 +2537,7 @@
       "source_file": "src/idh_glioma/molecular/feature_select.py",
       "source_location": "L78",
       "id": "feature_select_select_features_modality",
-      "community": 34
+      "community": 37
     },
     {
       "label": "multimodal.py",
@@ -2329,7 +2545,7 @@
       "source_file": "src/idh_glioma/molecular/multimodal.py",
       "source_location": "L1",
       "id": "multimodal",
-      "community": 58
+      "community": 60
     },
     {
       "label": "concat_modalities()",
@@ -2337,7 +2553,7 @@
       "source_file": "src/idh_glioma/molecular/multimodal.py",
       "source_location": "L8",
       "id": "multimodal_concat_modalities",
-      "community": 58
+      "community": 60
     },
     {
       "label": "select_multimodal_features()",
@@ -2345,7 +2561,7 @@
       "source_file": "src/idh_glioma/molecular/multimodal.py",
       "source_location": "L40",
       "id": "multimodal_select_multimodal_features",
-      "community": 58
+      "community": 60
     },
     {
       "label": "gdc_download.py",
@@ -2353,7 +2569,7 @@
       "source_file": "src/idh_glioma/molecular/gdc_download.py",
       "source_location": "L1",
       "id": "gdc_download",
-      "community": 16
+      "community": 18
     },
     {
       "label": "FileRecord",
@@ -2361,7 +2577,7 @@
       "source_file": "src/idh_glioma/molecular/gdc_download.py",
       "source_location": "L31",
       "id": "gdc_download_filerecord",
-      "community": 16
+      "community": 18
     },
     {
       "label": "_build_lgg_filter()",
@@ -2369,7 +2585,7 @@
       "source_file": "src/idh_glioma/molecular/gdc_download.py",
       "source_location": "L41",
       "id": "gdc_download_build_lgg_filter",
-      "community": 16
+      "community": 18
     },
     {
       "label": "query_lgg_files()",
@@ -2377,7 +2593,7 @@
       "source_file": "src/idh_glioma/molecular/gdc_download.py",
       "source_location": "L78",
       "id": "gdc_download_query_lgg_files",
-      "community": 16
+      "community": 18
     },
     {
       "label": "write_manifest()",
@@ -2385,7 +2601,7 @@
       "source_file": "src/idh_glioma/molecular/gdc_download.py",
       "source_location": "L125",
       "id": "gdc_download_write_manifest",
-      "community": 16
+      "community": 18
     },
     {
       "label": "download_via_gdc_client()",
@@ -2393,7 +2609,7 @@
       "source_file": "src/idh_glioma/molecular/gdc_download.py",
       "source_location": "L146",
       "id": "gdc_download_download_via_gdc_client",
-      "community": 16
+      "community": 18
     },
     {
       "label": "download_lgg_dataset()",
@@ -2401,7 +2617,7 @@
       "source_file": "src/idh_glioma/molecular/gdc_download.py",
       "source_location": "L172",
       "id": "gdc_download_download_lgg_dataset",
-      "community": 16
+      "community": 18
     },
     {
       "label": "query_lgg_methylation_files()",
@@ -2409,7 +2625,7 @@
       "source_file": "src/idh_glioma/molecular/gdc_download.py",
       "source_location": "L212",
       "id": "gdc_download_query_lgg_methylation_files",
-      "community": 16
+      "community": 18
     },
     {
       "label": "download_lgg_methylation()",
@@ -2417,7 +2633,7 @@
       "source_file": "src/idh_glioma/molecular/gdc_download.py",
       "source_location": "L216",
       "id": "gdc_download_download_lgg_methylation",
-      "community": 16
+      "community": 18
     },
     {
       "label": "eval.py",
@@ -2425,7 +2641,7 @@
       "source_file": "src/idh_glioma/molecular/eval.py",
       "source_location": "L1",
       "id": "eval",
-      "community": 7
+      "community": 9
     },
     {
       "label": "_normalize_modalities()",
@@ -2433,7 +2649,7 @@
       "source_file": "src/idh_glioma/molecular/eval.py",
       "source_location": "L37",
       "id": "eval_normalize_modalities",
-      "community": 7
+      "community": 9
     },
     {
       "label": "_resolve_output_dir()",
@@ -2441,7 +2657,7 @@
       "source_file": "src/idh_glioma/molecular/eval.py",
       "source_location": "L47",
       "id": "eval_resolve_output_dir",
-      "community": 7
+      "community": 9
     },
     {
       "label": "_load_inputs()",
@@ -2449,7 +2665,7 @@
       "source_file": "src/idh_glioma/molecular/eval.py",
       "source_location": "L53",
       "id": "eval_load_inputs",
-      "community": 7
+      "community": 9
     },
     {
       "label": "_new_model()",
@@ -2457,7 +2673,7 @@
       "source_file": "src/idh_glioma/molecular/eval.py",
       "source_location": "L81",
       "id": "eval_new_model",
-      "community": 7
+      "community": 9
     },
     {
       "label": "_safe_auprc()",
@@ -2465,7 +2681,7 @@
       "source_file": "src/idh_glioma/molecular/eval.py",
       "source_location": "L91",
       "id": "eval_safe_auprc",
-      "community": 7
+      "community": 9
     },
     {
       "label": "_recall_at_specificity()",
@@ -2473,7 +2689,7 @@
       "source_file": "src/idh_glioma/molecular/eval.py",
       "source_location": "L98",
       "id": "eval_recall_at_specificity",
-      "community": 7
+      "community": 9
     },
     {
       "label": "_select_features_by_modality()",
@@ -2481,7 +2697,7 @@
       "source_file": "src/idh_glioma/molecular/eval.py",
       "source_location": "L107",
       "id": "eval_select_features_by_modality",
-      "community": 7
+      "community": 9
     },
     {
       "label": "_build_feature_matrix()",
@@ -2489,7 +2705,7 @@
       "source_file": "src/idh_glioma/molecular/eval.py",
       "source_location": "L140",
       "id": "eval_build_feature_matrix",
-      "community": 7
+      "community": 9
     },
     {
       "label": "_evaluate_pooled_cv()",
@@ -2497,7 +2713,7 @@
       "source_file": "src/idh_glioma/molecular/eval.py",
       "source_location": "L149",
       "id": "eval_evaluate_pooled_cv",
-      "community": 7
+      "community": 9
     },
     {
       "label": "_evaluate_source_holdout()",
@@ -2505,7 +2721,7 @@
       "source_file": "src/idh_glioma/molecular/eval.py",
       "source_location": "L226",
       "id": "eval_evaluate_source_holdout",
-      "community": 7
+      "community": 9
     },
     {
       "label": "_evaluate_minority_metrics()",
@@ -2513,7 +2729,7 @@
       "source_file": "src/idh_glioma/molecular/eval.py",
       "source_location": "L267",
       "id": "eval_evaluate_minority_metrics",
-      "community": 7
+      "community": 9
     },
     {
       "label": "_plot_figures()",
@@ -2521,7 +2737,7 @@
       "source_file": "src/idh_glioma/molecular/eval.py",
       "source_location": "L294",
       "id": "eval_plot_figures",
-      "community": 7
+      "community": 9
     },
     {
       "label": "parse_args()",
@@ -2529,7 +2745,7 @@
       "source_file": "src/idh_glioma/molecular/eval.py",
       "source_location": "L352",
       "id": "eval_parse_args",
-      "community": 7
+      "community": 9
     },
     {
       "label": "main()",
@@ -2537,7 +2753,7 @@
       "source_file": "src/idh_glioma/molecular/eval.py",
       "source_location": "L364",
       "id": "eval_main",
-      "community": 7
+      "community": 9
     },
     {
       "label": "maf_parser.py",
@@ -2545,7 +2761,7 @@
       "source_file": "src/idh_glioma/molecular/maf_parser.py",
       "source_location": "L1",
       "id": "maf_parser",
-      "community": 23
+      "community": 25
     },
     {
       "label": "IDHMutationRecord",
@@ -2553,7 +2769,7 @@
       "source_file": "src/idh_glioma/molecular/maf_parser.py",
       "source_location": "L13",
       "id": "maf_parser_idhmutationrecord",
-      "community": 23
+      "community": 25
     },
     {
       "label": "_patient_id_from_barcode()",
@@ -2561,7 +2777,7 @@
       "source_file": "src/idh_glioma/molecular/maf_parser.py",
       "source_location": "L20",
       "id": "maf_parser_patient_id_from_barcode",
-      "community": 23
+      "community": 25
     },
     {
       "label": "_read_maf_rows()",
@@ -2569,7 +2785,7 @@
       "source_file": "src/idh_glioma/molecular/maf_parser.py",
       "source_location": "L27",
       "id": "maf_parser_read_maf_rows",
-      "community": 23
+      "community": 25
     },
     {
       "label": "_to_float()",
@@ -2577,7 +2793,7 @@
       "source_file": "src/idh_glioma/molecular/maf_parser.py",
       "source_location": "L46",
       "id": "maf_parser_to_float",
-      "community": 23
+      "community": 25
     },
     {
       "label": "extract_idh_status()",
@@ -2585,7 +2801,7 @@
       "source_file": "src/idh_glioma/molecular/maf_parser.py",
       "source_location": "L55",
       "id": "maf_parser_extract_idh_status",
-      "community": 23
+      "community": 25
     },
     {
       "label": "aggregate_idh_labels()",
@@ -2593,7 +2809,7 @@
       "source_file": "src/idh_glioma/molecular/maf_parser.py",
       "source_location": "L85",
       "id": "maf_parser_aggregate_idh_labels",
-      "community": 23
+      "community": 25
     },
     {
       "label": "eval_idh_monai.py",
@@ -2601,7 +2817,7 @@
       "source_file": "src/idh_glioma/eval/eval_idh_monai.py",
       "source_location": "L1",
       "id": "eval_idh_monai",
-      "community": 24
+      "community": 26
     },
     {
       "label": "_zscore()",
@@ -2609,7 +2825,7 @@
       "source_file": "src/idh_glioma/eval/eval_idh_monai.py",
       "source_location": "L51",
       "id": "eval_idh_monai_zscore",
-      "community": 24
+      "community": 26
     },
     {
       "label": "_tumor_bbox_3d()",
@@ -2617,7 +2833,7 @@
       "source_file": "src/idh_glioma/eval/eval_idh_monai.py",
       "source_location": "L56",
       "id": "eval_idh_monai_tumor_bbox_3d",
-      "community": 24
+      "community": 26
     },
     {
       "label": "_predict_case()",
@@ -2625,7 +2841,7 @@
       "source_file": "src/idh_glioma/eval/eval_idh_monai.py",
       "source_location": "L74",
       "id": "eval_idh_monai_predict_case",
-      "community": 24
+      "community": 26
     },
     {
       "label": "parse_args()",
@@ -2633,7 +2849,7 @@
       "source_file": "src/idh_glioma/eval/eval_idh_monai.py",
       "source_location": "L102",
       "id": "eval_idh_monai_parse_args",
-      "community": 24
+      "community": 26
     },
     {
       "label": "main()",
@@ -2641,7 +2857,7 @@
       "source_file": "src/idh_glioma/eval/eval_idh_monai.py",
       "source_location": "L113",
       "id": "eval_idh_monai_main",
-      "community": 24
+      "community": 26
     },
     {
       "label": "Evaluate the MONAI 3D IDH classifier on the held-out test split.  Mirrors eval_i",
@@ -2649,7 +2865,7 @@
       "source_file": "src/idh_glioma/eval/eval_idh_monai.py",
       "source_location": "L1",
       "id": "eval_idh_monai_rationale_1",
-      "community": 24
+      "community": 26
     },
     {
       "label": "eval_idh.py",
@@ -2657,7 +2873,7 @@
       "source_file": "src/idh_glioma/eval/eval_idh.py",
       "source_location": "L1",
       "id": "eval_idh",
-      "community": 25
+      "community": 27
     },
     {
       "label": "_predict_case()",
@@ -2665,7 +2881,7 @@
       "source_file": "src/idh_glioma/eval/eval_idh.py",
       "source_location": "L51",
       "id": "eval_idh_predict_case",
-      "community": 25
+      "community": 27
     },
     {
       "label": "score_test_split()",
@@ -2673,7 +2889,7 @@
       "source_file": "src/idh_glioma/eval/eval_idh.py",
       "source_location": "L98",
       "id": "eval_idh_score_test_split",
-      "community": 25
+      "community": 27
     },
     {
       "label": "parse_args()",
@@ -2681,7 +2897,7 @@
       "source_file": "src/idh_glioma/eval/eval_idh.py",
       "source_location": "L230",
       "id": "eval_idh_parse_args",
-      "community": 25
+      "community": 27
     },
     {
       "label": "main()",
@@ -2689,7 +2905,7 @@
       "source_file": "src/idh_glioma/eval/eval_idh.py",
       "source_location": "L248",
       "id": "eval_idh_main",
-      "community": 25
+      "community": 27
     },
     {
       "label": "Evaluate the MobileNetV3 IDH classifier on the held-out test split.  Slice-level",
@@ -2697,7 +2913,7 @@
       "source_file": "src/idh_glioma/eval/eval_idh.py",
       "source_location": "L1",
       "id": "eval_idh_rationale_1",
-      "community": 25
+      "community": 27
     },
     {
       "label": "Returns (case_prob, slice_probs) -- mean probability across tumor slices.",
@@ -2705,7 +2921,7 @@
       "source_file": "src/idh_glioma/eval/eval_idh.py",
       "source_location": "L61",
       "id": "eval_idh_rationale_61",
-      "community": 25
+      "community": 27
     },
     {
       "label": "eval_ct.py",
@@ -2841,7 +3057,7 @@
       "source_file": "src/idh_glioma/eval/eval_seg_zoo.py",
       "source_location": "L1",
       "id": "eval_seg_zoo",
-      "community": 47
+      "community": 49
     },
     {
       "label": "parse_args()",
@@ -2849,7 +3065,7 @@
       "source_file": "src/idh_glioma/eval/eval_seg_zoo.py",
       "source_location": "L44",
       "id": "eval_seg_zoo_parse_args",
-      "community": 47
+      "community": 49
     },
     {
       "label": "main()",
@@ -2857,7 +3073,7 @@
       "source_file": "src/idh_glioma/eval/eval_seg_zoo.py",
       "source_location": "L59",
       "id": "eval_seg_zoo_main",
-      "community": 47
+      "community": 49
     },
     {
       "label": "Evaluate the MONAI Model Zoo `brats_mri_segmentation` bundle on TCGA-LGG.  Zero-",
@@ -2865,7 +3081,7 @@
       "source_file": "src/idh_glioma/eval/eval_seg_zoo.py",
       "source_location": "L1",
       "id": "eval_seg_zoo_rationale_1",
-      "community": 47
+      "community": 49
     },
     {
       "label": "eval_seg_monai.py",
@@ -2873,7 +3089,7 @@
       "source_file": "src/idh_glioma/eval/eval_seg_monai.py",
       "source_location": "L1",
       "id": "eval_seg_monai",
-      "community": 35
+      "community": 38
     },
     {
       "label": "_records_to_monai()",
@@ -2881,7 +3097,7 @@
       "source_file": "src/idh_glioma/eval/eval_seg_monai.py",
       "source_location": "L55",
       "id": "eval_seg_monai_records_to_monai",
-      "community": 35
+      "community": 38
     },
     {
       "label": "_build_transforms()",
@@ -2889,7 +3105,7 @@
       "source_file": "src/idh_glioma/eval/eval_seg_monai.py",
       "source_location": "L74",
       "id": "eval_seg_monai_build_transforms",
-      "community": 35
+      "community": 38
     },
     {
       "label": "parse_args()",
@@ -2897,7 +3113,7 @@
       "source_file": "src/idh_glioma/eval/eval_seg_monai.py",
       "source_location": "L91",
       "id": "eval_seg_monai_parse_args",
-      "community": 35
+      "community": 38
     },
     {
       "label": "main()",
@@ -2905,7 +3121,7 @@
       "source_file": "src/idh_glioma/eval/eval_seg_monai.py",
       "source_location": "L104",
       "id": "eval_seg_monai_main",
-      "community": 35
+      "community": 38
     },
     {
       "label": "Evaluate the MONAI SegResNet checkpoint on the held-out test split.  Mirrors eva",
@@ -2913,7 +3129,7 @@
       "source_file": "src/idh_glioma/eval/eval_seg_monai.py",
       "source_location": "L1",
       "id": "eval_seg_monai_rationale_1",
-      "community": 35
+      "community": 38
     },
     {
       "label": "eval_e2e_monai_zoo.py",
@@ -2921,7 +3137,7 @@
       "source_file": "src/idh_glioma/eval/eval_e2e_monai_zoo.py",
       "source_location": "L1",
       "id": "eval_e2e_monai_zoo",
-      "community": 48
+      "community": 50
     },
     {
       "label": "parse_args()",
@@ -2929,7 +3145,7 @@
       "source_file": "src/idh_glioma/eval/eval_e2e_monai_zoo.py",
       "source_location": "L54",
       "id": "eval_e2e_monai_zoo_parse_args",
-      "community": 48
+      "community": 50
     },
     {
       "label": "main()",
@@ -2937,7 +3153,7 @@
       "source_file": "src/idh_glioma/eval/eval_e2e_monai_zoo.py",
       "source_location": "L75",
       "id": "eval_e2e_monai_zoo_main",
-      "community": 48
+      "community": 50
     },
     {
       "label": "End-to-end evaluation: MONAI Model Zoo bundle (seg) + 3D DenseNet (cls).  Comput",
@@ -2945,7 +3161,7 @@
       "source_file": "src/idh_glioma/eval/eval_e2e_monai_zoo.py",
       "source_location": "L1",
       "id": "eval_e2e_monai_zoo_rationale_1",
-      "community": 48
+      "community": 50
     },
     {
       "label": "manifest_adapters.py",
@@ -2953,7 +3169,7 @@
       "source_file": "src/idh_glioma/data/manifest_adapters.py",
       "source_location": "L1",
       "id": "manifest_adapters",
-      "community": 59
+      "community": 61
     },
     {
       "label": "to_legacy_manifest_record()",
@@ -2961,7 +3177,7 @@
       "source_file": "src/idh_glioma/data/manifest_adapters.py",
       "source_location": "L4",
       "id": "manifest_adapters_to_legacy_manifest_record",
-      "community": 59
+      "community": 61
     },
     {
       "label": "Project a manifest-v2-style record into the current training shape.",
@@ -2969,7 +3185,7 @@
       "source_file": "src/idh_glioma/data/manifest_adapters.py",
       "source_location": "L5",
       "id": "manifest_adapters_rationale_5",
-      "community": 59
+      "community": 61
     },
     {
       "label": "prepare_idh_multisource.py",
@@ -2977,7 +3193,7 @@
       "source_file": "src/idh_glioma/data/prepare_idh_multisource.py",
       "source_location": "L1",
       "id": "prepare_idh_multisource",
-      "community": 9
+      "community": 11
     },
     {
       "label": "_canonical_suffix()",
@@ -2985,7 +3201,7 @@
       "source_file": "src/idh_glioma/data/prepare_idh_multisource.py",
       "source_location": "L70",
       "id": "prepare_idh_multisource_canonical_suffix",
-      "community": 9
+      "community": 11
     },
     {
       "label": "classify_modalities()",
@@ -2993,7 +3209,7 @@
       "source_file": "src/idh_glioma/data/prepare_idh_multisource.py",
       "source_location": "L81",
       "id": "prepare_idh_multisource_classify_modalities",
-      "community": 9
+      "community": 11
     },
     {
       "label": "_select_mask_path()",
@@ -3001,7 +3217,7 @@
       "source_file": "src/idh_glioma/data/prepare_idh_multisource.py",
       "source_location": "L95",
       "id": "prepare_idh_multisource_select_mask_path",
-      "community": 9
+      "community": 11
     },
     {
       "label": "_infer_date()",
@@ -3009,7 +3225,7 @@
       "source_file": "src/idh_glioma/data/prepare_idh_multisource.py",
       "source_location": "L103",
       "id": "prepare_idh_multisource_infer_date",
-      "community": 9
+      "community": 11
     },
     {
       "label": "infer_source_root()",
@@ -3017,7 +3233,7 @@
       "source_file": "src/idh_glioma/data/prepare_idh_multisource.py",
       "source_location": "L112",
       "id": "prepare_idh_multisource_infer_source_root",
-      "community": 9
+      "community": 11
     },
     {
       "label": "load_label_map()",
@@ -3025,7 +3241,7 @@
       "source_file": "src/idh_glioma/data/prepare_idh_multisource.py",
       "source_location": "L121",
       "id": "prepare_idh_multisource_load_label_map",
-      "community": 9
+      "community": 11
     },
     {
       "label": "collect_case_dirs()",
@@ -3033,7 +3249,7 @@
       "source_file": "src/idh_glioma/data/prepare_idh_multisource.py",
       "source_location": "L192",
       "id": "prepare_idh_multisource_collect_case_dirs",
-      "community": 9
+      "community": 11
     },
     {
       "label": "build_multisource_manifest()",
@@ -3041,7 +3257,7 @@
       "source_file": "src/idh_glioma/data/prepare_idh_multisource.py",
       "source_location": "L196",
       "id": "prepare_idh_multisource_build_multisource_manifest",
-      "community": 9
+      "community": 11
     },
     {
       "label": "split_multisource_records()",
@@ -3049,7 +3265,7 @@
       "source_file": "src/idh_glioma/data/prepare_idh_multisource.py",
       "source_location": "L243",
       "id": "prepare_idh_multisource_split_multisource_records",
-      "community": 9
+      "community": 11
     },
     {
       "label": "build_payload()",
@@ -3057,7 +3273,7 @@
       "source_file": "src/idh_glioma/data/prepare_idh_multisource.py",
       "source_location": "L321",
       "id": "prepare_idh_multisource_build_payload",
-      "community": 9
+      "community": 11
     },
     {
       "label": "write_multisource_manifest()",
@@ -3065,7 +3281,7 @@
       "source_file": "src/idh_glioma/data/prepare_idh_multisource.py",
       "source_location": "L358",
       "id": "prepare_idh_multisource_write_multisource_manifest",
-      "community": 9
+      "community": 11
     },
     {
       "label": "parse_args()",
@@ -3073,7 +3289,7 @@
       "source_file": "src/idh_glioma/data/prepare_idh_multisource.py",
       "source_location": "L369",
       "id": "prepare_idh_multisource_parse_args",
-      "community": 9
+      "community": 11
     },
     {
       "label": "main()",
@@ -3081,7 +3297,7 @@
       "source_file": "src/idh_glioma/data/prepare_idh_multisource.py",
       "source_location": "L400",
       "id": "prepare_idh_multisource_main",
-      "community": 9
+      "community": 11
     },
     {
       "label": "prepare_ct_data.py",
@@ -3220,76 +3436,156 @@
       "community": 1
     },
     {
+      "label": "prepare_kaggle_4class.py",
+      "file_type": "code",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L1",
+      "id": "prepare_kaggle_4class",
+      "community": 7
+    },
+    {
+      "label": "ImageRecord",
+      "file_type": "code",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L40",
+      "id": "prepare_kaggle_4class_imagerecord",
+      "community": 7
+    },
+    {
+      "label": "_collect_split_dir()",
+      "file_type": "code",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L46",
+      "id": "prepare_kaggle_4class_collect_split_dir",
+      "community": 7
+    },
+    {
+      "label": "_stratified_train_val_split()",
+      "file_type": "code",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L63",
+      "id": "prepare_kaggle_4class_stratified_train_val_split",
+      "community": 7
+    },
+    {
+      "label": "build_manifest()",
+      "file_type": "code",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L87",
+      "id": "prepare_kaggle_4class_build_manifest",
+      "community": 7
+    },
+    {
+      "label": "write_manifest()",
+      "file_type": "code",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L104",
+      "id": "prepare_kaggle_4class_write_manifest",
+      "community": 7
+    },
+    {
+      "label": "_summarize()",
+      "file_type": "code",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L112",
+      "id": "prepare_kaggle_4class_summarize",
+      "community": 7
+    },
+    {
+      "label": "parse_args()",
+      "file_type": "code",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L122",
+      "id": "prepare_kaggle_4class_parse_args",
+      "community": 7
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L142",
+      "id": "prepare_kaggle_4class_main",
+      "community": 7
+    },
+    {
+      "label": "Build a train/val/test manifest for the Kaggle 4-class brain-tumor dataset.  Sou",
+      "file_type": "rationale",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L1",
+      "id": "prepare_kaggle_4class_rationale_1",
+      "community": 7
+    },
+    {
       "label": "prepare_dataset.py",
       "file_type": "code",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
       "source_location": "L1",
       "id": "prepare_dataset",
-      "community": 17
+      "community": 19
     },
     {
       "label": "CaseRecord",
       "file_type": "code",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L15",
+      "source_location": "L25",
       "id": "prepare_dataset_caserecord",
-      "community": 17
+      "community": 19
     },
     {
       "label": "parse_case_folder()",
       "file_type": "code",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L23",
+      "source_location": "L33",
       "id": "prepare_dataset_parse_case_folder",
-      "community": 17
+      "community": 19
     },
     {
       "label": "build_manifest()",
       "file_type": "code",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L62",
+      "source_location": "L82",
       "id": "prepare_dataset_build_manifest",
-      "community": 17
+      "community": 19
     },
     {
       "label": "infer_brats_root()",
       "file_type": "code",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L93",
+      "source_location": "L113",
       "id": "prepare_dataset_infer_brats_root",
-      "community": 17
+      "community": 19
     },
     {
       "label": "stratified_split()",
       "file_type": "code",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L126",
+      "source_location": "L146",
       "id": "prepare_dataset_stratified_split",
-      "community": 17
+      "community": 19
     },
     {
       "label": "write_manifest()",
       "file_type": "code",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L188",
+      "source_location": "L208",
       "id": "prepare_dataset_write_manifest",
-      "community": 17
+      "community": 19
     },
     {
       "label": "parse_args()",
       "file_type": "code",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L206",
+      "source_location": "L226",
       "id": "prepare_dataset_parse_args",
-      "community": 17
+      "community": 19
     },
     {
       "label": "main()",
       "file_type": "code",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L224",
+      "source_location": "L244",
       "id": "prepare_dataset_main",
-      "community": 17
+      "community": 19
     },
     {
       "label": "datasets.py",
@@ -3361,7 +3657,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L117",
       "id": "datasets_bratsslicesegmentationdataset",
-      "community": 0
+      "community": 6
     },
     {
       "label": ".__init__()",
@@ -3369,7 +3665,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L118",
       "id": "datasets_bratsslicesegmentationdataset_init",
-      "community": 0
+      "community": 6
     },
     {
       "label": ".__len__()",
@@ -3377,7 +3673,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L133",
       "id": "datasets_bratsslicesegmentationdataset_len",
-      "community": 0
+      "community": 6
     },
     {
       "label": ".__getitem__()",
@@ -3433,7 +3729,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L259",
       "id": "datasets_caselevelsampler",
-      "community": 0
+      "community": 6
     },
     {
       "label": ".__init__()",
@@ -3441,7 +3737,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L266",
       "id": "datasets_caselevelsampler_init",
-      "community": 0
+      "community": 6
     },
     {
       "label": ".__len__()",
@@ -3449,7 +3745,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L278",
       "id": "datasets_caselevelsampler_len",
-      "community": 0
+      "community": 6
     },
     {
       "label": ".__iter__()",
@@ -3457,7 +3753,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L281",
       "id": "datasets_caselevelsampler_iter",
-      "community": 0
+      "community": 6
     },
     {
       "label": "Resize a (C, H, W) tensor to (C, size, size).      Uses nearest-neighbor for mas",
@@ -3513,7 +3809,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L260",
       "id": "datasets_rationale_260",
-      "community": 0
+      "community": 6
     },
     {
       "label": "export_yolo.py",
@@ -3521,7 +3817,7 @@
       "source_file": "src/idh_glioma/data/export_yolo.py",
       "source_location": "L1",
       "id": "export_yolo",
-      "community": 36
+      "community": 39
     },
     {
       "label": "normalize_to_uint8()",
@@ -3529,7 +3825,7 @@
       "source_file": "src/idh_glioma/data/export_yolo.py",
       "source_location": "L15",
       "id": "export_yolo_normalize_to_uint8",
-      "community": 36
+      "community": 39
     },
     {
       "label": "mask_to_bbox()",
@@ -3537,7 +3833,7 @@
       "source_file": "src/idh_glioma/data/export_yolo.py",
       "source_location": "L21",
       "id": "export_yolo_mask_to_bbox",
-      "community": 36
+      "community": 39
     },
     {
       "label": "export_split()",
@@ -3545,7 +3841,7 @@
       "source_file": "src/idh_glioma/data/export_yolo.py",
       "source_location": "L35",
       "id": "export_yolo_export_split",
-      "community": 36
+      "community": 39
     },
     {
       "label": "parse_args()",
@@ -3553,7 +3849,7 @@
       "source_file": "src/idh_glioma/data/export_yolo.py",
       "source_location": "L68",
       "id": "export_yolo_parse_args",
-      "community": 36
+      "community": 39
     },
     {
       "label": "main()",
@@ -3561,7 +3857,7 @@
       "source_file": "src/idh_glioma/data/export_yolo.py",
       "source_location": "L79",
       "id": "export_yolo_main",
-      "community": 36
+      "community": 39
     },
     {
       "label": "e2e_roi.py",
@@ -3569,7 +3865,7 @@
       "source_file": "src/idh_glioma/infer/e2e_roi.py",
       "source_location": "L1",
       "id": "e2e_roi",
-      "community": 13
+      "community": 15
     },
     {
       "label": "apply_mask_postprocess()",
@@ -3577,7 +3873,7 @@
       "source_file": "src/idh_glioma/infer/e2e_roi.py",
       "source_location": "L27",
       "id": "e2e_roi_apply_mask_postprocess",
-      "community": 13
+      "community": 15
     },
     {
       "label": "build_roi_boxes()",
@@ -3585,7 +3881,7 @@
       "source_file": "src/idh_glioma/infer/e2e_roi.py",
       "source_location": "L46",
       "id": "e2e_roi_build_roi_boxes",
-      "community": 13
+      "community": 15
     },
     {
       "label": "aggregate_probs()",
@@ -3593,7 +3889,7 @@
       "source_file": "src/idh_glioma/infer/e2e_roi.py",
       "source_location": "L72",
       "id": "e2e_roi_aggregate_probs",
-      "community": 13
+      "community": 15
     },
     {
       "label": "load_e2e_config()",
@@ -3601,7 +3897,7 @@
       "source_file": "src/idh_glioma/infer/e2e_roi.py",
       "source_location": "L83",
       "id": "e2e_roi_load_e2e_config",
-      "community": 13
+      "community": 15
     },
     {
       "label": "save_e2e_config()",
@@ -3609,7 +3905,7 @@
       "source_file": "src/idh_glioma/infer/e2e_roi.py",
       "source_location": "L91",
       "id": "e2e_roi_save_e2e_config",
-      "community": 13
+      "community": 15
     },
     {
       "label": "select_best_threshold()",
@@ -3617,7 +3913,7 @@
       "source_file": "src/idh_glioma/infer/e2e_roi.py",
       "source_location": "L97",
       "id": "e2e_roi_select_best_threshold",
-      "community": 13
+      "community": 15
     },
     {
       "label": "merge_e2e_config()",
@@ -3625,7 +3921,7 @@
       "source_file": "src/idh_glioma/infer/e2e_roi.py",
       "source_location": "L123",
       "id": "e2e_roi_merge_e2e_config",
-      "community": 13
+      "community": 15
     },
     {
       "label": "zscore_crop()",
@@ -3633,7 +3929,7 @@
       "source_file": "src/idh_glioma/infer/e2e_roi.py",
       "source_location": "L139",
       "id": "e2e_roi_zscore_crop",
-      "community": 13
+      "community": 15
     },
     {
       "label": "predict_multi_view_idh()",
@@ -3641,7 +3937,7 @@
       "source_file": "src/idh_glioma/infer/e2e_roi.py",
       "source_location": "L145",
       "id": "e2e_roi_predict_multi_view_idh",
-      "community": 13
+      "community": 15
     },
     {
       "label": "Shared helpers for end-to-end ROI extraction and config loading.",
@@ -3649,7 +3945,7 @@
       "source_file": "src/idh_glioma/infer/e2e_roi.py",
       "source_location": "L1",
       "id": "e2e_roi_rationale_1",
-      "community": 13
+      "community": 15
     },
     {
       "label": "pipeline_monai_zoo.py",
@@ -3657,7 +3953,7 @@
       "source_file": "src/idh_glioma/infer/pipeline_monai_zoo.py",
       "source_location": "L1",
       "id": "pipeline_monai_zoo",
-      "community": 41
+      "community": 43
     },
     {
       "label": "predict()",
@@ -3665,7 +3961,7 @@
       "source_file": "src/idh_glioma/infer/pipeline_monai_zoo.py",
       "source_location": "L42",
       "id": "pipeline_monai_zoo_predict",
-      "community": 41
+      "community": 43
     },
     {
       "label": "parse_args()",
@@ -3673,7 +3969,7 @@
       "source_file": "src/idh_glioma/infer/pipeline_monai_zoo.py",
       "source_location": "L154",
       "id": "pipeline_monai_zoo_parse_args",
-      "community": 41
+      "community": 43
     },
     {
       "label": "main()",
@@ -3681,7 +3977,7 @@
       "source_file": "src/idh_glioma/infer/pipeline_monai_zoo.py",
       "source_location": "L178",
       "id": "pipeline_monai_zoo_main",
-      "community": 41
+      "community": 43
     },
     {
       "label": "End-to-end inference combining the MONAI Model Zoo brats bundle (seg) with our 3",
@@ -3689,7 +3985,7 @@
       "source_file": "src/idh_glioma/infer/pipeline_monai_zoo.py",
       "source_location": "L1",
       "id": "pipeline_monai_zoo_rationale_1",
-      "community": 41
+      "community": 43
     },
     {
       "label": "pipeline.py",
@@ -3697,7 +3993,7 @@
       "source_file": "src/idh_glioma/infer/pipeline.py",
       "source_location": "L1",
       "id": "pipeline",
-      "community": 26
+      "community": 28
     },
     {
       "label": "_zscore()",
@@ -3705,7 +4001,7 @@
       "source_file": "src/idh_glioma/infer/pipeline.py",
       "source_location": "L17",
       "id": "pipeline_zscore",
-      "community": 26
+      "community": 28
     },
     {
       "label": "_load_case()",
@@ -3713,7 +4009,7 @@
       "source_file": "src/idh_glioma/infer/pipeline.py",
       "source_location": "L21",
       "id": "pipeline_load_case",
-      "community": 26
+      "community": 28
     },
     {
       "label": "predict()",
@@ -3721,7 +4017,7 @@
       "source_file": "src/idh_glioma/infer/pipeline.py",
       "source_location": "L39",
       "id": "pipeline_predict",
-      "community": 26
+      "community": 28
     },
     {
       "label": "parse_args()",
@@ -3729,7 +4025,7 @@
       "source_file": "src/idh_glioma/infer/pipeline.py",
       "source_location": "L188",
       "id": "pipeline_parse_args",
-      "community": 26
+      "community": 28
     },
     {
       "label": "apply_profile()",
@@ -3737,7 +4033,7 @@
       "source_file": "src/idh_glioma/infer/pipeline.py",
       "source_location": "L230",
       "id": "pipeline_apply_profile",
-      "community": 26
+      "community": 28
     },
     {
       "label": "main()",
@@ -3745,7 +4041,7 @@
       "source_file": "src/idh_glioma/infer/pipeline.py",
       "source_location": "L242",
       "id": "pipeline_main",
-      "community": 26
+      "community": 28
     },
     {
       "label": "pipeline_monai.py",
@@ -3753,7 +4049,7 @@
       "source_file": "src/idh_glioma/infer/pipeline_monai.py",
       "source_location": "L1",
       "id": "pipeline_monai",
-      "community": 37
+      "community": 40
     },
     {
       "label": "_bbox3d()",
@@ -3761,7 +4057,7 @@
       "source_file": "src/idh_glioma/infer/pipeline_monai.py",
       "source_location": "L45",
       "id": "pipeline_monai_bbox3d",
-      "community": 37
+      "community": 40
     },
     {
       "label": "predict()",
@@ -3769,7 +4065,7 @@
       "source_file": "src/idh_glioma/infer/pipeline_monai.py",
       "source_location": "L58",
       "id": "pipeline_monai_predict",
-      "community": 37
+      "community": 40
     },
     {
       "label": "parse_args()",
@@ -3777,7 +4073,7 @@
       "source_file": "src/idh_glioma/infer/pipeline_monai.py",
       "source_location": "L162",
       "id": "pipeline_monai_parse_args",
-      "community": 37
+      "community": 40
     },
     {
       "label": "main()",
@@ -3785,7 +4081,7 @@
       "source_file": "src/idh_glioma/infer/pipeline_monai.py",
       "source_location": "L171",
       "id": "pipeline_monai_main",
-      "community": 37
+      "community": 40
     },
     {
       "label": "End-to-end inference with MONAI 3D models (SegResNet + DenseNet121).  Mirrors in",
@@ -3793,7 +4089,7 @@
       "source_file": "src/idh_glioma/infer/pipeline_monai.py",
       "source_location": "L1",
       "id": "pipeline_monai_rationale_1",
-      "community": 37
+      "community": 40
     },
     {
       "label": "unet2d.py",
@@ -3865,7 +4161,7 @@
       "source_file": "src/idh_glioma/models/mobilenetv3_classifier.py",
       "source_location": "L1",
       "id": "mobilenetv3_classifier",
-      "community": 60
+      "community": 62
     },
     {
       "label": "build_mobilenetv3_binary()",
@@ -3873,7 +4169,7 @@
       "source_file": "src/idh_glioma/models/mobilenetv3_classifier.py",
       "source_location": "L7",
       "id": "mobilenetv3_classifier_build_mobilenetv3_binary",
-      "community": 60
+      "community": 62
     },
     {
       "label": "Build a MobileNetV3 binary classifier.      ``variant=\"small\"`` keeps backwards",
@@ -3881,7 +4177,7 @@
       "source_file": "src/idh_glioma/models/mobilenetv3_classifier.py",
       "source_location": "L12",
       "id": "mobilenetv3_classifier_rationale_12",
-      "community": 60
+      "community": 62
     },
     {
       "label": "train_idh_classifier.py",
@@ -3889,7 +4185,7 @@
       "source_file": "src/idh_glioma/train/train_idh_classifier.py",
       "source_location": "L1",
       "id": "train_idh_classifier",
-      "community": 38
+      "community": 0
     },
     {
       "label": "run_epoch()",
@@ -3897,7 +4193,7 @@
       "source_file": "src/idh_glioma/train/train_idh_classifier.py",
       "source_location": "L23",
       "id": "train_idh_classifier_run_epoch",
-      "community": 38
+      "community": 0
     },
     {
       "label": "parse_args()",
@@ -3905,7 +4201,7 @@
       "source_file": "src/idh_glioma/train/train_idh_classifier.py",
       "source_location": "L75",
       "id": "train_idh_classifier_parse_args",
-      "community": 38
+      "community": 0
     },
     {
       "label": "apply_profile()",
@@ -3913,7 +4209,7 @@
       "source_file": "src/idh_glioma/train/train_idh_classifier.py",
       "source_location": "L121",
       "id": "train_idh_classifier_apply_profile",
-      "community": 38
+      "community": 0
     },
     {
       "label": "main()",
@@ -3921,7 +4217,7 @@
       "source_file": "src/idh_glioma/train/train_idh_classifier.py",
       "source_location": "L137",
       "id": "train_idh_classifier_main",
-      "community": 38
+      "community": 0
     },
     {
       "label": "Returns (mean_loss, all_probs, all_labels).",
@@ -3929,7 +4225,7 @@
       "source_file": "src/idh_glioma/train/train_idh_classifier.py",
       "source_location": "L32",
       "id": "train_idh_classifier_rationale_32",
-      "community": 38
+      "community": 0
     },
     {
       "label": "train_segmentation.py",
@@ -3937,7 +4233,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L1",
       "id": "train_segmentation",
-      "community": 0
+      "community": 6
     },
     {
       "label": "_worker_init()",
@@ -3945,7 +4241,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L19",
       "id": "train_segmentation_worker_init",
-      "community": 0
+      "community": 6
     },
     {
       "label": "dice_loss()",
@@ -3953,7 +4249,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L24",
       "id": "train_segmentation_dice_loss",
-      "community": 0
+      "community": 6
     },
     {
       "label": "focal_loss()",
@@ -3961,7 +4257,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L31",
       "id": "train_segmentation_focal_loss",
-      "community": 0
+      "community": 6
     },
     {
       "label": "train_epoch()",
@@ -3969,7 +4265,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L44",
       "id": "train_segmentation_train_epoch",
-      "community": 0
+      "community": 6
     },
     {
       "label": "validation_epoch()",
@@ -3977,7 +4273,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L79",
       "id": "train_segmentation_validation_epoch",
-      "community": 0
+      "community": 6
     },
     {
       "label": "parse_args()",
@@ -3985,7 +4281,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L117",
       "id": "train_segmentation_parse_args",
-      "community": 0
+      "community": 6
     },
     {
       "label": "apply_profile()",
@@ -3993,7 +4289,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L149",
       "id": "train_segmentation_apply_profile",
-      "community": 0
+      "community": 6
     },
     {
       "label": "main()",
@@ -4001,7 +4297,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L165",
       "id": "train_segmentation_main",
-      "community": 0
+      "community": 6
     },
     {
       "label": "Clear the NIfTI LRU cache so each DataLoader worker builds its own.",
@@ -4009,7 +4305,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L20",
       "id": "train_segmentation_rationale_20",
-      "community": 0
+      "community": 6
     },
     {
       "label": "Focal loss for handling class imbalance (tumor pixels << background).",
@@ -4017,7 +4313,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L37",
       "id": "train_segmentation_rationale_37",
-      "community": 0
+      "community": 6
     },
     {
       "label": "Returns (loss, dice_score).",
@@ -4025,7 +4321,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L85",
       "id": "train_segmentation_rationale_85",
-      "community": 0
+      "community": 6
     },
     {
       "label": "train_idh_monai.py",
@@ -4033,7 +4329,7 @@
       "source_file": "src/idh_glioma/train/train_idh_monai.py",
       "source_location": "L1",
       "id": "train_idh_monai",
-      "community": 11
+      "community": 12
     },
     {
       "label": "_zscore()",
@@ -4041,7 +4337,7 @@
       "source_file": "src/idh_glioma/train/train_idh_monai.py",
       "source_location": "L35",
       "id": "train_idh_monai_zscore",
-      "community": 11
+      "community": 12
     },
     {
       "label": "_tumor_bbox_3d()",
@@ -4049,7 +4345,7 @@
       "source_file": "src/idh_glioma/train/train_idh_monai.py",
       "source_location": "L40",
       "id": "train_idh_monai_tumor_bbox_3d",
-      "community": 11
+      "community": 12
     },
     {
       "label": "_expand_bbox_uniformly()",
@@ -4057,7 +4353,7 @@
       "source_file": "src/idh_glioma/train/train_idh_monai.py",
       "source_location": "L56",
       "id": "train_idh_monai_expand_bbox_uniformly",
-      "community": 11
+      "community": 12
     },
     {
       "label": "TumorVolume3DDataset",
@@ -4065,7 +4361,7 @@
       "source_file": "src/idh_glioma/train/train_idh_monai.py",
       "source_location": "L75",
       "id": "train_idh_monai_tumorvolume3ddataset",
-      "community": 11
+      "community": 12
     },
     {
       "label": "Dataset",
@@ -4073,7 +4369,7 @@
       "source_file": "",
       "source_location": "",
       "id": "dataset",
-      "community": 11
+      "community": 12
     },
     {
       "label": ".__init__()",
@@ -4081,7 +4377,7 @@
       "source_file": "src/idh_glioma/train/train_idh_monai.py",
       "source_location": "L76",
       "id": "train_idh_monai_tumorvolume3ddataset_init",
-      "community": 11
+      "community": 12
     },
     {
       "label": ".__len__()",
@@ -4089,7 +4385,7 @@
       "source_file": "src/idh_glioma/train/train_idh_monai.py",
       "source_location": "L91",
       "id": "train_idh_monai_tumorvolume3ddataset_len",
-      "community": 11
+      "community": 12
     },
     {
       "label": ".__getitem__()",
@@ -4097,7 +4393,7 @@
       "source_file": "src/idh_glioma/train/train_idh_monai.py",
       "source_location": "L94",
       "id": "train_idh_monai_tumorvolume3ddataset_getitem",
-      "community": 11
+      "community": 12
     },
     {
       "label": "_make_balanced_sampler()",
@@ -4105,7 +4401,7 @@
       "source_file": "src/idh_glioma/train/train_idh_monai.py",
       "source_location": "L165",
       "id": "train_idh_monai_make_balanced_sampler",
-      "community": 11
+      "community": 12
     },
     {
       "label": "parse_args()",
@@ -4113,7 +4409,7 @@
       "source_file": "src/idh_glioma/train/train_idh_monai.py",
       "source_location": "L177",
       "id": "train_idh_monai_parse_args",
-      "community": 11
+      "community": 12
     },
     {
       "label": "_run_epoch()",
@@ -4121,7 +4417,7 @@
       "source_file": "src/idh_glioma/train/train_idh_monai.py",
       "source_location": "L201",
       "id": "train_idh_monai_run_epoch",
-      "community": 11
+      "community": 12
     },
     {
       "label": "main()",
@@ -4129,7 +4425,7 @@
       "source_file": "src/idh_glioma/train/train_idh_monai.py",
       "source_location": "L227",
       "id": "train_idh_monai_main",
-      "community": 11
+      "community": 12
     },
     {
       "label": "3D IDH classifier with MONAI on the TCGA-LGG cohort.  Crops the 4-channel multim",
@@ -4137,7 +4433,7 @@
       "source_file": "src/idh_glioma/train/train_idh_monai.py",
       "source_location": "L1",
       "id": "train_idh_monai_rationale_1",
-      "community": 11
+      "community": 12
     },
     {
       "label": "train_ct_classifier.py",
@@ -4289,7 +4585,7 @@
       "source_file": "src/idh_glioma/train/train_yolo_detection.py",
       "source_location": "L1",
       "id": "train_yolo_detection",
-      "community": 49
+      "community": 51
     },
     {
       "label": "parse_args()",
@@ -4297,7 +4593,7 @@
       "source_file": "src/idh_glioma/train/train_yolo_detection.py",
       "source_location": "L8",
       "id": "train_yolo_detection_parse_args",
-      "community": 49
+      "community": 51
     },
     {
       "label": "main()",
@@ -4305,7 +4601,7 @@
       "source_file": "src/idh_glioma/train/train_yolo_detection.py",
       "source_location": "L44",
       "id": "train_yolo_detection_main",
-      "community": 49
+      "community": 51
     },
     {
       "label": "Train YOLOv8 brain-tumor detection model on Ultralytics brain-tumor dataset.",
@@ -4313,7 +4609,7 @@
       "source_file": "src/idh_glioma/train/train_yolo_detection.py",
       "source_location": "L1",
       "id": "train_yolo_detection_rationale_1",
-      "community": 49
+      "community": 51
     },
     {
       "label": "train_segmentation_monai.py",
@@ -4321,7 +4617,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation_monai.py",
       "source_location": "L1",
       "id": "train_segmentation_monai",
-      "community": 20
+      "community": 22
     },
     {
       "label": "_records_to_monai()",
@@ -4329,7 +4625,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation_monai.py",
       "source_location": "L46",
       "id": "train_segmentation_monai_records_to_monai",
-      "community": 20
+      "community": 22
     },
     {
       "label": "_build_transforms()",
@@ -4337,7 +4633,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation_monai.py",
       "source_location": "L65",
       "id": "train_segmentation_monai_build_transforms",
-      "community": 20
+      "community": 22
     },
     {
       "label": "_binarize_label()",
@@ -4345,7 +4641,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation_monai.py",
       "source_location": "L90",
       "id": "train_segmentation_monai_binarize_label",
-      "community": 20
+      "community": 22
     },
     {
       "label": "_maybe_load_zoo_init()",
@@ -4353,23 +4649,23 @@
       "source_file": "src/idh_glioma/train/train_segmentation_monai.py",
       "source_location": "L94",
       "id": "train_segmentation_monai_maybe_load_zoo_init",
-      "community": 20
+      "community": 22
     },
     {
       "label": "parse_args()",
       "file_type": "code",
       "source_file": "src/idh_glioma/train/train_segmentation_monai.py",
-      "source_location": "L114",
+      "source_location": "L119",
       "id": "train_segmentation_monai_parse_args",
-      "community": 20
+      "community": 22
     },
     {
       "label": "main()",
       "file_type": "code",
       "source_file": "src/idh_glioma/train/train_segmentation_monai.py",
-      "source_location": "L131",
+      "source_location": "L136",
       "id": "train_segmentation_monai_main",
-      "community": 20
+      "community": 22
     },
     {
       "label": "3D segmentation training with MONAI on the TCGA-LGG cohort.  Uses SegResNet (4-c",
@@ -4377,7 +4673,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation_monai.py",
       "source_location": "L1",
       "id": "train_segmentation_monai_rationale_1",
-      "community": 20
+      "community": 22
     },
     {
       "label": "test_prepare_multimodal_integration.py",
@@ -4385,7 +4681,7 @@
       "source_file": "tests/molecular/test_prepare_multimodal_integration.py",
       "source_location": "L1",
       "id": "test_prepare_multimodal_integration",
-      "community": 39
+      "community": 41
     },
     {
       "label": "_write_rnaseq()",
@@ -4393,7 +4689,7 @@
       "source_file": "tests/molecular/test_prepare_multimodal_integration.py",
       "source_location": "L13",
       "id": "test_prepare_multimodal_integration_write_rnaseq",
-      "community": 39
+      "community": 41
     },
     {
       "label": "_write_maf()",
@@ -4401,7 +4697,7 @@
       "source_file": "tests/molecular/test_prepare_multimodal_integration.py",
       "source_location": "L31",
       "id": "test_prepare_multimodal_integration_write_maf",
-      "community": 39
+      "community": 41
     },
     {
       "label": "_write_methylation()",
@@ -4409,7 +4705,7 @@
       "source_file": "tests/molecular/test_prepare_multimodal_integration.py",
       "source_location": "L44",
       "id": "test_prepare_multimodal_integration_write_methylation",
-      "community": 39
+      "community": 41
     },
     {
       "label": "test_prepare_multimodal_writes_all_artifacts()",
@@ -4417,7 +4713,7 @@
       "source_file": "tests/molecular/test_prepare_multimodal_integration.py",
       "source_location": "L54",
       "id": "test_prepare_multimodal_integration_test_prepare_multimodal_writes_all_artifacts",
-      "community": 39
+      "community": 41
     },
     {
       "label": "test_prepare_multimodal_missing_methylation_dir_exits()",
@@ -4425,7 +4721,7 @@
       "source_file": "tests/molecular/test_prepare_multimodal_integration.py",
       "source_location": "L119",
       "id": "test_prepare_multimodal_integration_test_prepare_multimodal_missing_methylation_dir_exits",
-      "community": 39
+      "community": 41
     },
     {
       "label": "test_eval.py",
@@ -4433,7 +4729,7 @@
       "source_file": "tests/molecular/test_eval.py",
       "source_location": "L1",
       "id": "test_eval",
-      "community": 64
+      "community": 66
     },
     {
       "label": "test_eval_main_all_modes_writes_outputs()",
@@ -4441,7 +4737,7 @@
       "source_file": "tests/molecular/test_eval.py",
       "source_location": "L12",
       "id": "test_eval_test_eval_main_all_modes_writes_outputs",
-      "community": 64
+      "community": 66
     },
     {
       "label": "test_feature_select.py",
@@ -4449,7 +4745,7 @@
       "source_file": "tests/molecular/test_feature_select.py",
       "source_location": "L1",
       "id": "test_feature_select",
-      "community": 65
+      "community": 67
     },
     {
       "label": "test_select_features_top_k_and_prior_union_fold_aware()",
@@ -4457,7 +4753,7 @@
       "source_file": "tests/molecular/test_feature_select.py",
       "source_location": "L9",
       "id": "test_feature_select_test_select_features_top_k_and_prior_union_fold_aware",
-      "community": 65
+      "community": 67
     },
     {
       "label": "test_clinical_parser.py",
@@ -4465,7 +4761,7 @@
       "source_file": "tests/molecular/test_clinical_parser.py",
       "source_location": "L1",
       "id": "test_clinical_parser",
-      "community": 61
+      "community": 63
     },
     {
       "label": "test_parse_clinical_xml_extracts_core_fields()",
@@ -4473,7 +4769,7 @@
       "source_file": "tests/molecular/test_clinical_parser.py",
       "source_location": "L8",
       "id": "test_clinical_parser_test_parse_clinical_xml_extracts_core_fields",
-      "community": 61
+      "community": 63
     },
     {
       "label": "test_aggregate_clinical_adds_source()",
@@ -4481,7 +4777,7 @@
       "source_file": "tests/molecular/test_clinical_parser.py",
       "source_location": "L39",
       "id": "test_clinical_parser_test_aggregate_clinical_adds_source",
-      "community": 61
+      "community": 63
     },
     {
       "label": "test_gdc_download.py",
@@ -4489,7 +4785,7 @@
       "source_file": "tests/molecular/test_gdc_download.py",
       "source_location": "L1",
       "id": "test_gdc_download",
-      "community": 50
+      "community": 52
     },
     {
       "label": "test_write_manifest_gdc_format()",
@@ -4497,7 +4793,7 @@
       "source_file": "tests/molecular/test_gdc_download.py",
       "source_location": "L14",
       "id": "test_gdc_download_test_write_manifest_gdc_format",
-      "community": 50
+      "community": 52
     },
     {
       "label": "test_query_lgg_methylation_files_filters_platforms()",
@@ -4505,7 +4801,7 @@
       "source_file": "tests/molecular/test_gdc_download.py",
       "source_location": "L45",
       "id": "test_gdc_download_test_query_lgg_methylation_files_filters_platforms",
-      "community": 50
+      "community": 52
     },
     {
       "label": "test_download_lgg_methylation_writes_manifest_and_calls_downloader()",
@@ -4513,7 +4809,7 @@
       "source_file": "tests/molecular/test_gdc_download.py",
       "source_location": "L88",
       "id": "test_gdc_download_test_download_lgg_methylation_writes_manifest_and_calls_downloader",
-      "community": 50
+      "community": 52
     },
     {
       "label": "test_train_eval_multimodal.py",
@@ -4521,7 +4817,7 @@
       "source_file": "tests/molecular/test_train_eval_multimodal.py",
       "source_location": "L1",
       "id": "test_train_eval_multimodal",
-      "community": 66
+      "community": 68
     },
     {
       "label": "test_train_eval_multimodal_end_to_end()",
@@ -4529,7 +4825,7 @@
       "source_file": "tests/molecular/test_train_eval_multimodal.py",
       "source_location": "L13",
       "id": "test_train_eval_multimodal_test_train_eval_multimodal_end_to_end",
-      "community": 66
+      "community": 68
     },
     {
       "label": "test_models.py",
@@ -4537,7 +4833,7 @@
       "source_file": "tests/molecular/test_models.py",
       "source_location": "L1",
       "id": "test_models",
-      "community": 42
+      "community": 44
     },
     {
       "label": "_toy_data()",
@@ -4545,7 +4841,7 @@
       "source_file": "tests/molecular/test_models.py",
       "source_location": "L11",
       "id": "test_models_toy_data",
-      "community": 42
+      "community": 44
     },
     {
       "label": "test_logistic_predict_proba_and_roundtrip()",
@@ -4553,7 +4849,7 @@
       "source_file": "tests/molecular/test_models.py",
       "source_location": "L22",
       "id": "test_models_test_logistic_predict_proba_and_roundtrip",
-      "community": 42
+      "community": 44
     },
     {
       "label": "test_lightgbm_predict_proba_and_roundtrip()",
@@ -4561,7 +4857,7 @@
       "source_file": "tests/molecular/test_models.py",
       "source_location": "L37",
       "id": "test_models_test_lightgbm_predict_proba_and_roundtrip",
-      "community": 42
+      "community": 44
     },
     {
       "label": "test_mlp_predict_proba_and_roundtrip()",
@@ -4569,7 +4865,7 @@
       "source_file": "tests/molecular/test_models.py",
       "source_location": "L52",
       "id": "test_models_test_mlp_predict_proba_and_roundtrip",
-      "community": 42
+      "community": 44
     },
     {
       "label": "test_rnaseq_loader.py",
@@ -4577,7 +4873,7 @@
       "source_file": "tests/molecular/test_rnaseq_loader.py",
       "source_location": "L1",
       "id": "test_rnaseq_loader",
-      "community": 51
+      "community": 53
     },
     {
       "label": "_write_rnaseq()",
@@ -4585,7 +4881,7 @@
       "source_file": "tests/molecular/test_rnaseq_loader.py",
       "source_location": "L8",
       "id": "test_rnaseq_loader_write_rnaseq",
-      "community": 51
+      "community": 53
     },
     {
       "label": "test_parse_rnaseq_tsv_skips_summary_rows()",
@@ -4593,7 +4889,7 @@
       "source_file": "tests/molecular/test_rnaseq_loader.py",
       "source_location": "L24",
       "id": "test_rnaseq_loader_test_parse_rnaseq_tsv_skips_summary_rows",
-      "community": 51
+      "community": 53
     },
     {
       "label": "test_build_expression_matrix_merges_samples_and_logs()",
@@ -4601,7 +4897,7 @@
       "source_file": "tests/molecular/test_rnaseq_loader.py",
       "source_location": "L44",
       "id": "test_rnaseq_loader_test_build_expression_matrix_merges_samples_and_logs",
-      "community": 51
+      "community": 53
     },
     {
       "label": "test_multimodal.py",
@@ -4609,7 +4905,7 @@
       "source_file": "tests/molecular/test_multimodal.py",
       "source_location": "L1",
       "id": "test_multimodal",
-      "community": 52
+      "community": 54
     },
     {
       "label": "test_concat_modalities_uses_strict_patient_subset_and_prefixes()",
@@ -4617,7 +4913,7 @@
       "source_file": "tests/molecular/test_multimodal.py",
       "source_location": "L10",
       "id": "test_multimodal_test_concat_modalities_uses_strict_patient_subset_and_prefixes",
-      "community": 52
+      "community": 54
     },
     {
       "label": "test_select_features_modality_top_k_union_prior_ids()",
@@ -4625,7 +4921,7 @@
       "source_file": "tests/molecular/test_multimodal.py",
       "source_location": "L43",
       "id": "test_multimodal_test_select_features_modality_top_k_union_prior_ids",
-      "community": 52
+      "community": 54
     },
     {
       "label": "test_select_multimodal_features_is_per_modality_fold_aware()",
@@ -4633,7 +4929,7 @@
       "source_file": "tests/molecular/test_multimodal.py",
       "source_location": "L57",
       "id": "test_multimodal_test_select_multimodal_features_is_per_modality_fold_aware",
-      "community": 52
+      "community": 54
     },
     {
       "label": "test_idh_cpg_panel.py",
@@ -4641,7 +4937,7 @@
       "source_file": "tests/molecular/test_idh_cpg_panel.py",
       "source_location": "L1",
       "id": "test_idh_cpg_panel",
-      "community": 67
+      "community": 69
     },
     {
       "label": "test_idh_cpg_panel_schema()",
@@ -4649,7 +4945,7 @@
       "source_file": "tests/molecular/test_idh_cpg_panel.py",
       "source_location": "L7",
       "id": "test_idh_cpg_panel_test_idh_cpg_panel_schema",
-      "community": 67
+      "community": 69
     },
     {
       "label": "test_methylation_loader.py",
@@ -4657,7 +4953,7 @@
       "source_file": "tests/molecular/test_methylation_loader.py",
       "source_location": "L1",
       "id": "test_methylation_loader",
-      "community": 53
+      "community": 55
     },
     {
       "label": "_write_sesame()",
@@ -4665,7 +4961,7 @@
       "source_file": "tests/molecular/test_methylation_loader.py",
       "source_location": "L13",
       "id": "test_methylation_loader_write_sesame",
-      "community": 53
+      "community": 55
     },
     {
       "label": "test_parse_sesame_txt_preserves_nan_values()",
@@ -4673,7 +4969,7 @@
       "source_file": "tests/molecular/test_methylation_loader.py",
       "source_location": "L19",
       "id": "test_methylation_loader_test_parse_sesame_txt_preserves_nan_values",
-      "community": 53
+      "community": 55
     },
     {
       "label": "test_build_methylation_matrix_intersection_transform_and_dedup()",
@@ -4681,7 +4977,7 @@
       "source_file": "tests/molecular/test_methylation_loader.py",
       "source_location": "L37",
       "id": "test_methylation_loader_test_build_methylation_matrix_intersection_transform_and_dedup",
-      "community": 53
+      "community": 55
     },
     {
       "label": "test_prepare_integration.py",
@@ -4689,7 +4985,7 @@
       "source_file": "tests/molecular/test_prepare_integration.py",
       "source_location": "L1",
       "id": "test_prepare_integration",
-      "community": 54
+      "community": 56
     },
     {
       "label": "_write_rnaseq()",
@@ -4697,7 +4993,7 @@
       "source_file": "tests/molecular/test_prepare_integration.py",
       "source_location": "L12",
       "id": "test_prepare_integration_write_rnaseq",
-      "community": 54
+      "community": 56
     },
     {
       "label": "_write_maf()",
@@ -4705,7 +5001,7 @@
       "source_file": "tests/molecular/test_prepare_integration.py",
       "source_location": "L32",
       "id": "test_prepare_integration_write_maf",
-      "community": 54
+      "community": 56
     },
     {
       "label": "test_prepare_main_end_to_end_with_mock_data()",
@@ -4713,7 +5009,7 @@
       "source_file": "tests/molecular/test_prepare_integration.py",
       "source_location": "L45",
       "id": "test_prepare_integration_test_prepare_main_end_to_end_with_mock_data",
-      "community": 54
+      "community": 56
     },
     {
       "label": "test_maf_parser.py",
@@ -4721,7 +5017,7 @@
       "source_file": "tests/molecular/test_maf_parser.py",
       "source_location": "L1",
       "id": "test_maf_parser",
-      "community": 55
+      "community": 57
     },
     {
       "label": "_write_maf()",
@@ -4729,7 +5025,7 @@
       "source_file": "tests/molecular/test_maf_parser.py",
       "source_location": "L9",
       "id": "test_maf_parser_write_maf",
-      "community": 55
+      "community": 57
     },
     {
       "label": "test_extract_idh_status_detects_idh1_idh2_missense()",
@@ -4737,7 +5033,7 @@
       "source_file": "tests/molecular/test_maf_parser.py",
       "source_location": "L22",
       "id": "test_maf_parser_test_extract_idh_status_detects_idh1_idh2_missense",
-      "community": 55
+      "community": 57
     },
     {
       "label": "test_aggregate_idh_labels_marks_wildtype_when_no_idh_mutation()",
@@ -4745,7 +5041,7 @@
       "source_file": "tests/molecular/test_maf_parser.py",
       "source_location": "L43",
       "id": "test_maf_parser_test_aggregate_idh_labels_marks_wildtype_when_no_idh_mutation",
-      "community": 55
+      "community": 57
     },
     {
       "label": "model.ts",
@@ -4753,10 +5049,274 @@
       "source_file": "checkpoints/monai_zoo/brats_mri_segmentation/models/model.ts",
       "source_location": "L1",
       "id": "model",
-      "community": 68
+      "community": 70
     }
   ],
   "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_src": "test_prepare_dataset",
+      "_tgt": "test_prepare_dataset_touch",
+      "source": "test_prepare_dataset",
+      "target": "test_prepare_dataset_touch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_src": "test_prepare_dataset",
+      "_tgt": "test_prepare_dataset_make_tcga_case",
+      "source": "test_prepare_dataset",
+      "target": "test_prepare_dataset_make_tcga_case",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_src": "test_prepare_dataset",
+      "_tgt": "test_prepare_dataset_make_brats2021_case",
+      "source": "test_prepare_dataset",
+      "target": "test_prepare_dataset_make_brats2021_case",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_src": "test_prepare_dataset",
+      "_tgt": "test_prepare_dataset_test_tcga_case_id_and_date_unchanged",
+      "source": "test_prepare_dataset",
+      "target": "test_prepare_dataset_test_tcga_case_id_and_date_unchanged",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_src": "test_prepare_dataset",
+      "_tgt": "test_prepare_dataset_test_tcga_prefers_manually_corrected_mask",
+      "source": "test_prepare_dataset",
+      "target": "test_prepare_dataset_test_tcga_prefers_manually_corrected_mask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_src": "test_prepare_dataset",
+      "_tgt": "test_prepare_dataset_test_tcga_falls_back_to_plain_glistrboost",
+      "source": "test_prepare_dataset",
+      "target": "test_prepare_dataset_test_tcga_falls_back_to_plain_glistrboost",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L83",
+      "weight": 1.0,
+      "_src": "test_prepare_dataset",
+      "_tgt": "test_prepare_dataset_test_brats2021_case_id_is_dir_name",
+      "source": "test_prepare_dataset",
+      "target": "test_prepare_dataset_test_brats2021_case_id_is_dir_name",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L92",
+      "weight": 1.0,
+      "_src": "test_prepare_dataset",
+      "_tgt": "test_prepare_dataset_test_brats2021_t1ce_is_mapped_to_t1gd",
+      "source": "test_prepare_dataset",
+      "target": "test_prepare_dataset_test_brats2021_t1ce_is_mapped_to_t1gd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L102",
+      "weight": 1.0,
+      "_src": "test_prepare_dataset",
+      "_tgt": "test_prepare_dataset_test_brats2021_seg_is_used_as_mask",
+      "source": "test_prepare_dataset",
+      "target": "test_prepare_dataset_test_brats2021_seg_is_used_as_mask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L110",
+      "weight": 1.0,
+      "_src": "test_prepare_dataset",
+      "_tgt": "test_prepare_dataset_test_brats2021_missing_modality_returns_none",
+      "source": "test_prepare_dataset",
+      "target": "test_prepare_dataset_test_brats2021_missing_modality_returns_none",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L130",
+      "weight": 1.0,
+      "_src": "test_prepare_dataset",
+      "_tgt": "test_prepare_dataset_test_parses_real_brats2021_case",
+      "source": "test_prepare_dataset",
+      "target": "test_prepare_dataset_test_parses_real_brats2021_case",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "test_prepare_dataset_rationale_1",
+      "_tgt": "test_prepare_dataset",
+      "source": "test_prepare_dataset",
+      "target": "test_prepare_dataset_rationale_1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L32",
+      "weight": 0.8,
+      "_src": "test_prepare_dataset_make_tcga_case",
+      "_tgt": "test_prepare_dataset_touch",
+      "source": "test_prepare_dataset_touch",
+      "target": "test_prepare_dataset_make_tcga_case",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L41",
+      "weight": 0.8,
+      "_src": "test_prepare_dataset_make_brats2021_case",
+      "_tgt": "test_prepare_dataset_touch",
+      "source": "test_prepare_dataset_touch",
+      "target": "test_prepare_dataset_make_brats2021_case",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L63",
+      "weight": 0.8,
+      "_src": "test_prepare_dataset_test_tcga_prefers_manually_corrected_mask",
+      "_tgt": "test_prepare_dataset_touch",
+      "source": "test_prepare_dataset_touch",
+      "target": "test_prepare_dataset_test_tcga_prefers_manually_corrected_mask",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L52",
+      "weight": 0.8,
+      "_src": "test_prepare_dataset_test_tcga_case_id_and_date_unchanged",
+      "_tgt": "test_prepare_dataset_make_tcga_case",
+      "source": "test_prepare_dataset_make_tcga_case",
+      "target": "test_prepare_dataset_test_tcga_case_id_and_date_unchanged",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L62",
+      "weight": 0.8,
+      "_src": "test_prepare_dataset_test_tcga_prefers_manually_corrected_mask",
+      "_tgt": "test_prepare_dataset_make_tcga_case",
+      "source": "test_prepare_dataset_make_tcga_case",
+      "target": "test_prepare_dataset_test_tcga_prefers_manually_corrected_mask",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L72",
+      "weight": 0.8,
+      "_src": "test_prepare_dataset_test_tcga_falls_back_to_plain_glistrboost",
+      "_tgt": "test_prepare_dataset_make_tcga_case",
+      "source": "test_prepare_dataset_make_tcga_case",
+      "target": "test_prepare_dataset_test_tcga_falls_back_to_plain_glistrboost",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L85",
+      "weight": 0.8,
+      "_src": "test_prepare_dataset_test_brats2021_case_id_is_dir_name",
+      "_tgt": "test_prepare_dataset_make_brats2021_case",
+      "source": "test_prepare_dataset_make_brats2021_case",
+      "target": "test_prepare_dataset_test_brats2021_case_id_is_dir_name",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L94",
+      "weight": 0.8,
+      "_src": "test_prepare_dataset_test_brats2021_t1ce_is_mapped_to_t1gd",
+      "_tgt": "test_prepare_dataset_make_brats2021_case",
+      "source": "test_prepare_dataset_make_brats2021_case",
+      "target": "test_prepare_dataset_test_brats2021_t1ce_is_mapped_to_t1gd",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L104",
+      "weight": 0.8,
+      "_src": "test_prepare_dataset_test_brats2021_seg_is_used_as_mask",
+      "_tgt": "test_prepare_dataset_make_brats2021_case",
+      "source": "test_prepare_dataset_make_brats2021_case",
+      "target": "test_prepare_dataset_test_brats2021_seg_is_used_as_mask",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "tests/test_prepare_dataset.py",
+      "source_location": "L112",
+      "weight": 0.8,
+      "_src": "test_prepare_dataset_test_brats2021_missing_modality_returns_none",
+      "_tgt": "test_prepare_dataset_make_brats2021_case",
+      "source": "test_prepare_dataset_make_brats2021_case",
+      "target": "test_prepare_dataset_test_brats2021_missing_modality_returns_none",
+      "confidence_score": 0.5
+    },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
@@ -5596,6 +6156,138 @@
       "source": "test_e2e_calibration_config",
       "target": "test_e2e_calibration_config_rationale_1",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_src": "test_prepare_kaggle_4class",
+      "_tgt": "test_prepare_kaggle_4class_make_fake_kaggle4",
+      "source": "test_prepare_kaggle_4class",
+      "target": "test_prepare_kaggle_4class_make_fake_kaggle4",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_src": "test_prepare_kaggle_4class",
+      "_tgt": "test_prepare_kaggle_4class_test_collect_split_dir_counts",
+      "source": "test_prepare_kaggle_4class",
+      "target": "test_prepare_kaggle_4class_test_collect_split_dir_counts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_src": "test_prepare_kaggle_4class",
+      "_tgt": "test_prepare_kaggle_4class_test_collect_split_dir_missing_class_raises",
+      "source": "test_prepare_kaggle_4class",
+      "target": "test_prepare_kaggle_4class_test_collect_split_dir_missing_class_raises",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_src": "test_prepare_kaggle_4class",
+      "_tgt": "test_prepare_kaggle_4class_test_build_manifest_uses_testing_as_held_out",
+      "source": "test_prepare_kaggle_4class",
+      "target": "test_prepare_kaggle_4class_test_build_manifest_uses_testing_as_held_out",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_src": "test_prepare_kaggle_4class",
+      "_tgt": "test_prepare_kaggle_4class_test_stratified_split_balanced_per_class",
+      "source": "test_prepare_kaggle_4class",
+      "target": "test_prepare_kaggle_4class_test_stratified_split_balanced_per_class",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L72",
+      "weight": 1.0,
+      "_src": "test_prepare_kaggle_4class",
+      "_tgt": "test_prepare_kaggle_4class_test_write_manifest_round_trip",
+      "source": "test_prepare_kaggle_4class",
+      "target": "test_prepare_kaggle_4class_test_write_manifest_round_trip",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "test_prepare_kaggle_4class_rationale_1",
+      "_tgt": "test_prepare_kaggle_4class",
+      "source": "test_prepare_kaggle_4class",
+      "target": "test_prepare_kaggle_4class_rationale_1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L36",
+      "weight": 0.8,
+      "_src": "test_prepare_kaggle_4class_test_collect_split_dir_counts",
+      "_tgt": "test_prepare_kaggle_4class_make_fake_kaggle4",
+      "source": "test_prepare_kaggle_4class_make_fake_kaggle4",
+      "target": "test_prepare_kaggle_4class_test_collect_split_dir_counts",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L54",
+      "weight": 0.8,
+      "_src": "test_prepare_kaggle_4class_test_build_manifest_uses_testing_as_held_out",
+      "_tgt": "test_prepare_kaggle_4class_make_fake_kaggle4",
+      "source": "test_prepare_kaggle_4class_make_fake_kaggle4",
+      "target": "test_prepare_kaggle_4class_test_build_manifest_uses_testing_as_held_out",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L75",
+      "weight": 0.8,
+      "_src": "test_prepare_kaggle_4class_test_write_manifest_round_trip",
+      "_tgt": "test_prepare_kaggle_4class_make_fake_kaggle4",
+      "source": "test_prepare_kaggle_4class_make_fake_kaggle4",
+      "target": "test_prepare_kaggle_4class_test_write_manifest_round_trip",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "tests/test_prepare_kaggle_4class.py",
+      "source_location": "L13",
+      "weight": 0.8,
+      "_src": "test_prepare_kaggle_4class_rationale_1",
+      "_tgt": "prepare_kaggle_4class_imagerecord",
+      "source": "test_prepare_kaggle_4class_rationale_1",
+      "target": "prepare_kaggle_4class_imagerecord",
+      "confidence_score": 0.5
     },
     {
       "relation": "contains",
@@ -7432,6 +8124,90 @@
       "source": "calibrate_idh_e2e_predict_seg_mask",
       "target": "calibrate_idh_e2e_main",
       "confidence_score": 0.5
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/download_hf_brats2021.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_src": "download_hf_brats2021",
+      "_tgt": "download_hf_brats2021_list_cases",
+      "source": "download_hf_brats2021",
+      "target": "download_hf_brats2021_list_cases",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/download_hf_brats2021.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_src": "download_hf_brats2021",
+      "_tgt": "download_hf_brats2021_download_cases",
+      "source": "download_hf_brats2021",
+      "target": "download_hf_brats2021_download_cases",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/download_hf_brats2021.py",
+      "source_location": "L68",
+      "weight": 1.0,
+      "_src": "download_hf_brats2021",
+      "_tgt": "download_hf_brats2021_main",
+      "source": "download_hf_brats2021",
+      "target": "download_hf_brats2021_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/download_hf_brats2021.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "download_hf_brats2021_rationale_1",
+      "_tgt": "download_hf_brats2021",
+      "source": "download_hf_brats2021",
+      "target": "download_hf_brats2021_rationale_1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "scripts/download_hf_brats2021.py",
+      "source_location": "L98",
+      "weight": 0.8,
+      "_src": "download_hf_brats2021_main",
+      "_tgt": "download_hf_brats2021_list_cases",
+      "source": "download_hf_brats2021_list_cases",
+      "target": "download_hf_brats2021_main",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "scripts/download_hf_brats2021.py",
+      "source_location": "L122",
+      "weight": 0.8,
+      "_src": "download_hf_brats2021_main",
+      "_tgt": "download_hf_brats2021_download_cases",
+      "source": "download_hf_brats2021_download_cases",
+      "target": "download_hf_brats2021_main",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/download_hf_brats2021.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_src": "download_hf_brats2021_rationale_51",
+      "_tgt": "download_hf_brats2021_download_cases",
+      "source": "download_hf_brats2021_download_cases",
+      "target": "download_hf_brats2021_rationale_51",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -12068,8 +12844,200 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_src": "prepare_kaggle_4class",
+      "_tgt": "prepare_kaggle_4class_imagerecord",
+      "source": "prepare_kaggle_4class",
+      "target": "prepare_kaggle_4class_imagerecord",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_src": "prepare_kaggle_4class",
+      "_tgt": "prepare_kaggle_4class_collect_split_dir",
+      "source": "prepare_kaggle_4class",
+      "target": "prepare_kaggle_4class_collect_split_dir",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L63",
+      "weight": 1.0,
+      "_src": "prepare_kaggle_4class",
+      "_tgt": "prepare_kaggle_4class_stratified_train_val_split",
+      "source": "prepare_kaggle_4class",
+      "target": "prepare_kaggle_4class_stratified_train_val_split",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_src": "prepare_kaggle_4class",
+      "_tgt": "prepare_kaggle_4class_build_manifest",
+      "source": "prepare_kaggle_4class",
+      "target": "prepare_kaggle_4class_build_manifest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L104",
+      "weight": 1.0,
+      "_src": "prepare_kaggle_4class",
+      "_tgt": "prepare_kaggle_4class_write_manifest",
+      "source": "prepare_kaggle_4class",
+      "target": "prepare_kaggle_4class_write_manifest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L112",
+      "weight": 1.0,
+      "_src": "prepare_kaggle_4class",
+      "_tgt": "prepare_kaggle_4class_summarize",
+      "source": "prepare_kaggle_4class",
+      "target": "prepare_kaggle_4class_summarize",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L122",
+      "weight": 1.0,
+      "_src": "prepare_kaggle_4class",
+      "_tgt": "prepare_kaggle_4class_parse_args",
+      "source": "prepare_kaggle_4class",
+      "target": "prepare_kaggle_4class_parse_args",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L142",
+      "weight": 1.0,
+      "_src": "prepare_kaggle_4class",
+      "_tgt": "prepare_kaggle_4class_main",
+      "source": "prepare_kaggle_4class",
+      "target": "prepare_kaggle_4class_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "prepare_kaggle_4class_rationale_1",
+      "_tgt": "prepare_kaggle_4class",
+      "source": "prepare_kaggle_4class",
+      "target": "prepare_kaggle_4class_rationale_1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L58",
+      "weight": 0.8,
+      "_src": "prepare_kaggle_4class_collect_split_dir",
+      "_tgt": "prepare_kaggle_4class_imagerecord",
+      "source": "prepare_kaggle_4class_imagerecord",
+      "target": "prepare_kaggle_4class_collect_split_dir",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L92",
+      "weight": 0.8,
+      "_src": "prepare_kaggle_4class_build_manifest",
+      "_tgt": "prepare_kaggle_4class_collect_split_dir",
+      "source": "prepare_kaggle_4class_collect_split_dir",
+      "target": "prepare_kaggle_4class_build_manifest",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L98",
+      "weight": 0.8,
+      "_src": "prepare_kaggle_4class_build_manifest",
+      "_tgt": "prepare_kaggle_4class_stratified_train_val_split",
+      "source": "prepare_kaggle_4class_stratified_train_val_split",
+      "target": "prepare_kaggle_4class_build_manifest",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L144",
+      "weight": 0.8,
+      "_src": "prepare_kaggle_4class_main",
+      "_tgt": "prepare_kaggle_4class_build_manifest",
+      "source": "prepare_kaggle_4class_build_manifest",
+      "target": "prepare_kaggle_4class_main",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L145",
+      "weight": 0.8,
+      "_src": "prepare_kaggle_4class_main",
+      "_tgt": "prepare_kaggle_4class_write_manifest",
+      "source": "prepare_kaggle_4class_write_manifest",
+      "target": "prepare_kaggle_4class_main",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L147",
+      "weight": 0.8,
+      "_src": "prepare_kaggle_4class_main",
+      "_tgt": "prepare_kaggle_4class_summarize",
+      "source": "prepare_kaggle_4class_summarize",
+      "target": "prepare_kaggle_4class_main",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/data/prepare_kaggle_4class.py",
+      "source_location": "L143",
+      "weight": 0.8,
+      "_src": "prepare_kaggle_4class_main",
+      "_tgt": "prepare_kaggle_4class_parse_args",
+      "source": "prepare_kaggle_4class_parse_args",
+      "target": "prepare_kaggle_4class_main",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L15",
+      "source_location": "L25",
       "weight": 1.0,
       "_src": "prepare_dataset",
       "_tgt": "prepare_dataset_caserecord",
@@ -12081,7 +13049,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L23",
+      "source_location": "L33",
       "weight": 1.0,
       "_src": "prepare_dataset",
       "_tgt": "prepare_dataset_parse_case_folder",
@@ -12093,7 +13061,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L62",
+      "source_location": "L82",
       "weight": 1.0,
       "_src": "prepare_dataset",
       "_tgt": "prepare_dataset_build_manifest",
@@ -12105,7 +13073,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L93",
+      "source_location": "L113",
       "weight": 1.0,
       "_src": "prepare_dataset",
       "_tgt": "prepare_dataset_infer_brats_root",
@@ -12117,7 +13085,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L126",
+      "source_location": "L146",
       "weight": 1.0,
       "_src": "prepare_dataset",
       "_tgt": "prepare_dataset_stratified_split",
@@ -12129,7 +13097,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L188",
+      "source_location": "L208",
       "weight": 1.0,
       "_src": "prepare_dataset",
       "_tgt": "prepare_dataset_write_manifest",
@@ -12141,7 +13109,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L206",
+      "source_location": "L226",
       "weight": 1.0,
       "_src": "prepare_dataset",
       "_tgt": "prepare_dataset_parse_args",
@@ -12153,7 +13121,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L224",
+      "source_location": "L244",
       "weight": 1.0,
       "_src": "prepare_dataset",
       "_tgt": "prepare_dataset_main",
@@ -12165,7 +13133,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L53",
+      "source_location": "L73",
       "weight": 0.8,
       "_src": "prepare_dataset_parse_case_folder",
       "_tgt": "prepare_dataset_caserecord",
@@ -12177,7 +13145,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L83",
+      "source_location": "L103",
       "weight": 0.8,
       "_src": "prepare_dataset_build_manifest",
       "_tgt": "prepare_dataset_parse_case_folder",
@@ -12189,7 +13157,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L227",
+      "source_location": "L247",
       "weight": 0.8,
       "_src": "prepare_dataset_main",
       "_tgt": "prepare_dataset_build_manifest",
@@ -12201,7 +13169,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L226",
+      "source_location": "L246",
       "weight": 0.8,
       "_src": "prepare_dataset_main",
       "_tgt": "prepare_dataset_infer_brats_root",
@@ -12213,7 +13181,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L228",
+      "source_location": "L248",
       "weight": 0.8,
       "_src": "prepare_dataset_main",
       "_tgt": "prepare_dataset_stratified_split",
@@ -12225,7 +13193,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L229",
+      "source_location": "L249",
       "weight": 0.8,
       "_src": "prepare_dataset_main",
       "_tgt": "prepare_dataset_write_manifest",
@@ -12237,7 +13205,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/data/prepare_dataset.py",
-      "source_location": "L225",
+      "source_location": "L245",
       "weight": 0.8,
       "_src": "prepare_dataset_main",
       "_tgt": "prepare_dataset_parse_args",
@@ -14541,7 +15509,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/train/train_segmentation_monai.py",
-      "source_location": "L114",
+      "source_location": "L119",
       "weight": 1.0,
       "_src": "train_segmentation_monai",
       "_tgt": "train_segmentation_monai_parse_args",
@@ -14553,7 +15521,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/train/train_segmentation_monai.py",
-      "source_location": "L131",
+      "source_location": "L136",
       "weight": 1.0,
       "_src": "train_segmentation_monai",
       "_tgt": "train_segmentation_monai_main",
@@ -14577,7 +15545,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/train/train_segmentation_monai.py",
-      "source_location": "L141",
+      "source_location": "L146",
       "weight": 0.8,
       "_src": "train_segmentation_monai_main",
       "_tgt": "train_segmentation_monai_records_to_monai",
@@ -14589,7 +15557,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/train/train_segmentation_monai.py",
-      "source_location": "L145",
+      "source_location": "L150",
       "weight": 0.8,
       "_src": "train_segmentation_monai_main",
       "_tgt": "train_segmentation_monai_build_transforms",
@@ -14601,7 +15569,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/train/train_segmentation_monai.py",
-      "source_location": "L192",
+      "source_location": "L197",
       "weight": 0.8,
       "_src": "train_segmentation_monai_main",
       "_tgt": "train_segmentation_monai_binarize_label",
@@ -14613,7 +15581,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/train/train_segmentation_monai.py",
-      "source_location": "L162",
+      "source_location": "L167",
       "weight": 0.8,
       "_src": "train_segmentation_monai_main",
       "_tgt": "train_segmentation_monai_maybe_load_zoo_init",
@@ -14625,7 +15593,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/train/train_segmentation_monai.py",
-      "source_location": "L132",
+      "source_location": "L137",
       "weight": 0.8,
       "_src": "train_segmentation_monai_main",
       "_tgt": "train_segmentation_monai_parse_args",
