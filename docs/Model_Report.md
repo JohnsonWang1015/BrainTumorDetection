@@ -239,28 +239,45 @@
 
 ### 3D 視覺化 — 環繞動畫
 
-| MRI 玻璃腦 + 腫瘤環繞（TCGA-HT-8111） | 腫瘤表面環繞 GT vs Pred（TCGA-DU-7301） |
+#### 玻璃腦環繞 — 成功 vs 失敗（同一視覺化、並排對照）
+
+| ✅ 成功 — TCGA-HT-8111（IDH 判讀正確） | ❌ 失敗 — TCGA-CS-6669（IDH 判讀錯誤） |
 |:---:|:---:|
-| ![3D MRI glass-brain orbit](report_assets/mri_orbit_3d.gif) | ![3D tumor surface orbit](report_assets/seg_orbit_3d.gif) |
+| ![3D MRI glass-brain orbit (success)](report_assets/mri_orbit_3d.gif) | ![3D MRI glass-brain orbit (failure)](report_assets/mri_orbit_failure_3d.gif) |
 
-> **左**：以 marching cubes 把去顱 FLAIR 的腦組織重建為半透明「玻璃腦」外殼（BraTS 已去顱，非零區即為腦），再把腫瘤主體（紅 = 預測、綠 = GT）嵌入其中環繞 360°——可看出腫瘤位於**左額葉**的解剖位置。為求畫面乾淨，腫瘤僅取最大連通元件（周邊零星偽陽性已於上方「誤差分解」量化，標題 Dice 0.723 仍為含 FP 的完整遮罩值）。
-> **右**：純腫瘤表面的 GT（綠）vs 預測（紅）環繞，凸顯三維形狀吻合度。兩段皆由 `scripts/_make_report_overlays.py` 以同一批端到端遮罩產生。
+> 兩段為**同一種玻璃腦環繞視覺化**，刻意並排以直接對照成功與失敗：以 marching cubes 把去顱 FLAIR 重建為半透明「玻璃腦」外殼（BraTS 已去顱，非零區即為腦），再把腫瘤主體（紅 = 預測、綠 = GT）嵌入其中環繞 360°。為求畫面乾淨，腫瘤僅取最大連通元件。
+> - **左（成功，HT-8111）**：腫瘤位於**左額葉**，分割乾淨、IDH 端到端判讀正確。標題 Dice 0.723 為含周邊偽陽性的完整遮罩值（偽陽性已於上方「誤差分解」量化）。
+> - **右（失敗，CS-6669）**：真實 IDH-**wildtype** 卻被分類頭判成 mutant（P=0.138 > 閾值 0.13）。但玻璃腦顯示其腫瘤**分割依然乾淨、定位明確**（seg Dice 高）——失敗純粹在下游 IDH 分類頭，而非分割。
+>
+> 兩圖直接對照即印證全報告反覆強調的結論：**分割品質好 ≠ IDH 判讀正確**。
 
-#### 新增環繞動畫（round 2）
+#### 同一案例、不同方法比較 — SegResNet 3D vs MONAI bundle
 
-| 3D 誤差分解環繞（TCGA-DU-A6S8） | 多案例腫瘤形狀環繞（4 例） |
-|:---:|:---:|
-| ![3D error decomposition orbit](report_assets/seg_error_orbit_3d.gif) | ![Multi-case tumor shape orbit](report_assets/seg_orbit_multicase.gif) |
+![Same-case method comparison orbit](report_assets/seg_method_orbit_3d.gif)
 
-> **左（3D 誤差分解環繞）**：把第 5 節「誤差分解」並排圖**立體化**——將端到端預測拆成 **TP（黃實心主體，正確重疊）/ FN（綠半透明殼，漏判 GT）/ FP（紅半透明殼，過分割）** 一起環繞。DU-A6S8（Dice 0.879）的黃色 TP 主體外側，一邊是綠色 FN（漏判區，35,893 體素）、另一邊是紅色 FP（外擴區，18,172 體素）——三維直接呈現「Dice 損失分布在主體周邊」而非從單一切片推論，且兩種誤差型態在空間上分屬不同側。
-> **右（多案例腫瘤形狀環繞）**：4 個 test 案例的預測腫瘤表面（紅）vs GT（綠）各自一格、同步環繞，一眼比較三維形狀多樣性——從緻密的 DU-7301（Dice 0.96）到不規則的 CS-6669。各取最大連通元件以保持畫面乾淨。
+> **固定案例、只換方法**的環繞對照（**列 = 同一病人、欄 = 方法**），如此形狀差異才能歸因於模型，而非「換了不同案例」。紅 = 預測表面、綠 = GT 外殼，四格同步環繞；Dice 由原生空間遮罩計算，與第 5 節對照表一致。
+> - **TCGA-DU-7301（易）**：兩法幾乎平手（SegResNet **0.964** vs bundle **0.959**），紅色預測幾乎蓋滿綠色 GT。
+> - **TCGA-CS-6669（難）**：差異明顯——SegResNet（**0.838**）較貼合但漏掉部分 GT（露出綠色），bundle（**0.794**）邊界外擴過分割。對應體素量 SegResNet 較緊（132k）、bundle 較大（184k，GT 143k）。
+>
+> SegResNet 的原生空間遮罩由 `scripts/infer_segresnet_native.py` 產生（推論後以 nibabel 重取樣回 GT 網格，故能與 GT／bundle 在同一座標系疊圖）。
 
-| ROI bounding-box 環繞（TCGA-DU-7301） | 失敗案例玻璃腦環繞（TCGA-CS-6669） |
-|:---:|:---:|
-| ![IDH ROI bounding box orbit](report_assets/idh_roi_orbit_3d.gif) | ![Failure-case glass brain orbit](report_assets/mri_orbit_failure_3d.gif) |
+#### 腫瘤表面與誤差分解環繞
 
-> **左（ROI bounding-box 環繞）**：在預測腫瘤表面外畫出端到端管線實際送入 DenseNet121 的 **3D 裁切框**（含訓練用 margin=4），環繞顯示「分割 → 分類」的 ROI 交接——IDH 判讀只看得到這個籠子內、再 resize 到 96³ 的內容。把分割與分類兩階段的銜接視覺化。
-> **右（失敗案例玻璃腦環繞）**：對 **CS-6669**（真實 WT 卻被 IDH 端到端判成 Mut，P=0.138 > 閾值 0.13）產生玻璃腦環繞。雖然 IDH 判讀失敗，玻璃腦顯示其腫瘤**分割乾淨、定位明確**（seg Dice 高）——再次印證「分割品質好 ≠ IDH 判讀正確」，瓶頸在下游分類頭而非分割。可與前面 TCGA-HT-8111 的成功玻璃腦對照。
+| 腫瘤表面 GT vs Pred（TCGA-DU-7301） | 3D 誤差分解環繞（TCGA-DU-A6S8） | 多案例腫瘤形狀環繞（4 例） |
+|:---:|:---:|:---:|
+| ![3D tumor surface orbit](report_assets/seg_orbit_3d.gif) | ![3D error decomposition orbit](report_assets/seg_error_orbit_3d.gif) | ![Multi-case tumor shape orbit](report_assets/seg_orbit_multicase.gif) |
+
+> **左（腫瘤表面）**：純腫瘤表面 GT（綠）vs 預測（紅）環繞，凸顯三維形狀吻合度。
+> **中（3D 誤差分解）**：把第 5 節「誤差分解」並排圖**立體化**——TP（黃實心主體，正確重疊）/ FN（綠半透明殼，漏判 GT）/ FP（紅半透明殼，過分割）一起環繞。DU-A6S8（Dice 0.879）的黃色主體外側一邊漏判（綠，35,893 體素）、另一邊外擴（紅，18,172 體素），三維直接呈現「Dice 損失分布在主體周邊」。
+> **右（多案例形狀）**：4 個 test 案例的預測（紅）vs GT（綠）各自一格、同步環繞，一眼比較三維形狀多樣性——從緻密的 DU-7301（Dice 0.96）到不規則的 CS-6669。各取最大連通元件。
+>
+> ⚠️ 此處「多案例」是刻意展示**形狀多樣性**（每格不同案例）；若要看**方法差異**，請看上方「同一案例、不同方法」一節（固定案例、只換方法）。
+
+#### 分割 → 分類的 ROI 交接（TCGA-DU-7301）
+
+![IDH ROI bounding box orbit](report_assets/idh_roi_orbit_3d.gif)
+
+> 端到端管線把分割預測的腫瘤（**紅色表面**）外擴 margin=4 取**軸對齊 3D 裁切框**（**藍色籠子**），resize 到 96³ 後才送進 DenseNet121 做 IDH 判讀——**IDH 分類頭看到的就只有藍框內的內容**。圖上已直接標註圖例（紅 = 腫瘤表面、藍 = ROI 裁切框）與三步驟（segment → crop box → resize），把「分割 → 分類」兩階段的銜接視覺化，避免只看標題不明所以。
 
 ### ❌ 失敗案例 — Legacy U-Net 2D
 
@@ -298,10 +315,14 @@
 
 ### 附錄：重現本報告圖片
 ```bash
-# 分割疊圖 + CT 分類蒙太奇 + 6 支 3D 環繞動畫（即時由 GT/預測遮罩繪製）
+# 同一案例不同方法比較需要的原生空間 SegResNet 遮罩（推論 + 重取樣回 GT 網格）
+uv run python scripts/infer_segresnet_native.py --cases TCGA-DU-7301 TCGA-CS-6669
+#   → outputs/segresnet_<case>_pred.nii.gz
+
+# 分割疊圖 + CT 分類蒙太奇 + 7 支 3D 環繞動畫（即時由 GT/預測遮罩繪製）
 python3 scripts/_make_report_overlays.py        # → docs/report_assets/
-# 產出 .gif：seg_orbit_3d / mri_orbit_3d / mri_orbit_failure_3d /
-#            seg_error_orbit_3d / seg_orbit_multicase / idh_roi_orbit_3d
+# 產出 .gif：seg_orbit_3d / mri_orbit_3d / mri_orbit_failure_3d / seg_error_orbit_3d /
+#            seg_orbit_multicase / seg_method_orbit_3d / idh_roi_orbit_3d
 
 # 重新產生評估圖
 uv run eval-ct                 # CT 分類 ROC / 混淆矩陣 / 可靠度圖（ECE）
