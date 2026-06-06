@@ -2,7 +2,7 @@
 
 > IDH 突變偵測與膠質瘤分割管線（Brain Tumor MRI / CT）
 > 涵蓋 **Classification（分類）** 與 **Segmentation（分割）** 兩大任務，附推論結果圖（成功 + 失敗案例）。
-> 產出日期：2026-06-04 ／ 分支：`develop`
+> 產出日期：2026-06-06 ／ 分支：`develop`
 
 ---
 
@@ -36,7 +36,7 @@
 
 | 任務 | 模型 | 架構重點 |
 |------|------|----------|
-| CT/MRI 腫瘤分類 | **MobileNetV3-Small** | ImageNet 預訓練、3-channel stem、GradCAM 可視化 |
+| CT/MRI 腫瘤分類 | **MobileNetV3-Large** | ImageNet 預訓練、cosine warmup、label smoothing 0.05、EMA(0.999)、依 val AUC 存檔、溫度校準（T≈0.51）、GradCAM 可視化 |
 | 膠質瘤分割（2D，legacy） | **U-Net 2D** | 4-channel 輸入 → 1-channel 遮罩，Focal + Dice loss |
 | 膠質瘤分割（3D，自訓） | **MONAI SegResNet 3D** | sliding-window + DiceCE，較 2D +0.15 Dice 且 std 減半 |
 | 膠質瘤分割（3D，**生產推薦**） | **MONAI Model Zoo `brats_mri_segmentation`** | 在完整 BraTS（~500 cases）預訓練、zero-shot 即勝過自訓模型 |
@@ -53,7 +53,7 @@
 
 | 模型 | 指標 | 數值 |
 |------|------|------|
-| CT/MRI 分類（MobileNetV3-Small） | Accuracy / AUC | **96.4%** / **0.993** |
+| CT/MRI 分類（MobileNetV3-Large） | Accuracy / AUC / ECE | **99.65%** / **0.9997** / **0.0026**（test 1,443 張；`--tta` 下 AUC **1.0000**） |
 | 分割 U-Net 2D（TCGA-LGG） | Dice | 0.760 ± 0.090（test）；val best 0.806 |
 | 分割 SegResNet 3D（TCGA-LGG，自訓） | Dice | **0.910 ± 0.036**（test, 10 cases）；val best 0.918 |
 | 分割 MONAI Model Zoo bundle（zero-shot） | Dice | **0.926 ± 0.031**（test, WT channel）— 生產推薦 |
@@ -66,9 +66,11 @@
 
 評估圖（由 eval 腳本產生）：
 
-| CT/MRI 分類 ROC | CT/MRI 分類 混淆矩陣 |
-|---|---|
-| ![CT ROC](report_assets/eval_ct_roc.png) | ![CT confusion](report_assets/eval_ct_confusion.png) |
+| CT/MRI 分類 ROC | CT/MRI 分類 混淆矩陣 | CT/MRI 校準可靠度圖 |
+|---|---|---|
+| ![CT ROC](report_assets/eval_ct_roc.png) | ![CT confusion](report_assets/eval_ct_confusion.png) | ![CT reliability](report_assets/eval_ct_reliability.png) |
+
+> 混淆矩陣為 MobileNetV3-Large 在 test 1,443 張的結果：TP 793 / TN 645 / **FP 0** / FN 5。可靠度圖為 15-bin ECE，溫度校準（T≈0.51）後 ECE 由 0.0256 降至 **0.0026**（約 10×）。
 
 | 分割 3D Dice 分布 | IDH 端到端 ROC（val） | IDH 端到端 混淆矩陣（val） |
 |---|---|---|
@@ -82,17 +84,17 @@
 
 ## 4. 推論結果圖 — Classification
 
-### CT/MRI 腫瘤分類（MobileNetV3-Small）— 成功 vs 失敗
+### CT/MRI 腫瘤分類（MobileNetV3-Large）— 成功 vs 失敗
 
 ![CT/MRI classification montage](report_assets/cls_ct_montage.png)
 
-> 綠色標題 = 預測正確；紅色標題 = 預測錯誤。閾值 0.5。整體測試集 Accuracy 96.4%（1,443 張中 52 張錯誤）。
+> 綠色標題 = 預測正確；紅色標題 = 預測錯誤。閾值 0.5。整體測試集 Accuracy **99.65%**（1,443 張中僅 5 張錯誤）。升級為 MobileNetV3-Large（+ cosine warmup + label smoothing 0.05 + EMA + 依 val AUC 存檔 + 溫度校準）後，較舊版 Small（96.4%）大幅提升，且**錯誤結構翻轉**：Small 為 10 FP + 42 FN，Large 為 **0 FP + 5 FN**——所有舊版的偽陽性現已正確排除，兩個失敗面板皆為漏判腫瘤。
 
-**8-case 推論藝廊（CT + MRI 各模態 × TP / TN / FP / FN）**
+**8-case 推論藝廊（上排 4 正確、下排 4 錯誤）**
 
 ![CT/MRI 8-case gallery](report_assets/cls_ct_gallery.png)
 
-> 上排為判讀正確（TP / TN），下排為錯誤（FP / FN），兩種模態（CT、MRI）皆涵蓋。**所有 P(tumor) 直接取自 `outputs/eval_ct_predictions.csv`**，即評估當下模型實際輸出，非事後重算。
+> 上排為判讀正確（CT/MRI × TP/TN），下排為實際錯誤。**Large 在 test 上 FP=0，故下排 4 例全為偽陰性（FN，漏判腫瘤）**。所有 P(tumor) 與 outcome 直接取自 `outputs/eval_ct_predictions.csv`，outcome 由 label/pred 推導而非寫死。
 >
 > | 面板 | 模態 | 影像 | 真實 | 預測 | P(tumor) | 觀察 |
 > |------|------|------|------|------|----------|------|
@@ -100,34 +102,36 @@
 > | TN | CT | `ct_healthy (955)` | Healthy | Healthy | 0.000 | 健康腦完美排除 |
 > | TP | MRI | `glioma (246)` | Tumor | Tumor | 1.000 | 膠質瘤強化清晰 |
 > | TN | MRI | `mri_healthy (196)` | Healthy | Healthy | 0.000 | 高信心正確 |
-> | FP | CT | `ct_healthy (264)` | Healthy | Tumor | 0.999 | 亮區/偽影誤判為強化 |
-> | FN | CT | `ct_tumor (291)` | Tumor | Healthy | 0.006 | 對比微弱、高信心漏判 |
-> | FP | MRI | `mri_healthy (1005)` | Healthy | Tumor | 0.692 | 唯二 MRI 偽陽性之一，信心偏低（接近閾值） |
-> | FN | MRI | `meningioma (55)` | Tumor | Healthy | 0.000 | 腦膜瘤（非膠質瘤）型態與訓練分布差異大 |
+> | FN | CT | `ct_tumor (7)` | Tumor | Healthy | 0.234 | 接近閾值的漏判 |
+> | FN | CT | `ct_tumor (1908)` | Tumor | Healthy | 0.030 | 對比微弱、高信心漏判 |
+> | FN | MRI | `meningioma (55)` | Tumor | Healthy | 0.147 | 腦膜瘤（非膠質瘤）型態與訓練分布差異大 |
+> | FN | MRI | `meningioma (914)` | Tumor | Healthy | 0.150 | 同為腦膜瘤漏判 |
 >
-> 兩個模態的偽陽性數都很少（CT 8、MRI 僅 2），且 MRI 偽陽性信心明顯較低（0.692，貼近 0.5）；偽陰性則多為高信心（P≈0），代表這些腫瘤在影像上對比確實微弱，而非模型猶豫。
+> 5 個錯誤中 **3 個是腦膜瘤（meningioma）**——一種在訓練分布中相對少見的非膠質瘤腫瘤型態；其餘 2 個為對比微弱的 CT 腫瘤。已無任何偽陽性，代表健康腦的辨識已近乎完美。
 
 | 類型 | 案例 | 真實 | 預測 | P(tumor) | 說明 |
 |------|------|------|------|----------|------|
 | ✅ 成功 | `ct_tumor (917).jpg` | Tumor | Tumor | 1.000 | 高信心正確 |
-| ✅ 成功 | `mri_healthy (10).jpg` | Healthy | Healthy | 0.02 | 健康腦正確排除 |
-| ❌ 失敗（偽陽性 FP） | `ct_healthy (264).jpg` | Healthy | Tumor | 0.999 | 高信心**誤判**為腫瘤 |
-| ❌ 失敗（偽陰性 FN） | `ct_tumor (291).jpg` | Tumor | Healthy | 0.006 | 高信心**漏掉**腫瘤 |
+| ✅ 成功 | `mri_healthy (196).jpg` | Healthy | Healthy | 0.019 | 健康腦正確排除 |
+| ❌ 失敗（偽陰性 FN） | `ct_tumor (1908).jpg` | Tumor | Healthy | 0.030 | 高信心**漏掉**腫瘤（對比微弱） |
+| ❌ 失敗（偽陰性 FN） | `meningioma (55).jpg` | Tumor | Healthy | 0.147 | 非膠質瘤型態，**漏判** |
 
-**錯誤分布（test 1,443 張，52 張錯誤）**
+**錯誤分布（test 1,443 張，僅 5 張錯誤）**
 
 | 維度 | 切分 | 錯誤數 / 總數 | 錯誤率 |
 |------|------|---------------|--------|
-| 錯誤類型 | 偽陰性 FN（Tumor→Healthy） | **42** / 52 | 81% 的錯誤 |
-| 錯誤類型 | 偽陽性 FP（Healthy→Tumor） | **10** / 52 | 19% 的錯誤 |
-| 模態 | CT scan | 28 / 693 | 4.0% |
-| 模態 | MRI | 24 / 750 | 3.2% |
+| 錯誤類型 | 偽陰性 FN（Tumor→Healthy） | **5** / 5 | 100% 的錯誤 |
+| 錯誤類型 | 偽陽性 FP（Healthy→Tumor） | **0** / 5 | 0% 的錯誤 |
+| 模態 | CT scan | 2 / 693 | 0.29% |
+| 模態 | MRI | 3 / 750 | 0.40% |
+| 腫瘤型態 | 腦膜瘤 meningioma | 3 / 5 | 60% 的錯誤 |
 
 **失敗模式分析**：
-- **以偽陰性為主**（42/52，81%）——模型傾向把訊號偏弱的腫瘤判成健康。許多漏判的 P(tumor) 極低（如 `ct_tumor (291).jpg` P=0.006、`ct_tumor (191).jpg` P=0.029），屬高信心漏判而非邊界猶豫，反映這些腫瘤在影像上對比確實微弱。
-- **CT 與 MRI 錯誤率相近**（4.0% vs 3.2%）——CT 略高，符合 CT 軟組織對比較弱的物理特性，但差距不大，並非單一模態崩潰。
-- **偽陽性少但信心高**：FP 僅 10 例，常出現在帶明顯亮區或偽影的健康影像（如 `ct_healthy (264).jpg` P=0.999），被誤認為腫瘤強化。
-- **臨床取捨**：以腫瘤偵測而言，FN（漏掉腫瘤）比 FP 風險更高。若部署為篩檢工具，可下調閾值（< 0.5）以提高 recall，代價是增加 FP 與後續複查量。
+- **全為偽陰性、零偽陽性**（5/5 FN，0 FP）——Large 模型對健康腦的特異度已近乎完美，殘餘錯誤全是漏判腫瘤。相較 Small 的 42 FN，漏判由 42 降到 5（tumor recall 0.947→**0.994**）。
+- **殘餘盲點是腫瘤「型態」而非「校準」**：5 個漏判有 3 個是腦膜瘤——非膠質瘤、在訓練分布中較少見的型態。這把問題從「邊界猶豫」轉成「分布外型態」，可由補充腦膜瘤樣本改善，而非調整閾值。
+- **CT 與 MRI 錯誤率都極低且相近**（0.29% vs 0.40%）——並非單一模態崩潰。
+- **校準（ECE）**：溫度校準（T≈0.51）後 15-bin ECE 由 0.0256 降至 0.0026。值得注意 T<1：label smoothing 使模型「**欠**自信」，溫度校準反而需要**銳化** logits，兩者互補；T>0 不改變 0.5 決策，故 accuracy/AUC 不變，僅 ECE 改善。
+- **臨床取捨**：以腫瘤偵測而言 FN 比 FP 風險更高。殘餘 5 個 FN 中有 2 個 P 接近閾值（如 `ct_tumor (7)` P=0.234），微幅下調閾值即可救回，代價是可能首次引入 FP；但腦膜瘤型態的漏判（P≈0.12–0.15）需要資料層面補強。
 
 ### IDH 突變分類（3D 端到端，DenseNet121 + 預測遮罩）
 
@@ -242,6 +246,22 @@
 > **左**：以 marching cubes 把去顱 FLAIR 的腦組織重建為半透明「玻璃腦」外殼（BraTS 已去顱，非零區即為腦），再把腫瘤主體（紅 = 預測、綠 = GT）嵌入其中環繞 360°——可看出腫瘤位於**左額葉**的解剖位置。為求畫面乾淨，腫瘤僅取最大連通元件（周邊零星偽陽性已於上方「誤差分解」量化，標題 Dice 0.723 仍為含 FP 的完整遮罩值）。
 > **右**：純腫瘤表面的 GT（綠）vs 預測（紅）環繞，凸顯三維形狀吻合度。兩段皆由 `scripts/_make_report_overlays.py` 以同一批端到端遮罩產生。
 
+#### 新增環繞動畫（round 2）
+
+| 3D 誤差分解環繞（TCGA-DU-A6S8） | 多案例腫瘤形狀環繞（4 例） |
+|:---:|:---:|
+| ![3D error decomposition orbit](report_assets/seg_error_orbit_3d.gif) | ![Multi-case tumor shape orbit](report_assets/seg_orbit_multicase.gif) |
+
+> **左（3D 誤差分解環繞）**：把第 5 節「誤差分解」並排圖**立體化**——將端到端預測拆成 **TP（黃實心主體，正確重疊）/ FN（綠半透明殼，漏判 GT）/ FP（紅半透明殼，過分割）** 一起環繞。DU-A6S8（Dice 0.879）的黃色 TP 主體外側，一邊是綠色 FN（漏判區，35,893 體素）、另一邊是紅色 FP（外擴區，18,172 體素）——三維直接呈現「Dice 損失分布在主體周邊」而非從單一切片推論，且兩種誤差型態在空間上分屬不同側。
+> **右（多案例腫瘤形狀環繞）**：4 個 test 案例的預測腫瘤表面（紅）vs GT（綠）各自一格、同步環繞，一眼比較三維形狀多樣性——從緻密的 DU-7301（Dice 0.96）到不規則的 CS-6669。各取最大連通元件以保持畫面乾淨。
+
+| ROI bounding-box 環繞（TCGA-DU-7301） | 失敗案例玻璃腦環繞（TCGA-CS-6669） |
+|:---:|:---:|
+| ![IDH ROI bounding box orbit](report_assets/idh_roi_orbit_3d.gif) | ![Failure-case glass brain orbit](report_assets/mri_orbit_failure_3d.gif) |
+
+> **左（ROI bounding-box 環繞）**：在預測腫瘤表面外畫出端到端管線實際送入 DenseNet121 的 **3D 裁切框**（含訓練用 margin=4），環繞顯示「分割 → 分類」的 ROI 交接——IDH 判讀只看得到這個籠子內、再 resize 到 96³ 的內容。把分割與分類兩階段的銜接視覺化。
+> **右（失敗案例玻璃腦環繞）**：對 **CS-6669**（真實 WT 卻被 IDH 端到端判成 Mut，P=0.138 > 閾值 0.13）產生玻璃腦環繞。雖然 IDH 判讀失敗，玻璃腦顯示其腫瘤**分割乾淨、定位明確**（seg Dice 高）——再次印證「分割品質好 ≠ IDH 判讀正確」，瓶頸在下游分類頭而非分割。可與前面 TCGA-HT-8111 的成功玻璃腦對照。
+
 ### ❌ 失敗案例 — Legacy U-Net 2D
 
 ![Segmentation failure](report_assets/seg_failure.png)
@@ -264,7 +284,7 @@
 ## 6. 結論與已知限制
 
 **結論**
-- **分類**：CT/MRI 腫瘤分類達 96.4% / AUC 0.993，生產可用；分子 IDH（RNA-seq）AUC 0.99 為各路徑最強。
+- **分類**：CT/MRI 腫瘤分類達 **99.65% / AUC 0.9997 / ECE 0.0026**（MobileNetV3-Large，0 FP / 5 FN），生產可用；分子 IDH（RNA-seq）AUC 0.99 為各路徑最強。
 - **分割**：MONAI Model Zoo bundle（zero-shot Dice 0.926）勝過自訓模型，列為生產推薦。
 - **IDH 影像分類**：3D（CV AUC 0.916）顯著優於 2D（0.764）；端到端受分割誤差影響降至 AUC 0.75。
 
@@ -278,11 +298,13 @@
 
 ### 附錄：重現本報告圖片
 ```bash
-# 分割疊圖 + CT 分類蒙太奇（即時由 GT/預測遮罩繪製）
+# 分割疊圖 + CT 分類蒙太奇 + 6 支 3D 環繞動畫（即時由 GT/預測遮罩繪製）
 python3 scripts/_make_report_overlays.py        # → docs/report_assets/
+# 產出 .gif：seg_orbit_3d / mri_orbit_3d / mri_orbit_failure_3d /
+#            seg_error_orbit_3d / seg_orbit_multicase / idh_roi_orbit_3d
 
 # 重新產生評估圖
-uv run eval-ct                 # CT 分類 ROC / 混淆矩陣
+uv run eval-ct                 # CT 分類 ROC / 混淆矩陣 / 可靠度圖（ECE）
 uv run eval-seg-monai          # 3D 分割 Dice 直方圖
 uv run eval-e2e-zoo            # IDH 端到端 ROC / 混淆矩陣
 uv run eval-idh-molecular --modalities rnaseq methylation  # 分子 IDH 圖

@@ -282,6 +282,25 @@ Additional facts:
 - the pooled label distribution is roughly balanced (`442` WT vs `438` mutant), but per-source it is highly imbalanced — GBM is `~93%` wildtype and LGG is `~81%` mutant
 - 90 GBM patients had multiple primary aliquots that were collapsed during preparation; 14 LGG patients similarly
 
+### 5.4a Raw file inventory on disk (real run, 2026-05-04)
+
+Consolidated from the former `docs/DATASET_CARD.md` (merged into this file on 2026-06-06; this is now the single source of truth). The counts below are the raw GDC files present locally before aliquot dedup, so they exceed the per-patient numbers in 5.4.
+
+| Source | RNA-seq files | MAF files (public masked) | Clinical files | Expression patients (after dedup) | MAF-labeled patients | Labeled + Expression |
+|---|---:|---:|---:|---:|---:|---:|
+| TCGA-GBM-Molecular | 391 | 468 | 599 | 293 | 371 | 250 |
+| TCGA-LGG-Molecular | 534 | 530 | 537 | 516 | 509 | 509 |
+| Pooled | 925 | 998 | 1136 | 809 | 880 | 759 |
+| Pooled strict multi-modal (RNA-seq + methylation) | — | — | — | 615 | 615 | 615 |
+
+IDH label distribution from MAF aggregation (mutant fraction makes the per-source confound explicit):
+
+| Source | IDH-mutant (`1`) | IDH-wildtype (`0`) | Mutant fraction |
+|---|---:|---:|---:|
+| TCGA-GBM-Molecular | 24 | 347 | 6.5% |
+| TCGA-LGG-Molecular | 414 | 95 | 81.3% |
+| Pooled labels | 438 | 442 | 49.8% |
+
 ### 5.5 Feature panel
 
 - strategy: `variance_top_k_union_prior_panel` with `default_top_k = 2000`
@@ -337,6 +356,14 @@ Strict multimodal intersection (patients with **both** RNA-seq and methylation *
 | pooled wildtype | 272 |
 | pooled mutant | 343 |
 | `rnaseq_only_dropped` | ≈ 144 patients (those in the RNA-seq cohort but missing methylation) |
+
+Raw methylation file inventory on disk (real run, 2026-05-04, consolidated from the former `docs/DATASET_CARD.md`):
+
+| Source | Methylation files | HM27 files | HM450 files | Methylation patients (after dedup) | RNA-seq patients | Strict overlap | Intersection CpGs |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| TCGA-GBM-Molecular | 450 | 295 | 155 | 423 | 293 | 210 | 25,978 |
+| TCGA-LGG-Molecular | 495 | 0 | 495 | 409 | 516 | 405 | 482,421 |
+| Pooled strict subset | 945 | 295 | 650 | 832 | 809 | 615 | 25,978 (after cross-source intersection) |
 
 ### 6.5 Feature panel
 

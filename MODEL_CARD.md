@@ -22,7 +22,8 @@ Where a metric comes from code or artifacts, it is treated as verified from the 
 | `checkpoints/segresnet_tcga.pt` | 72M | 2026-04-30 16:53 | 3D MRI segmentation | Present |
 | `checkpoints/densenet3d_idh.pt` | 44M | 2026-04-30 17:25 | 3D IDH classifier | Present |
 | `checkpoints/densenet3d_idh_jitter.pt` | 44M | 2026-04-30 18:26 | 3D IDH classifier with bbox jitter | Present |
-| `checkpoints/mobilenetv3_ct_best.pt` | 6.0M | 2026-03-21 14:39 | CT/MRI tumor classifier | Present |
+| `checkpoints/mobilenetv3_ct_best.pt` | 17M | 2026-06-06 17:04 | CT/MRI tumor classifier (MobileNetV3-Large) | Present |
+| `checkpoints/_exploratory/mobilenetv3_ct_small_baseline_0964.pt` | 6.0M | 2026-06-06 16:21 | CT/MRI tumor classifier (legacy Small baseline 96.4%) | Archived |
 | `checkpoints/yolov8_brain_tumor_best.pt` | 6.0M | 2026-03-28 14:52 | YOLO detector | Present |
 | `checkpoints/monai_zoo/brats_mri_segmentation/models/model.pt` | external bundle | vendor asset | MONAI Model Zoo segmentation | Present |
 | `checkpoints/molecular_idh/{logistic.joblib, lightgbm.txt, mlp.pt}` | ~6M total | 2026-05-04 | Molecular IDH classifier (RNA-seq) | Present |
@@ -188,30 +189,42 @@ Task:
 
 Architecture:
 
-- `MobileNetV3-small` binary classifier
+- `MobileNetV3-large` binary classifier (upgraded from Small on 2026-06-06)
 - ImageNet-pretrained backbone
 - RGB input
+- checkpoint is self-describing: stores `variant`, so eval/app pick the head automatically (default `"small"` keeps legacy checkpoints loadable)
 
 Training recipe from code:
 
-- optimizer: `AdamW`
-- default lr: `3e-4`
-- default epochs: 20
-- checkpoint selection: best validation loss
+- optimizer: `AdamW` with weight decay
+- LR schedule: cosine annealing + linear warmup (per-step)
+- label smoothing: soft BCE targets (eps 0.05, symmetric 1→0.975 / 0→0.025)
+- EMA(0.999) shadow tracked; both raw and EMA weights validated each epoch, the better kept
+- checkpoint selection: best validation **AUC** (not val_loss)
+- post-hoc temperature scaling on val (`scripts/calibrate_ct_temperature.py`, LBFGS over log-T)
 
 Checkpoint metadata verified from file:
 
 | Field | Value |
 |---|---|
-| epoch | 19 |
-| val_loss | 0.0864 |
-| val_acc | 0.9674 |
+| variant | `large` |
+| epoch | 9 |
+| val_auc | 0.99995 |
+| val_acc | 0.9979 |
 | modality | `both` |
+| ema | `False` (raw weights won selection) |
+| temperature | 0.5145 |
+| temperature_split | `val` |
 
-Repository-reported evaluation:
+Repository-reported evaluation (test, 1,443 images):
 
-- accuracy: `96.4%`
-- AUC: `0.993`
+- accuracy: `99.65%` (1,438/1,443; was 96.4% under Small)
+- AUC: `0.9997` (`1.0000` with `--tta` horizontal-flip averaging)
+- ECE (15-bin): `0.0026` after temperature scaling (was 0.0256 pre-calibration)
+- confusion: TP 793 / TN 645 / **FP 0** / FN 5 — tumor recall 0.994 (missed tumors 42→5)
+- the legacy Small baseline (96.4% / 0.993) is archived at `checkpoints/_exploratory/mobilenetv3_ct_small_baseline_0964.pt`
+
+Note on the fitted temperature `T≈0.51 (<1)`: label smoothing made the model *under*-confident, so temperature **sharpens** the logits to compensate. `T>0` preserves the 0.5 decision boundary, so accuracy/AUC are unchanged; only ECE moves. Re-run the calibration script after any retrain.
 
 ### 4.5 `segresnet_tcga.pt`
 
@@ -451,7 +464,7 @@ A single table covering every trained model in the repo. Columns include the met
 | `segresnet_tcga.pt` | 3D whole-tumor seg | TCGA-LGG (10 test) | — | — | — | Dice 0.9101 ± 0.036 (val 0.9176) | custom-trained 3D baseline |
 | `unet2d_tcga_v1.pt` | 2D whole-tumor seg | TCGA-LGG | — | — | — | Dice 0.7598 ± 0.090 (val 0.8063) | 2D legacy baseline |
 | **Tumor binary classification** | | | | | | | |
-| `mobilenetv3_ct_best.pt` ★ | 2D CT/MRI tumor vs healthy | Kaggle CT/MRI (val) | **96.4%** | **0.993** | — | — | val_loss 0.0864; only model in this branch |
+| `mobilenetv3_ct_best.pt` (MobileNetV3-Large) ★ | 2D CT/MRI tumor vs healthy | Kaggle CT/MRI (1,443 test) | **99.65%** | **0.9997** (1.0000 w/ `--tta`) | — | ECE 0.0026 (15-bin, temp-scaled) | FP 0 / FN 5; tumor recall 0.994; legacy Small 96.4%/0.993 archived |
 | **IDH classification — Imaging** | | | | | | | |
 | `densenet3d_idh.pt` | 3D IDH (GT-mask ROI, upper bound) | TCGA-LGG (val) | — | val 1.000 (GT-mask only) | — | — | optimistic ceiling, not deployable |
 | `densenet3d_idh_jitter.pt` + Zoo bundle ★ | 3D IDH end-to-end (predicted-mask) | TCGA-LGG (10 E2E test) | **0.80** (E2E) | **0.75** (E2E); 0.9164 ± 0.073 (5-fold CV smoothed) | **0.69** (E2E) | GT-mask case AUC 1.000; jitter-trained for box noise | E2E threshold 0.13 from `e2e_idh_config.json` |
@@ -473,8 +486,8 @@ A single table covering every trained model in the repo. Columns include the met
 
 - **Accuracy** is reported only when a model has a fixed deployment threshold (`mobilenetv3_ct_best`, end-to-end IDH). Pure classifiers without a chosen threshold report AUC instead, since accuracy depends on the cutoff.
 - **macro F1** is reported only for the end-to-end IDH pipeline because that is where the threshold from `e2e_idh_config.json` is applied. Adding a similar number for the standalone classifiers would require re-applying their stored thresholds, which has not been done in this snapshot.
-- **AUC** is the standard primary metric for the binary classifiers. For molecular models, three AUC values are reported (pooled 5-fold CV, LGG→GBM source-holdout, GBM→LGG source-holdout) so that cohort confound is visible — see B3 strategy in `docs/MODEL_CARD.md`.
-- The molecular multi-omics fusion row gives essentially noise-level AUC change vs the RNA-seq-only baseline (pooled CV +0.0009, GBM minority AUPRC −0.0044 with smaller test n=210), but a real Brier improvement (0.014 → 0.0095, ≈31% better calibration). See `docs/MODEL_CARD.md` for the full B3 side-by-side.
+- **AUC** is the standard primary metric for the binary classifiers. For molecular models, three AUC values are reported (pooled 5-fold CV, LGG→GBM source-holdout, GBM→LGG source-holdout) so that cohort confound is visible — see the B3 strategy detail in [Section 8](#8-molecular-idh--full-b3-evaluation-detail).
+- The molecular multi-omics fusion row gives essentially noise-level AUC change vs the RNA-seq-only baseline (pooled CV +0.0009, GBM minority AUPRC −0.0044 with smaller test n=210), but a real Brier improvement (0.014 → 0.0095, ≈31% better calibration). See [Section 8](#8-molecular-idh--full-b3-evaluation-detail) for the full B3 side-by-side.
 
 ## 7. Caveats
 
@@ -482,3 +495,78 @@ A single table covering every trained model in the repo. Columns include the met
 - IDH metrics are based on a very small labeled cohort with strong class imbalance
 - The local YOLO checkpoint metadata does not match the current training script defaults, so future retraining may not reproduce the same result unless arguments are pinned explicitly
 - The MONAI Model Zoo bundle is an external pretrained asset and should be tracked separately from custom-trained checkpoints when reporting provenance
+
+## 8. Molecular IDH — Full B3 Evaluation Detail
+
+This section was consolidated from the former `docs/MODEL_CARD.md` (the two files were merged on 2026-06-06; this is now the single source of truth). It holds the per-model B3 tables that Section 6 summarizes.
+
+### 8.1 Scope
+
+- Task: binary IDH mutation status classification (`0 = wildtype`, `1 = mutant`) from RNA-seq expression.
+- Features: `log2(TPM+1)` expression with fold-aware selection (`top-K variance ∪ prior panel`).
+- Cohort for this run: pooled TCGA-GBM + TCGA-LGG molecular data prepared under `artifacts/molecular/`.
+- Models: `LogisticIDH`, `LightGBMIDH`, `MLPIDH`.
+- Real eval run: `--mode all --folds 5 --seed 42`.
+
+### 8.2 Pooled 5-fold stratified CV
+
+| Model | Mean AUC | AUC std | Mean AUPRC | AUPRC std |
+|---|---:|---:|---:|---:|
+| Logistic | 0.9916 | 0.0098 | 0.9899 | 0.0135 |
+| LightGBM | 0.9924 | 0.0089 | 0.9896 | 0.0152 |
+| MLP | 0.9899 | 0.0085 | 0.9876 | 0.0118 |
+
+### 8.3 Source-holdout (bidirectional)
+
+| Direction | Model | AUC | AUPRC |
+|---|---|---:|---:|
+| Train LGG → Test GBM | Logistic | 0.9801 | 0.9514 |
+| Train LGG → Test GBM | LightGBM | 0.9650 | 0.9290 |
+| Train LGG → Test GBM | MLP | 0.9880 | 0.9458 |
+| Train GBM → Test LGG | Logistic | 0.9722 | 0.9891 |
+| Train GBM → Test LGG | LightGBM | 0.9555 | 0.9868 |
+| Train GBM → Test LGG | MLP | 0.9539 | 0.9846 |
+
+### 8.4 Minority metrics on GBM subset (from pooled CV predictions)
+
+| Model | n (GBM test predictions) | AUPRC | Recall @ 95% specificity | Brier score |
+|---|---:|---:|---:|---:|
+| Logistic | 250 | 0.9326 | 0.9444 | 0.0121 |
+| LightGBM | 250 | 0.9469 | 0.9444 | 0.0138 |
+| MLP | 250 | 0.9386 | 0.9444 | 0.0151 |
+
+### 8.5 Intended use
+
+- Research-only molecular baseline for IDH discrimination from TCGA transcriptomics.
+- Cross-modality reference signal to compare with the imaging IDH pipeline when paired data exists.
+- Offline analysis when MRI is unavailable.
+
+### 8.6 Out-of-scope use
+
+- Any clinical diagnosis or treatment decision support.
+- Prospective deployment on non-TCGA cohorts without external validation.
+- Use as a replacement for pathology/genomics workflows in patient care.
+- CNV/survival/subtype claims, which are not part of this release.
+
+### 8.7 Multi-omics fusion (RNA-seq + methylation)
+
+B3 side-by-side comparison (real eval run, `--mode all --folds 5 --seed 42`):
+
+| Report | RNA-seq-only baseline | Multi-omics fusion | Lift (multi − baseline) |
+|---|---:|---:|---:|
+| Pooled 5-fold CV best AUC | 0.9924 (LightGBM) | 0.9933 (MLP) | +0.0009 |
+| Source holdout AUC: LGG → GBM (best model) | 0.9880 (MLP) | 0.9847 (MLP) | −0.0034 |
+| Source holdout AUC: GBM → LGG (best model) | 0.9722 (Logistic) | 0.9772 (Logistic) | +0.0050 |
+| GBM minority AUPRC (best model) | 0.9469 (LightGBM, n=250) | 0.9425 (LightGBM, n=210) | −0.0044 |
+| GBM minority recall @95% specificity (best model) | 0.9444 | 0.9444 | +0.0000 |
+| GBM minority Brier (best model) | 0.0138 | 0.0095 | −0.0043 |
+
+Observed outcome on this cohort: pooled CV improved slightly and GBM→LGG transfer improved, but LGG→GBM and GBM minority AUPRC did not. The clearest win is calibration (Brier 0.0138 → 0.0095, ≈31% better). The repo-best GBM-minority AUPRC (0.9502) comes from a separate **late-fusion** recipe (per-modality LightGBM, mean of probs) — see Section 6 and `scripts/exp_late_fusion_idh.py`.
+
+### 8.8 Risks and limitations (multi-omics, verbatim from spec)
+
+1. **Smaller training set in strict mode** — multi-modal subset is ~600 vs RNA-seq-only 759, increasing variance.
+2. **HM27 platform ceiling** — intersecting to HM27 caps methylation resolution at ~27K CpGs vs HM450's ~485K.
+3. **Batch effects across aliquots** — methylation and RNA-seq may come from different sample/aliquot for the same patient.
+4. **M-value clipping** — extreme beta values (~0 or ~1) lose information after the `[0.001, 0.999]` clip.
+5. **Cohort confound persists** — same diagnosis caveat as RNA-seq-only B3; pooled CV remains LGG-vs-GBM susceptible.
