@@ -43,6 +43,50 @@ except ImportError:
     _HAS_MPL = False
 
 
+def expected_calibration_error(
+    probs: np.ndarray, labels: np.ndarray, n_bins: int = 15
+) -> tuple[float, list[dict[str, float]]]:
+    """Expected Calibration Error for a binary classifier.
+
+    ``probs`` are P(tumor). For each sample the model's *confidence* is the
+    probability of its predicted class (``max(p, 1-p)``). Samples are grouped
+    into ``n_bins`` equal-width confidence bins; ECE is the population-weighted
+    gap between accuracy and mean confidence per bin:
+
+        ECE = Σ_b (|b| / N) · |acc(b) − conf(b)|
+
+    Returns ``(ece, bins)`` where ``bins`` carries per-bin stats for a
+    reliability diagram.
+    """
+    preds = (probs >= 0.5).astype(int)
+    confidence = np.maximum(probs, 1.0 - probs)
+    correct = (preds == labels).astype(float)
+
+    edges = np.linspace(0.0, 1.0, n_bins + 1)
+    n = len(labels)
+    ece = 0.0
+    bins: list[dict[str, float]] = []
+    for i in range(n_bins):
+        lo, hi = float(edges[i]), float(edges[i + 1])
+        # Bin 0 includes its left edge; every bin is closed on the right so the
+        # boundary value (and confidence == 1.0 in the last bin) is counted once.
+        if i == 0:
+            in_bin = (confidence >= lo) & (confidence <= hi)
+        else:
+            in_bin = (confidence > lo) & (confidence <= hi)
+        count = int(in_bin.sum())
+        if count == 0:
+            bins.append({"lo": float(lo), "hi": float(hi), "count": 0, "acc": 0.0, "conf": 0.0})
+            continue
+        bin_acc = float(correct[in_bin].mean())
+        bin_conf = float(confidence[in_bin].mean())
+        ece += (count / n) * abs(bin_acc - bin_conf)
+        bins.append(
+            {"lo": float(lo), "hi": float(hi), "count": count, "acc": bin_acc, "conf": bin_conf}
+        )
+    return float(ece), bins
+
+
 @torch.inference_mode()
 def evaluate(
     manifest: Path,
@@ -52,6 +96,7 @@ def evaluate(
     num_workers: int,
     output_dir: Path,
     img_size: int,
+    tta: bool = False,
 ) -> dict[str, float]:
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -67,9 +112,15 @@ def evaluate(
     )
 
     state = torch.load(ckpt, map_location=device, weights_only=True)
-    model = build_mobilenetv3_binary(num_input_channels=3).to(device)
+    # Checkpoints are self-describing; legacy ones default to the Small backbone.
+    variant = state.get("variant", "small")
+    # Temperature scaling (Guo et al. 2017): p = sigmoid(logit / T). T>0 leaves
+    # the 0.5 decision unchanged (accuracy/AUC fixed) and only softens confidence.
+    temperature = float(state.get("temperature", 1.0))
+    model = build_mobilenetv3_binary(num_input_channels=3, variant=variant).to(device)
     model.load_state_dict(state["model"])
     model.eval()
+    print(f"Loaded {variant} backbone  (TTA={'on' if tta else 'off'}, T={temperature:.3f})")
 
     all_probs: list[float] = []
     all_labels: list[int] = []
@@ -77,7 +128,10 @@ def evaluate(
     for images, labels in tqdm(loader, desc="eval"):
         images = images.to(device, non_blocking=True)
         logits = model(images)
-        probs = torch.sigmoid(logits).cpu().numpy().reshape(-1)
+        if tta:
+            # Average logits with the horizontal-flip view (brain L/R symmetry).
+            logits = 0.5 * (logits + model(torch.flip(images, dims=[3])))
+        probs = torch.sigmoid(logits / temperature).cpu().numpy().reshape(-1)
         all_probs.extend(probs.tolist())
         all_labels.extend(labels.numpy().reshape(-1).astype(int).tolist())
 
@@ -87,6 +141,7 @@ def evaluate(
 
     acc = accuracy_score(labels_arr, preds_arr)
     auc = roc_auc_score(labels_arr, probs_arr)
+    ece, ece_bins = expected_calibration_error(probs_arr, labels_arr, n_bins=15)
     report = classification_report(labels_arr, preds_arr, target_names=["Healthy", "Tumor"], digits=4)
 
     print(f"\n{'=' * 50}")
@@ -95,6 +150,7 @@ def evaluate(
     print(f"{'=' * 50}")
     print(f"Accuracy   : {acc:.4f}")
     print(f"AUC-ROC    : {auc:.4f}")
+    print(f"ECE (15-bin): {ece:.4f}   (lower = better calibrated)")
     print()
     print(report)
 
@@ -135,7 +191,32 @@ def evaluate(
         plt.close(fig)
         print(f"ROC curve        → {roc_path}")
 
-    return {"accuracy": acc, "auc_roc": auc}
+        # Reliability diagram — per-bin accuracy vs confidence. The diagonal is
+        # perfect calibration; bars below it = overconfident, above = under.
+        populated = [b for b in ece_bins if b["count"] > 0]
+        if populated:
+            centers = [(b["lo"] + b["hi"]) / 2 for b in populated]
+            accs = [b["acc"] for b in populated]
+            confs = [b["conf"] for b in populated]
+            width = 1.0 / len(ece_bins)
+            fig, ax = plt.subplots(figsize=(5, 5))
+            ax.bar(centers, accs, width=width * 0.9, edgecolor="black",
+                   alpha=0.75, label="accuracy")
+            ax.plot(confs, accs, "o-", color="C1", lw=1, ms=4, label="confidence")
+            ax.plot([0, 1], [0, 1], "k--", lw=1, label="perfect")
+            ax.set_xlim(0, 1)
+            ax.set_ylim(0, 1)
+            ax.set_xlabel("Confidence")
+            ax.set_ylabel("Accuracy")
+            ax.set_title(f"Reliability Diagram  (ECE={ece:.4f})")
+            ax.legend(loc="upper left")
+            fig.tight_layout()
+            rel_path = output_dir / "eval_ct_reliability.png"
+            fig.savefig(rel_path, dpi=150)
+            plt.close(fig)
+            print(f"Reliability      → {rel_path}")
+
+    return {"accuracy": acc, "auc_roc": auc, "ece": ece}
 
 
 def parse_args() -> argparse.Namespace:
@@ -147,6 +228,12 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--num-workers", type=int, default=0)
     p.add_argument("--img-size", type=int, default=224)
     p.add_argument("--output-dir", type=Path, default=Path("outputs"))
+    p.add_argument(
+        "--tta",
+        action=argparse.BooleanOptionalAction,
+        default=False,
+        help="Test-time augmentation: average original + horizontal-flip logits",
+    )
     return p.parse_args()
 
 
@@ -160,6 +247,7 @@ def main() -> None:
         args.num_workers,
         args.output_dir,
         args.img_size,
+        tta=args.tta,
     )
 
 

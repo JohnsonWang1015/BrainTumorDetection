@@ -201,7 +201,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L1",
       "id": "test_idh_dataset",
-      "community": 2
+      "community": 0
     },
     {
       "label": "test_tumor_bbox_empty_returns_none()",
@@ -209,7 +209,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L31",
       "id": "test_idh_dataset_test_tumor_bbox_empty_returns_none",
-      "community": 2
+      "community": 0
     },
     {
       "label": "test_tumor_bbox_tight_with_margin()",
@@ -217,7 +217,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L36",
       "id": "test_idh_dataset_test_tumor_bbox_tight_with_margin",
-      "community": 2
+      "community": 0
     },
     {
       "label": "test_tumor_bbox_clips_at_image_edges()",
@@ -225,7 +225,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L48",
       "id": "test_idh_dataset_test_tumor_bbox_clips_at_image_edges",
-      "community": 2
+      "community": 0
     },
     {
       "label": "test_crop_roi_passthrough_when_bbox_none()",
@@ -233,7 +233,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L60",
       "id": "test_idh_dataset_test_crop_roi_passthrough_when_bbox_none",
-      "community": 2
+      "community": 0
     },
     {
       "label": "test_crop_roi_shapes()",
@@ -241,7 +241,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L66",
       "id": "test_idh_dataset_test_crop_roi_shapes",
-      "community": 2
+      "community": 0
     },
     {
       "label": "test_balanced_sampler_weight_distribution()",
@@ -249,7 +249,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L77",
       "id": "test_idh_dataset_test_balanced_sampler_weight_distribution",
-      "community": 2
+      "community": 0
     },
     {
       "label": "test_balanced_sampler_single_class_falls_back_to_uniform()",
@@ -257,7 +257,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L91",
       "id": "test_idh_dataset_test_balanced_sampler_single_class_falls_back_to_uniform",
-      "community": 2
+      "community": 0
     },
     {
       "label": "_write_synthetic_manifest()",
@@ -265,7 +265,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L104",
       "id": "test_idh_dataset_write_synthetic_manifest",
-      "community": 2
+      "community": 0
     },
     {
       "label": "_fake_volume()",
@@ -273,7 +273,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L128",
       "id": "test_idh_dataset_fake_volume",
-      "community": 2
+      "community": 0
     },
     {
       "label": "test_classification_dataset_roi_returns_expected_shape()",
@@ -281,7 +281,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L137",
       "id": "test_idh_dataset_test_classification_dataset_roi_returns_expected_shape",
-      "community": 2
+      "community": 0
     },
     {
       "label": "test_classification_dataset_no_roi_keeps_full_slice()",
@@ -289,7 +289,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L162",
       "id": "test_idh_dataset_test_classification_dataset_no_roi_keeps_full_slice",
-      "community": 2
+      "community": 0
     },
     {
       "label": "Tests for IDH classification dataset helpers (ROI crop + balanced sampler).  Run",
@@ -297,7 +297,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L1",
       "id": "test_idh_dataset_rationale_1",
-      "community": 2
+      "community": 0
     },
     {
       "label": "Manifest entry pointing at fake nifti paths; load_nifti is monkey-patched in the",
@@ -305,7 +305,7 @@
       "source_file": "tests/test_idh_dataset.py",
       "source_location": "L105",
       "id": "test_idh_dataset_rationale_105",
-      "community": 2
+      "community": 0
     },
     {
       "label": "test_ct_datasets.py",
@@ -313,7 +313,7 @@
       "source_file": "tests/test_ct_datasets.py",
       "source_location": "L1",
       "id": "test_ct_datasets",
-      "community": 0
+      "community": 5
     },
     {
       "label": "_make_fake_dataset()",
@@ -321,7 +321,7 @@
       "source_file": "tests/test_ct_datasets.py",
       "source_location": "L33",
       "id": "test_ct_datasets_make_fake_dataset",
-      "community": 0
+      "community": 5
     },
     {
       "label": "test_collect_images_counts()",
@@ -329,7 +329,7 @@
       "source_file": "tests/test_ct_datasets.py",
       "source_location": "L54",
       "id": "test_ct_datasets_test_collect_images_counts",
-      "community": 0
+      "community": 5
     },
     {
       "label": "test_build_manifest_both()",
@@ -337,7 +337,7 @@
       "source_file": "tests/test_ct_datasets.py",
       "source_location": "L68",
       "id": "test_ct_datasets_test_build_manifest_both",
-      "community": 0
+      "community": 5
     },
     {
       "label": "test_build_manifest_ct_only()",
@@ -345,7 +345,7 @@
       "source_file": "tests/test_ct_datasets.py",
       "source_location": "L76",
       "id": "test_ct_datasets_test_build_manifest_ct_only",
-      "community": 0
+      "community": 5
     },
     {
       "label": "test_build_manifest_missing_dir_raises()",
@@ -353,7 +353,7 @@
       "source_file": "tests/test_ct_datasets.py",
       "source_location": "L84",
       "id": "test_ct_datasets_test_build_manifest_missing_dir_raises",
-      "community": 0
+      "community": 5
     },
     {
       "label": "test_stratified_split_proportions()",
@@ -361,7 +361,7 @@
       "source_file": "tests/test_ct_datasets.py",
       "source_location": "L90",
       "id": "test_ct_datasets_test_stratified_split_proportions",
-      "community": 0
+      "community": 5
     },
     {
       "label": "test_write_and_reload_manifest()",
@@ -369,7 +369,7 @@
       "source_file": "tests/test_ct_datasets.py",
       "source_location": "L101",
       "id": "test_ct_datasets_test_write_and_reload_manifest",
-      "community": 0
+      "community": 5
     },
     {
       "label": "test_dataset_len_and_shape()",
@@ -377,7 +377,7 @@
       "source_file": "tests/test_ct_datasets.py",
       "source_location": "L118",
       "id": "test_ct_datasets_test_dataset_len_and_shape",
-      "community": 0
+      "community": 5
     },
     {
       "label": "test_dataset_modality_filter()",
@@ -385,7 +385,7 @@
       "source_file": "tests/test_ct_datasets.py",
       "source_location": "L138",
       "id": "test_ct_datasets_test_dataset_modality_filter",
-      "community": 0
+      "community": 5
     },
     {
       "label": "test_dataset_pixel_range()",
@@ -393,7 +393,7 @@
       "source_file": "tests/test_ct_datasets.py",
       "source_location": "L155",
       "id": "test_ct_datasets_test_dataset_pixel_range",
-      "community": 0
+      "community": 5
     },
     {
       "label": "Unit tests for the CT/MRI data pipeline.  Run with:     uv run pytest tests/ -v",
@@ -401,7 +401,7 @@
       "source_file": "tests/test_ct_datasets.py",
       "source_location": "L1",
       "id": "test_ct_datasets_rationale_1",
-      "community": 0
+      "community": 5
     },
     {
       "label": "Create a minimal fake Kaggle-style folder tree with tiny images.",
@@ -409,7 +409,7 @@
       "source_file": "tests/test_ct_datasets.py",
       "source_location": "L34",
       "id": "test_ct_datasets_rationale_34",
-      "community": 0
+      "community": 5
     },
     {
       "label": "After normalization values should not be raw [0, 255].",
@@ -417,7 +417,7 @@
       "source_file": "tests/test_ct_datasets.py",
       "source_location": "L156",
       "id": "test_ct_datasets_rationale_156",
-      "community": 0
+      "community": 5
     },
     {
       "label": "__init__.py",
@@ -585,7 +585,7 @@
       "source_file": "scripts/exp_late_fusion_idh.py",
       "source_location": "L1",
       "id": "exp_late_fusion_idh",
-      "community": 1
+      "community": 2
     },
     {
       "label": "_new_base()",
@@ -593,7 +593,7 @@
       "source_file": "scripts/exp_late_fusion_idh.py",
       "source_location": "L49",
       "id": "exp_late_fusion_idh_new_base",
-      "community": 1
+      "community": 2
     },
     {
       "label": "_recall_at_specificity()",
@@ -601,7 +601,7 @@
       "source_file": "scripts/exp_late_fusion_idh.py",
       "source_location": "L57",
       "id": "exp_late_fusion_idh_recall_at_specificity",
-      "community": 1
+      "community": 2
     },
     {
       "label": "_load_inputs()",
@@ -609,7 +609,7 @@
       "source_file": "scripts/exp_late_fusion_idh.py",
       "source_location": "L66",
       "id": "exp_late_fusion_idh_load_inputs",
-      "community": 1
+      "community": 2
     },
     {
       "label": "_select_per_modality()",
@@ -617,7 +617,7 @@
       "source_file": "scripts/exp_late_fusion_idh.py",
       "source_location": "L87",
       "id": "exp_late_fusion_idh_select_per_modality",
-      "community": 1
+      "community": 2
     },
     {
       "label": "_fit_per_modality()",
@@ -625,7 +625,7 @@
       "source_file": "scripts/exp_late_fusion_idh.py",
       "source_location": "L107",
       "id": "exp_late_fusion_idh_fit_per_modality",
-      "community": 1
+      "community": 2
     },
     {
       "label": "_per_modality_probs()",
@@ -633,7 +633,7 @@
       "source_file": "scripts/exp_late_fusion_idh.py",
       "source_location": "L121",
       "id": "exp_late_fusion_idh_per_modality_probs",
-      "community": 1
+      "community": 2
     },
     {
       "label": "_summarize()",
@@ -641,7 +641,7 @@
       "source_file": "scripts/exp_late_fusion_idh.py",
       "source_location": "L128",
       "id": "exp_late_fusion_idh_summarize",
-      "community": 1
+      "community": 2
     },
     {
       "label": "parse_args()",
@@ -649,7 +649,7 @@
       "source_file": "scripts/exp_late_fusion_idh.py",
       "source_location": "L140",
       "id": "exp_late_fusion_idh_parse_args",
-      "community": 1
+      "community": 2
     },
     {
       "label": "main()",
@@ -657,7 +657,7 @@
       "source_file": "scripts/exp_late_fusion_idh.py",
       "source_location": "L154",
       "id": "exp_late_fusion_idh_main",
-      "community": 1
+      "community": 2
     },
     {
       "label": "Late-fusion experiment for the multi-omics molecular IDH cohort.  Hypothesis: ea",
@@ -665,7 +665,7 @@
       "source_file": "scripts/exp_late_fusion_idh.py",
       "source_location": "L1",
       "id": "exp_late_fusion_idh_rationale_1",
-      "community": 1
+      "community": 2
     },
     {
       "label": "_make_report_overlays.py",
@@ -850,6 +850,62 @@
       "source_location": "L507",
       "id": "make_report_overlays_rationale_507",
       "community": 4
+    },
+    {
+      "label": "calibrate_ct_temperature.py",
+      "file_type": "code",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L1",
+      "id": "calibrate_ct_temperature",
+      "community": 1
+    },
+    {
+      "label": "_collect_logits()",
+      "file_type": "code",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L35",
+      "id": "calibrate_ct_temperature_collect_logits",
+      "community": 1
+    },
+    {
+      "label": "fit_temperature()",
+      "file_type": "code",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L51",
+      "id": "calibrate_ct_temperature_fit_temperature",
+      "community": 1
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L76",
+      "id": "calibrate_ct_temperature_main",
+      "community": 1
+    },
+    {
+      "label": "Temperature-scale the CT/MRI tumor classifier on the val split.  Temperature sca",
+      "file_type": "rationale",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L1",
+      "id": "calibrate_ct_temperature_rationale_1",
+      "community": 1
+    },
+    {
+      "label": "Return (logits, labels) over the whole loader, on CPU as float32.",
+      "file_type": "rationale",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L38",
+      "id": "calibrate_ct_temperature_rationale_38",
+      "community": 1
+    },
+    {
+      "label": "Fit T>0 minimising BCE(logits / T, labels) via LBFGS.      Optimises over log-T",
+      "file_type": "rationale",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L52",
+      "id": "calibrate_ct_temperature_rationale_52",
+      "community": 1
     },
     {
       "label": "cv_idh.py",
@@ -1271,7 +1327,7 @@
       "label": "_get_model()",
       "file_type": "code",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L62",
+      "source_location": "L63",
       "id": "app_get_model",
       "community": 6
     },
@@ -1279,7 +1335,7 @@
       "label": "_gradcam()",
       "file_type": "code",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L89",
+      "source_location": "L92",
       "id": "app_gradcam",
       "community": 6
     },
@@ -1287,7 +1343,7 @@
       "label": "_overlay_heatmap()",
       "file_type": "code",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L134",
+      "source_location": "L137",
       "id": "app_overlay_heatmap",
       "community": 6
     },
@@ -1295,7 +1351,7 @@
       "label": "_fig_to_array()",
       "file_type": "code",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L149",
+      "source_location": "L152",
       "id": "app_fig_to_array",
       "community": 6
     },
@@ -1303,7 +1359,7 @@
       "label": "predict()",
       "file_type": "code",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L158",
+      "source_location": "L161",
       "id": "app_predict",
       "community": 6
     },
@@ -1311,7 +1367,7 @@
       "label": "_build_diagnosis()",
       "file_type": "code",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L221",
+      "source_location": "L225",
       "id": "app_build_diagnosis",
       "community": 6
     },
@@ -1319,7 +1375,7 @@
       "label": "_collect_examples()",
       "file_type": "code",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L255",
+      "source_location": "L259",
       "id": "app_collect_examples",
       "community": 6
     },
@@ -1327,7 +1383,7 @@
       "label": "build_app()",
       "file_type": "code",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L266",
+      "source_location": "L270",
       "id": "app_build_app",
       "community": 6
     },
@@ -1335,7 +1391,7 @@
       "label": "main()",
       "file_type": "code",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L463",
+      "source_location": "L467",
       "id": "app_main",
       "community": 6
     },
@@ -1351,32 +1407,32 @@
       "label": "Compute GradCAM heatmap from last convolutional layer.",
       "file_type": "rationale",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L94",
-      "id": "app_rationale_94",
+      "source_location": "L97",
+      "id": "app_rationale_97",
       "community": 6
     },
     {
       "label": "Overlay GradCAM heatmap on original image.",
       "file_type": "rationale",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L139",
-      "id": "app_rationale_139",
+      "source_location": "L142",
+      "id": "app_rationale_142",
       "community": 6
     },
     {
       "label": "Run tumor detection on uploaded image.      Returns (label_confidences, gradcam_",
       "file_type": "rationale",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L159",
-      "id": "app_rationale_159",
+      "source_location": "L162",
+      "id": "app_rationale_162",
       "community": 6
     },
     {
       "label": "Gather a handful of example images from each category.",
       "file_type": "rationale",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L256",
-      "id": "app_rationale_256",
+      "source_location": "L260",
+      "id": "app_rationale_260",
       "community": 6
     },
     {
@@ -1705,7 +1761,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L1",
       "id": "models",
-      "community": 1
+      "community": 2
     },
     {
       "label": "MolecularIDHModel",
@@ -1713,7 +1769,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L19",
       "id": "models_molecularidhmodel",
-      "community": 1
+      "community": 2
     },
     {
       "label": "Protocol",
@@ -1721,7 +1777,7 @@
       "source_file": "",
       "source_location": "",
       "id": "protocol",
-      "community": 1
+      "community": 2
     },
     {
       "label": ".fit()",
@@ -1729,7 +1785,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L20",
       "id": "models_molecularidhmodel_fit",
-      "community": 1
+      "community": 2
     },
     {
       "label": ".predict_proba()",
@@ -1737,7 +1793,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L21",
       "id": "models_molecularidhmodel_predict_proba",
-      "community": 1
+      "community": 2
     },
     {
       "label": ".save()",
@@ -1745,7 +1801,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L22",
       "id": "models_molecularidhmodel_save",
-      "community": 1
+      "community": 2
     },
     {
       "label": "load()",
@@ -1753,7 +1809,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L25",
       "id": "models_load",
-      "community": 1
+      "community": 2
     },
     {
       "label": "LogisticIDH",
@@ -1761,7 +1817,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L28",
       "id": "models_logisticidh",
-      "community": 1
+      "community": 2
     },
     {
       "label": ".__init__()",
@@ -1769,7 +1825,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L29",
       "id": "models_logisticidh_init",
-      "community": 1
+      "community": 2
     },
     {
       "label": ".fit()",
@@ -1777,7 +1833,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L38",
       "id": "models_logisticidh_fit",
-      "community": 1
+      "community": 2
     },
     {
       "label": ".predict_proba()",
@@ -1785,7 +1841,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L43",
       "id": "models_logisticidh_predict_proba",
-      "community": 1
+      "community": 2
     },
     {
       "label": ".save()",
@@ -1793,7 +1849,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L49",
       "id": "models_logisticidh_save",
-      "community": 1
+      "community": 2
     },
     {
       "label": "LightGBMIDH",
@@ -1801,7 +1857,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L63",
       "id": "models_lightgbmidh",
-      "community": 1
+      "community": 2
     },
     {
       "label": ".__init__()",
@@ -1809,7 +1865,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L64",
       "id": "models_lightgbmidh_init",
-      "community": 1
+      "community": 2
     },
     {
       "label": ".fit()",
@@ -1817,7 +1873,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L68",
       "id": "models_lightgbmidh_fit",
-      "community": 1
+      "community": 2
     },
     {
       "label": ".predict_proba()",
@@ -1825,7 +1881,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L83",
       "id": "models_lightgbmidh_predict_proba",
-      "community": 1
+      "community": 2
     },
     {
       "label": ".save()",
@@ -1833,7 +1889,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L92",
       "id": "models_lightgbmidh_save",
-      "community": 1
+      "community": 2
     },
     {
       "label": "_MLPNet",
@@ -1841,7 +1897,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L109",
       "id": "models_mlpnet",
-      "community": 1
+      "community": 2
     },
     {
       "label": ".__init__()",
@@ -1849,7 +1905,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L110",
       "id": "models_mlpnet_init",
-      "community": 1
+      "community": 2
     },
     {
       "label": ".forward()",
@@ -1857,7 +1913,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L119",
       "id": "models_mlpnet_forward",
-      "community": 1
+      "community": 2
     },
     {
       "label": "_MLPConfig",
@@ -1865,7 +1921,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L124",
       "id": "models_mlpconfig",
-      "community": 1
+      "community": 2
     },
     {
       "label": "MLPIDH",
@@ -1873,7 +1929,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L132",
       "id": "models_mlpidh",
-      "community": 1
+      "community": 2
     },
     {
       "label": ".__init__()",
@@ -1881,7 +1937,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L133",
       "id": "models_mlpidh_init",
-      "community": 1
+      "community": 2
     },
     {
       "label": "._ensure_model()",
@@ -1889,7 +1945,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L140",
       "id": "models_mlpidh_ensure_model",
-      "community": 1
+      "community": 2
     },
     {
       "label": ".fit()",
@@ -1897,7 +1953,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L145",
       "id": "models_mlpidh_fit",
-      "community": 1
+      "community": 2
     },
     {
       "label": ".predict_proba()",
@@ -1905,7 +1961,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L213",
       "id": "models_mlpidh_predict_proba",
-      "community": 1
+      "community": 2
     },
     {
       "label": ".save()",
@@ -1913,7 +1969,7 @@
       "source_file": "src/idh_glioma/molecular/models.py",
       "source_location": "L223",
       "id": "models_mlpidh_save",
-      "community": 1
+      "community": 2
     },
     {
       "label": "prepare.py",
@@ -2505,31 +2561,39 @@
       "source_file": "src/idh_glioma/eval/eval_ct.py",
       "source_location": "L1",
       "id": "eval_ct",
-      "community": 0
+      "community": 1
+    },
+    {
+      "label": "expected_calibration_error()",
+      "file_type": "code",
+      "source_file": "src/idh_glioma/eval/eval_ct.py",
+      "source_location": "L46",
+      "id": "eval_ct_expected_calibration_error",
+      "community": 1
     },
     {
       "label": "evaluate()",
       "file_type": "code",
       "source_file": "src/idh_glioma/eval/eval_ct.py",
-      "source_location": "L47",
+      "source_location": "L91",
       "id": "eval_ct_evaluate",
-      "community": 0
+      "community": 1
     },
     {
       "label": "parse_args()",
       "file_type": "code",
       "source_file": "src/idh_glioma/eval/eval_ct.py",
-      "source_location": "L141",
+      "source_location": "L222",
       "id": "eval_ct_parse_args",
-      "community": 0
+      "community": 1
     },
     {
       "label": "main()",
       "file_type": "code",
       "source_file": "src/idh_glioma/eval/eval_ct.py",
-      "source_location": "L153",
+      "source_location": "L240",
       "id": "eval_ct_main",
-      "community": 0
+      "community": 1
     },
     {
       "label": "Evaluate the CT/MRI binary tumor classifier on the held-out test split.  Outputs",
@@ -2537,7 +2601,15 @@
       "source_file": "src/idh_glioma/eval/eval_ct.py",
       "source_location": "L1",
       "id": "eval_ct_rationale_1",
-      "community": 0
+      "community": 1
+    },
+    {
+      "label": "Expected Calibration Error for a binary classifier.      ``probs`` are P(tumor).",
+      "file_type": "rationale",
+      "source_file": "src/idh_glioma/eval/eval_ct.py",
+      "source_location": "L49",
+      "id": "eval_ct_rationale_49",
+      "community": 1
     },
     {
       "label": "eval_seg.py",
@@ -2865,7 +2937,7 @@
       "source_file": "src/idh_glioma/data/prepare_ct_data.py",
       "source_location": "L1",
       "id": "prepare_ct_data",
-      "community": 0
+      "community": 5
     },
     {
       "label": "ImageRecord",
@@ -2873,7 +2945,7 @@
       "source_file": "src/idh_glioma/data/prepare_ct_data.py",
       "source_location": "L36",
       "id": "prepare_ct_data_imagerecord",
-      "community": 0
+      "community": 5
     },
     {
       "label": "_collect_images()",
@@ -2881,7 +2953,7 @@
       "source_file": "src/idh_glioma/data/prepare_ct_data.py",
       "source_location": "L42",
       "id": "prepare_ct_data_collect_images",
-      "community": 0
+      "community": 5
     },
     {
       "label": "build_manifest()",
@@ -2889,7 +2961,7 @@
       "source_file": "src/idh_glioma/data/prepare_ct_data.py",
       "source_location": "L54",
       "id": "prepare_ct_data_build_manifest",
-      "community": 0
+      "community": 5
     },
     {
       "label": "stratified_split()",
@@ -2897,7 +2969,7 @@
       "source_file": "src/idh_glioma/data/prepare_ct_data.py",
       "source_location": "L78",
       "id": "prepare_ct_data_stratified_split",
-      "community": 0
+      "community": 5
     },
     {
       "label": "write_manifest()",
@@ -2905,7 +2977,7 @@
       "source_file": "src/idh_glioma/data/prepare_ct_data.py",
       "source_location": "L114",
       "id": "prepare_ct_data_write_manifest",
-      "community": 0
+      "community": 5
     },
     {
       "label": "parse_args()",
@@ -2913,7 +2985,7 @@
       "source_file": "src/idh_glioma/data/prepare_ct_data.py",
       "source_location": "L121",
       "id": "prepare_ct_data_parse_args",
-      "community": 0
+      "community": 5
     },
     {
       "label": "main()",
@@ -2921,7 +2993,7 @@
       "source_file": "src/idh_glioma/data/prepare_ct_data.py",
       "source_location": "L148",
       "id": "prepare_ct_data_main",
-      "community": 0
+      "community": 5
     },
     {
       "label": "Build a train/val/test manifest for the Kaggle CT & MRI brain-tumor dataset.  Fo",
@@ -2929,7 +3001,7 @@
       "source_file": "src/idh_glioma/data/prepare_ct_data.py",
       "source_location": "L1",
       "id": "prepare_ct_data_rationale_1",
-      "community": 0
+      "community": 5
     },
     {
       "label": "ct_datasets.py",
@@ -2937,7 +3009,7 @@
       "source_file": "src/idh_glioma/data/ct_datasets.py",
       "source_location": "L1",
       "id": "ct_datasets",
-      "community": 0
+      "community": 1
     },
     {
       "label": "_build_transforms()",
@@ -2945,7 +3017,7 @@
       "source_file": "src/idh_glioma/data/ct_datasets.py",
       "source_location": "L30",
       "id": "ct_datasets_build_transforms",
-      "community": 0
+      "community": 1
     },
     {
       "label": "BrainImageDataset",
@@ -2953,7 +3025,7 @@
       "source_file": "src/idh_glioma/data/ct_datasets.py",
       "source_location": "L51",
       "id": "ct_datasets_brainimagedataset",
-      "community": 0
+      "community": 1
     },
     {
       "label": ".__init__()",
@@ -2961,7 +3033,7 @@
       "source_file": "src/idh_glioma/data/ct_datasets.py",
       "source_location": "L63",
       "id": "ct_datasets_brainimagedataset_init",
-      "community": 0
+      "community": 1
     },
     {
       "label": ".__len__()",
@@ -2969,7 +3041,7 @@
       "source_file": "src/idh_glioma/data/ct_datasets.py",
       "source_location": "L84",
       "id": "ct_datasets_brainimagedataset_len",
-      "community": 0
+      "community": 1
     },
     {
       "label": ".__getitem__()",
@@ -2977,7 +3049,7 @@
       "source_file": "src/idh_glioma/data/ct_datasets.py",
       "source_location": "L87",
       "id": "ct_datasets_brainimagedataset_getitem",
-      "community": 0
+      "community": 1
     },
     {
       "label": "PyTorch Dataset for the Kaggle CT/MRI brain-tumor classification dataset.  Reads",
@@ -2985,7 +3057,7 @@
       "source_file": "src/idh_glioma/data/ct_datasets.py",
       "source_location": "L1",
       "id": "ct_datasets_rationale_1",
-      "community": 0
+      "community": 1
     },
     {
       "label": "Binary classification dataset for CT/MRI brain-tumor images.      Args:",
@@ -2993,7 +3065,7 @@
       "source_file": "src/idh_glioma/data/ct_datasets.py",
       "source_location": "L52",
       "id": "ct_datasets_rationale_52",
-      "community": 0
+      "community": 1
     },
     {
       "label": "prepare_dataset.py",
@@ -3073,7 +3145,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L1",
       "id": "datasets",
-      "community": 2
+      "community": 0
     },
     {
       "label": "zscore()",
@@ -3081,7 +3153,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L20",
       "id": "datasets_zscore",
-      "community": 2
+      "community": 0
     },
     {
       "label": "load_nifti()",
@@ -3089,7 +3161,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L27",
       "id": "datasets_load_nifti",
-      "community": 2
+      "community": 0
     },
     {
       "label": "_resize_slice()",
@@ -3097,7 +3169,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L34",
       "id": "datasets_resize_slice",
-      "community": 2
+      "community": 0
     },
     {
       "label": "_tumor_bbox_2d()",
@@ -3105,7 +3177,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L47",
       "id": "datasets_tumor_bbox_2d",
-      "community": 2
+      "community": 0
     },
     {
       "label": "_crop_roi()",
@@ -3113,7 +3185,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L66",
       "id": "datasets_crop_roi",
-      "community": 2
+      "community": 0
     },
     {
       "label": "_augment_seg()",
@@ -3121,7 +3193,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L76",
       "id": "datasets_augment_seg",
-      "community": 2
+      "community": 0
     },
     {
       "label": "_augment_cls()",
@@ -3129,7 +3201,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L101",
       "id": "datasets_augment_cls",
-      "community": 2
+      "community": 0
     },
     {
       "label": "BraTSSliceSegmentationDataset",
@@ -3137,7 +3209,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L117",
       "id": "datasets_bratsslicesegmentationdataset",
-      "community": 5
+      "community": 0
     },
     {
       "label": ".__init__()",
@@ -3145,7 +3217,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L118",
       "id": "datasets_bratsslicesegmentationdataset_init",
-      "community": 5
+      "community": 0
     },
     {
       "label": ".__len__()",
@@ -3153,7 +3225,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L133",
       "id": "datasets_bratsslicesegmentationdataset_len",
-      "community": 5
+      "community": 0
     },
     {
       "label": ".__getitem__()",
@@ -3161,7 +3233,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L136",
       "id": "datasets_bratsslicesegmentationdataset_getitem",
-      "community": 2
+      "community": 0
     },
     {
       "label": "BraTSSliceClassificationDataset",
@@ -3169,7 +3241,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L165",
       "id": "datasets_bratssliceclassificationdataset",
-      "community": 2
+      "community": 0
     },
     {
       "label": ".__init__()",
@@ -3177,7 +3249,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L166",
       "id": "datasets_bratssliceclassificationdataset_init",
-      "community": 2
+      "community": 0
     },
     {
       "label": ".__len__()",
@@ -3185,7 +3257,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L186",
       "id": "datasets_bratssliceclassificationdataset_len",
-      "community": 2
+      "community": 0
     },
     {
       "label": ".__getitem__()",
@@ -3193,7 +3265,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L189",
       "id": "datasets_bratssliceclassificationdataset_getitem",
-      "community": 2
+      "community": 0
     },
     {
       "label": "make_balanced_sampler()",
@@ -3201,7 +3273,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L228",
       "id": "datasets_make_balanced_sampler",
-      "community": 2
+      "community": 0
     },
     {
       "label": "CaseLevelSampler",
@@ -3209,7 +3281,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L259",
       "id": "datasets_caselevelsampler",
-      "community": 5
+      "community": 0
     },
     {
       "label": ".__init__()",
@@ -3217,7 +3289,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L266",
       "id": "datasets_caselevelsampler_init",
-      "community": 5
+      "community": 0
     },
     {
       "label": ".__len__()",
@@ -3225,7 +3297,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L278",
       "id": "datasets_caselevelsampler_len",
-      "community": 5
+      "community": 0
     },
     {
       "label": ".__iter__()",
@@ -3233,7 +3305,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L281",
       "id": "datasets_caselevelsampler_iter",
-      "community": 5
+      "community": 0
     },
     {
       "label": "Resize a (C, H, W) tensor to (C, size, size).      Uses nearest-neighbor for mas",
@@ -3241,7 +3313,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L35",
       "id": "datasets_rationale_35",
-      "community": 2
+      "community": 0
     },
     {
       "label": "Tight bbox around foreground in a 2-D mask, expanded by ``margin`` and clipped.",
@@ -3249,7 +3321,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L50",
       "id": "datasets_rationale_50",
-      "community": 2
+      "community": 0
     },
     {
       "label": "Crop a (C, H, W) array to ``bbox`` (or return unchanged when bbox is None).",
@@ -3257,7 +3329,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L69",
       "id": "datasets_rationale_69",
-      "community": 2
+      "community": 0
     },
     {
       "label": "Apply random spatial augmentations jointly to image (C,H,W) and mask (1,H,W).",
@@ -3265,7 +3337,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L79",
       "id": "datasets_rationale_79",
-      "community": 2
+      "community": 0
     },
     {
       "label": "Random spatial + intensity augmentations for classification (image only, C,H,W).",
@@ -3273,7 +3345,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L102",
       "id": "datasets_rationale_102",
-      "community": 2
+      "community": 0
     },
     {
       "label": "Build a WeightedRandomSampler that balances IDH=0 vs IDH=1 across an epoch.",
@@ -3281,7 +3353,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L231",
       "id": "datasets_rationale_231",
-      "community": 2
+      "community": 0
     },
     {
       "label": "Shuffles at the *case* level so that all slices of a case are yielded     consec",
@@ -3289,7 +3361,7 @@
       "source_file": "src/idh_glioma/data/datasets.py",
       "source_location": "L260",
       "id": "datasets_rationale_260",
-      "community": 5
+      "community": 0
     },
     {
       "label": "export_yolo.py",
@@ -3297,7 +3369,7 @@
       "source_file": "src/idh_glioma/data/export_yolo.py",
       "source_location": "L1",
       "id": "export_yolo",
-      "community": 35
+      "community": 34
     },
     {
       "label": "normalize_to_uint8()",
@@ -3305,7 +3377,7 @@
       "source_file": "src/idh_glioma/data/export_yolo.py",
       "source_location": "L15",
       "id": "export_yolo_normalize_to_uint8",
-      "community": 35
+      "community": 34
     },
     {
       "label": "mask_to_bbox()",
@@ -3313,7 +3385,7 @@
       "source_file": "src/idh_glioma/data/export_yolo.py",
       "source_location": "L21",
       "id": "export_yolo_mask_to_bbox",
-      "community": 35
+      "community": 34
     },
     {
       "label": "export_split()",
@@ -3321,7 +3393,7 @@
       "source_file": "src/idh_glioma/data/export_yolo.py",
       "source_location": "L35",
       "id": "export_yolo_export_split",
-      "community": 35
+      "community": 34
     },
     {
       "label": "parse_args()",
@@ -3329,7 +3401,7 @@
       "source_file": "src/idh_glioma/data/export_yolo.py",
       "source_location": "L68",
       "id": "export_yolo_parse_args",
-      "community": 35
+      "community": 34
     },
     {
       "label": "main()",
@@ -3337,7 +3409,7 @@
       "source_file": "src/idh_glioma/data/export_yolo.py",
       "source_location": "L79",
       "id": "export_yolo_main",
-      "community": 35
+      "community": 34
     },
     {
       "label": "e2e_roi.py",
@@ -3529,7 +3601,7 @@
       "source_file": "src/idh_glioma/infer/pipeline_monai.py",
       "source_location": "L1",
       "id": "pipeline_monai",
-      "community": 36
+      "community": 35
     },
     {
       "label": "_bbox3d()",
@@ -3537,7 +3609,7 @@
       "source_file": "src/idh_glioma/infer/pipeline_monai.py",
       "source_location": "L45",
       "id": "pipeline_monai_bbox3d",
-      "community": 36
+      "community": 35
     },
     {
       "label": "predict()",
@@ -3545,7 +3617,7 @@
       "source_file": "src/idh_glioma/infer/pipeline_monai.py",
       "source_location": "L58",
       "id": "pipeline_monai_predict",
-      "community": 36
+      "community": 35
     },
     {
       "label": "parse_args()",
@@ -3553,7 +3625,7 @@
       "source_file": "src/idh_glioma/infer/pipeline_monai.py",
       "source_location": "L162",
       "id": "pipeline_monai_parse_args",
-      "community": 36
+      "community": 35
     },
     {
       "label": "main()",
@@ -3561,7 +3633,7 @@
       "source_file": "src/idh_glioma/infer/pipeline_monai.py",
       "source_location": "L171",
       "id": "pipeline_monai_main",
-      "community": 36
+      "community": 35
     },
     {
       "label": "End-to-end inference with MONAI 3D models (SegResNet + DenseNet121).  Mirrors in",
@@ -3569,7 +3641,7 @@
       "source_file": "src/idh_glioma/infer/pipeline_monai.py",
       "source_location": "L1",
       "id": "pipeline_monai_rationale_1",
-      "community": 36
+      "community": 35
     },
     {
       "label": "unet2d.py",
@@ -3665,7 +3737,7 @@
       "source_file": "src/idh_glioma/train/train_idh_classifier.py",
       "source_location": "L1",
       "id": "train_idh_classifier",
-      "community": 34
+      "community": 36
     },
     {
       "label": "run_epoch()",
@@ -3673,7 +3745,7 @@
       "source_file": "src/idh_glioma/train/train_idh_classifier.py",
       "source_location": "L23",
       "id": "train_idh_classifier_run_epoch",
-      "community": 34
+      "community": 36
     },
     {
       "label": "parse_args()",
@@ -3681,7 +3753,7 @@
       "source_file": "src/idh_glioma/train/train_idh_classifier.py",
       "source_location": "L75",
       "id": "train_idh_classifier_parse_args",
-      "community": 34
+      "community": 36
     },
     {
       "label": "apply_profile()",
@@ -3689,7 +3761,7 @@
       "source_file": "src/idh_glioma/train/train_idh_classifier.py",
       "source_location": "L121",
       "id": "train_idh_classifier_apply_profile",
-      "community": 34
+      "community": 36
     },
     {
       "label": "main()",
@@ -3697,7 +3769,7 @@
       "source_file": "src/idh_glioma/train/train_idh_classifier.py",
       "source_location": "L137",
       "id": "train_idh_classifier_main",
-      "community": 34
+      "community": 36
     },
     {
       "label": "Returns (mean_loss, all_probs, all_labels).",
@@ -3705,7 +3777,7 @@
       "source_file": "src/idh_glioma/train/train_idh_classifier.py",
       "source_location": "L32",
       "id": "train_idh_classifier_rationale_32",
-      "community": 34
+      "community": 36
     },
     {
       "label": "train_segmentation.py",
@@ -3713,7 +3785,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L1",
       "id": "train_segmentation",
-      "community": 5
+      "community": 0
     },
     {
       "label": "_worker_init()",
@@ -3721,7 +3793,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L19",
       "id": "train_segmentation_worker_init",
-      "community": 5
+      "community": 0
     },
     {
       "label": "dice_loss()",
@@ -3729,7 +3801,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L24",
       "id": "train_segmentation_dice_loss",
-      "community": 5
+      "community": 0
     },
     {
       "label": "focal_loss()",
@@ -3737,7 +3809,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L31",
       "id": "train_segmentation_focal_loss",
-      "community": 5
+      "community": 0
     },
     {
       "label": "train_epoch()",
@@ -3745,7 +3817,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L44",
       "id": "train_segmentation_train_epoch",
-      "community": 5
+      "community": 0
     },
     {
       "label": "validation_epoch()",
@@ -3753,7 +3825,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L79",
       "id": "train_segmentation_validation_epoch",
-      "community": 5
+      "community": 0
     },
     {
       "label": "parse_args()",
@@ -3761,7 +3833,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L117",
       "id": "train_segmentation_parse_args",
-      "community": 5
+      "community": 0
     },
     {
       "label": "apply_profile()",
@@ -3769,7 +3841,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L149",
       "id": "train_segmentation_apply_profile",
-      "community": 5
+      "community": 0
     },
     {
       "label": "main()",
@@ -3777,7 +3849,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L165",
       "id": "train_segmentation_main",
-      "community": 5
+      "community": 0
     },
     {
       "label": "Clear the NIfTI LRU cache so each DataLoader worker builds its own.",
@@ -3785,7 +3857,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L20",
       "id": "train_segmentation_rationale_20",
-      "community": 5
+      "community": 0
     },
     {
       "label": "Focal loss for handling class imbalance (tumor pixels << background).",
@@ -3793,7 +3865,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L37",
       "id": "train_segmentation_rationale_37",
-      "community": 5
+      "community": 0
     },
     {
       "label": "Returns (loss, dice_score).",
@@ -3801,7 +3873,7 @@
       "source_file": "src/idh_glioma/train/train_segmentation.py",
       "source_location": "L85",
       "id": "train_segmentation_rationale_85",
-      "community": 5
+      "community": 0
     },
     {
       "label": "train_idh_monai.py",
@@ -3921,55 +3993,143 @@
       "source_file": "src/idh_glioma/train/train_ct_classifier.py",
       "source_location": "L1",
       "id": "train_ct_classifier",
-      "community": 0
+      "community": 1
+    },
+    {
+      "label": "EMA",
+      "file_type": "code",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L52",
+      "id": "train_ct_classifier_ema",
+      "community": 1
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L60",
+      "id": "train_ct_classifier_ema_init",
+      "community": 1
+    },
+    {
+      "label": "update()",
+      "file_type": "code",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L67",
+      "id": "train_ct_classifier_update",
+      "community": 1
+    },
+    {
+      "label": ".copy_to()",
+      "file_type": "code",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L75",
+      "id": "train_ct_classifier_ema_copy_to",
+      "community": 1
+    },
+    {
+      "label": "_smooth_targets()",
+      "file_type": "code",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L79",
+      "id": "train_ct_classifier_smooth_targets",
+      "community": 1
     },
     {
       "label": "run_epoch()",
       "file_type": "code",
       "source_file": "src/idh_glioma/train/train_ct_classifier.py",
-      "source_location": "L32",
+      "source_location": "L86",
       "id": "train_ct_classifier_run_epoch",
-      "community": 0
+      "community": 1
+    },
+    {
+      "label": "evaluate_ema()",
+      "file_type": "code",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L153",
+      "id": "train_ct_classifier_evaluate_ema",
+      "community": 1
     },
     {
       "label": "parse_args()",
       "file_type": "code",
       "source_file": "src/idh_glioma/train/train_ct_classifier.py",
-      "source_location": "L78",
+      "source_location": "L170",
       "id": "train_ct_classifier_parse_args",
-      "community": 0
+      "community": 1
     },
     {
       "label": "apply_profile()",
       "file_type": "code",
       "source_file": "src/idh_glioma/train/train_ct_classifier.py",
-      "source_location": "L112",
+      "source_location": "L219",
       "id": "train_ct_classifier_apply_profile",
-      "community": 0
+      "community": 1
+    },
+    {
+      "label": "_build_scheduler()",
+      "file_type": "code",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L234",
+      "id": "train_ct_classifier_build_scheduler",
+      "community": 1
     },
     {
       "label": "main()",
       "file_type": "code",
       "source_file": "src/idh_glioma/train/train_ct_classifier.py",
-      "source_location": "L127",
+      "source_location": "L250",
       "id": "train_ct_classifier_main",
-      "community": 0
+      "community": 1
     },
     {
-      "label": "Train MobileNetV3-Small for binary CT/MRI brain-tumor classification.  Reads the",
+      "label": "Train MobileNetV3 for binary CT/MRI brain-tumor classification.  Reads the JSON",
       "file_type": "rationale",
       "source_file": "src/idh_glioma/train/train_ct_classifier.py",
       "source_location": "L1",
       "id": "train_ct_classifier_rationale_1",
-      "community": 0
+      "community": 1
     },
     {
-      "label": "Returns (avg_loss, accuracy).",
+      "label": "Exponential moving average of model weights.      Tracks every floating-point te",
       "file_type": "rationale",
       "source_file": "src/idh_glioma/train/train_ct_classifier.py",
-      "source_location": "L40",
-      "id": "train_ct_classifier_rationale_40",
-      "community": 0
+      "source_location": "L53",
+      "id": "train_ct_classifier_rationale_53",
+      "community": 1
+    },
+    {
+      "label": "Symmetric label smoothing for binary targets: 1\u21921-eps/2, 0\u2192eps/2.",
+      "file_type": "rationale",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L80",
+      "id": "train_ct_classifier_rationale_80",
+      "community": 1
+    },
+    {
+      "label": "Returns (avg_loss, accuracy, auc).",
+      "file_type": "rationale",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L98",
+      "id": "train_ct_classifier_rationale_98",
+      "community": 1
+    },
+    {
+      "label": "Evaluate the EMA weights (acc, auc) on ``loader`` without disturbing the     liv",
+      "file_type": "rationale",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L160",
+      "id": "train_ct_classifier_rationale_160",
+      "community": 1
+    },
+    {
+      "label": "Per-step cosine schedule with linear warmup.",
+      "file_type": "rationale",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L237",
+      "id": "train_ct_classifier_rationale_237",
+      "community": 1
     },
     {
       "label": "train_yolo_detection.py",
@@ -6188,6 +6348,138 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_src": "calibrate_ct_temperature",
+      "_tgt": "calibrate_ct_temperature_collect_logits",
+      "source": "calibrate_ct_temperature",
+      "target": "calibrate_ct_temperature_collect_logits",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_src": "calibrate_ct_temperature",
+      "_tgt": "calibrate_ct_temperature_fit_temperature",
+      "source": "calibrate_ct_temperature",
+      "target": "calibrate_ct_temperature_fit_temperature",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L76",
+      "weight": 1.0,
+      "_src": "calibrate_ct_temperature",
+      "_tgt": "calibrate_ct_temperature_main",
+      "source": "calibrate_ct_temperature",
+      "target": "calibrate_ct_temperature_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "calibrate_ct_temperature_rationale_1",
+      "_tgt": "calibrate_ct_temperature",
+      "source": "calibrate_ct_temperature",
+      "target": "calibrate_ct_temperature_rationale_1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L115",
+      "weight": 0.8,
+      "_src": "calibrate_ct_temperature_main",
+      "_tgt": "calibrate_ct_temperature_collect_logits",
+      "source": "calibrate_ct_temperature_collect_logits",
+      "target": "calibrate_ct_temperature_main",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_src": "calibrate_ct_temperature_rationale_38",
+      "_tgt": "calibrate_ct_temperature_collect_logits",
+      "source": "calibrate_ct_temperature_collect_logits",
+      "target": "calibrate_ct_temperature_rationale_38",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L123",
+      "weight": 0.8,
+      "_src": "calibrate_ct_temperature_main",
+      "_tgt": "calibrate_ct_temperature_fit_temperature",
+      "source": "calibrate_ct_temperature_fit_temperature",
+      "target": "calibrate_ct_temperature_main",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_src": "calibrate_ct_temperature_rationale_52",
+      "_tgt": "calibrate_ct_temperature_fit_temperature",
+      "source": "calibrate_ct_temperature_fit_temperature",
+      "target": "calibrate_ct_temperature_rationale_52",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L29",
+      "weight": 0.8,
+      "_src": "calibrate_ct_temperature_rationale_1",
+      "_tgt": "ct_datasets_brainimagedataset",
+      "source": "calibrate_ct_temperature_rationale_1",
+      "target": "ct_datasets_brainimagedataset",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L29",
+      "weight": 0.8,
+      "_src": "calibrate_ct_temperature_rationale_38",
+      "_tgt": "ct_datasets_brainimagedataset",
+      "source": "calibrate_ct_temperature_rationale_38",
+      "target": "ct_datasets_brainimagedataset",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "scripts/calibrate_ct_temperature.py",
+      "source_location": "L29",
+      "weight": 0.8,
+      "_src": "calibrate_ct_temperature_rationale_52",
+      "_tgt": "ct_datasets_brainimagedataset",
+      "source": "calibrate_ct_temperature_rationale_52",
+      "target": "ct_datasets_brainimagedataset",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "scripts/cv_idh.py",
       "source_location": "L33",
       "weight": 1.0,
@@ -7125,7 +7417,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L62",
+      "source_location": "L63",
       "weight": 1.0,
       "_src": "app",
       "_tgt": "app_get_model",
@@ -7137,7 +7429,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L89",
+      "source_location": "L92",
       "weight": 1.0,
       "_src": "app",
       "_tgt": "app_gradcam",
@@ -7149,7 +7441,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L134",
+      "source_location": "L137",
       "weight": 1.0,
       "_src": "app",
       "_tgt": "app_overlay_heatmap",
@@ -7161,7 +7453,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L149",
+      "source_location": "L152",
       "weight": 1.0,
       "_src": "app",
       "_tgt": "app_fig_to_array",
@@ -7173,7 +7465,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L158",
+      "source_location": "L161",
       "weight": 1.0,
       "_src": "app",
       "_tgt": "app_predict",
@@ -7185,7 +7477,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L221",
+      "source_location": "L225",
       "weight": 1.0,
       "_src": "app",
       "_tgt": "app_build_diagnosis",
@@ -7197,7 +7489,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L255",
+      "source_location": "L259",
       "weight": 1.0,
       "_src": "app",
       "_tgt": "app_collect_examples",
@@ -7209,7 +7501,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L266",
+      "source_location": "L270",
       "weight": 1.0,
       "_src": "app",
       "_tgt": "app_build_app",
@@ -7221,7 +7513,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L463",
+      "source_location": "L467",
       "weight": 1.0,
       "_src": "app",
       "_tgt": "app_main",
@@ -7245,7 +7537,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L167",
+      "source_location": "L170",
       "weight": 0.8,
       "_src": "app_predict",
       "_tgt": "app_get_model",
@@ -7257,7 +7549,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L279",
+      "source_location": "L283",
       "weight": 0.8,
       "_src": "app_build_app",
       "_tgt": "app_get_model",
@@ -7269,7 +7561,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L180",
+      "source_location": "L184",
       "weight": 0.8,
       "_src": "app_predict",
       "_tgt": "app_gradcam",
@@ -7281,19 +7573,19 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L94",
+      "source_location": "L97",
       "weight": 1.0,
-      "_src": "app_rationale_94",
+      "_src": "app_rationale_97",
       "_tgt": "app_gradcam",
       "source": "app_gradcam",
-      "target": "app_rationale_94",
+      "target": "app_rationale_97",
       "confidence_score": 1.0
     },
     {
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L181",
+      "source_location": "L185",
       "weight": 0.8,
       "_src": "app_predict",
       "_tgt": "app_overlay_heatmap",
@@ -7305,19 +7597,19 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L139",
+      "source_location": "L142",
       "weight": 1.0,
-      "_src": "app_rationale_139",
+      "_src": "app_rationale_142",
       "_tgt": "app_overlay_heatmap",
       "source": "app_overlay_heatmap",
-      "target": "app_rationale_139",
+      "target": "app_rationale_142",
       "confidence_score": 1.0
     },
     {
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L212",
+      "source_location": "L216",
       "weight": 0.8,
       "_src": "app_predict",
       "_tgt": "app_fig_to_array",
@@ -7329,7 +7621,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L215",
+      "source_location": "L219",
       "weight": 0.8,
       "_src": "app_predict",
       "_tgt": "app_build_diagnosis",
@@ -7341,19 +7633,19 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L159",
+      "source_location": "L162",
       "weight": 1.0,
-      "_src": "app_rationale_159",
+      "_src": "app_rationale_162",
       "_tgt": "app_predict",
       "source": "app_predict",
-      "target": "app_rationale_159",
+      "target": "app_rationale_162",
       "confidence_score": 1.0
     },
     {
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L276",
+      "source_location": "L280",
       "weight": 0.8,
       "_src": "app_build_app",
       "_tgt": "app_collect_examples",
@@ -7365,19 +7657,19 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L256",
+      "source_location": "L260",
       "weight": 1.0,
-      "_src": "app_rationale_256",
+      "_src": "app_rationale_260",
       "_tgt": "app_collect_examples",
       "source": "app_collect_examples",
-      "target": "app_rationale_256",
+      "target": "app_rationale_260",
       "confidence_score": 1.0
     },
     {
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/app.py",
-      "source_location": "L464",
+      "source_location": "L468",
       "weight": 0.8,
       "_src": "app_main",
       "_tgt": "app_build_app",
@@ -9969,7 +10261,19 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/eval/eval_ct.py",
-      "source_location": "L47",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_src": "eval_ct",
+      "_tgt": "eval_ct_expected_calibration_error",
+      "source": "eval_ct",
+      "target": "eval_ct_expected_calibration_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/eval/eval_ct.py",
+      "source_location": "L91",
       "weight": 1.0,
       "_src": "eval_ct",
       "_tgt": "eval_ct_evaluate",
@@ -9981,7 +10285,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/eval/eval_ct.py",
-      "source_location": "L141",
+      "source_location": "L222",
       "weight": 1.0,
       "_src": "eval_ct",
       "_tgt": "eval_ct_parse_args",
@@ -9993,7 +10297,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/eval/eval_ct.py",
-      "source_location": "L153",
+      "source_location": "L240",
       "weight": 1.0,
       "_src": "eval_ct",
       "_tgt": "eval_ct_main",
@@ -10017,7 +10321,31 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/eval/eval_ct.py",
-      "source_location": "L155",
+      "source_location": "L144",
+      "weight": 0.8,
+      "_src": "eval_ct_evaluate",
+      "_tgt": "eval_ct_expected_calibration_error",
+      "source": "eval_ct_expected_calibration_error",
+      "target": "eval_ct_evaluate",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/eval/eval_ct.py",
+      "source_location": "L49",
+      "weight": 1.0,
+      "_src": "eval_ct_rationale_49",
+      "_tgt": "eval_ct_expected_calibration_error",
+      "source": "eval_ct_expected_calibration_error",
+      "target": "eval_ct_rationale_49",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/eval/eval_ct.py",
+      "source_location": "L242",
       "weight": 0.8,
       "_src": "eval_ct_main",
       "_tgt": "eval_ct_evaluate",
@@ -10029,7 +10357,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/eval/eval_ct.py",
-      "source_location": "L154",
+      "source_location": "L241",
       "weight": 0.8,
       "_src": "eval_ct_main",
       "_tgt": "eval_ct_parse_args",
@@ -10046,6 +10374,18 @@
       "_src": "eval_ct_rationale_1",
       "_tgt": "ct_datasets_brainimagedataset",
       "source": "eval_ct_rationale_1",
+      "target": "ct_datasets_brainimagedataset",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/eval/eval_ct.py",
+      "source_location": "L34",
+      "weight": 0.8,
+      "_src": "eval_ct_rationale_49",
+      "_tgt": "ct_datasets_brainimagedataset",
+      "source": "eval_ct_rationale_49",
       "target": "ct_datasets_brainimagedataset",
       "confidence_score": 0.5
     },
@@ -11013,7 +11353,19 @@
       "relation": "uses",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/train/train_ct_classifier.py",
-      "source_location": "L28",
+      "source_location": "L48",
+      "weight": 0.8,
+      "_src": "train_ct_classifier_ema",
+      "_tgt": "ct_datasets_brainimagedataset",
+      "source": "ct_datasets_brainimagedataset",
+      "target": "train_ct_classifier_ema",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L48",
       "weight": 0.8,
       "_src": "train_ct_classifier_rationale_1",
       "_tgt": "ct_datasets_brainimagedataset",
@@ -11025,12 +11377,60 @@
       "relation": "uses",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/train/train_ct_classifier.py",
-      "source_location": "L28",
+      "source_location": "L48",
       "weight": 0.8,
-      "_src": "train_ct_classifier_rationale_40",
+      "_src": "train_ct_classifier_rationale_53",
       "_tgt": "ct_datasets_brainimagedataset",
       "source": "ct_datasets_brainimagedataset",
-      "target": "train_ct_classifier_rationale_40",
+      "target": "train_ct_classifier_rationale_53",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L48",
+      "weight": 0.8,
+      "_src": "train_ct_classifier_rationale_80",
+      "_tgt": "ct_datasets_brainimagedataset",
+      "source": "ct_datasets_brainimagedataset",
+      "target": "train_ct_classifier_rationale_80",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L48",
+      "weight": 0.8,
+      "_src": "train_ct_classifier_rationale_98",
+      "_tgt": "ct_datasets_brainimagedataset",
+      "source": "ct_datasets_brainimagedataset",
+      "target": "train_ct_classifier_rationale_98",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L48",
+      "weight": 0.8,
+      "_src": "train_ct_classifier_rationale_160",
+      "_tgt": "ct_datasets_brainimagedataset",
+      "source": "ct_datasets_brainimagedataset",
+      "target": "train_ct_classifier_rationale_160",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L48",
+      "weight": 0.8,
+      "_src": "train_ct_classifier_rationale_237",
+      "_tgt": "ct_datasets_brainimagedataset",
+      "source": "ct_datasets_brainimagedataset",
+      "target": "train_ct_classifier_rationale_237",
       "confidence_score": 0.5
     },
     {
@@ -13089,7 +13489,43 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/train/train_ct_classifier.py",
-      "source_location": "L32",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_src": "train_ct_classifier",
+      "_tgt": "train_ct_classifier_ema",
+      "source": "train_ct_classifier",
+      "target": "train_ct_classifier_ema",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L67",
+      "weight": 1.0,
+      "_src": "train_ct_classifier",
+      "_tgt": "train_ct_classifier_update",
+      "source": "train_ct_classifier",
+      "target": "train_ct_classifier_update",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L79",
+      "weight": 1.0,
+      "_src": "train_ct_classifier",
+      "_tgt": "train_ct_classifier_smooth_targets",
+      "source": "train_ct_classifier",
+      "target": "train_ct_classifier_smooth_targets",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L86",
       "weight": 1.0,
       "_src": "train_ct_classifier",
       "_tgt": "train_ct_classifier_run_epoch",
@@ -13101,7 +13537,19 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/train/train_ct_classifier.py",
-      "source_location": "L78",
+      "source_location": "L153",
+      "weight": 1.0,
+      "_src": "train_ct_classifier",
+      "_tgt": "train_ct_classifier_evaluate_ema",
+      "source": "train_ct_classifier",
+      "target": "train_ct_classifier_evaluate_ema",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L170",
       "weight": 1.0,
       "_src": "train_ct_classifier",
       "_tgt": "train_ct_classifier_parse_args",
@@ -13113,7 +13561,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/train/train_ct_classifier.py",
-      "source_location": "L112",
+      "source_location": "L219",
       "weight": 1.0,
       "_src": "train_ct_classifier",
       "_tgt": "train_ct_classifier_apply_profile",
@@ -13125,7 +13573,19 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/train/train_ct_classifier.py",
-      "source_location": "L127",
+      "source_location": "L234",
+      "weight": 1.0,
+      "_src": "train_ct_classifier",
+      "_tgt": "train_ct_classifier_build_scheduler",
+      "source": "train_ct_classifier",
+      "target": "train_ct_classifier_build_scheduler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L250",
       "weight": 1.0,
       "_src": "train_ct_classifier",
       "_tgt": "train_ct_classifier_main",
@@ -13146,10 +13606,118 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_src": "train_ct_classifier_ema",
+      "_tgt": "train_ct_classifier_ema_init",
+      "source": "train_ct_classifier_ema",
+      "target": "train_ct_classifier_ema_init",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L75",
+      "weight": 1.0,
+      "_src": "train_ct_classifier_ema",
+      "_tgt": "train_ct_classifier_ema_copy_to",
+      "source": "train_ct_classifier_ema",
+      "target": "train_ct_classifier_ema_copy_to",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/train/train_ct_classifier.py",
-      "source_location": "L175",
+      "source_location": "L298",
+      "weight": 0.8,
+      "_src": "train_ct_classifier_main",
+      "_tgt": "train_ct_classifier_ema",
+      "source": "train_ct_classifier_ema",
+      "target": "train_ct_classifier_main",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_src": "train_ct_classifier_rationale_53",
+      "_tgt": "train_ct_classifier_ema",
+      "source": "train_ct_classifier_ema",
+      "target": "train_ct_classifier_rationale_53",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L127",
+      "weight": 0.8,
+      "_src": "train_ct_classifier_run_epoch",
+      "_tgt": "train_ct_classifier_update",
+      "source": "train_ct_classifier_update",
+      "target": "train_ct_classifier_run_epoch",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L162",
+      "weight": 0.8,
+      "_src": "train_ct_classifier_evaluate_ema",
+      "_tgt": "train_ct_classifier_ema_copy_to",
+      "source": "train_ct_classifier_ema_copy_to",
+      "target": "train_ct_classifier_evaluate_ema",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L118",
+      "weight": 0.8,
+      "_src": "train_ct_classifier_run_epoch",
+      "_tgt": "train_ct_classifier_smooth_targets",
+      "source": "train_ct_classifier_smooth_targets",
+      "target": "train_ct_classifier_run_epoch",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L80",
+      "weight": 1.0,
+      "_src": "train_ct_classifier_rationale_80",
+      "_tgt": "train_ct_classifier_smooth_targets",
+      "source": "train_ct_classifier_smooth_targets",
+      "target": "train_ct_classifier_rationale_80",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L164",
+      "weight": 0.8,
+      "_src": "train_ct_classifier_evaluate_ema",
+      "_tgt": "train_ct_classifier_run_epoch",
+      "source": "train_ct_classifier_run_epoch",
+      "target": "train_ct_classifier_evaluate_ema",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L311",
       "weight": 0.8,
       "_src": "train_ct_classifier_main",
       "_tgt": "train_ct_classifier_run_epoch",
@@ -13161,19 +13729,43 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/idh_glioma/train/train_ct_classifier.py",
-      "source_location": "L40",
+      "source_location": "L98",
       "weight": 1.0,
-      "_src": "train_ct_classifier_rationale_40",
+      "_src": "train_ct_classifier_rationale_98",
       "_tgt": "train_ct_classifier_run_epoch",
       "source": "train_ct_classifier_run_epoch",
-      "target": "train_ct_classifier_rationale_40",
+      "target": "train_ct_classifier_rationale_98",
       "confidence_score": 1.0
     },
     {
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/train/train_ct_classifier.py",
-      "source_location": "L128",
+      "source_location": "L333",
+      "weight": 0.8,
+      "_src": "train_ct_classifier_main",
+      "_tgt": "train_ct_classifier_evaluate_ema",
+      "source": "train_ct_classifier_evaluate_ema",
+      "target": "train_ct_classifier_main",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L160",
+      "weight": 1.0,
+      "_src": "train_ct_classifier_rationale_160",
+      "_tgt": "train_ct_classifier_evaluate_ema",
+      "source": "train_ct_classifier_evaluate_ema",
+      "target": "train_ct_classifier_rationale_160",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L251",
       "weight": 0.8,
       "_src": "train_ct_classifier_main",
       "_tgt": "train_ct_classifier_parse_args",
@@ -13185,13 +13777,37 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "source_file": "src/idh_glioma/train/train_ct_classifier.py",
-      "source_location": "L130",
+      "source_location": "L253",
       "weight": 0.8,
       "_src": "train_ct_classifier_main",
       "_tgt": "train_ct_classifier_apply_profile",
       "source": "train_ct_classifier_apply_profile",
       "target": "train_ct_classifier_main",
       "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L292",
+      "weight": 0.8,
+      "_src": "train_ct_classifier_main",
+      "_tgt": "train_ct_classifier_build_scheduler",
+      "source": "train_ct_classifier_build_scheduler",
+      "target": "train_ct_classifier_main",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/idh_glioma/train/train_ct_classifier.py",
+      "source_location": "L237",
+      "weight": 1.0,
+      "_src": "train_ct_classifier_rationale_237",
+      "_tgt": "train_ct_classifier_build_scheduler",
+      "source": "train_ct_classifier_build_scheduler",
+      "target": "train_ct_classifier_rationale_237",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",

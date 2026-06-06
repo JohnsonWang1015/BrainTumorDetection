@@ -1,17 +1,17 @@
-# Graph Report - .  (2026-06-04)
+# Graph Report - .  (2026-06-06)
 
 ## Corpus Check
-- 83 files · ~0 words
+- 84 files · ~0 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 555 nodes · 794 edges · 67 communities detected
-- Extraction: 60% EXTRACTED · 40% INFERRED · 0% AMBIGUOUS · INFERRED: 314 edges (avg confidence: 0.5)
+- 575 nodes · 832 edges · 67 communities detected
+- Extraction: 60% EXTRACTED · 40% INFERRED · 0% AMBIGUOUS · INFERRED: 333 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## God Nodes (most connected - your core abstractions)
-1. `UNet2D` - 12 edges
-2. `BrainImageDataset` - 11 edges
+1. `BrainImageDataset` - 20 edges
+2. `UNet2D` - 12 edges
 3. `load()` - 10 edges
 4. `main()` - 10 edges
 5. `main()` - 9 edges
@@ -28,24 +28,24 @@
   tests/test_idh_dataset.py → src/idh_glioma/data/datasets.py
 - `Unit tests for the CT/MRI data pipeline.  Run with:     uv run pytest tests/ -v` --uses--> `BrainImageDataset`  [INFERRED]
   tests/test_ct_datasets.py → src/idh_glioma/data/ct_datasets.py
-- `Unit tests for the CT/MRI data pipeline.  Run with:     uv run pytest tests/ -v` --uses--> `ImageRecord`  [INFERRED]
-  tests/test_ct_datasets.py → src/idh_glioma/data/prepare_ct_data.py
 - `Create a minimal fake Kaggle-style folder tree with tiny images.` --uses--> `BrainImageDataset`  [INFERRED]
+  tests/test_ct_datasets.py → src/idh_glioma/data/ct_datasets.py
+- `After normalization values should not be raw [0, 255].` --uses--> `BrainImageDataset`  [INFERRED]
   tests/test_ct_datasets.py → src/idh_glioma/data/ct_datasets.py
 
 ## Communities
 
 ### Community 0 - "Community 0"
-Cohesion: 0.07
-Nodes (32): BrainImageDataset, _build_transforms(), PyTorch Dataset for the Kaggle CT/MRI brain-tumor classification dataset.  Reads, Binary classification dataset for CT/MRI brain-tumor images.      Args:, evaluate(), main(), parse_args(), Evaluate the CT/MRI binary tumor classifier on the held-out test split.  Outputs (+24 more)
+Cohesion: 0.06
+Nodes (34): _augment_cls(), _augment_seg(), BraTSSliceClassificationDataset, BraTSSliceSegmentationDataset, CaseLevelSampler, _crop_roi(), load_nifti(), make_balanced_sampler() (+26 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.08
-Nodes (18): _fit_per_modality(), _load_inputs(), main(), _new_base(), parse_args(), _per_modality_probs(), Late-fusion experiment for the multi-omics molecular IDH cohort.  Hypothesis: ea, _recall_at_specificity() (+10 more)
+Nodes (31): _collect_logits(), fit_temperature(), main(), Temperature-scale the CT/MRI tumor classifier on the val split.  Temperature sca, Return (logits, labels) over the whole loader, on CPU as float32., Fit T>0 minimising BCE(logits / T, labels) via LBFGS.      Optimises over log-T, BrainImageDataset, _build_transforms() (+23 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.08
-Nodes (20): _augment_cls(), _augment_seg(), BraTSSliceClassificationDataset, _crop_roi(), load_nifti(), make_balanced_sampler(), Random spatial + intensity augmentations for classification (image only, C,H,W)., Build a WeightedRandomSampler that balances IDH=0 vs IDH=1 across an epoch. (+12 more)
+Nodes (18): _fit_per_modality(), _load_inputs(), main(), _new_base(), parse_args(), _per_modality_probs(), Late-fusion experiment for the multi-omics molecular IDH cohort.  Hypothesis: ea, _recall_at_specificity() (+10 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.12
@@ -56,8 +56,8 @@ Cohesion: 0.17
 Nodes (22): best_slice(), ct_gallery_extended(), dice(), idh_e2e_gallery(), idh_montage(), load(), mri_orbit_gif(), Generate figures for the model report:   1. Segmentation overlays (FLAIR + GT gr (+14 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.17
-Nodes (14): BraTSSliceSegmentationDataset, CaseLevelSampler, Shuffles at the *case* level so that all slices of a case are yielded     consec, apply_profile(), dice_loss(), focal_loss(), main(), parse_args() (+6 more)
+Cohesion: 0.14
+Nodes (18): build_manifest(), _collect_images(), ImageRecord, main(), parse_args(), Build a train/val/test manifest for the Kaggle CT & MRI brain-tumor dataset.  Fo, stratified_split(), write_manifest() (+10 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.21
@@ -172,16 +172,16 @@ Cohesion: 0.53
 Nodes (5): _build_transforms(), main(), parse_args(), Evaluate the MONAI SegResNet checkpoint on the held-out test split.  Mirrors eva, _records_to_monai()
 
 ### Community 34 - "Community 34"
-Cohesion: 0.53
-Nodes (5): apply_profile(), main(), parse_args(), Returns (mean_loss, all_probs, all_labels)., run_epoch()
-
-### Community 35 - "Community 35"
 Cohesion: 0.6
 Nodes (5): export_split(), main(), mask_to_bbox(), normalize_to_uint8(), parse_args()
 
-### Community 36 - "Community 36"
+### Community 35 - "Community 35"
 Cohesion: 0.53
 Nodes (5): _bbox3d(), main(), parse_args(), predict(), End-to-end inference with MONAI 3D models (SegResNet + DenseNet121).  Mirrors in
+
+### Community 36 - "Community 36"
+Cohesion: 0.53
+Nodes (5): apply_profile(), main(), parse_args(), Returns (mean_loss, all_probs, all_labels)., run_epoch()
 
 ### Community 37 - "Community 37"
 Cohesion: 0.67
@@ -324,16 +324,16 @@ Nodes (0):
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `UNet2D` connect `Community 3` to `Community 5`?**
-  _High betweenness centrality (0.014) - this node is a cross-community bridge._
-- **Why does `BraTSSliceClassificationDataset` connect `Community 2` to `Community 34`?**
+- **Why does `UNet2D` connect `Community 3` to `Community 0`?**
+  _High betweenness centrality (0.013) - this node is a cross-community bridge._
+- **Why does `BraTSSliceClassificationDataset` connect `Community 0` to `Community 36`?**
   _High betweenness centrality (0.010) - this node is a cross-community bridge._
-- **Why does `CaseLevelSampler` connect `Community 5` to `Community 2`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+- **Why does `BrainImageDataset` connect `Community 1` to `Community 5`?**
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+- **Are the 15 inferred relationships involving `BrainImageDataset` (e.g. with `Unit tests for the CT/MRI data pipeline.  Run with:     uv run pytest tests/ -v` and `Create a minimal fake Kaggle-style folder tree with tiny images.`) actually correct?**
+  _`BrainImageDataset` has 15 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 9 inferred relationships involving `UNet2D` (e.g. with `IDH classification handler for the Gradio app.  Exposes :func:`predict_idh` -- g` and `Return mean per-slice IDH probability across tumor-bearing slices.`) actually correct?**
   _`UNet2D` has 9 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 6 inferred relationships involving `BrainImageDataset` (e.g. with `Unit tests for the CT/MRI data pipeline.  Run with:     uv run pytest tests/ -v` and `Create a minimal fake Kaggle-style folder tree with tiny images.`) actually correct?**
-  _`BrainImageDataset` has 6 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 9 inferred relationships involving `load()` (e.g. with `seg_overlay()` and `idh_montage()`) actually correct?**
   _`load()` has 9 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 9 inferred relationships involving `main()` (e.g. with `parse_args()` and `_normalize_modalities()`) actually correct?**

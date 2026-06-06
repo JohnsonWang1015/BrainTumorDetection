@@ -70,6 +70,8 @@ Helper scripts (not registered as CLI entries):
 ```bash
 # Threshold calibration via Youden's J on val
 uv run python scripts/calibrate_idh_threshold.py --ckpt <ckpt>
+# CT classifier temperature scaling (calibration) on val
+uv run python scripts/calibrate_ct_temperature.py --ckpt checkpoints/mobilenetv3_ct_best.pt
 # 5-fold stratified CV
 uv run python scripts/cv_idh.py            # 2D
 uv run python scripts/cv_idh_monai.py      # 3D MONAI
@@ -146,6 +148,14 @@ src/idh_glioma/
 ### Classification Training (CT/MRI, `BrainImageDataset`)
 - **ImageNet normalization**: Applied to all CT/MRI images even though they are medical — pretrained features transfer well.
 - **Augmentation**: Random horizontal flip, rotation (15°), color jitter for training split only.
+- **Backbone**: MobileNetV3-**Large** (`--variant large`, the default). The richer ImageNet stem clearly beats Small here (96.4%→99.65%). Checkpoints store `variant`; eval/app read it (default `"small"` keeps legacy checkpoints loadable).
+- **Checkpoint selection**: best validation **AUC**, not val_loss — same rationale as the IDH classifier. The old CT trainer selected on val_loss and left ~3 accuracy points on the table.
+- **Schedule**: cosine annealing + linear warmup (per-step). Constant LR under-anneals; warmup avoids the cold-start spike at `lr=3e-4`.
+- **EMA**: an EMA(0.999) shadow is tracked and **both** raw and EMA weights are validated each epoch — keep whichever discriminates better. Raw wins early (EMA's time constant ≈1000 steps lags ~10 epochs at 106 steps/epoch); EMA takes over after cosine decay flattens the raw model. Never select EMA-only in early epochs — its weights are still ~init.
+- **Label smoothing**: soft BCE targets (eps 0.05, symmetric: 1→0.975, 0→0.025) curb overconfidence and help AUC/calibration.
+- **TTA**: `eval-ct --tta` averages original + horizontal-flip logits (brain L/R symmetry). Leaves accuracy unchanged here but perfects ranking (AUC 0.9997→1.0000).
+- **Calibration (ECE)**: `eval-ct` reports 15-bin Expected Calibration Error and saves a reliability diagram (`outputs/.../eval_ct_reliability.png`). The checkpoint stores a `temperature` (default 1.0); eval and the app apply `sigmoid(logit / T)`.
+- **Temperature scaling**: `scripts/calibrate_ct_temperature.py` fits one scalar T on val (LBFGS over log-T, min NLL) and writes it to the ckpt. T>0 preserves the 0.5 decision, so **accuracy/AUC are unchanged**; only ECE moves. Test ECE 0.0256→**0.0026** (10×). Note the fitted **T≈0.51 (<1)**: label smoothing made the model *under*-confident, so T sharpens to compensate — the two techniques compose. Re-run after any retrain (`uv run python scripts/calibrate_ct_temperature.py --ckpt <ckpt>`).
 
 ### IDH Classification (`BraTSSliceClassificationDataset`)
 - **Inputs**: 3-channel slices (flair/t1Gd/t2) with per-volume z-score, NOT ImageNet normalization (intensity ranges differ).
@@ -194,7 +204,7 @@ python -m idh_glioma.app  # Alternative launch
 ```
 
 Three tabs:
-1. **CT/MRI Tumor Detection** — single-image upload (PNG/JPG), MobileNetV3-Small binary classifier (96.4% acc / AUC 0.993) with GradCAM heatmap.
+1. **CT/MRI Tumor Detection** — single-image upload (PNG/JPG), MobileNetV3-Large binary classifier (99.65% acc / AUC 0.9997) with GradCAM heatmap. Checkpoint is self-describing (stores `variant`); legacy Small checkpoints still load via the `variant` default.
 2. **IDH Mutation Classification (2D)** — 4 BraTS-style NIfTI uploads, U-Net 2D + MobileNetV3-large pipeline with calibrated threshold 0.876. Implementation in `app_idh.py`.
 3. **IDH Mutation Classification (3D MONAI, recommended)** — 4 NIfTI uploads, MONAI Model Zoo bundle (zero-shot Dice 0.926) + 3D DenseNet121 (jitter-trained) at threshold 0.0775. E2E AUC 0.75, accuracy 0.80. Implementation in `app_idh_monai.py`.
 
@@ -210,7 +220,7 @@ Three tabs:
 
 | Model | Metric | Value |
 |-------|--------|-------|
-| CT/MRI Classification (MobileNetV3) | Accuracy / AUC | 96.4% / 0.993 |
+| CT/MRI Classification (MobileNetV3-Large) | Acc / AUC / ECE | **99.65% / 0.9997 / 0.0026** (test, 1443 imgs; AUC 1.0000 w/ `--tta`). MobileNetV3-Large + cosine warmup + label smoothing 0.05 + EMA(0.999) + AUC-based ckpt selection + temperature scaling (T≈0.51). Tumor recall 0.947→0.994 (missed tumors 42→5); ECE 0.0256→0.0026. Prev Small/constant-LR/val_loss baseline: 96.4% / 0.993 (backup at `checkpoints/_exploratory/mobilenetv3_ct_small_baseline_0964.pt`). |
 | MRI Segmentation (U-Net 2D, TCGA-LGG) | Dice | 0.7598 ± 0.090 (test); val best 0.8063 |
 | MRI Segmentation (MONAI SegResNet 3D, TCGA-LGG) | Dice | **0.9101 ± 0.036** (test, 10 cases); val best 0.9176. 3D + sliding-window + DiceCE; +0.15 over 2D, std halved. |
 | IDH Mutation Classifier (MobileNetV3-large 2D, TCGA-LGG, ROI crop) | AUC | Case **0.875** / Slice 0.453 (single-split test); val best 0.8533. 5-fold CV smoothed val AUC **0.764 ± 0.076**. Calibrated threshold 0.876 (Youden's J) → WT recall 50%. |

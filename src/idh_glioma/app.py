@@ -45,6 +45,7 @@ _MRI_HEALTHY = _DATASET_ROOT / "Brain Tumor MRI images" / "Healthy"
 
 _DEVICE: torch.device | None = None
 _MODEL: torch.nn.Module | None = None
+_TEMPERATURE: float = 1.0  # post-hoc calibration; set from checkpoint on load
 
 # Pre-compute normalization tensors (avoids repeated allocation)
 _MEAN_TENSOR = torch.tensor(_IMAGENET_MEAN).view(3, 1, 1)
@@ -60,7 +61,7 @@ _PREPROCESS = transforms.Compose(
 
 # ── Model loading ────────────────────────────────────────────────────
 def _get_model() -> tuple[torch.nn.Module, torch.device]:
-    global _MODEL, _DEVICE, _FWD_HOOK, _BWD_HOOK
+    global _MODEL, _DEVICE, _FWD_HOOK, _BWD_HOOK, _TEMPERATURE
     if _MODEL is not None and _DEVICE is not None:
         return _MODEL, _DEVICE
 
@@ -72,10 +73,12 @@ def _get_model() -> tuple[torch.nn.Module, torch.device]:
         except RuntimeError:
             pass
 
-    _MODEL = build_mobilenetv3_binary(num_input_channels=3).to(_DEVICE)
     state = torch.load(_CKPT_PATH, map_location=_DEVICE, weights_only=True)
+    variant = state.get("variant", "small")  # legacy checkpoints are Small
+    _MODEL = build_mobilenetv3_binary(num_input_channels=3, variant=variant).to(_DEVICE)
     _MODEL.load_state_dict(state["model"])
     _MODEL.eval()
+    _TEMPERATURE = float(state.get("temperature", 1.0))  # 1.0 = uncalibrated
 
     # Set inference-optimized mode
     torch.set_grad_enabled(False)
@@ -171,7 +174,8 @@ def predict(image: np.ndarray | None) -> tuple[dict[str, float], np.ndarray | No
 
     # Inference (grad is globally disabled; GradCAM re-enables locally)
     logit = model(tensor.unsqueeze(0).to(device))
-    prob_tumor = torch.sigmoid(logit).item()
+    # Temperature scaling for calibrated confidence (no effect on the argmax).
+    prob_tumor = torch.sigmoid(logit / _TEMPERATURE).item()
 
     prob_healthy = 1.0 - prob_tumor
     is_tumor = prob_tumor >= 0.5
@@ -295,7 +299,7 @@ def build_app():  # noqa: ANN201
                 gr.Markdown(
                     "Upload a single CT or MRI brain image (PNG/JPG). "
                     "Returns tumor probability + GradCAM heatmap. "
-                    "Accuracy 96.4%, AUC 0.993 (Kaggle CT/MRI test split, 1,443 images)."
+                    "Accuracy 99.65%, AUC 0.9997 (Kaggle CT/MRI test split, 1,443 images)."
                 )
                 with gr.Row():
                     with gr.Column(scale=1):
@@ -344,10 +348,10 @@ def build_app():  # noqa: ANN201
                         """
                         | Item | Details |
                         |------|---------|
-                        | **Architecture** | MobileNetV3-Small (binary classification) |
+                        | **Architecture** | MobileNetV3-Large (binary classification) |
                         | **Training data** | 9,618 CT/MRI brain images |
-                        | **Test accuracy** | 96.4% (1,443 test images) |
-                        | **AUC-ROC** | 0.9928 |
+                        | **Test accuracy** | 99.65% (1,443 test images) |
+                        | **AUC-ROC** | 0.9997 |
                         | **Input size** | 224 x 224 RGB |
 
                         **GradCAM**: Red regions indicate the highest tumor correlation.
