@@ -603,7 +603,7 @@ idh_e2e_gallery()
 
 
 # ======================================================================================
-# Additional 3D orbiting visualizations (round 2)
+# Additional 3D orbiting visualizations
 # ======================================================================================
 
 def _largest_cc(vol):
@@ -736,6 +736,70 @@ def seg_orbit_multicase(cids=("TCGA-DU-7301", "TCGA-HT-8111", "TCGA-DU-8162", "T
 seg_orbit_multicase()
 
 
+# --- Same-case, different-method orbit: SegResNet 3D vs MONAI bundle on one tumor ---
+def seg_method_orbit_3d(cids=("TCGA-DU-7301", "TCGA-CS-6669"), n_frames=36, step=2):
+    """Hold the CASE fixed and vary the METHOD: for each case, render the SegResNet 3D
+    prediction and the MONAI-bundle prediction side by side (each as red surface over the
+    faint green GT shell) and orbit them in lockstep. Rows = same case, columns = method,
+    so any shape difference is attributable to the model, not to picking a different case.
+
+    Needs native-space SegResNet masks from scripts/infer_segresnet_native.py
+    (outputs/segresnet_<cid>_pred.nii.gz); skips gracefully if they are absent."""
+    import imageio.v2 as imageio
+    from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+
+    methods = [
+        ("SegResNet 3D", "outputs/segresnet_{cid}_pred.nii.gz"),
+        ("MONAI bundle", "outputs/e2e_{cid}_pred.nii.gz"),
+    ]
+    # Keep only cases for which every method's mask exists.
+    cids = [c for c in cids
+            if all(Path(t.format(cid=c)).exists() for _, t in methods)]
+    if not cids:
+        print("[seg] method-comparison orbit skipped (run infer_segresnet_native.py first)")
+        return
+
+    panels = []  # (row, col, cid, method_name, dice, gv, gf, pv, pf)
+    for r, cid in enumerate(cids):
+        gt = (load(cases[cid]["mask_path"]) > 0).astype(np.uint8)
+        gv, gf = _mesh(_largest_cc(gt), step)
+        for c, (mname, tmpl) in enumerate(methods):
+            pred = (load(tmpl.format(cid=cid)) > 0).astype(np.uint8)
+            d = dice(gt, pred)
+            pv, pf = _mesh(_largest_cc(pred), step)
+            panels.append((r, c, cid, mname, d, gv, gf, pv, pf))
+
+    nrow, ncol = len(cids), len(methods)
+    fig = plt.figure(figsize=(5.0 * ncol, 5.0 * nrow))
+    axes = []
+    for (r, c, cid, mname, d, gv, gf, pv, pf) in panels:
+        ax = fig.add_subplot(nrow, ncol, r * ncol + c + 1, projection="3d")
+        ax.add_collection3d(Poly3DCollection(gv[gf], alpha=0.15, facecolor="lime", edgecolor="none"))
+        ax.plot_trisurf(pv[:, 0], pv[:, 1], pf, pv[:, 2],
+                        cmap="YlOrRd", linewidth=0, antialiased=True, shade=True, alpha=0.95)
+        _equal_box(ax, np.vstack([gv, pv]))
+        ax.set_title(f"{cid}\n{mname}  |  Dice = {d:.3f}", fontsize=11)
+        axes.append(ax)
+    fig.suptitle("Same case, different method — SegResNet 3D vs MONAI bundle\n"
+                 "rows = same patient · columns = method · Pred (red) vs GT (green), "
+                 "orbiting in lockstep", fontsize=12)
+    fig.tight_layout(rect=(0, 0, 1, 0.93))
+
+    frames = []
+    for azim in np.linspace(0, 360, n_frames, endpoint=False):
+        for ax in axes:
+            ax.view_init(elev=18, azim=float(azim))
+        fig.canvas.draw()
+        frames.append(np.asarray(fig.canvas.buffer_rgba())[..., :3].copy())
+    plt.close(fig)
+    imageio.mimsave(str(OUT / "seg_method_orbit_3d.gif"), frames, duration=0.08, loop=0)
+    print(f"[seg] same-case method-comparison orbit ({nrow} cases x {ncol} methods) "
+          "-> seg_method_orbit_3d.gif")
+
+
+seg_method_orbit_3d()
+
+
 # --- ROI bounding-box orbit: the 3D crop fed to the DenseNet121 IDH classifier ---
 def idh_roi_orbit_3d(cid="TCGA-DU-7301", n_frames=36, step=2, margin=4):
     """Draw the predicted tumor surface plus the axis-aligned 3D bounding box (with the
@@ -761,7 +825,8 @@ def idh_roi_orbit_3d(cid="TCGA-DU-7301", n_frames=36, step=2, margin=4):
                  (2, 6), (3, 7), (4, 5), (4, 6), (5, 7), (6, 7)]
     segs = [[corners[a], corners[b]] for a, b in edges_idx]
 
-    fig = plt.figure(figsize=(5.4, 5.4))
+    from matplotlib.patches import Patch
+    fig = plt.figure(figsize=(5.6, 5.8))
     ax = fig.add_subplot(111, projection="3d")
     ax.plot_trisurf(pv[:, 0], pv[:, 1], pf, pv[:, 2],
                     cmap="YlOrRd", linewidth=0, antialiased=True, shade=True, alpha=0.95)
@@ -773,8 +838,19 @@ def idh_roi_orbit_3d(cid="TCGA-DU-7301", n_frames=36, step=2, margin=4):
     ax.add_collection3d(Poly3DCollection(box_faces, alpha=0.05, facecolor="#1f77ff", edgecolor="none"))
     _equal_box(ax, np.vstack([pv, corners]))
     dims = (hi - lo).astype(int)
-    fig.suptitle(f"{cid} — IDH ROI bounding box (margin {margin}) around predicted tumor\n"
-                 f"box {dims[0]}x{dims[1]}x{dims[2]} -> resized to 96^3 for DenseNet121", fontsize=11)
+    # Explicit legend + step labels so the figure reads on its own: what the red blob is,
+    # what the blue cage is, and that the cage is the ONLY thing the IDH head sees.
+    handles = [
+        Patch(facecolor="#ff7f0e", edgecolor="none", label="predicted tumor surface (from segmentation)"),
+        Patch(facecolor="#1f77ff", edgecolor="#1f77ff", alpha=0.3,
+              label="ROI crop box = exactly what the IDH classifier sees"),
+    ]
+    ax.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, 0.02),
+              fontsize=8.5, frameon=False, ncol=1)
+    fig.suptitle(
+        f"{cid} — segmentation → IDH classifier hand-off\n"
+        f"box {dims[0]}×{dims[1]}×{dims[2]} (+margin {margin}) → resized 96³ → DenseNet121",
+        fontsize=10)
 
     frames = []
     for azim in np.linspace(0, 360, n_frames, endpoint=False):
