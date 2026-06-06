@@ -73,7 +73,7 @@ def _build_transforms():
 def parse_args():
     p = argparse.ArgumentParser(description="SegResNet 3D native-space inference")
     p.add_argument("--manifest", type=Path, default=Path("artifacts/manifest.json"))
-    p.add_argument("--ckpt", type=Path, default=Path("checkpoints/segresnet_tcga.pt"))
+    p.add_argument("--ckpt", type=Path, default=Path("checkpoints/segresnet_brats2021.pt"))
     p.add_argument("--cases", nargs="+",
                    default=["TCGA-DU-7301", "TCGA-CS-6669"])
     p.add_argument("--roi-size", type=int, nargs=3, default=(96, 96, 96))

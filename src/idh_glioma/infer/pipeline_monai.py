@@ -162,7 +162,7 @@ def predict(
 def parse_args():
     p = argparse.ArgumentParser()
     p.add_argument("--case-dir", type=Path, required=True)
-    p.add_argument("--seg-ckpt", type=Path, default=Path("checkpoints/segresnet_tcga.pt"))
+    p.add_argument("--seg-ckpt", type=Path, default=Path("checkpoints/segresnet_brats2021.pt"))
     p.add_argument("--cls-ckpt", type=Path, default=Path("checkpoints/densenet3d_idh.pt"))
     p.add_argument("--output-mask", type=Path, default=Path("outputs/pred_mask_monai.nii.gz"))
     return p.parse_args()
